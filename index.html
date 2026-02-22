@@ -242,6 +242,10 @@ body {
 .data-value.amber { color:var(--accent-amber); }
 .data-value.blue { color:var(--accent-blue); }
 .data-value.cyan { color:var(--accent-cyan); }
+/* Long-value rows: align label to top, wrap value right-justified */
+.data-row.long-val { align-items:flex-start; }
+.data-row.long-val .data-label { padding-top:2px; flex-shrink:0; }
+.data-row.long-val .data-value { text-align:right; max-width:62%; }
 /* Interpret box */
 .interpret-box {
   margin-top:10px;
@@ -869,12 +873,12 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">BOJ Policy Rate</span><span class="data-value">0.50%</span></div>
       <div class="data-row"><span class="data-label">Next Hike Expected</span><span class="data-value amber">Jul 2026 (GS est.)</span></div>
       <div class="data-row"><span class="data-label">Debt/GDP</span><span class="data-value red">237%</span></div>
-      <div class="data-row"><span class="data-label">SBI ST Bonds</span><span class="data-value green">¥10B security token bonds, XRP rewards to holders, Mizuho admin</span></div>
-      <div class="data-row"><span class="data-label">SBI / AWAJ</span><span class="data-value green">Fintech startup pipeline onto XRPL</span></div>
-      <div class="data-row"><span class="data-label">SBI BTC+XRP ETF</span><span class="data-value amber">Planned for Tokyo Stock Exchange — pending FSA approval</span></div>
-      <div class="data-row"><span class="data-label">FSA Reclassification</span><span class="data-value amber">XRP as regulated financial product — targeted Q2 2026</span></div>
-      <div class="data-row"><span class="data-label">SBI Coinhako</span><span class="data-value green">Acquired Singapore exchange — Japan-SEA digital asset corridor</span></div>
-      <div class="data-row"><span class="data-label">SBI Ripple Stake</span><span class="data-value green">~9% of Ripple Labs equity (Kitao confirmed Feb 15)</span></div>
+      <div class="data-row long-val"><span class="data-label">SBI ST Bonds</span><span class="data-value green">¥10B security token bonds, XRP rewards to holders, Mizuho admin</span></div>
+      <div class="data-row long-val"><span class="data-label">SBI / AWAJ</span><span class="data-value green">Fintech startup pipeline onto XRPL</span></div>
+      <div class="data-row long-val"><span class="data-label">SBI BTC+XRP ETF</span><span class="data-value amber">Planned for Tokyo Stock Exchange — pending FSA approval</span></div>
+      <div class="data-row long-val"><span class="data-label">FSA Reclassification</span><span class="data-value amber">XRP as regulated financial product — targeted Q2 2026</span></div>
+      <div class="data-row long-val"><span class="data-label">SBI Coinhako</span><span class="data-value green">Acquired Singapore exchange — Japan-SEA digital asset corridor</span></div>
+      <div class="data-row long-val"><span class="data-label">SBI Ripple Stake</span><span class="data-value green">~9% of Ripple Labs equity (Kitao confirmed Feb 15)</span></div>
       <div class="interpret-box">
         <div class="label">JAPAN MACRO THESIS</div>
         <p>Takaichi's supermajority removes all political friction for fiscal expansion. Weak yen + rising JGB yields + record oil/JPY = maximum pressure on BOJ. This creates the exact conditions where efficient cross-border settlement (ODL) becomes a necessity for Japanese institutions. SBI's long XRP bet was predicated on this environment. Watch BOJ announcements as the fulcrum.</p>
