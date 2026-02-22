@@ -705,8 +705,9 @@ textarea:focus { border-color:var(--accent-cyan); }
     <div class="full-card" style="border-color:rgba(0,229,153,0.2);">
       <h3>📊 XRP ETF OVERVIEW</h3>
       <div class="data-row"><span class="data-label">Total AUM</span><span class="data-value green" id="etfTotalAum">--</span></div>
-      <div class="data-row"><span class="data-label">Total XRP Locked</span><span class="data-value" id="etfXrpLocked">--</span></div>
-      <div class="data-row"><span class="data-label">ETFs Active</span><span class="data-value">7 US Spot</span></div>
+      <div class="data-row"><span class="data-label">XRP Locked (Cumulative)</span><span class="data-value" id="etfXrpLocked">--</span></div>
+      <div class="data-row"><span class="data-label">% of Circulating Supply</span><span class="data-value amber" id="etfPctSupply">--</span></div>
+      <div class="data-row"><span class="data-label">ETFs Active</span><span class="data-value" id="etfNumFunds">--</span></div>
       <div class="data-row"><span class="data-label">Data As Of</span><span class="data-value" id="etfAsOf">--</span></div>
       <div class="data-row"><span class="data-label">Source</span><span class="data-value" style="color:var(--text-muted);font-size:10px;">xrp-insights.com · auto-updated</span></div>
     </div>
@@ -1592,6 +1593,8 @@ async function fetchDashboardData() {
       // Overview
       if (e.total_aum != null) set('etfTotalAum', '$' + (e.total_aum / 1e9).toFixed(3) + 'B');
       if (e.total_xrp_locked != null) set('etfXrpLocked', (e.total_xrp_locked / 1e6).toFixed(1) + 'M XRP');
+      if (e.pct_supply != null) set('etfPctSupply', e.pct_supply.toFixed(2) + '% of circulating');
+      if (e.num_funds != null) set('etfNumFunds', e.num_funds + ' US Spot ETFs');
       set('etfAsOf', e.as_of_date ?? '--');
 
       // Daily flows
@@ -1621,29 +1624,33 @@ async function fetchDashboardData() {
 
       // Per-fund table
       if (Array.isArray(e.funds) && e.funds.length > 0) {
+        const totalAum = e.total_aum || 1;
         const rows = e.funds
           .slice()
           .sort((a, b) => (b.aum ?? 0) - (a.aum ?? 0))
           .map(f => {
-            const aumStr  = f.aum != null ? '$' + (f.aum / 1e6).toFixed(1) + 'M' : '--';
-            const xrpStr  = f.xrp_locked != null ? (f.xrp_locked / 1e6).toFixed(1) + 'M' : '--';
-            const flowStr = f.daily_flow != null ? fmtM(f.daily_flow) : '--';
-            const flowCls = f.daily_flow == null ? '' : f.daily_flow >= 0 ? 'color:var(--accent-green)' : 'color:var(--accent-red)';
-            return `<div class="data-row" style="align-items:baseline;">
-              <span class="data-label" style="min-width:90px;"><span style="color:var(--accent-cyan);font-weight:700;">${f.ticker}</span> <span style="color:var(--text-muted);font-size:9px;">${f.issuer}</span></span>
-              <span style="margin-left:auto;display:flex;gap:16px;font-family:'JetBrains Mono',monospace;font-size:11px;">
-                <span style="color:var(--text-secondary);min-width:60px;text-align:right;">${aumStr}</span>
-                <span style="color:var(--text-muted);min-width:60px;text-align:right;">${xrpStr}</span>
-                <span style="min-width:70px;text-align:right;${flowCls}">${flowStr}</span>
+            const aumStr   = f.aum != null ? '$' + (f.aum / 1e6).toFixed(1) + 'M' : '--';
+            const xrpStr   = f.xrp_locked != null ? (f.xrp_locked / 1e6).toFixed(1) + 'M' : '--';
+            const pctStr   = f.aum != null ? ((f.aum / totalAum) * 100).toFixed(1) + '%' : '--';
+            const flowStr  = f.daily_flow != null ? fmtM(f.daily_flow) : '--';
+            const flowCls  = f.daily_flow == null ? '' : f.daily_flow >= 0 ? 'color:var(--accent-green)' : 'color:var(--accent-red)';
+            return `<div class="data-row" style="align-items:baseline;padding:3px 0;">
+              <span style="min-width:100px;"><span style="color:var(--accent-cyan);font-weight:700;font-family:\'JetBrains Mono\',monospace;">${f.ticker}</span><br><span style="color:var(--text-muted);font-size:9px;letter-spacing:0.5px;">${f.issuer}</span></span>
+              <span style="margin-left:auto;display:flex;gap:12px;font-family:\'JetBrains Mono\',monospace;font-size:11px;align-items:center;">
+                <span style="color:var(--text-secondary);min-width:55px;text-align:right;" title="AUM">${aumStr}</span>
+                <span style="color:var(--text-muted);min-width:40px;text-align:right;font-size:10px;" title="% of total AUM">${pctStr}</span>
+                <span style="color:var(--text-muted);min-width:55px;text-align:right;" title="XRP locked">${xrpStr}</span>
+                <span style="min-width:72px;text-align:right;${flowCls}" title="Daily net flow">${flowStr}</span>
               </span>
             </div>`;
           }).join('');
-        const header = `<div class="data-row" style="opacity:0.5;font-size:9px;letter-spacing:1px;padding-bottom:4px;">
+        const header = `<div style="display:flex;opacity:0.45;font-size:9px;letter-spacing:1px;padding-bottom:6px;border-bottom:1px solid var(--border);margin-bottom:4px;">
           <span style="color:var(--text-muted);">TICKER / ISSUER</span>
-          <span style="margin-left:auto;display:flex;gap:16px;">
-            <span style="min-width:60px;text-align:right;">AUM</span>
-            <span style="min-width:60px;text-align:right;">XRP</span>
-            <span style="min-width:70px;text-align:right;">DAILY FLOW</span>
+          <span style="margin-left:auto;display:flex;gap:12px;">
+            <span style="min-width:55px;text-align:right;">AUM</span>
+            <span style="min-width:40px;text-align:right;">SHARE</span>
+            <span style="min-width:55px;text-align:right;">XRP</span>
+            <span style="min-width:72px;text-align:right;">NET FLOW</span>
           </span>
         </div>`;
         setHtml('etfFundsTable', header + rows);

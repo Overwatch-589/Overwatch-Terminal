@@ -392,6 +392,14 @@ async function main() {
     fetchETF(existing),
   ]);
 
+  // Enrich ETF with % of circulating supply (market_cap / price = circ. supply)
+  if (etf.total_xrp_locked != null && xrp.market_cap != null && xrp.price != null && xrp.price > 0) {
+    const circSupply = xrp.market_cap / xrp.price;
+    etf.pct_supply   = parseFloat(((etf.total_xrp_locked / circSupply) * 100).toFixed(3));
+    etf.circ_supply  = Math.round(circSupply);
+  }
+  etf.num_funds = etf.funds?.length ?? 0;
+
   // FRED calls are sequential to avoid hammering the API
   const jpn10y = await fetchFRED('JPN_10Y', ENDPOINTS.fred.jpn_10y, existing?.macro?.jpn_10y);
   const brent  = await fetchFRED('BRENT',   ENDPOINTS.fred.brent,   existing?.macro?.brent_crude);
