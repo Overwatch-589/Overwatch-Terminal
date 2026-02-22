@@ -1,0 +1,171 @@
+#!/usr/bin/env node
+'use strict';
+
+/**
+ * Overwatch Terminal — Apply Approved Analysis
+ * Reads analysis-output.json and applies recommended scorecard and kill-switch
+ * updates to dashboard-data.json.
+ * Run this after reviewing the Telegram analysis and deciding to approve.
+ */
+
+const path = require('path');
+const fs   = require('fs');
+
+const DASHBOARD_PATH = path.join(__dirname, '..', 'dashboard-data.json');
+const ANALYSIS_PATH  = path.join(__dirname, '..', 'analysis-output.json');
+
+// ─── Utilities ────────────────────────────────────────────────────────────────
+
+function log(label, msg)  { console.log(`[${label}] ${msg}`); }
+function warn(label, msg) { console.warn(`[${label}] WARN: ${msg}`); }
+function err(label, msg)  { console.error(`[${label}] ERROR: ${msg}`); }
+
+// Map from Claude's scorecard category label → dashboard-data.json thesis_scores key
+const SCORE_KEY_MAP = {
+  'Regulatory Clarity':   'regulatory',
+  'Regulatory':           'regulatory',
+  'Institutional Custody': 'institutional_custody',
+  'ETF Adoption':         'etf_adoption',
+  'XRPL Infrastructure':  'xrpl_infrastructure',
+  'Stablecoin (RLUSD)':   'stablecoin_adoption',
+  'Stablecoin Adoption':  'stablecoin_adoption',
+  'RLUSD':                'stablecoin_adoption',
+  'ODL Volume':           'odl_volume',
+  'Japan Adoption':       'japan_adoption',
+  'Macro Environment':    'macro_environment',
+  'Macro':                'macro_environment',
+};
+
+// Map from Claude's kill switch name → dashboard-data.json kill_switches key
+const KS_KEY_MAP = {
+  'ODL Volume':                   'odl_volume',
+  'RLUSD Circulation':            'rlusd_circulation',
+  'Permissioned DEX':             'permissioned_dex_adoption',
+  'XRP ETF AUM':                  'xrp_etf_aum',
+  'Japan Adoption':               'japan_adoption',
+  'Clarity Act':                  'clarity_act',
+  'Announcement-to-Deployment':   'announcement_to_deployment',
+  'Token Velocity':               'token_velocity',
+  'Competitive Displacement':     'competitive_displacement',
+  'ODL Transparency':             'odl_transparency',
+};
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+
+async function main() {
+  console.log('\n━━━ Overwatch Terminal — Apply Analysis ━━━');
+  console.log(`Started: ${new Date().toISOString()}\n`);
+
+  // 1. Load both files
+  if (!fs.existsSync(ANALYSIS_PATH)) {
+    err('io', 'analysis-output.json not found — run analyze-thesis.js first');
+    process.exit(1);
+  }
+  if (!fs.existsSync(DASHBOARD_PATH)) {
+    err('io', 'dashboard-data.json not found');
+    process.exit(1);
+  }
+
+  const analysis  = JSON.parse(fs.readFileSync(ANALYSIS_PATH, 'utf8'));
+  const dashboard = JSON.parse(fs.readFileSync(DASHBOARD_PATH, 'utf8'));
+
+  log('io', `Loaded analysis from: ${analysis.timestamp ?? 'unknown'}`);
+  log('io', 'Loaded dashboard-data.json');
+
+  let changes = 0;
+
+  // 2. Apply scorecard updates
+  const scorecardUpdates = analysis.scorecard_updates ?? [];
+  for (const update of scorecardUpdates) {
+    if (update.recommended_status === update.previous_status) continue;
+
+    const key = SCORE_KEY_MAP[update.category];
+    if (!key) {
+      warn('scorecard', `Unknown category "${update.category}" — skipping`);
+      continue;
+    }
+
+    if (!dashboard.thesis_scores) dashboard.thesis_scores = {};
+    const current = dashboard.thesis_scores[key] ?? {};
+
+    log('scorecard', `${update.category}: ${current.status ?? '?'} → ${update.recommended_status}`);
+    dashboard.thesis_scores[key] = {
+      ...current,
+      status: update.recommended_status,
+    };
+    changes++;
+  }
+
+  // 3. Apply kill switch status notes (we update status field if changed)
+  const ksUpdates = analysis.kill_switch_updates ?? [];
+  for (const update of ksUpdates) {
+    if (update.recommended_status === update.previous_status) continue;
+
+    const key = KS_KEY_MAP[update.name];
+    if (!key) {
+      warn('kill_switch', `Unknown kill switch "${update.name}" — skipping`);
+      continue;
+    }
+
+    if (!dashboard.kill_switches) dashboard.kill_switches = {};
+    if (!dashboard.kill_switches[key]) {
+      warn('kill_switch', `kill_switches.${key} not found in dashboard — skipping`);
+      continue;
+    }
+
+    log('kill_switch', `${update.name}: ${update.previous_status} → ${update.recommended_status}`);
+    dashboard.kill_switches[key].status = update.recommended_status;
+    if (update.reasoning) {
+      dashboard.kill_switches[key]._analysis_note = update.reasoning;
+    }
+    changes++;
+  }
+
+  // 4. Apply probability adjustment if recommended
+  const prob = analysis.recommended_probability_adjustment;
+  if (prob && prob.reasoning) {
+    log('probability', `Applying recommended probability: Bear ${prob.bear}% | Base ${prob.base}% | Mid ${prob.mid}% | Bull ${prob.bull}%`);
+    dashboard.probability = {
+      bear: prob.bear,
+      base: prob.base,
+      mid:  prob.mid,
+      bull: prob.bull,
+      last_updated: analysis.timestamp,
+      last_reasoning: prob.reasoning,
+    };
+    changes++;
+  }
+
+  // 5. Stamp the applied analysis metadata
+  dashboard.last_analysis = {
+    timestamp:   analysis.timestamp,
+    run_type:    analysis.run_type,
+    stress_level: analysis.stress_assessment?.level,
+    stress_score: analysis.stress_assessment?.score,
+    applied_at:  new Date().toISOString(),
+    changes_applied: changes,
+  };
+
+  // 6. Write updated dashboard-data.json
+  fs.writeFileSync(DASHBOARD_PATH, JSON.stringify(dashboard, null, 2));
+  log('io', `Wrote dashboard-data.json (${changes} change${changes === 1 ? '' : 's'} applied)`);
+
+  console.log('\n─── Apply Summary ──────────────────────────────');
+  console.log(`Analysis timestamp: ${analysis.timestamp}`);
+  console.log(`Changes applied:    ${changes}`);
+  console.log(`Scorecard updates:  ${scorecardUpdates.filter(s => s.recommended_status !== s.previous_status).length}`);
+  console.log(`Kill sw updates:    ${ksUpdates.filter(k => k.recommended_status !== k.previous_status).length}`);
+  if (prob?.reasoning) console.log(`Probability:        Updated`);
+  console.log('───────────────────────────────────────────────\n');
+
+  if (changes === 0) {
+    warn('apply', 'No changes to apply — all recommendations matched existing state');
+  }
+
+  console.log(`Done: ${new Date().toISOString()}`);
+}
+
+main().catch(e => {
+  console.error('\nFATAL:', e);
+  process.exit(1);
+});
