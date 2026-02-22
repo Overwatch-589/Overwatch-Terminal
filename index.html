@@ -444,6 +444,57 @@ textarea:focus { border-color:var(--accent-cyan); }
   border-top:1px solid rgba(26,39,64,0.5);
 }
 .event-item.expanded .event-body { display:block; }
+/* ── Events Filter Bar ───────────────────────────────── */
+.events-filter-bar {
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+  margin-bottom:6px;
+}
+.filter-pill {
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.8px;
+  padding:3px 9px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--text-muted);
+  cursor:pointer;
+  transition:border-color 0.15s,color 0.15s,background 0.15s;
+}
+.filter-pill:hover { border-color:var(--accent-cyan);color:var(--accent-cyan); }
+.filter-pill.active { background:rgba(0,200,200,0.08);border-color:rgba(0,200,200,0.35);color:var(--accent-cyan); }
+.filter-pill.fp-red.active { background:rgba(255,71,87,0.08);border-color:rgba(255,71,87,0.35);color:var(--accent-red); }
+.filter-pill.fp-amber.active { background:rgba(255,179,71,0.08);border-color:rgba(255,179,71,0.35);color:var(--accent-amber); }
+.filter-pill.fp-green.active { background:rgba(0,229,153,0.08);border-color:rgba(0,229,153,0.35);color:var(--accent-green); }
+/* ── Events Scroll Container ────────────────────────── */
+.events-scroll-container {
+  max-height:500px;
+  overflow-y:auto;
+  scroll-behavior:smooth;
+  padding-right:2px;
+}
+.events-scroll-container::-webkit-scrollbar { width:3px; }
+.events-scroll-container::-webkit-scrollbar-track { background:transparent; }
+.events-scroll-container::-webkit-scrollbar-thumb { background:var(--border);border-radius:2px; }
+@media(max-width:600px){.events-scroll-container{max-height:400px;}}
+/* ── Month dividers (sticky within scroll container) ── */
+.event-month-divider {
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:var(--bg-card);
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:2px;
+  color:var(--text-muted);
+  padding:5px 0 4px;
+  margin-bottom:4px;
+  border-bottom:1px solid var(--border);
+}
 /* Scrollbar */
 ::-webkit-scrollbar { width:4px; }
 ::-webkit-scrollbar-track { background:transparent; }
@@ -633,11 +684,29 @@ textarea:focus { border-color:var(--accent-cyan); }
 
     <!-- Events Timeline -->
     <div class="full-card" style="border-color:rgba(255,179,71,0.25);padding-bottom:6px;">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
-        <h3 style="margin-bottom:0;">⚡ EVENTS TIMELINE</h3>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div style="display:flex;align-items:baseline;gap:10px;">
+          <h3 style="margin-bottom:0;">⚡ EVENTS TIMELINE</h3>
+          <span id="eventCount" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:1px;">-- EVENTS</span>
+        </div>
         <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">TAP TO EXPAND</span>
       </div>
-      <div id="eventsContainer"></div>
+      <!-- Category filters -->
+      <div class="events-filter-bar">
+        <button class="filter-pill active" data-filter-cat="ALL">ALL</button>
+        <button class="filter-pill" data-filter-cat="INSTITUTIONAL">INSTITUTIONAL</button>
+        <button class="filter-pill" data-filter-cat="REGULATORY">REGULATORY</button>
+        <button class="filter-pill" data-filter-cat="GEOPOLITICAL">GEOPOLITICAL</button>
+        <button class="filter-pill" data-filter-cat="FINANCIAL">FINANCIAL</button>
+      </div>
+      <!-- Severity filters -->
+      <div class="events-filter-bar" style="margin-bottom:10px;">
+        <button class="filter-pill active" data-filter-sev="ALL">ALL</button>
+        <button class="filter-pill fp-red" data-filter-sev="CRITICAL">🔴 CRITICAL</button>
+        <button class="filter-pill fp-amber" data-filter-sev="ELEVATED">🟡 ELEVATED</button>
+        <button class="filter-pill fp-green" data-filter-sev="MONITORING">🟢 MONITORING</button>
+      </div>
+      <div class="events-scroll-container" id="eventsContainer"></div>
     </div>
 
     <!-- Thesis Pulse -->
@@ -1180,6 +1249,66 @@ setInterval(updateCountdown, 60000);
 //         threatEmoji, desc
 const EVENTS_DATA = [
   {
+    date: '2026-02-22',
+    dateLabel: 'FEB 22',
+    title: 'SEC allows 2% haircut on stablecoin positions for broker-dealers',
+    category: 'REGULATORY',
+    catClass: 'reg',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Division of Trading and Markets FAQ confirms broker-dealers can hold payment stablecoins as proprietary positions with 2% capital haircut. Removes major barrier to institutional RLUSD adoption as balance sheet asset.'
+  },
+  {
+    date: '2026-02-22',
+    dateLabel: 'FEB 22',
+    title: 'USS Gerald R. Ford enters Mediterranean — dual carrier strike groups positioned',
+    category: 'GEOPOLITICAL',
+    catClass: 'geo',
+    threat: 'CRITICAL',
+    threatEmoji: '🔴',
+    desc: 'World\'s most advanced supercarrier joins USS Abraham Lincoln. Two CSGs now positioned as Iran nuclear talks stall. Strait of Hormuz risk escalating — military positioning suggests strike capability, not deterrence.'
+  },
+  {
+    date: '2026-02-22',
+    dateLabel: 'FEB 22',
+    title: 'XRPL 24h: 1M+ payments, 483K DEX orders, AMM activity surging',
+    category: 'INSTITUTIONAL',
+    catClass: 'inst',
+    threat: 'MONITORING',
+    threatEmoji: '🟢',
+    desc: 'Vet analysis shows 1,002,061 payment transactions (44.4% share), 483K OfferCreate orders. First Ledger XRP/RLUSD incentive program driving AMM deposit activity. Network utilization at elevated levels.'
+  },
+  {
+    date: '2026-02-22',
+    dateLabel: 'FEB 22',
+    title: 'T. Rowe Price active crypto ETF — SEC deadline Feb 26',
+    category: 'REGULATORY',
+    catClass: 'reg',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'SEC faces Feb 26 deadline on T. Rowe Price ($1.8T AUM) active crypto ETF listing XRP as core eligible asset. If approved, creates dynamic institutional allocation channel beyond existing spot ETFs.'
+  },
+  {
+    date: '2026-02-22',
+    dateLabel: 'FEB 22',
+    title: 'Ripple $4B acquisition stack — OCC trust bank charter confirmed',
+    category: 'INSTITUTIONAL',
+    catClass: 'inst',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Hidden Road ($1.25B prime brokerage, $3T clearing), Rail ($200M stablecoin rails), GTreasury ($1B corporate treasury), Palisade (custody). OCC national trust bank charter grants direct US banking access. Garlinghouse: Banks are our customers.'
+  },
+  {
+    date: '2026-02-22',
+    dateLabel: 'FEB 22',
+    title: '42 new whale wallets (1M+ XRP) since January amid price drawdown',
+    category: 'FINANCIAL',
+    catClass: 'fin',
+    threat: 'MONITORING',
+    threatEmoji: '🟢',
+    desc: 'On-chain data shows 42 new wallets each holding 1M+ XRP appeared since January. Accumulation during drawdown while Upbit data shows 3.3B XRP ($5B) systematically sold into Korean retail over 10 months.'
+  },
+  {
     date: '2026-02-18',
     dateLabel: 'FEB 18',
     title: 'US military strike on Iran possible this weekend',
@@ -1341,13 +1470,56 @@ const EVENTS_DATA = [
   }
 ];
 
+// ===== EVENTS TIMELINE FILTERS =====
+let evtFilterCat = 'ALL';
+let evtFilterSev = 'ALL';
+
+const MONTH_LABELS = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+
 function renderEvents() {
   const container = document.getElementById('eventsContainer');
   if (!container) return;
-  const sorted = [...EVENTS_DATA].sort((a, b) => b.date.localeCompare(a.date) || EVENTS_DATA.indexOf(a) - EVENTS_DATA.indexOf(b));
-  container.innerHTML = sorted.map(e => {
-    const threatClass = e.threat === 'CRITICAL' ? 'critical' : e.threat === 'ELEVATED' ? 'elevated' : 'monitoring';
-    return `<div class="event-item ${threatClass}" onclick="this.classList.toggle('expanded')">
+
+  // Apply active filters
+  let filtered = EVENTS_DATA.filter(e =>
+    (evtFilterCat === 'ALL' || e.category === evtFilterCat) &&
+    (evtFilterSev === 'ALL' || e.threat === evtFilterSev)
+  );
+
+  // Sort newest-first
+  filtered.sort((a, b) => b.date.localeCompare(a.date));
+
+  // Update count badge
+  const countEl = document.getElementById('eventCount');
+  if (countEl) {
+    const total = EVENTS_DATA.length;
+    countEl.textContent = filtered.length < total
+      ? `${filtered.length} / ${total} EVENTS`
+      : `${total} EVENTS`;
+  }
+
+  if (filtered.length === 0) {
+    container.innerHTML = '<div style="padding:24px 0;text-align:center;font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--text-muted);letter-spacing:1px;">NO EVENTS MATCH FILTER</div>';
+    return;
+  }
+
+  // Group by month-year for sticky dividers
+  const groups = [];
+  let currentKey = null;
+  for (const e of filtered) {
+    const [y, m] = e.date.split('-');
+    const key = `${y}-${m}`;
+    if (key !== currentKey) {
+      currentKey = key;
+      groups.push({ label: MONTH_LABELS[parseInt(m, 10) - 1] + ' ' + y, events: [] });
+    }
+    groups[groups.length - 1].events.push(e);
+  }
+
+  container.innerHTML = groups.map(({ label, events }) => {
+    const eventRows = events.map(e => {
+      const threatClass = e.threat === 'CRITICAL' ? 'critical' : e.threat === 'ELEVATED' ? 'elevated' : 'monitoring';
+      return `<div class="event-item ${threatClass}" onclick="this.classList.toggle('expanded')">
   <div class="event-meta">
     <div class="event-meta-left">
       <span class="event-date-tag">${e.dateLabel}</span>
@@ -1361,7 +1533,28 @@ function renderEvents() {
   </div>
   <div class="event-body">${escHtml(e.desc)}</div>
 </div>`;
+    }).join('');
+    return `<div class="event-month-divider">${label}</div>${eventRows}`;
   }).join('');
+}
+
+function initEventFilters() {
+  document.querySelectorAll('[data-filter-cat]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      evtFilterCat = btn.dataset.filterCat;
+      document.querySelectorAll('[data-filter-cat]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderEvents();
+    });
+  });
+  document.querySelectorAll('[data-filter-sev]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      evtFilterSev = btn.dataset.filterSev;
+      document.querySelectorAll('[data-filter-sev]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderEvents();
+    });
+  });
 }
 
 // ===== AGENT ECONOMY & x402 DATA =====
@@ -2002,6 +2195,7 @@ fetchDashboardData();
 connectXRPL();
 renderJournal();
 renderEvents();
+initEventFilters();
 renderX402();
 fetchGeopolitical();
 setInterval(fetchXRPPrice, 120000);
