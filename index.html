@@ -503,6 +503,20 @@ textarea:focus { border-color:var(--accent-cyan); }
 ::-webkit-scrollbar { width:4px; }
 ::-webkit-scrollbar-track { background:transparent; }
 ::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+/* ── BEAR tab — bear score bar ── */
+.bear-bar { height:6px; border-radius:3px; background:rgba(255,255,255,0.05); overflow:hidden; margin:8px 0 4px; }
+.bear-fill { height:100%; border-radius:3px; transition:width 0.6s ease,background 0.6s; }
+/* ── History scroll container ── */
+.history-scroll { max-height:400px; overflow-y:auto; scroll-behavior:smooth; padding-right:2px; }
+.history-scroll::-webkit-scrollbar { width:3px; }
+.history-scroll::-webkit-scrollbar-track { background:transparent; }
+.history-scroll::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+@media(max-width:600px){ .history-scroll { max-height:320px; } }
+/* ── History row ── */
+.hist-row { display:grid; grid-template-columns:105px 56px 52px 1fr; gap:4px; padding:5px 0; border-bottom:1px solid rgba(255,255,255,0.04); align-items:center; }
+.hist-row:last-child { border-bottom:none; }
+.hist-cell { font-family:'JetBrains Mono',monospace; font-size:10px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+@media(max-width:400px){ .hist-row { grid-template-columns:85px 48px 46px 1fr; } .hist-cell { font-size:9px; } }
 /* News Feed */
 .news-card {
   background:var(--bg-card);
@@ -630,6 +644,7 @@ textarea:focus { border-color:var(--accent-cyan); }
   <button class="tab-btn" data-tab="macro">MACRO</button>
   <button class="tab-btn" data-tab="infra">XRPL</button>
   <button class="tab-btn" data-tab="thesis">SCORE</button>
+  <button class="tab-btn" data-tab="bear">BEAR</button>
   <button class="tab-btn" data-tab="journal">LOG</button>
   <button class="tab-btn" data-tab="x402">x402</button>
   <button class="tab-btn" data-tab="links">LINKS</button>
@@ -1051,8 +1066,108 @@ textarea:focus { border-color:var(--accent-cyan); }
     </div>
   </div>
 
+  <!-- ==================== BEAR / COUNTER-THESIS ==================== -->
+  <div class="tab-panel" id="panel-bear">
+
+    <!-- Counter-thesis Pressure Score -->
+    <div class="full-card" style="border-color:rgba(255,71,87,0.35);background:linear-gradient(135deg,rgba(255,71,87,0.03),transparent);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <h3 style="margin-bottom:0;">🐻 COUNTER-THESIS PRESSURE</h3>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;" id="bearLastUpdated"></span>
+      </div>
+      <div style="text-align:center;margin:10px 0 6px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:700;color:var(--accent-red);" id="bearScore">--</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-top:2px;" id="bearLabel">AWAITING DATA</div>
+      </div>
+      <div class="bear-bar">
+        <div class="bear-fill" id="bearFill" style="width:0%;background:var(--accent-green);"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;">
+        <span>LOW PRESSURE</span><span>MODERATE</span><span>HIGH PRESSURE</span>
+      </div>
+      <div class="interpret-box" style="border-color:rgba(255,71,87,0.2);background:rgba(255,71,87,0.04);margin-top:10px;">
+        <div class="label" style="color:var(--accent-red);">SCORE REASONING</div>
+        <p id="bearScoreReasoning" style="color:var(--text-secondary);font-size:12px;line-height:1.55;">Awaiting analyst cycle.</p>
+      </div>
+    </div>
+
+    <!-- Bear Market Signals (auto-calculated + manual from bear_case) -->
+    <div class="full-card" style="border-color:rgba(255,179,71,0.25);">
+      <h3>⚡ BEAR MARKET SIGNALS</h3>
+      <div class="data-row"><span class="data-label">XRP ETF Outflow Streak</span><span class="data-value" id="bearEtfStreak">--</span></div>
+      <div class="data-row"><span class="data-label">RLUSD Pace vs $5B Target</span><span class="data-value" id="bearRlusdPace">--</span></div>
+      <div class="data-row"><span class="data-label">Exchange Float Trend</span><span class="data-value" id="bearExchangeFloat">--</span></div>
+      <div class="data-row"><span class="data-label">F&amp;G &lt;20 (Crypto Winter)</span><span class="data-value" id="bearFgStreak">--</span></div>
+      <div class="data-row"><span class="data-label">ODL Stagnation</span><span class="data-value" id="bearOdlStagnation">--</span></div>
+      <div class="data-row"><span class="data-label">Token Velocity Risk</span><span class="data-value" id="bearTokenVelocity">--</span></div>
+    </div>
+
+    <!-- Competing Infrastructure -->
+    <div class="full-card" style="border-color:rgba(255,71,87,0.15);">
+      <h3>🏦 COMPETING INFRASTRUCTURE</h3>
+      <div id="bearCompeting">
+        <div class="data-row"><span class="data-label">SWIFT GPI</span><span class="signal">--</span></div>
+        <div class="data-row"><span class="data-label">Visa B2B Connect</span><span class="signal">--</span></div>
+        <div class="data-row"><span class="data-label">JPMorgan Kinexys</span><span class="signal">--</span></div>
+        <div class="data-row"><span class="data-label">BIS Project Nexus</span><span class="signal">--</span></div>
+        <div class="data-row"><span class="data-label">Ethereum Institutional</span><span class="signal">--</span></div>
+      </div>
+    </div>
+
+    <!-- Macro Headwinds -->
+    <div class="full-card" style="border-color:rgba(255,179,71,0.15);">
+      <h3>🌪 MACRO HEADWINDS</h3>
+      <div id="bearMacroHeadwinds">
+        <div class="data-row"><span class="data-label">Global Recession Risk</span><span class="signal">--</span></div>
+        <div class="data-row"><span class="data-label">Crypto Winter Signals</span><span class="signal">--</span></div>
+        <div class="data-row"><span class="data-label">Regulatory Reversal Risk</span><span class="signal">--</span></div>
+        <div class="data-row"><span class="data-label">Rate Hike Extension</span><span class="signal">--</span></div>
+      </div>
+    </div>
+
+    <!-- Bear Narrative -->
+    <div class="full-card" style="border-color:rgba(255,71,87,0.25);background:rgba(255,71,87,0.025);">
+      <h3>📉 BEAR NARRATIVE</h3>
+      <div class="interpret-box" style="border-color:rgba(255,71,87,0.2);background:rgba(255,71,87,0.04);">
+        <div class="label" style="color:var(--accent-red);">STRONGEST COUNTER-ARGUMENTS</div>
+        <p id="bearNarrativeText" style="color:var(--text-secondary);font-size:12px;line-height:1.55;">Awaiting analyst cycle. Counter-thesis evaluated twice daily with instructions to actively seek disconfirming evidence.</p>
+      </div>
+    </div>
+
+    <!-- Thesis vs Counter-thesis comparison -->
+    <div class="full-card">
+      <h3>⚖️ THESIS vs COUNTER-THESIS</h3>
+      <div class="data-row"><span class="data-label">Probability (Base Case)</span><span class="data-value green" id="bearProbBase">--</span></div>
+      <div class="data-row"><span class="data-label">Probability (Bull Case)</span><span class="data-value cyan" id="bearProbBull">--</span></div>
+      <div class="data-row"><span class="data-label">Bear Case Probability</span><span class="data-value red" id="bearProbBear">--</span></div>
+      <div class="data-row"><span class="data-label">Counter-Thesis Pressure</span><span class="data-value" id="bearProbPressure">--/100</span></div>
+      <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);text-align:center;letter-spacing:0.5px;line-height:1.6;" id="bearConfidenceLabel">THESIS CONFIDENCE: -- | COUNTER-THESIS PRESSURE: --</div>
+      <p style="font-size:10px;color:var(--text-muted);margin-top:8px;line-height:1.5;">Updated twice daily. Analyst instructed to actively seek disconfirming evidence independent of bull case bias.</p>
+    </div>
+
+  </div>
+
   <!-- ==================== DECISION JOURNAL ==================== -->
   <div class="tab-panel" id="panel-journal">
+
+    <!-- Analysis History -->
+    <div class="full-card" style="border-color:rgba(0,229,255,0.1);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <h3 style="margin-bottom:0;">📊 ANALYSIS HISTORY</h3>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);letter-spacing:1px;" id="historyCount">-- RUNS</span>
+      </div>
+      <!-- Header row -->
+      <div class="hist-row" style="border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:4px;margin-bottom:2px;">
+        <span class="hist-cell" style="color:var(--text-muted);">DATE/TIME</span>
+        <span class="hist-cell" style="color:var(--text-muted);">STRESS</span>
+        <span class="hist-cell" style="color:var(--text-muted);">XRP</span>
+        <span class="hist-cell" style="color:var(--text-muted);">F&amp;G · ALERTS</span>
+      </div>
+      <div class="history-scroll" id="analysisHistoryList">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);text-align:center;padding:20px 0;">Loading history...</div>
+      </div>
+    </div>
+
     <div class="full-card">
       <h3>📓 DECISION JOURNAL</h3>
       <p style="font-size:11px;color:var(--text-muted);margin-bottom:10px;">Log observations, decisions, and reasoning. Review monthly to check for bias.</p>
@@ -1841,6 +1956,7 @@ async function fetchDashboardData() {
   try {
     const r = await fetch('https://raw.githubusercontent.com/Overwatch-589/Overwatch-Terminal/main/dashboard-data.json?t=' + Date.now());
     const d = await r.json();
+    _lastDashData = d;  // cache for BEAR tab auto signals
     const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
     const setHtml = (id, val) => { const el = document.getElementById(id); if (el && val) el.innerHTML = val; };
 
@@ -2196,6 +2312,11 @@ async function fetchDashboardData() {
       set('dataUpdated', 'Data: ' + dt.toLocaleDateString([],{month:'short',day:'numeric'}) + ' ' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}));
     }
 
+    // BEAR tab — render bear case from dashboard data
+    if (d.bear_case) renderBearCase(d.bear_case, d.probability);
+    // Refresh auto signals when dashboard data updates (if history is loaded)
+    if (_analysisHistory.length > 0) renderBearAutoSignals();
+
   } catch(e) {
     console.log('Dashboard data fetch:', e.message);
   }
@@ -2246,6 +2367,220 @@ function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+// ===== ANALYSIS HISTORY =====
+let _analysisHistory = [];
+let _lastDashData = null;
+
+async function fetchAnalysisHistory() {
+  try {
+    const r = await fetch('https://raw.githubusercontent.com/Overwatch-589/Overwatch-Terminal/main/scripts/analysis-history.json?t=' + Date.now());
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    _analysisHistory = await r.json();
+    renderAnalysisHistory();
+    renderBearAutoSignals();
+  } catch(e) {
+    const el = document.getElementById('analysisHistoryList');
+    if (el) el.innerHTML = '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--text-muted);text-align:center;padding:12px 0;">No history available yet</div>';
+  }
+}
+
+function renderAnalysisHistory() {
+  const container = document.getElementById('analysisHistoryList');
+  const countEl   = document.getElementById('historyCount');
+  if (!container) return;
+  if (!_analysisHistory.length) {
+    container.innerHTML = '<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;color:var(--text-muted);text-align:center;padding:12px 0;">No runs recorded yet</div>';
+    return;
+  }
+  if (countEl) countEl.textContent = _analysisHistory.length + ' RUNS';
+  const last30 = [..._analysisHistory].slice(-30).reverse();
+  container.innerHTML = last30.map((entry, idx) => {
+    const prev = last30[idx + 1];
+    const score    = entry.stress_score;
+    const prevScore = prev?.stress_score;
+    let arrow = '→', arrowColor = 'var(--text-muted)';
+    if (prevScore != null && score != null) {
+      if (score > prevScore + 2)       { arrow = '↑'; arrowColor = 'var(--accent-red)'; }
+      else if (score < prevScore - 2)  { arrow = '↓'; arrowColor = 'var(--accent-green)'; }
+    }
+    const scoreColor = score == null ? 'var(--text-muted)' : score < 40 ? 'var(--accent-green)' : score < 70 ? 'var(--accent-amber)' : 'var(--accent-red)';
+    const dt = new Date(entry.timestamp);
+    const dateStr = dt.toLocaleDateString('en-US', {month:'short', day:'numeric'}) + ' ' +
+                    dt.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+    const priceStr = entry.xrp_price != null ? '$' + entry.xrp_price.toFixed(2) : '--';
+    const alertStr = 'F&G:' + (entry.fear_greed ?? '--') + ' ⚡' + (entry.alerts_count ?? 0);
+    return `<div class="hist-row">` +
+      `<span class="hist-cell" style="color:var(--text-muted);">${escHtml(dateStr)}</span>` +
+      `<span class="hist-cell"><span style="color:${scoreColor};font-weight:700;">${score ?? '--'}</span><span style="color:${arrowColor};margin-left:3px;">${arrow}</span></span>` +
+      `<span class="hist-cell" style="color:var(--text-primary);">${priceStr}</span>` +
+      `<span class="hist-cell" style="color:var(--text-muted);">${alertStr}</span>` +
+      `</div>`;
+  }).join('');
+}
+
+// ===== BEAR TAB RENDERING =====
+
+function renderBearCase(bc, probability) {
+  if (!bc) return;
+
+  // Score + bar
+  const score = bc.counter_thesis_score ?? 0;
+  const scoreEl = document.getElementById('bearScore');
+  const labelEl = document.getElementById('bearLabel');
+  const fillEl  = document.getElementById('bearFill');
+  const presEl  = document.getElementById('bearProbPressure');
+  const confEl  = document.getElementById('bearConfidenceLabel');
+  if (scoreEl) scoreEl.textContent = score;
+  let bearColor, bearLabel;
+  if (score < 30)       { bearColor = 'var(--accent-green)'; bearLabel = 'LOW PRESSURE'; }
+  else if (score < 60)  { bearColor = 'var(--accent-amber)'; bearLabel = 'MODERATE PRESSURE'; }
+  else                  { bearColor = 'var(--accent-red)';   bearLabel = 'HIGH PRESSURE'; }
+  if (labelEl) labelEl.textContent = bearLabel;
+  if (scoreEl) scoreEl.style.color = bearColor;
+  if (fillEl)  { fillEl.style.width = score + '%'; fillEl.style.background = bearColor; }
+  if (presEl)  presEl.textContent = score + '/100';
+
+  const el = id => document.getElementById(id);
+  if (el('bearScoreReasoning') && bc.score_reasoning) el('bearScoreReasoning').textContent = bc.score_reasoning;
+  if (el('bearNarrativeText') && bc.bear_narrative)   el('bearNarrativeText').textContent  = bc.bear_narrative;
+  if (el('bearOdlStagnation') && bc.odl_stagnation)   el('bearOdlStagnation').textContent  = bc.odl_stagnation;
+  if (el('bearTokenVelocity') && bc.token_velocity_concern) el('bearTokenVelocity').textContent = bc.token_velocity_concern;
+
+  // Last updated
+  if (bc.last_updated) {
+    const lu = document.getElementById('bearLastUpdated');
+    if (lu) {
+      const dt = new Date(bc.last_updated);
+      lu.textContent = dt.toLocaleDateString('en-US',{month:'short',day:'numeric'}) + ' ' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    }
+  }
+
+  // Competing infrastructure
+  const compEl = document.getElementById('bearCompeting');
+  if (compEl && Array.isArray(bc.competing_infrastructure)) {
+    compEl.innerHTML = bc.competing_infrastructure.map(item => {
+      const cls = item.status === 'ELEVATED_RISK' ? 'red' : item.status === 'LOW_RISK' ? 'green' : 'amber';
+      return `<div class="data-row"><span class="data-label">${escHtml(item.name)}</span><span class="signal ${cls}">${escHtml(item.status_text ?? item.status)}</span></div>`;
+    }).join('');
+  }
+
+  // Macro headwinds
+  const macroEl = document.getElementById('bearMacroHeadwinds');
+  if (macroEl && Array.isArray(bc.macro_headwinds)) {
+    macroEl.innerHTML = bc.macro_headwinds.map(item => {
+      const cls = item.status === 'ELEVATED_RISK' ? 'red' : item.status === 'LOW_RISK' ? 'green' : 'amber';
+      return `<div class="data-row"><span class="data-label">${escHtml(item.name)}</span><span class="signal ${cls}">${escHtml(item.status_text ?? item.status)}</span></div>`;
+    }).join('');
+  }
+
+  // Probability comparison
+  if (probability) {
+    const setTxt = (id, v) => { const e = document.getElementById(id); if (e && v != null) e.textContent = v; };
+    setTxt('bearProbBase', (probability.base ?? '--') + '%');
+    setTxt('bearProbBull', (probability.bull ?? '--') + '%');
+    setTxt('bearProbBear', (probability.bear ?? '--') + '%');
+    if (confEl) {
+      const bullBase = (probability.base ?? 0) + (probability.bull ?? 0);
+      confEl.textContent = `THESIS CONFIDENCE: ${bullBase}% BULL+BASE | COUNTER-THESIS PRESSURE: ${score}/100`;
+    }
+  }
+}
+
+function renderBearAutoSignals() {
+  const hist = _analysisHistory;
+  const d = _lastDashData;
+
+  // 1. XRP ETF outflow streak: consecutive runs with etf_daily_flow < 0 (newest first)
+  let etfOutflowStreak = 0;
+  for (let i = hist.length - 1; i >= 0; i--) {
+    if (hist[i].etf_daily_flow != null && hist[i].etf_daily_flow < 0) etfOutflowStreak++;
+    else break;
+  }
+  const etfEl = document.getElementById('bearEtfStreak');
+  if (etfEl) {
+    if (hist.length === 0) { etfEl.textContent = 'No history'; }
+    else {
+      etfEl.textContent = etfOutflowStreak === 0 ? 'No active streak' : etfOutflowStreak + ' consecutive outflow runs';
+      etfEl.className = 'data-value ' + (etfOutflowStreak >= 10 ? 'red' : etfOutflowStreak >= 4 ? 'amber' : 'green');
+    }
+  }
+
+  // 2. F&G sustained below 20 streak
+  let fgStreak = 0;
+  for (let i = hist.length - 1; i >= 0; i--) {
+    if (hist[i].fear_greed != null && hist[i].fear_greed < 20) fgStreak++;
+    else break;
+  }
+  const fgEl = document.getElementById('bearFgStreak');
+  if (fgEl) {
+    fgEl.textContent = fgStreak === 0 ? 'Not in extreme fear streak' : fgStreak + ' consecutive runs below 20';
+    fgEl.className = 'data-value ' + (fgStreak >= 20 ? 'red' : fgStreak >= 8 ? 'amber' : 'green');
+  }
+
+  // 3. RLUSD pace vs $5B target by Dec 31, 2026
+  const rlusdEl = document.getElementById('bearRlusdPace');
+  if (rlusdEl) {
+    const current = d?.rlusd?.market_cap;
+    if (current == null) { rlusdEl.textContent = 'No data'; }
+    else {
+      const TARGET = 5_000_000_000;
+      const DEADLINE = new Date('2026-12-31');
+      const now = new Date();
+      const daysLeft = Math.max(1, Math.round((DEADLINE - now) / 86400000));
+      const required = (TARGET - current) / daysLeft;
+      // Estimate daily growth from last 14 history entries
+      const recent = hist.slice(-28); // 28 runs = ~14 days
+      let dailyGrowth = null;
+      if (recent.length >= 4) {
+        const oldest = recent[0].rlusd_market_cap;
+        const newest = recent[recent.length - 1].rlusd_market_cap;
+        if (oldest != null && newest != null && oldest > 0) {
+          const days = recent.length / 2; // 2 runs/day
+          dailyGrowth = (newest - oldest) / days;
+        }
+      }
+      if (dailyGrowth == null) {
+        rlusdEl.textContent = '$' + (current / 1e9).toFixed(2) + 'B — pace unknown';
+        rlusdEl.className = 'data-value amber';
+      } else {
+        const daysToTarget = dailyGrowth > 0 ? (TARGET - current) / dailyGrowth : Infinity;
+        const pct = Math.round(daysToTarget / daysLeft * 100);
+        if (daysToTarget <= daysLeft) {
+          rlusdEl.textContent = 'On pace — ' + Math.round(daysToTarget) + 'd to target';
+          rlusdEl.className = 'data-value green';
+        } else {
+          rlusdEl.textContent = 'Behind — needs ' + (required / 1e6).toFixed(1) + 'M/day (tracking ' + (dailyGrowth / 1e6).toFixed(1) + 'M/day)';
+          rlusdEl.className = 'data-value ' + (pct > 200 ? 'red' : 'amber');
+        }
+      }
+    }
+  }
+
+  // 4. Exchange float trend (current vs 30-run ago)
+  const floatEl = document.getElementById('bearExchangeFloat');
+  if (floatEl) {
+    const current = d?.supply?.exchanges;
+    if (current == null || hist.length < 10) {
+      floatEl.textContent = hist.length < 10 ? 'Building baseline' : 'No data';
+      floatEl.className = 'data-value';
+    } else {
+      const lookback = hist.slice(-30);
+      // Approximate: use etf_daily_flow trend as proxy for institutional absorption
+      const absorbedRecent = lookback.reduce((s, h) => s + (h.etf_daily_flow ?? 0), 0);
+      if (absorbedRecent > 50_000_000) {
+        floatEl.textContent = 'Shrinking — ETF absorbing supply';
+        floatEl.className = 'data-value green';
+      } else if (absorbedRecent < -10_000_000) {
+        floatEl.textContent = 'Growing — net outflows returning to exchanges';
+        floatEl.className = 'data-value red';
+      } else {
+        floatEl.textContent = 'Stable — minimal net movement';
+        floatEl.className = 'data-value amber';
+      }
+    }
+  }
+}
+
 // ===== REFRESH ALL =====
 function refreshAll() {
   fetchXRPPrice();
@@ -2254,6 +2589,7 @@ function refreshAll() {
   fetchXRPSupply();
   fetchDashboardData();
   fetchGeopolitical();
+  fetchAnalysisHistory();
   updateCountdown();
   if (!xrplWs || xrplWs.readyState > 1) { reconnectAttempts = 0; connectXRPL(); }
 }
@@ -2270,6 +2606,7 @@ renderEvents();
 initEventFilters();
 renderX402();
 fetchGeopolitical();
+fetchAnalysisHistory();
 setInterval(fetchXRPPrice, 120000);
 setInterval(fetchFearGreed, 300000);
 setInterval(fetchMacroData, 300000);

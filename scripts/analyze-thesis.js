@@ -17,6 +17,9 @@ const DASHBOARD_PATH      = path.join(__dirname, '..', 'dashboard-data.json');
 const ANALYSIS_PATH       = path.join(__dirname, '..', 'analysis-output.json');
 const THESIS_CONTEXT_PATH = path.join(__dirname, 'thesis-context.md');
 const DEBUG_RESPONSE_PATH = path.join(__dirname, 'debug-claude-response.txt');
+const HISTORY_PATH        = path.join(__dirname, 'analysis-history.json');
+
+const HISTORY_MAX_RECORDS = 180; // 90 days × 2 runs/day
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
@@ -258,7 +261,28 @@ Your output must be a JSON object with these fields:
 
   "thesis_pulse_assessment": "3-4 sentences distilling the current thesis state for the dashboard assessment box. Terminal voice. Reference actual numbers. Be honest about risks.",
 
-  "stress_interpretation": "2-3 sentences explaining the current composite stress environment for the dashboard stress card. Reference specific thresholds breached or held."
+  "stress_interpretation": "2-3 sentences explaining the current composite stress environment for the dashboard stress card. Reference specific thresholds breached or held.",
+
+  "bear_case": {
+    "counter_thesis_score": 0,
+    "score_reasoning": "1-2 sentence explanation of the score. What is driving the pressure level?",
+    "competing_infrastructure": [
+      {"name": "SWIFT GPI", "status": "LOW_RISK | MONITORING | ELEVATED_RISK", "status_text": "1 sentence current assessment"},
+      {"name": "Visa B2B Connect", "status": "LOW_RISK | MONITORING | ELEVATED_RISK", "status_text": "1 sentence current assessment"},
+      {"name": "JPMorgan Kinexys", "status": "LOW_RISK | MONITORING | ELEVATED_RISK", "status_text": "1 sentence current assessment"},
+      {"name": "BIS Project Nexus", "status": "LOW_RISK | MONITORING | ELEVATED_RISK", "status_text": "1 sentence current assessment"},
+      {"name": "Ethereum Institutional", "status": "LOW_RISK | MONITORING | ELEVATED_RISK", "status_text": "1 sentence current assessment"}
+    ],
+    "odl_stagnation": "1 sentence assessment of ODL volume growth risk",
+    "token_velocity_concern": "1 sentence assessment of token velocity / utility ratio risk",
+    "macro_headwinds": [
+      {"name": "Global Recession Risk", "status": "LOW_RISK | MONITORING | ELEVATED_RISK", "status_text": "1 sentence current assessment"},
+      {"name": "Crypto Winter Signals", "status": "LOW_RISK | MONITORING | ELEVATED_RISK", "status_text": "1 sentence current assessment"},
+      {"name": "Regulatory Reversal Risk", "status": "LOW_RISK | MONITORING | ELEVATED_RISK", "status_text": "1 sentence current assessment"},
+      {"name": "Rate Hike Extension", "status": "LOW_RISK | MONITORING | ELEVATED_RISK", "status_text": "1 sentence current assessment"}
+    ],
+    "bear_narrative": "2-3 sentences stating the strongest honest counter-arguments to the thesis right now. Do not soften findings."
+  }
 }
 
 Rules:
@@ -271,7 +295,7 @@ Rules:
 - For events_draft: only include headlines that materially affect the thesis framework. Ignore routine price commentary, opinion pieces, and pure speculation. Flag if any headline suggests a kill switch status change.
 - For geopolitical_watchlist: provide current, factual status for each region. Use terminal-style language — terse, specific. Flag active escalation.
 - For energy_interpretation, thesis_pulse_assessment, stress_interpretation: terminal voice — precise, no fluff, signal-focused. These render directly in the dashboard.
-- Output ONLY valid JSON. No markdown, no commentary outside the JSON.`;
+- For bear_case: ACTIVELY SEEK DISCONFIRMING EVIDENCE. Do not soften bear case findings to protect the thesis. The counter_thesis_score should reflect genuine risk (0 = no credible threat to thesis, 100 = thesis clearly failing). Rate each competing infrastructure item honestly based on actual adoption data. The bear_narrative must represent the strongest honest case against the thesis — not a strawman.`;
 
 // ─── Determine run type ───────────────────────────────────────────────────────
 
@@ -401,6 +425,61 @@ Respond with the JSON analysis object only.`;
   // 6. Write analysis-output.json
   fs.writeFileSync(ANALYSIS_PATH, JSON.stringify(analysis, null, 2));
   log('io', `Wrote analysis-output.json`);
+
+  // 6b. Append to analysis-history.json
+  try {
+    // Build kill switch summary from current dashboard data
+    const ksCounts = {};
+    for (const ks of Object.values(dashboardData.kill_switches ?? {})) {
+      const s = ks.status ?? 'UNKNOWN';
+      ksCounts[s] = (ksCounts[s] || 0) + 1;
+    }
+
+    // Probability: use recommended adjustment if present, else existing dashboard probability
+    const probSrc = analysis.recommended_probability_adjustment?.reasoning
+      ? analysis.recommended_probability_adjustment
+      : dashboardData.probability;
+
+    const historyRecord = {
+      timestamp:           analysis.timestamp,
+      run_type:            analysis.run_type,
+      stress_score:        analysis.stress_assessment?.score    ?? null,
+      stress_level:        analysis.stress_assessment?.level    ?? null,
+      xrp_price:           dashboardData.xrp?.price             ?? null,
+      fear_greed:          dashboardData.macro?.fear_greed?.value ?? null,
+      usd_jpy:             dashboardData.macro?.usd_jpy          ?? null,
+      jpn_10y:             dashboardData.macro?.jpn_10y          ?? null,
+      brent_crude:         dashboardData.macro?.brent_crude      ?? null,
+      etf_daily_flow:      dashboardData.etf?.daily_net_flow     ?? null,
+      dex_volume_24h:      dashboardData.xrpl_metrics?.dex_volume_24h_usd ?? null,
+      rlusd_market_cap:    dashboardData.rlusd?.market_cap       ?? null,
+      probability_framework: {
+        bear: probSrc?.bear ?? 8,
+        base: probSrc?.base ?? 55,
+        mid:  probSrc?.mid  ?? 25,
+        bull: probSrc?.bull ?? 12,
+      },
+      kill_switch_summary: ksCounts,
+      alerts_count:        (analysis.alerts ?? []).length,
+      events_drafted_count:(analysis.events_draft ?? []).length,
+      thesis_pulse:        (analysis.thesis_pulse ?? '').substring(0, 200),
+      counter_thesis_score: analysis.bear_case?.counter_thesis_score ?? null,
+    };
+
+    let history = [];
+    if (fs.existsSync(HISTORY_PATH)) {
+      try { history = JSON.parse(fs.readFileSync(HISTORY_PATH, 'utf8')); } catch (_) {}
+    }
+    if (!Array.isArray(history)) history = [];
+    history.push(historyRecord);
+    if (history.length > HISTORY_MAX_RECORDS) {
+      history = history.slice(history.length - HISTORY_MAX_RECORDS);
+    }
+    fs.writeFileSync(HISTORY_PATH, JSON.stringify(history, null, 2));
+    log('io', `Analysis history updated (${history.length} records)`);
+  } catch (histErr) {
+    warn('io', `Could not update analysis-history.json: ${histErr.message}`);
+  }
 
   // 7. Send Telegram notification
   const message = formatTelegramMessage(analysis, dashboardData);

@@ -787,6 +787,12 @@ async function main() {
     kill_switches:  buildKillSwitches(manual, rlusd, etf),
     thesis_scores,
     health_check:   fetchHealth,
+    // Preserve bear_case — managed by apply-analysis.js / Claude analyst
+    bear_case:      existing?.bear_case ?? null,
+    // Preserve probability model — managed by apply-analysis.js
+    probability:    existing?.probability ?? null,
+    // Preserve last_analysis stamp
+    last_analysis:  existing?.last_analysis ?? null,
   };
 
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));

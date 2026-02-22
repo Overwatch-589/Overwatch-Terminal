@@ -396,6 +396,17 @@ async function main() {
     changes++;
   }
 
+  // 4b. Apply bear_case if present
+  if (analysis.bear_case && typeof analysis.bear_case === 'object') {
+    dashboard.bear_case = {
+      ...analysis.bear_case,
+      last_updated: analysis.timestamp,
+    };
+    log('bear_case', `Counter-thesis score: ${analysis.bear_case.counter_thesis_score ?? 'N/A'}`);
+    changelogEntries.push(`BEAR_CASE: counter_thesis_score=${analysis.bear_case.counter_thesis_score ?? 'N/A'}`);
+    changes++;
+  }
+
   // 5. Stamp the applied analysis metadata
   dashboard.last_analysis = {
     timestamp:   analysis.timestamp,
