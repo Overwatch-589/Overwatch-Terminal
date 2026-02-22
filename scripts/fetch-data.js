@@ -461,19 +461,26 @@ async function fetchNews(fallback) {
   const ndKey = process.env.NEWSDATA_API_KEY;
   if (ndKey) {
     try {
-      const ndUrl = `https://newsdata.io/api/1/news?apikey=${encodeURIComponent(ndKey)}&q=XRP%20OR%20Ripple%20OR%20XRPL&language=en&size=10`;
+      // Fetch extra results so there's a buffer after relevance filtering
+      const ndUrl = `https://newsdata.io/api/1/news?apikey=${encodeURIComponent(ndKey)}&q=XRP%20OR%20Ripple%20OR%20XRPL&language=en&size=10&category=technology,business,top`;
       const data = await fetchJSON(ndUrl, 12_000);
       const results = data?.results;
       if (!Array.isArray(results) || results.length === 0) throw new Error('Empty NewsData.io response');
 
-      const headlines = results.slice(0, 15).map(p => ({
+      // Post-filter: only keep articles that actually mention XRP/Ripple/XRPL in title or description
+      const XRP_RE = /\b(XRP|Ripple|XRPL|RLUSD|ODL|OnDemandLiquidity|RippleNet)\b/i;
+      const relevant = results.filter(p => XRP_RE.test((p.title ?? '') + ' ' + (p.description ?? '')));
+      // Fall back to raw results only if zero XRP-relevant articles found
+      const pool = relevant.length >= 1 ? relevant : results;
+
+      const headlines = pool.slice(0, 15).map(p => ({
         title:     p.title ?? '',
         source:    p.source_id ?? 'NewsData',
         url:       p.link ?? '',
         published: p.pubDate ?? null,
       }));
 
-      log('News', `NewsData.io: ${headlines.length} headlines`);
+      log('News', `NewsData.io: ${headlines.length} headlines (${relevant.length} XRP-relevant of ${results.length} returned)`);
       return { last_fetched: new Date().toISOString(), source: 'newsdata', headlines };
     } catch (e2) {
       err('News', `NewsData.io also failed: ${e2.message}`);
