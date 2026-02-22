@@ -701,26 +701,47 @@ textarea:focus { border-color:var(--accent-cyan); }
 
   <!-- ==================== ETF ==================== -->
   <div class="tab-panel" id="panel-etf">
+
     <div class="full-card" style="border-color:rgba(0,229,153,0.2);">
-      <h3>📊 XRP ETF DASHBOARD</h3>
-      <div class="data-row"><span class="data-label">Weekly Inflow (<span id="etfWeeklyDate">Feb 13</span>)</span><span class="data-value green" id="etfWeekly">+$7.65M</span></div>
-      <div class="data-row"><span class="data-label">Cumulative Inflows</span><span class="data-value green" id="etfCumulative">$1.4B+</span></div>
+      <h3>📊 XRP ETF OVERVIEW</h3>
+      <div class="data-row"><span class="data-label">Total AUM</span><span class="data-value green" id="etfTotalAum">--</span></div>
+      <div class="data-row"><span class="data-label">Total XRP Locked</span><span class="data-value" id="etfXrpLocked">--</span></div>
       <div class="data-row"><span class="data-label">ETFs Active</span><span class="data-value">7 US Spot</span></div>
-      <div class="data-row"><span class="data-label">Total AUM</span><span class="data-value amber">~$1.01B (price decline)</span></div>
-      <div class="data-row"><span class="data-label">Inflow Streak</span><span class="data-value amber" id="etfStreak">Streak ended — back-to-back positive weeks in Feb</span></div>
+      <div class="data-row"><span class="data-label">Data As Of</span><span class="data-value" id="etfAsOf">--</span></div>
+      <div class="data-row"><span class="data-label">Source</span><span class="data-value" style="color:var(--text-muted);font-size:10px;">xrp-insights.com · auto-updated</span></div>
     </div>
 
     <div class="full-card">
-      <h3>📈 COMPARATIVE ETF FLOWS (WEEKLY)</h3>
-      <div class="data-row"><span class="data-label">BTC ETFs</span><span class="data-value red" id="etfBtcWeekly">-$689.22M</span></div>
-      <div class="data-row"><span class="data-label">ETH ETFs</span><span class="data-value red" id="etfEthWeekly">-$149.07M</span></div>
-      <div class="data-row"><span class="data-label">SOL ETFs</span><span class="data-value green" id="etfSolWeekly">+$2.94M</span></div>
-      <div class="data-row"><span class="data-label">XRP ETFs</span><span class="data-value green" id="etfXrpWeekly">+$7.65M</span></div>
+      <h3>💸 FLOW SUMMARY</h3>
+      <div class="data-row"><span class="data-label">Daily Net (<span id="etfFlowDate">--</span>)</span><span class="data-value" id="etfDailyNet">--</span></div>
+      <div class="data-row"><span class="data-label">Daily Inflow</span><span class="data-value green" id="etfDailyIn">--</span></div>
+      <div class="data-row"><span class="data-label">Daily Outflow</span><span class="data-value red" id="etfDailyOut">--</span></div>
+      <div style="height:1px;background:var(--border);margin:8px 0;"></div>
+      <div class="data-row"><span class="data-label">5-Day Net Flow</span><span class="data-value" id="etfWeeklyNet">--</span></div>
+      <div class="data-row"><span class="data-label">5-Day Inflow</span><span class="data-value green" id="etfWeeklyIn">--</span></div>
+      <div class="data-row"><span class="data-label">5-Day Outflow</span><span class="data-value red" id="etfWeeklyOut">--</span></div>
+      <div style="height:1px;background:var(--border);margin:8px 0;"></div>
+      <div class="data-row"><span class="data-label">14-Day Cumulative Net</span><span class="data-value" id="etfCumNet">--</span></div>
+      <div class="data-row"><span class="data-label">14-Day Total Inflow</span><span class="data-value green" id="etfCumIn">--</span></div>
+    </div>
+
+    <div class="full-card">
+      <h3>🏦 PER-FUND BREAKDOWN</h3>
+      <div id="etfFundsTable" style="font-size:11px;">--</div>
+    </div>
+
+    <div class="full-card">
+      <h3>📈 COMPARATIVE ETF FLOWS (5-DAY)</h3>
+      <div class="data-row"><span class="data-label">BTC ETFs</span><span class="data-value red" id="etfBtcWeekly">--</span></div>
+      <div class="data-row"><span class="data-label">ETH ETFs</span><span class="data-value red" id="etfEthWeekly">--</span></div>
+      <div class="data-row"><span class="data-label">SOL ETFs</span><span class="data-value" id="etfSolWeekly">--</span></div>
+      <div class="data-row"><span class="data-label">XRP ETFs</span><span class="data-value" id="etfXrpWeekly">--</span></div>
       <div class="interpret-box">
         <div class="label">ETF INTERPRETATION</div>
-        <p>XRP is the only major crypto asset seeing meaningful institutional inflows during extreme fear. BTC hemorrhaging $689M while XRP adds $39M indicates thesis-driven institutional accumulation — these are not the same buyers. This divergence is one of the strongest relative strength signals for XRP's institutional narrative.</p>
+        <p id="etfInterpretation">XRP ETF data loading...</p>
       </div>
     </div>
+
   </div>
 
   <!-- ==================== MACRO ==================== -->
@@ -1540,7 +1561,7 @@ function exportJournal() {
 // ===== DASHBOARD DATA (AUTO-UPDATE FROM GITHUB JSON) =====
 async function fetchDashboardData() {
   try {
-    const r = await fetch('https://raw.githubusercontent.com/twrenn589/Overwatch-Terminal/main/dashboard-data.json?t=' + Date.now());
+    const r = await fetch('https://raw.githubusercontent.com/Overwatch-589/Overwatch-Terminal/main/dashboard-data.json?t=' + Date.now());
     const d = await r.json();
     const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
     const setHtml = (id, val) => { const el = document.getElementById(id); if (el && val) el.innerHTML = val; };
@@ -1563,17 +1584,79 @@ async function fetchDashboardData() {
 
     // ETF data
     if (d.etf) {
-      const xrpW = d.etf.xrp_weekly;
-      set('etfFlow', (xrpW.startsWith('+') ? '' : '+') + '$' + xrpW + 'M');
-      set('etfPill', (xrpW.startsWith('+') ? '' : '+') + '$' + xrpW + 'M/wk');
-      set('etfWeekly', (xrpW.startsWith('+') ? '' : '+') + '$' + xrpW + 'M');
-      set('etfWeeklyDate', d.etf.xrp_weekly_date);
-      set('etfCumulative', '$' + d.etf.xrp_cumulative);
-      set('etfStreak', d.etf.xrp_streak + ' trading days');
-      set('etfBtcWeekly', '$' + d.etf.btc_weekly + 'M');
-      set('etfEthWeekly', '$' + d.etf.eth_weekly + 'M');
-      set('etfSolWeekly', '$' + d.etf.sol_weekly + 'M');
-      set('etfXrpWeekly', '+$' + d.etf.xrp_weekly + 'M');
+      const e = d.etf;
+      const fmtM  = v => v == null ? '--' : (v >= 0 ? '+' : '') + '$' + (v / 1e6).toFixed(2) + 'M';
+      const fmtMabs = v => v == null ? '--' : '$' + Math.abs(v / 1e6).toFixed(2) + 'M';
+      const cls   = v => v == null ? '' : v >= 0 ? 'green' : 'red';
+
+      // Overview
+      if (e.total_aum != null) set('etfTotalAum', '$' + (e.total_aum / 1e9).toFixed(3) + 'B');
+      if (e.total_xrp_locked != null) set('etfXrpLocked', (e.total_xrp_locked / 1e6).toFixed(1) + 'M XRP');
+      set('etfAsOf', e.as_of_date ?? '--');
+
+      // Daily flows
+      set('etfFlowDate', e.flow_date ?? '--');
+      const dnEl = document.getElementById('etfDailyNet');
+      if (dnEl && e.daily_net_flow != null) { dnEl.textContent = fmtM(e.daily_net_flow); dnEl.className = 'data-value ' + cls(e.daily_net_flow); }
+      set('etfDailyIn',  fmtMabs(e.daily_inflow));
+      set('etfDailyOut', fmtMabs(e.daily_outflow));
+
+      // Weekly (5-day) flows
+      const wnEl = document.getElementById('etfWeeklyNet');
+      if (wnEl && e.weekly_net_flow != null) { wnEl.textContent = fmtM(e.weekly_net_flow); wnEl.className = 'data-value ' + cls(e.weekly_net_flow); }
+      set('etfWeeklyIn',  fmtMabs(e.weekly_inflow));
+      set('etfWeeklyOut', fmtMabs(e.weekly_outflow));
+
+      // 14-day cumulative
+      const cnEl = document.getElementById('etfCumNet');
+      if (cnEl && e.cum_net_flow != null) { cnEl.textContent = fmtM(e.cum_net_flow); cnEl.className = 'data-value ' + cls(e.cum_net_flow); }
+      set('etfCumIn', fmtMabs(e.cum_inflow));
+
+      // XRP weekly for comparative row
+      const xrpWEl = document.getElementById('etfXrpWeekly');
+      if (xrpWEl && e.weekly_net_flow != null) {
+        xrpWEl.textContent = fmtM(e.weekly_net_flow);
+        xrpWEl.className = 'data-value ' + cls(e.weekly_net_flow);
+      }
+
+      // Per-fund table
+      if (Array.isArray(e.funds) && e.funds.length > 0) {
+        const rows = e.funds
+          .slice()
+          .sort((a, b) => (b.aum ?? 0) - (a.aum ?? 0))
+          .map(f => {
+            const aumStr  = f.aum != null ? '$' + (f.aum / 1e6).toFixed(1) + 'M' : '--';
+            const xrpStr  = f.xrp_locked != null ? (f.xrp_locked / 1e6).toFixed(1) + 'M' : '--';
+            const flowStr = f.daily_flow != null ? fmtM(f.daily_flow) : '--';
+            const flowCls = f.daily_flow == null ? '' : f.daily_flow >= 0 ? 'color:var(--accent-green)' : 'color:var(--accent-red)';
+            return `<div class="data-row" style="align-items:baseline;">
+              <span class="data-label" style="min-width:90px;"><span style="color:var(--accent-cyan);font-weight:700;">${f.ticker}</span> <span style="color:var(--text-muted);font-size:9px;">${f.issuer}</span></span>
+              <span style="margin-left:auto;display:flex;gap:16px;font-family:'JetBrains Mono',monospace;font-size:11px;">
+                <span style="color:var(--text-secondary);min-width:60px;text-align:right;">${aumStr}</span>
+                <span style="color:var(--text-muted);min-width:60px;text-align:right;">${xrpStr}</span>
+                <span style="min-width:70px;text-align:right;${flowCls}">${flowStr}</span>
+              </span>
+            </div>`;
+          }).join('');
+        const header = `<div class="data-row" style="opacity:0.5;font-size:9px;letter-spacing:1px;padding-bottom:4px;">
+          <span style="color:var(--text-muted);">TICKER / ISSUER</span>
+          <span style="margin-left:auto;display:flex;gap:16px;">
+            <span style="min-width:60px;text-align:right;">AUM</span>
+            <span style="min-width:60px;text-align:right;">XRP</span>
+            <span style="min-width:70px;text-align:right;">DAILY FLOW</span>
+          </span>
+        </div>`;
+        setHtml('etfFundsTable', header + rows);
+      }
+
+      // Auto-generate interpretation
+      const netM = e.weekly_net_flow != null ? (e.weekly_net_flow / 1e6).toFixed(2) : null;
+      const aumB = e.total_aum != null ? (e.total_aum / 1e9).toFixed(2) : null;
+      if (netM && aumB) {
+        const direction = parseFloat(netM) >= 0 ? 'net inflows' : 'net outflows';
+        const interpEl = document.getElementById('etfInterpretation');
+        if (interpEl) interpEl.textContent = `7 US spot XRP ETFs hold $${aumB}B AUM with ${direction} of ${Math.abs(parseFloat(netM)).toFixed(2)}M over the last 5 trading days. Data sourced from xrp-insights.com.`;
+      }
     }
 
     // Thesis scorecard

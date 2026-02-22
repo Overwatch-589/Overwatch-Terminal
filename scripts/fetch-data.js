@@ -187,35 +187,53 @@ async function fetchETF(fallback) {
       throw new Error('Unexpected response shape from xrp-insights API');
     }
 
-    // Sort newest-first
-    const sorted = [...data.daily].sort((a, b) => b.date.localeCompare(a.date));
-    const latest = sorted[0];
+    // Sort newest-first; drop weekends
+    const tradingDays = [...data.daily]
+      .filter(d => !d.isWeekend)
+      .sort((a, b) => b.date.localeCompare(a.date));
 
-    // Most recent day with actual flow data (skip weekends / zero-flow days)
-    const latestWithFlow = sorted.find(d => d.inflow !== 0 || d.outflow !== 0) ?? latest;
+    const latest       = tradingDays[0];
+    const latestWithFlow = tradingDays.find(d => d.inflow !== 0 || d.outflow !== 0) ?? latest;
+
+    // Weekly = last 5 trading days
+    const week5 = tradingDays.slice(0, 5);
+    const weeklyNetFlow  = week5.reduce((s, d) => s + (d.netFlow  ?? 0), 0);
+    const weeklyInflow   = week5.reduce((s, d) => s + (d.inflow   ?? 0), 0);
+    const weeklyOutflow  = week5.reduce((s, d) => s + (d.outflow  ?? 0), 0);
+
+    // 14-day cumulative
+    const allDays = [...data.daily].sort((a, b) => b.date.localeCompare(a.date));
+    const cumNetFlow = allDays.reduce((s, d) => s + (d.netFlow ?? 0), 0);
+    const cumInflow  = allDays.reduce((s, d) => s + (d.inflow  ?? 0), 0);
 
     const funds = (latest.etfFlows ?? []).map(f => ({
       ticker:     f.ticker,
       issuer:     f.issuer,
-      aum:        f.aum        ?? null,
-      xrp_locked: f.xrpHoldings ?? null,
-      daily_flow: f.flow       ?? null,
+      aum:        f.aum          ?? null,
+      xrp_locked: f.xrpHoldings  ?? null,
+      daily_flow: f.flow         ?? null,
     }));
 
     const result = {
-      last_fetched:     new Date().toISOString(),
-      source:           'xrp-insights',
-      as_of_date:       latest.date,
-      total_aum:        latest.totalAUM        ?? null,
-      total_xrp_locked: latest.totalXRP        ?? null,
-      daily_net_flow:   latestWithFlow.netFlow  ?? null,
-      daily_inflow:     latestWithFlow.inflow   ?? null,
-      daily_outflow:    latestWithFlow.outflow  ?? null,
-      flow_date:        latestWithFlow.date     ?? null,
+      last_fetched:       new Date().toISOString(),
+      source:             'xrp-insights',
+      as_of_date:         latest.date,
+      total_aum:          latest.totalAUM        ?? null,
+      total_xrp_locked:   latest.totalXRP        ?? null,
+      daily_net_flow:     latestWithFlow.netFlow  ?? null,
+      daily_inflow:       latestWithFlow.inflow   ?? null,
+      daily_outflow:      latestWithFlow.outflow  ?? null,
+      flow_date:          latestWithFlow.date     ?? null,
+      weekly_net_flow:    weeklyNetFlow,
+      weekly_inflow:      weeklyInflow,
+      weekly_outflow:     weeklyOutflow,
+      weekly_start_date:  week5.at(-1)?.date      ?? null,
+      cum_net_flow:       cumNetFlow,
+      cum_inflow:         cumInflow,
       funds,
     };
 
-    log('ETF', `AUM=$${(result.total_aum / 1e6).toFixed(1)}M | XRP=${(result.total_xrp_locked / 1e6).toFixed(0)}M | funds=${funds.length} | flow=${latestWithFlow.date}`);
+    log('ETF', `AUM=$${(result.total_aum / 1e6).toFixed(1)}M | XRP=${(result.total_xrp_locked / 1e6).toFixed(0)}M | 5D flow=${(weeklyNetFlow / 1e6).toFixed(2)}M | funds=${funds.length}`);
     return result;
   } catch (e) {
     err('ETF', e.message);
