@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-22T20:10:26.223Z",
+  "updated": "2026-02-22T20:12:31.160Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.39,
-    "change_24h": -3.9259073924881807,
-    "volume_24h": 1298537684.3971932,
+    "price": 1.38,
+    "change_24h": -3.95615270645793,
+    "volume_24h": 1299834981.0223072,
     "market_cap": 84555723927.07216
   },
   "rlusd": {
@@ -12,7 +12,7 @@
     "source": "coingecko"
   },
   "etf": {
-    "last_fetched": "2026-02-22T20:10:24.190Z",
+    "last_fetched": "2026-02-22T20:12:29.516Z",
     "source": "xrp-insights",
     "as_of_date": "2026-02-19",
     "total_aum": 1136362890.9500003,
@@ -78,36 +78,46 @@
         "daily_flow": -1538794
       }
     ],
-    "pct_supply": 1.299,
-    "circ_supply": 60831456063,
+    "pct_supply": 1.289,
+    "circ_supply": 61272263715,
     "num_funds": 7
   },
   "btc_etf": {
-    "last_fetched": "2026-02-22T20:10:24.364Z",
+    "last_fetched": "2026-02-22T20:12:29.892Z",
     "source": "ishares-ibit",
     "ticker": "IBIT",
-    "as_of_date": "2001-02-20",
+    "as_of_date": "2026-02-20",
     "total_aum": 51331215299.52,
     "shares_outstanding": 1333600000,
     "nav_per_share": 38.4907133319736,
-    "daily_flow": null,
-    "weekly_net_flow": null,
-    "daily_flow_history": []
+    "daily_flow": 0,
+    "weekly_net_flow": 0,
+    "daily_flow_history": [
+      {
+        "date": "2026-02-20",
+        "flow": 0
+      }
+    ]
   },
   "eth_etf": {
-    "last_fetched": "2026-02-22T20:10:24.422Z",
+    "last_fetched": "2026-02-22T20:12:29.893Z",
     "source": "ishares-etha",
     "ticker": "ETHA",
-    "as_of_date": "2001-02-20",
+    "as_of_date": "2026-02-20",
     "total_aum": 6213796309.83,
     "shares_outstanding": 417680000,
     "nav_per_share": 14.876930448740662,
-    "daily_flow": null,
-    "weekly_net_flow": null,
-    "daily_flow_history": []
+    "daily_flow": 0,
+    "weekly_net_flow": 0,
+    "daily_flow_history": [
+      {
+        "date": "2026-02-20",
+        "flow": 0
+      }
+    ]
   },
   "supply": {
-    "last_fetched": "2026-02-22T20:10:24.704Z",
+    "last_fetched": "2026-02-22T20:12:30.815Z",
     "source": "xrp-insights",
     "total_supply": 100000000000,
     "circ_supply": 66075975893,
@@ -129,7 +139,7 @@
     }
   },
   "news": {
-    "last_fetched": "2026-02-22T20:10:24.992Z",
+    "last_fetched": "2026-02-22T20:12:30.252Z",
     "source": "newsdata",
     "headlines": [
       {
