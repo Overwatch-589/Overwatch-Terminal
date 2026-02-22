@@ -1,18 +1,18 @@
 {
-  "updated": "2026-02-22T07:01:41.169Z",
+  "updated": "2026-02-22T07:08:52.517Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.42,
-    "change_24h": -0.40185077620586773,
-    "volume_24h": 1376600793.5317683,
-    "market_cap": 86825004357.65723
+    "change_24h": -0.5332565198747098,
+    "volume_24h": 1378404607.8316636,
+    "market_cap": 86735419388.57489
   },
   "rlusd": {
-    "market_cap": 1558260640.2813933,
+    "market_cap": 1558269139.6174963,
     "source": "coingecko"
   },
   "etf": {
-    "last_fetched": "2026-02-22T07:01:39.787Z",
+    "last_fetched": "2026-02-22T07:08:51.083Z",
     "source": "xrp-insights",
     "as_of_date": "2026-02-19",
     "total_aum": 1136362890.9500003,
@@ -21,6 +21,12 @@
     "daily_inflow": 2876465.119999975,
     "daily_outflow": 3093520.6422000155,
     "flow_date": "2026-02-19",
+    "weekly_net_flow": -5946888.035600036,
+    "weekly_inflow": 6836407.929999977,
+    "weekly_outflow": 12783295.965600014,
+    "weekly_start_date": "2026-02-12",
+    "cum_net_flow": 34477681.65619996,
+    "cum_inflow": 48826672.87459997,
     "funds": [
       {
         "ticker": "XRPC",
@@ -84,9 +90,15 @@
     }
   },
   "news": {
-    "last_fetched": "2026-02-22T07:01:40.478Z",
+    "last_fetched": "2026-02-22T07:08:51.852Z",
     "source": "newsdata",
     "headlines": [
+      {
+        "title": "Behind the recent blockade strangling Cuba",
+        "source": "filmdaily",
+        "url": "https://filmdaily.co/news/behind-the-recent-blockade-strangling-cuba/",
+        "published": "2026-02-21 19:06:09"
+      },
       {
         "title": "US Lawmakers Slam Trump Tariffs, Warn They Will Derail The Economy",
         "source": "menafn",
@@ -140,12 +152,6 @@
         "source": "thestokesnews",
         "url": "https://www.thestokesnews.com/arts_and_entertainment/grubbs-coming-to-apple-gallery/article_68379962-ee8e-4328-ba65-9eace865ddd9.html",
         "published": "2026-02-21 18:22:00"
-      },
-      {
-        "title": "James Altucher Named A Leading Technology Expert Following Recent Presentation",
-        "source": "menafn",
-        "url": "https://menafn.com/1110771950/James-Altucher-Named-A-Leading-Technology-Expert-Following-Recent-Presentation",
-        "published": "2026-02-21 18:15:57"
       }
     ]
   },
@@ -167,7 +173,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1558260640.2813933,
+      "current": 1558269139.6174963,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 31
