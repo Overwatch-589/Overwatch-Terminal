@@ -731,6 +731,24 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div id="etfFundsTable" style="font-size:11px;">--</div>
     </div>
 
+    <div class="full-card" style="border-color:rgba(0,229,255,0.12);">
+      <h3>🪙 XRP SUPPLY CONTEXT</h3>
+      <div id="supplyBar" style="height:16px;border-radius:3px;overflow:hidden;display:flex;margin-bottom:8px;background:var(--card-bg);"></div>
+      <div id="supplyBarLegend" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.8px;color:var(--text-muted);"></div>
+      <div class="data-row"><span class="data-label">Total Supply</span><span class="data-value" style="color:var(--text-secondary);">100.00B XRP</span></div>
+      <div class="data-row"><span class="data-label">Circulating Supply</span><span class="data-value" id="supplyCirc">--</span></div>
+      <div style="height:1px;background:var(--border);margin:8px 0;"></div>
+      <div class="data-row"><span class="data-label">Ripple Escrow</span><span class="data-value" id="supplyEscrow">--</span></div>
+      <div class="data-row"><span class="data-label">Exchange Holdings</span><span class="data-value" id="supplyExchanges">--</span></div>
+      <div style="height:1px;background:var(--border);margin:8px 0;"></div>
+      <div class="data-row"><span class="data-label">ETF Locked</span><span class="data-value green" id="supplyEtfLocked">--</span></div>
+      <div class="data-row"><span class="data-label">DeFi Locked</span><span class="data-value" id="supplyDefi">--</span></div>
+      <div class="data-row"><span class="data-label">Corp. Treasuries</span><span class="data-value" id="supplyCorpTreasuries">--</span></div>
+      <div style="height:1px;background:var(--border);margin:8px 0;"></div>
+      <div class="data-row"><span class="data-label">Effective Float</span><span class="data-value amber" id="supplyEffFloat" title="Exchange Holdings minus ETF, DeFi, and Corp Treasury locked">--</span></div>
+      <div class="data-row" style="margin-top:4px;"><span class="data-label" style="font-size:9px;opacity:0.5;">Source</span><span class="data-value" style="color:var(--text-muted);font-size:9px;">xrp-insights.com · auto-updated</span></div>
+    </div>
+
     <div class="full-card">
       <h3>📈 COMPARATIVE ETF FLOWS (5-DAY)</h3>
       <div class="data-row"><span class="data-label">BTC ETFs</span><span class="data-value red" id="etfBtcWeekly">--</span></div>
@@ -1663,6 +1681,70 @@ async function fetchDashboardData() {
         const direction = parseFloat(netM) >= 0 ? 'net inflows' : 'net outflows';
         const interpEl = document.getElementById('etfInterpretation');
         if (interpEl) interpEl.textContent = `7 US spot XRP ETFs hold $${aumB}B AUM with ${direction} of ${Math.abs(parseFloat(netM)).toFixed(2)}M over the last 5 trading days. Data sourced from xrp-insights.com.`;
+      }
+    }
+
+    // Supply context
+    if (d.supply || d.etf) {
+      const s = d.supply ?? {};
+      const e = d.etf ?? {};
+      const TOTAL = 100_000_000_000;
+
+      const circ     = s.circ_supply      ?? e.circ_supply      ?? null;
+      const escrow   = s.escrow                                  ?? null;
+      const exchanges = s.exchanges                              ?? null;
+      const etfLocked = e.total_xrp_locked                      ?? null;
+      const defi     = s.defi_total                             ?? null;
+      const corp     = s.corp_treasuries                        ?? null;
+
+      const fmtB  = v => v == null ? '--' : (v / 1e9).toFixed(2) + 'B XRP';
+      const fmtMx = v => v == null ? '--' : (v / 1e6).toFixed(0) + 'M XRP';
+
+      set('supplyCirc', fmtB(circ));
+      set('supplyEscrow', fmtB(escrow));
+      set('supplyExchanges', fmtB(exchanges));
+      set('supplyEtfLocked', etfLocked != null ? fmtMx(etfLocked) : '--');
+      set('supplyDefi', defi != null ? fmtMx(defi) : '--');
+      set('supplyCorpTreasuries', corp != null ? fmtMx(corp) : '--');
+
+      // Effective float = exchange holdings minus all institutional locks
+      if (exchanges != null && etfLocked != null) {
+        const effFloat = exchanges - (etfLocked ?? 0) - (defi ?? 0) - (corp ?? 0);
+        set('supplyEffFloat', fmtB(effFloat));
+      }
+
+      // Visual bar (proportional to 100B total supply)
+      const barEl = document.getElementById('supplyBar');
+      const legEl = document.getElementById('supplyBarLegend');
+      if (barEl) {
+        const pct = v => v != null ? Math.max(0, (v / TOTAL * 100)) : 0;
+        const escrowPct = pct(escrow);
+        const exchPct   = pct(exchanges);
+        const etfPct    = pct(etfLocked);
+        const defiPct   = pct(defi);
+        const corpPct   = pct(corp);
+        const otherPct  = Math.max(0, 100 - escrowPct - exchPct - etfPct - defiPct - corpPct);
+
+        const seg = (color, w, label) => w > 0.05 ? `<div title="${label}" style="width:${w.toFixed(2)}%;background:${color};transition:width 0.5s;"></div>` : '';
+        barEl.innerHTML =
+          seg('#44445a', escrowPct, `Escrow: ${escrowPct.toFixed(1)}%`) +
+          seg('#3366bb', exchPct,   `Exchanges: ${exchPct.toFixed(1)}%`) +
+          seg('var(--accent-green)', etfPct, `ETF Locked: ${etfPct.toFixed(2)}%`) +
+          seg('var(--accent-cyan)',  defiPct, `DeFi Locked: ${defiPct.toFixed(2)}%`) +
+          seg('#996600', corpPct,   `Corp Treasuries: ${corpPct.toFixed(2)}%`) +
+          `<div style="flex:1;background:#111122;" title="Other Circulating: ${otherPct.toFixed(1)}%"></div>`;
+
+        if (legEl) {
+          const dot = c => `<span style="width:8px;height:8px;background:${c};border-radius:1px;display:inline-block;margin-right:3px;"></span>`;
+          legEl.innerHTML = [
+            escrowPct > 0 ? dot('#44445a') + `ESCROW ${escrowPct.toFixed(1)}%` : '',
+            exchPct   > 0 ? dot('#3366bb') + `EXCHANGES ${exchPct.toFixed(1)}%` : '',
+            etfPct    > 0 ? dot('var(--accent-green)') + `ETF ${etfPct.toFixed(2)}%` : '',
+            defiPct   > 0 ? dot('var(--accent-cyan)')  + `DEFI ${defiPct.toFixed(2)}%` : '',
+            corpPct   > 0 ? dot('#996600') + `CORP ${corpPct.toFixed(2)}%` : '',
+            dot('#111122') + `OTHER ${otherPct.toFixed(1)}%`,
+          ].filter(Boolean).map(s => `<span style="display:flex;align-items:center;">${s}</span>`).join('');
+        }
       }
     }
 

@@ -252,6 +252,74 @@ async function fetchETF(fallback) {
   }
 }
 
+// ─── XRP Supply / Radar fetcher ───────────────────────────────────────────────
+
+/**
+ * Fetch XRP supply distribution from xrp-insights.com/api/allocations.
+ * Returns escrow, exchange holdings, DeFi locked, corporate treasuries, etc.
+ * Always returns a "supply" object — never throws.
+ */
+async function fetchXRPRadar(fallback) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 15_000);
+  try {
+    const res = await fetch('https://xrp-insights.com/api/allocations', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; Overwatch-Terminal/1.0)',
+        'Accept':     'application/json',
+        'Referer':    'https://xrp-insights.com/xrp-radar',
+      },
+      signal: controller.signal,
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+    const json = await res.json();
+    if (!json.success || !json.data) throw new Error('Unexpected response shape');
+
+    const d = json.data;
+
+    const escrow          = d.supplyBreakdown?.escrow?.amount          ?? null;
+    const exchanges       = d.exchanges?.totalXrp                      ?? null;
+    const defi_total      = d.defi?.totalXrp                           ?? null;
+    const corp_treasuries = d.treasuries?.totalXrp                     ?? null;
+    const circ_supply     = d.circulatingSupply                        ?? null;
+    const total_supply    = d.totalSupply                              ?? 100_000_000_000;
+    const xrp_burned      = d.xrpBurned                               ?? null;
+    const amm_locked      = d.infrastructureDemand?.ammXrpLocked      ?? null;
+
+    const result = {
+      last_fetched:     new Date().toISOString(),
+      source:           'xrp-insights',
+      total_supply,
+      circ_supply,
+      escrow,
+      exchanges,
+      defi_total,
+      corp_treasuries,
+      amm_locked,
+      xrp_burned,
+    };
+
+    log('Supply', `Escrow=${escrow ? (escrow / 1e9).toFixed(2) + 'B' : 'N/A'} | Exchanges=${exchanges ? (exchanges / 1e9).toFixed(1) + 'B' : 'N/A'} | DeFi=${defi_total ? (defi_total / 1e6).toFixed(0) + 'M' : 'N/A'} | Corp=${corp_treasuries ? (corp_treasuries / 1e6).toFixed(0) + 'M' : 'N/A'}`);
+    return result;
+  } catch (e) {
+    err('Supply', e.message);
+    return fallback?.supply ?? {
+      last_fetched:     null,
+      source:           'none',
+      total_supply:     100_000_000_000,
+      circ_supply:      null,
+      escrow:           null,
+      exchanges:        null,
+      defi_total:       null,
+      corp_treasuries:  null,
+      amm_locked:       null,
+      xrp_burned:       null,
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // ─── News fetcher ─────────────────────────────────────────────────────────────
 
 /**
@@ -383,13 +451,14 @@ async function main() {
   const existing = loadExisting();
 
   // Fetch all live data. Each fetcher is self-contained and falls back gracefully.
-  const [xrp, rlusd, fearGreed, usdJpy, news, etf] = await Promise.all([
+  const [xrp, rlusd, fearGreed, usdJpy, news, etf, supply] = await Promise.all([
     fetchXRP(existing),
     fetchRLUSD(existing),
     fetchFearGreed(existing),
     fetchUSDJPY(existing),
     fetchNews(existing),
     fetchETF(existing),
+    fetchXRPRadar(existing),
   ]);
 
   // Enrich ETF with % of circulating supply (market_cap / price = circ. supply)
@@ -433,6 +502,7 @@ async function main() {
     xrp,
     rlusd,
     etf,
+    supply,
     macro: {
       usd_jpy:       usdJpy,
       jpn_10y: jpn10y,
@@ -459,6 +529,7 @@ async function main() {
   console.log(`Fear & Greed:    ${fearGreed.value ?? 'N/A'} (${fearGreed.label ?? 'N/A'})`);
   console.log(`ETF total AUM:   $${etf.total_aum != null ? (etf.total_aum / 1e6).toFixed(1) + 'M' : 'N/A'} | XRP locked: ${etf.total_xrp_locked != null ? (etf.total_xrp_locked / 1e6).toFixed(0) + 'M' : 'N/A'} (${etf.source})`);
   console.log(`News headlines:  ${news.headlines.length} (source: ${news.source})`);
+  console.log(`Supply escrow:   ${supply.escrow != null ? (supply.escrow / 1e9).toFixed(2) + 'B XRP' : 'N/A'} (${supply.source})`);
   console.log('───────────────────────────────────────────────\n');
 
   await pushToGitHub();
