@@ -736,7 +736,7 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">Risk Level</span><span class="signal amber">ELEVATED</span></div>
       <div class="interpret-box">
         <div class="label">ASSESSMENT</div>
-        <p id="thesisPulseText">Institutional adoption accelerating beyond forecast. Feb 20 delivered convergence event: SBI/AWAJ (Japan ecosystem), Dubai DLD (RWA secondary markets), SG-FORGE (EUR stablecoin), SBI security token bonds (XRP to traditional investors), all on XRPL in a single day. SCOTUS struck down IEEPA tariffs 6-3; Trump immediately invoked Section 122 (10% global, 150-day clock expires ~Jul 20). Macro stress intensifying: tariff chaos + Japan pressure + Hormuz risk. Infrastructure thesis confirmed across multiple continents and institution types. ODL volume remains primary falsification criterion. Kill switches: 1 confirming (Japan), 0 tripped, 1 needs data (ODL). Mid-case probability trending upward.</p>
+        <p id="thesisPulseText">SBI blockchain bond validates Japan adoption ahead of schedule, but sustained ETF outflows (-$5.5M weekly) signal institutional confidence strain. RLUSD at <p id="thesisPulseText">.56B shows 31% progress to kill switch while extreme fear (F&G: 5) creates headwinds. Core thesis infrastructure advancing despite macro stress.</p>
       </div>
     </div>
   </div>
@@ -767,7 +767,7 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">XRP ETF Flows</span><span class="data-value" id="stressXrpEtf">--</span></div>
       <div class="interpret-box">
         <div class="label">STRESS INTERPRETATION</div>
-        <p id="stressInterpretText">Extreme fear in crypto markets while Japan fiscal stress accelerates. Oil/JPY breaking upward from descending wedge adds energy cost pressure. BTC/ETH seeing institutional outflows while XRP sees continued inflows — divergent behavior signals thesis-driven accumulation vs. macro panic selling. Monitor BOJ rate decision as primary catalyst for stress resolution or escalation.</p>
+        <p id="stressInterpretText">Elevated stress environment with extreme fear index at 5 indicating broad market distress. USD/JPY at 155.21 approaches critical 155+ threshold while JGB yields at 2.24% suggest BOJ credibility issues. Multiple stress vectors converging but not yet critical.</p>
       </div>
     </div>
 
@@ -777,12 +777,11 @@ textarea:focus { border-color:var(--accent-cyan); }
         <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;" id="geoUpdated"></span>
       </div>
       <div id="geoWatchlist">
-        <div class="data-row"><span class="data-label">Japan</span><span class="signal amber">Takaichi supermajority + tariff pressure + yen weakness + rising JGB yields + SBI accelerating XRPL buildout</span></div>
-        <div class="data-row"><span class="data-label">Strait of Hormuz</span><span class="signal red">CRITICAL — 50+ fighter jets deployed, dual carrier groups, Russia-Iran-China naval exercises, strike preparations reported</span></div>
-        <div class="data-row"><span class="data-label">US-China AI Race</span><span class="signal amber">Accelerating</span></div>
-        <div class="data-row"><span class="data-label">US Tariffs / SCOTUS</span><span class="signal amber">IEEPA struck down 6-3. Section 122 invoked: 10% global tariff, 150-day clock (~Jul 20). IEEPA trade deals now unstable.</span></div>
-        <div class="data-row"><span class="data-label">Trade / Tariffs</span><span class="signal red">Active disruption</span></div>
-        <div class="data-row"><span class="data-label">Arctic / Russia</span><span class="signal amber">US acquisition signals</span></div>
+        <div class="data-row"><span class="data-label">Japan / BOJ</span><span class="signal amber">JGB yields at 2.24% signal credibility strain as USD/JPY approaches 155.21 stress threshold amid global rate pressures.</span></div>
+        <div class="data-row"><span class="data-label">Middle East</span><span class="signal amber">Strait of Hormuz remains critical with dual carrier groups deployed amid Russia-Iran-China naval exercises.</span></div>
+        <div class="data-row"><span class="data-label">US-China</span><span class="signal amber">Section 122 tariffs (10% global) continue with ~145 days remaining until July expiration.</span></div>
+        <div class="data-row"><span class="data-label">Trade / Tariffs</span><span class="signal amber">SCOTUS-struck IEEPA tariffs replaced by Section 122 framework, maintaining trade tension through mid-2026.</span></div>
+        <div class="data-row"><span class="data-label">Arctic / Russia</span><span class="signal amber">Naval exercises with Iran and China in critical shipping lanes maintain elevated geopolitical risk.</span></div>
       </div>
     </div>
   </div>
@@ -909,7 +908,7 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">Hormuz Risk</span><span class="data-value amber">Elevated</span></div>
       <div class="interpret-box">
         <div class="label">ENERGY INTERPRETATION</div>
-        <p id="energyInterpretText">Oil priced in yen breaking above descending trendline on weekly charts. Japan imports virtually all energy — rising oil/JPY directly increases trade deficit, weakens yen further, and forces BOJ closer to rate decision. Feedback loop amplifies Japan stress thesis.</p>
+        <p id="energyInterpretText">Brent crude at $69.77 remains below elevated thresholds despite Hormuz tensions, providing some relief to Japan's trade deficit pressures. However, JPY weakness at 155.21 amplifies import costs, creating feedback loop that pressures BOJ credibility as JGB yields climb to 2.24%.</p>
       </div>
     </div>
   </div>
@@ -1368,6 +1367,17 @@ setInterval(updateCountdown, 60000);
 //         catClass (geo|fin|reg|inst), threat (CRITICAL|ELEVATED|MONITORING),
 //         threatEmoji, desc
 const EVENTS_DATA = [
+
+  {
+    date: '2026-02-22',
+    dateLabel: 'FEB 22',
+    title: 'SBI Holdings Launches ¥10B Blockchain Bond With XRP Rewards',
+    category: 'INSTITUTIONAL',
+    catClass: 'inst',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Major Japanese financial institution deepens XRPL integration with tokenized bond offering, validating Japan adoption thesis ahead of Q3 2026 timeline. Represents institutional expansion beyond AWAJ ecosystem development.'
+  },
   {
     date: '2026-02-22',
     dateLabel: 'FEB 22',
