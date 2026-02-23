@@ -2,7 +2,11 @@ name: Fetch Dashboard Data
 
 on:
   schedule:
-    - cron: '0 */6 * * *'   # Runs every 6 hours (midnight, 6am, noon, 6pm UTC)
+    # Staggered to run 15 min before analysis at 12:00 and 00:00 UTC
+    - cron: '45 11 * * *'   # 11:45 UTC — feeds the 12:00 UTC analysis run
+    - cron: '0 6 * * *'     # 06:00 UTC — mid-morning data refresh
+    - cron: '45 23 * * *'   # 23:45 UTC — feeds the 00:00 UTC analysis run
+    - cron: '0 18 * * *'    # 18:00 UTC — evening data refresh
   workflow_dispatch:          # Allows manual trigger from GitHub website
 
 permissions:
