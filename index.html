@@ -667,9 +667,9 @@ textarea:focus { border-color:var(--accent-cyan); }
 
     <div class="summary-grid">
       <div class="summary-card cyan">
-        <div class="card-label">XRPL DEX VOL (24H)</div>
+        <div class="card-label">XRPL ACTIVITY</div>
         <div class="card-value" id="odlStatus">--</div>
-        <div class="card-sub">ODL activity proxy</div>
+        <div class="card-sub" id="odlSub">XRPL ledger metrics</div>
       </div>
       <div class="summary-card green">
         <div class="card-label">XRP ETF FLOWS</div>
@@ -920,24 +920,16 @@ textarea:focus { border-color:var(--accent-cyan); }
   <!-- ==================== XRPL INFRASTRUCTURE ==================== -->
   <div class="tab-panel" id="panel-infra">
 
-    <!-- Network Volume (24h) — auto-populated from dashboard-data.json -->
+    <!-- Network Metrics — auto-populated from dashboard-data.json -->
     <div class="full-card" style="border-color:rgba(0,229,255,0.15);">
-      <h3>📊 NETWORK VOLUME (24H)</h3>
+      <h3>📊 XRPL NETWORK METRICS</h3>
       <div class="data-row">
-        <span class="data-label">DEX VOLUME (USD)</span>
-        <span class="data-value cyan" id="xrplDexVol">--</span>
+        <span class="data-label">CURRENT LEDGER</span>
+        <span class="data-value cyan" id="xrplCurrentLedger">--</span>
       </div>
       <div class="data-row">
-        <span class="data-label">DEX VOLUME (XRP)</span>
-        <span class="data-value" id="xrplDexVolXrp">--</span>
-      </div>
-      <div class="data-row">
-        <span class="data-label">DEX TRADES (24H)</span>
-        <span class="data-value" id="xrplDexTrades">--</span>
-      </div>
-      <div class="data-row">
-        <span class="data-label">UNIQUE TAKERS</span>
-        <span class="data-value" id="xrplDexTakers">--</span>
+        <span class="data-label">LAST LEDGER TXNS</span>
+        <span class="data-value" id="xrplLastTxns">--</span>
       </div>
       <div class="data-row">
         <span class="data-label">AVG TX / LEDGER</span>
@@ -947,9 +939,58 @@ textarea:focus { border-color:var(--accent-cyan); }
         <span class="data-label">FEE BURN / LEDGER</span>
         <span class="data-value amber" id="xrplFeeBurn">--</span>
       </div>
+      <div class="data-row">
+        <span class="data-label">DEX VOLUME (USD)</span>
+        <span class="data-value cyan" id="xrplDexVol">N/A</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">DEX VOLUME (XRP)</span>
+        <span class="data-value" id="xrplDexVolXrp">N/A</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">DEX TRADES (24H)</span>
+        <span class="data-value" id="xrplDexTrades">N/A</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">UNIQUE TAKERS</span>
+        <span class="data-value" id="xrplDexTakers">N/A</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">SOURCE</span>
+        <span class="data-value" style="color:#8888aa;font-size:0.85em;">xrpl_native via s1.ripple.com</span>
+      </div>
       <div class="interpret-box" style="margin-top:12px;">
         <div class="label">ODL PROXY NOTE</div>
-        <p id="xrplVolumeNote">XRPL DEX volume is the closest available proxy for ODL activity. Cross-currency payments (XRP→USD, XRP→MXN, etc.) route through the DEX for currency conversion. Rising DEX volume with high taker counts indicates growing payment corridor utilization consistent with ODL growth.</p>
+        <p id="xrplVolumeNote">XRPL DEX volume is the closest available proxy for ODL activity. Cross-currency payments (XRP→USD, XRP→MXN, etc.) route through the DEX for currency conversion. Rising DEX volume with high taker counts indicates growing payment corridor utilization consistent with ODL growth. 24h DEX aggregates are not available via the native rippled JSON-RPC — a data aggregator endpoint is planned.</p>
+      </div>
+    </div>
+
+    <!-- Order Book Depth — auto-populated from dashboard-data.json -->
+    <div class="full-card" style="border-color:rgba(0,229,255,0.1);">
+      <h3>📖 XRP/USD ORDER BOOK DEPTH</h3>
+      <div class="data-row">
+        <span class="data-label">PAIR</span>
+        <span class="data-value cyan" id="xrplBookPair">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">OFFERS (TOP 10)</span>
+        <span class="data-value" id="xrplBookOffers">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">BID DEPTH (XRP)</span>
+        <span class="data-value green" id="xrplBookBidDepth">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">ASK DEPTH (XRP)</span>
+        <span class="data-value red" id="xrplBookAskDepth">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">BEST BID</span>
+        <span class="data-value" id="xrplBestBid">--</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">BEST ASK</span>
+        <span class="data-value" id="xrplBestAsk">--</span>
       </div>
     </div>
 
@@ -2074,10 +2115,16 @@ async function fetchDashboardData() {
     }
 
     // Overview cards — wired to live dashboard-data.json
-    // XRPL DEX volume (ODL proxy)
-    if (d.xrpl_metrics?.dex_volume_24h_usd != null) {
-      const vol = d.xrpl_metrics.dex_volume_24h_usd;
-      set('odlStatus', '$' + (vol / 1e6).toFixed(2) + 'M');
+    // XRPL Activity card (last_ledger_txns / avg_tx_per_ledger)
+    if (d.xrpl_metrics) {
+      const xm = d.xrpl_metrics;
+      if (xm.last_ledger_txns != null) {
+        set('odlStatus', xm.last_ledger_txns + ' txns');
+        if (xm.avg_tx_per_ledger != null) set('odlSub', 'avg ' + xm.avg_tx_per_ledger + ' tx/ledger');
+      } else if (xm.avg_tx_per_ledger != null) {
+        set('odlStatus', xm.avg_tx_per_ledger + ' tx/ledger');
+        set('odlSub', 'avg transactions');
+      }
     }
 
     // Hero status line
@@ -2148,6 +2195,14 @@ async function fetchDashboardData() {
       if (xrpStressEl && xrpStressFlow != null) {
         xrpStressEl.textContent = fmtM(xrpStressFlow) + ' 5D';
         xrpStressEl.className = 'data-value ' + cls(xrpStressFlow);
+      }
+
+      // Macro bar ETF pill → live weekly flow
+      const pillFlow = e.weekly_net_flow ?? e.daily_net_flow;
+      const pillEl = document.getElementById('etfPill');
+      if (pillEl && pillFlow != null) {
+        pillEl.textContent = fmtM(pillFlow) + '/wk';
+        pillEl.className = 'val ' + cls(pillFlow);
       }
 
       // Per-fund table
@@ -2366,22 +2421,27 @@ async function fetchDashboardData() {
       set('geoGreenland', d.stress.geo_greenland);
     }
 
-    // XRPL network volume (ODL proxy)
+    // XRPL network metrics
     if (d.xrpl_metrics) {
       const m = d.xrpl_metrics;
-      if (m.dex_volume_24h_usd != null) set('xrplDexVol', '$' + (m.dex_volume_24h_usd / 1e6).toFixed(2) + 'M');
-      if (m.dex_volume_24h_xrp != null) set('xrplDexVolXrp', m.dex_volume_24h_xrp.toLocaleString() + ' XRP');
-      if (m.dex_exchanges_24h != null)  set('xrplDexTrades', m.dex_exchanges_24h.toLocaleString());
-      if (m.dex_takers_24h != null)     set('xrplDexTakers', m.dex_takers_24h.toLocaleString());
-      if (m.avg_tx_per_ledger != null)  set('xrplAvgTx', m.avg_tx_per_ledger.toLocaleString() + ' tx');
+      if (m.current_ledger != null)      set('xrplCurrentLedger', m.current_ledger.toLocaleString());
+      if (m.last_ledger_txns != null)    set('xrplLastTxns', m.last_ledger_txns.toLocaleString() + ' txns');
+      if (m.avg_tx_per_ledger != null)   set('xrplAvgTx', m.avg_tx_per_ledger.toLocaleString() + ' tx');
       if (m.fee_burn_per_ledger_xrp != null) set('xrplFeeBurn', m.fee_burn_per_ledger_xrp.toFixed(4) + ' XRP');
+      if (m.dex_volume_24h_usd != null)  set('xrplDexVol', '$' + (m.dex_volume_24h_usd / 1e6).toFixed(2) + 'M');
+      if (m.dex_volume_24h_xrp != null)  set('xrplDexVolXrp', m.dex_volume_24h_xrp.toLocaleString() + ' XRP');
+      if (m.dex_exchanges_24h != null)   set('xrplDexTrades', m.dex_exchanges_24h.toLocaleString());
+      if (m.dex_takers_24h != null)      set('xrplDexTakers', m.dex_takers_24h.toLocaleString());
 
-      // Dynamic ODL note when data is available
-      if (m.dex_volume_24h_usd != null && m.dex_exchanges_24h != null) {
-        const vol = '$' + (m.dex_volume_24h_usd / 1e6).toFixed(1) + 'M';
-        const trades = m.dex_exchanges_24h.toLocaleString();
-        const noteEl = document.getElementById('xrplVolumeNote');
-        if (noteEl) noteEl.textContent = `XRPL DEX processed ${vol} across ${trades} trades in the past 24h. This is the closest available proxy for ODL payment corridor activity — cross-currency payments (XRP↔USD, XRP↔MXN, etc.) route through the DEX for FX conversion. Rising volume with high taker counts indicates growing corridor utilization.`;
+      // Order book depth card
+      if (m.book_depth_xrp_usd) {
+        const b = m.book_depth_xrp_usd;
+        set('xrplBookPair', b.pair);
+        set('xrplBookOffers', b.bids + ' bids / ' + b.asks + ' asks');
+        if (b.total_bid_xrp != null) set('xrplBookBidDepth', b.total_bid_xrp.toLocaleString() + ' XRP');
+        if (b.total_ask_xrp != null) set('xrplBookAskDepth', b.total_ask_xrp.toLocaleString() + ' XRP');
+        if (b.best_bid) set('xrplBestBid', b.best_bid.xrp.toFixed(0) + ' XRP = $' + b.best_bid.usd.toFixed(2));
+        if (b.best_ask) set('xrplBestAsk', b.best_ask.xrp.toFixed(0) + ' XRP = $' + b.best_ask.usd.toFixed(2));
       }
     }
 
