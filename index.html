@@ -1949,7 +1949,7 @@ function exportJournal() {
 // ===== DASHBOARD DATA (AUTO-UPDATE FROM GITHUB JSON) =====
 async function fetchDashboardData() {
   try {
-    const r = await fetch('https://raw.githubusercontent.com/Overwatch-589/Overwatch-Terminal/main/dashboard-data.json?t=' + Date.now());
+    const r = await fetch('https://overwatch-589.github.io/Overwatch-Terminal/dashboard-data.json?t=' + Date.now());
     const d = await r.json();
     _lastDashData = d;  // cache for BEAR tab auto signals
     const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
@@ -2397,7 +2397,7 @@ let _lastDashData = null;
 
 async function fetchAnalysisHistory() {
   try {
-    const r = await fetch('https://raw.githubusercontent.com/Overwatch-589/Overwatch-Terminal/main/scripts/analysis-history.json?t=' + Date.now());
+    const r = await fetch('https://overwatch-589.github.io/Overwatch-Terminal/scripts/analysis-history.json?t=' + Date.now());
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     _analysisHistory = await r.json();
     renderAnalysisHistory();
