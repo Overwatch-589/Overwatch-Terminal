@@ -740,7 +740,7 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">Risk Level</span><span class="signal amber">ELEVATED</span></div>
       <div class="interpret-box">
         <div class="label">ASSESSMENT</div>
-        <p id="thesisPulseText">SBI blockchain bond validates Japan adoption ahead of schedule, but sustained ETF outflows (-$5.5M weekly) signal institutional confidence strain. RLUSD at <p id="thesisPulseText">SBI ¥10B blockchain bond with XRP rewards validates Japan adoption thesis ahead of schedule. RLUSD growth to <p id="thesisPulseText">.56B (31% of kill switch) maintains momentum. However, accelerating ETF outflows (-$5.5M weekly) during extreme fear (F&G: 5) signal institutional confidence erosion. Core ODL volume data gap persists.</p>
+        <p id="thesisPulseText">SBI blockchain bond validates Japan adoption ahead of schedule, but sustained ETF outflows (-$5.5M weekly) signal institutional confidence strain. RLUSD at <p id="thesisPulseText">SBI ¥10B blockchain bond with XRP rewards validates Japan adoption thesis ahead of schedule. RLUSD growth to <p id="thesisPulseText">Core metrics tracking: RLUSD at <p id="thesisPulseText">.56B (31% of target), XRP ETFs at <p id="thesisPulseText">.1B (22% of target). SBI bond launch validated Japan adoption thesis ahead of schedule. ETF outflows slowing but persistent at -.56B (31% of kill switch) maintains momentum. However, accelerating ETF outflows (-$5.5M weekly) during extreme fear (F&G: 5) signal institutional confidence erosion. Core ODL volume data gap persists..6K daily. China-Japan trade escalation adds macro pressure but institutional infrastructure buildout continues. Stress environment elevated but not terminal.</p>
       </div>
     </div>
   </div>
@@ -771,7 +771,7 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">XRP ETF Flows</span><span class="data-value" id="stressXrpEtf">--</span></div>
       <div class="interpret-box">
         <div class="label">STRESS INTERPRETATION</div>
-        <p id="stressInterpretText">Elevated stress environment with USD/JPY 155.21 breaching threshold and JGB yields 2.24% in critical range. Extreme fear index at 5 indicates broad market stress, though Brent at $69.77 provides some energy relief.</p>
+        <p id="stressInterpretText">Composite stress at ELEVATED (82/100). USD/JPY 154.62 approaches critical 155 threshold for BOJ intervention. JGB yields 2.24% well above 2% stress level indicate central bank credibility under pressure. Extreme fear (F&G: 8) signals broad market distress but not panic.</p>
       </div>
     </div>
 
@@ -781,11 +781,11 @@ textarea:focus { border-color:var(--accent-cyan); }
         <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;" id="geoUpdated"></span>
       </div>
       <div id="geoWatchlist">
-        <div class="data-row"><span class="data-label">Japan / BOJ</span><span class="signal amber">JGB yields at 2.24% in critical range while SBI advances blockchain bond integration.</span></div>
-        <div class="data-row"><span class="data-label">Middle East</span><span class="signal amber">Strait of Hormuz critical status continues with dual carrier presence.</span></div>
-        <div class="data-row"><span class="data-label">US-China</span><span class="signal amber">Section 122 tariff framework active with 150-day expiration countdown.</span></div>
-        <div class="data-row"><span class="data-label">Trade / Tariffs</span><span class="signal amber">10% global tariffs under Section 122 expire approximately July 20, 2026.</span></div>
-        <div class="data-row"><span class="data-label">Arctic / Russia</span><span class="signal amber">Russia-Iran-China joint exercises maintain elevated tensions.</span></div>
+        <div class="data-row"><span class="data-label">Japan / BOJ</span><span class="signal amber">USD/JPY 154.62 near critical 155 intervention zone, JGB yields 2.24% signal credibility stress.</span></div>
+        <div class="data-row"><span class="data-label">Middle East</span><span class="signal amber">Brent at $69.77 stable, Hormuz tensions contained but dual carrier presence persists.</span></div>
+        <div class="data-row"><span class="data-label">US-China</span><span class="signal amber">China blacklists Japanese shipbuilders in export control escalation, pressure building on allied supply chains.</span></div>
+        <div class="data-row"><span class="data-label">Trade / Tariffs</span><span class="signal amber">Section 122 tariffs ongoing, ~145 days remaining on 150-day emergency authority.</span></div>
+        <div class="data-row"><span class="data-label">Arctic / Russia</span><span class="signal amber">No new escalation signals, energy flows stable through non-Arctic routes.</span></div>
       </div>
     </div>
   </div>
@@ -912,7 +912,7 @@ textarea:focus { border-color:var(--accent-cyan); }
       <div class="data-row"><span class="data-label">Hormuz Risk</span><span class="data-value amber">Elevated</span></div>
       <div class="interpret-box">
         <div class="label">ENERGY INTERPRETATION</div>
-        <p id="energyInterpretText">Brent at $69.77 provides relief from earlier energy shock fears, reducing pressure on Japan's trade deficit feedback loop. However, USD/JPY at 155.21 and JGB yields at 2.24% indicate BOJ credibility stress continues despite lower oil prices.</p>
+        <p id="energyInterpretText">Brent crude stable at $69.77 provides temporary relief to Japan trade deficit pressures. However, persistent yen weakness (154.62) and rising JGB yields (2.24%) indicate the energy-import cost feedback loop remains stressed despite contained oil prices.</p>
       </div>
     </div>
   </div>
@@ -1356,6 +1356,17 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 //         catClass (geo|fin|reg|inst), threat (CRITICAL|ELEVATED|MONITORING),
 //         threatEmoji, desc
 const EVENTS_DATA = [
+
+  {
+    date: '2026-02-24',
+    dateLabel: 'FEB 24',
+    title: 'China Blacklists Japanese Shipbuilders',
+    category: 'GEOPOLITICAL',
+    catClass: 'geo',
+    threat: 'ELEVATED',
+    threatEmoji: '🟡',
+    desc: 'Export control escalation adds trade pressure on Japan amid existing yen weakness and JGB yield stress. Reinforces thesis stress environment.'
+  },
 
   {
     date: '2026-02-22',
