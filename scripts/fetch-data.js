@@ -735,7 +735,7 @@ async function fetchNews(fallback) {
   const ndKey = process.env.NEWSDATA_API_KEY;
   if (ndKey) {
     try {
-      const ndUrl = `https://newsdata.io/api/1/news?apikey=${encodeURIComponent(ndKey)}&q=XRP%20OR%20Ripple%20OR%20XRPL%20OR%20RLUSD%20OR%20%22stablecoin%20settlement%22%20OR%20%22tokenized%20treasury%22%20OR%20%22cross-border%20payment%20blockchain%22%20OR%20%22SBI%20Holdings%20blockchain%22&language=en&size=15&category=technology,business,top`;
+      const ndUrl = `https://newsdata.io/api/1/news?apikey=${encodeURIComponent(ndKey)}&q=XRP%20OR%20Ripple%20OR%20XRPL%20OR%20RLUSD&language=en&size=15&category=technology,business,top`;
       const data = await withRetry(() => fetchJSON(ndUrl, 12_000), 'News-NewsData');
       const results = data?.results;
       if (!Array.isArray(results) || results.length === 0) throw new Error('Empty NewsData.io response');
