@@ -79,7 +79,7 @@ Approximately **$1–2/month** in Claude API usage. All data sources operate on 
 
 - **Orchestration:** GitHub Actions (cron scheduling, manual dispatch, secrets management)
 - **Runtime:** Node.js — vanilla, no framework, no build step
-- **AI Analysis:** Anthropic Claude API (`claude-sonnet-4-20250514`)
+- **AI Analysis:** Anthropic Claude API (`claude-sonnet-4-6`)
 - **Dashboard:** GitHub Pages — single-file HTML/CSS/JS, no bundler
 - **Alerts:** Telegram Bot API
 - **XRPL Data:** Native rippled JSON-RPC (`s1.ripple.com:51234`)

@@ -378,7 +378,7 @@ Respond with the JSON analysis object only.`;
   let raw;
   const client = new Anthropic({ apiKey });
   const callParams = {
-    model:      'claude-sonnet-4-20250514',
+    model:      'claude-sonnet-4-6',
     max_tokens: 4000,
     system:     SYSTEM_PROMPT,
     messages:   [{ role: 'user', content: userPrompt }],
@@ -387,7 +387,7 @@ Respond with the JSON analysis object only.`;
   let response;
   for (let attempt = 0; attempt <= 1; attempt++) {
     try {
-      log('Claude', `Calling claude-sonnet-4-20250514… (attempt ${attempt + 1})`);
+      log('Claude', `Calling claude-sonnet-4-6… (attempt ${attempt + 1})`);
       response = await client.messages.create(callParams);
       break; // success
     } catch (e) {

@@ -124,7 +124,7 @@ Writes `dashboard-data.json`. Always falls back to cached values on fetch failur
 Runs at 6am and 6pm Chicago time. Steps:
 1. Loads `dashboard-data.json`
 2. Builds a structured prompt including all live data + news headlines + thesis context
-3. Calls Claude API (`claude-sonnet-4-20250514`) to analyze thesis scorecard, kill switches, and events
+3. Calls Claude API (`claude-sonnet-4-6`) to analyze thesis scorecard, kill switches, and events
 4. Saves `analysis-output.json`
 5. Sends Telegram briefing to owner (includes 🐻 COUNTER-THESIS score after probability line)
 
