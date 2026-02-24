@@ -1817,56 +1817,26 @@ function renderX402() {
   set('x402Assets',       d.settlement_assets);
 }
 
-// ===== XRP PRICE (Multi-source) =====
+// ===== XRP PRICE =====
 async function fetchXRPPrice() {
-  let price = null, change = null, vol = null, mcap = null;
-
-  // Source 1: CoinCap
+  // CoinGecko — supports CORS from browser
   try {
-    const r = await fetch('https://api.coincap.io/v2/assets/xrp');
+    const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_market_cap=true');
     const d = await r.json();
-    if (d.data) {
-      price = parseFloat(d.data.priceUsd);
-      change = parseFloat(d.data.changePercent24Hr);
-      vol = parseFloat(d.data.volumeUsd24Hr);
-      mcap = parseFloat(d.data.marketCapUsd);
-    }
-  } catch(e) {}
-
-  // Source 2: Binance
-  if (!price) {
-    try {
-      const r = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=XRPUSDT');
-      const d = await r.json();
-      if (d.lastPrice) {
-        price = parseFloat(d.lastPrice);
-        change = parseFloat(d.priceChangePercent);
-        vol = parseFloat(d.quoteVolume);
+    if (d.ripple) {
+      const price = d.ripple.usd, change = d.ripple.usd_24h_change, vol = d.ripple.usd_24h_vol, mcap = d.ripple.usd_market_cap;
+      document.getElementById('xrpPrice').textContent = '$' + price.toFixed(4);
+      document.getElementById('xrpPrice').style.color = '';
+      const ce = document.getElementById('xrpChange');
+      if (change !== null) {
+        ce.textContent = (change >= 0 ? '+' : '') + parseFloat(change).toFixed(2) + '%';
+        ce.className = 'ticker-change ' + (change >= 0 ? 'positive' : 'negative');
       }
-    } catch(e) {}
-  }
-
-  // Source 3: CoinGecko
-  if (!price) {
-    try {
-      const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd&include_24hr_change=true&include_24hr_vol=true&include_market_cap=true');
-      const d = await r.json();
-      if (d.ripple) { price = d.ripple.usd; change = d.ripple.usd_24h_change; vol = d.ripple.usd_24h_vol; mcap = d.ripple.usd_market_cap; }
-    } catch(e) {}
-  }
-
-  if (price) {
-    document.getElementById('xrpPrice').textContent = '$' + price.toFixed(4);
-    document.getElementById('xrpPrice').style.color = '';
-    const ce = document.getElementById('xrpChange');
-    if (change !== null) {
-      ce.textContent = (change >= 0 ? '+' : '') + parseFloat(change).toFixed(2) + '%';
-      ce.className = 'ticker-change ' + (change >= 0 ? 'positive' : 'negative');
+      if (vol) document.getElementById('xrpVol').textContent = '$' + (vol / 1e9).toFixed(2) + 'B';
+      if (mcap) document.getElementById('xrpMcap').textContent = '$' + (mcap / 1e9).toFixed(1) + 'B';
+      document.getElementById('lastUpdated').innerHTML = '<span class="live-dot"></span>' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
     }
-    if (vol) document.getElementById('xrpVol').textContent = '$' + (vol / 1e9).toFixed(2) + 'B';
-    if (mcap) document.getElementById('xrpMcap').textContent = '$' + (mcap / 1e9).toFixed(1) + 'B';
-    document.getElementById('lastUpdated').innerHTML = '<span class="live-dot"></span>' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  } else {
+  } catch(e) {
     document.getElementById('xrpPrice').textContent = 'OFFLINE';
     document.getElementById('xrpPrice').style.color = 'var(--accent-red)';
   }
@@ -1966,46 +1936,9 @@ function connectXRPL() {
 }
 
 // ===== XRP SUPPLY =====
-async function fetchXRPSupply() {
-  try {
-    const r = await fetch('https://s1.ripple.com:51234/', {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({method:'server_state',params:[{}]})
-    });
-    const d = await r.json();
-    if (d.result && d.result.state && d.result.state.validated_ledger) {
-      const tc = d.result.state.validated_ledger.total_coins;
-      if (tc) {
-        const totalXrp = parseInt(tc) / 1000000;
-        const destroyed = 100000000000 - totalXrp;
-        const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-        set('totalXrp', (totalXrp / 1e9).toFixed(4) + 'B XRP');
-        set('xrpDestroyed', destroyed.toLocaleString(undefined,{maximumFractionDigits:0}) + ' XRP');
-        set('summaryBurned', destroyed.toLocaleString(undefined,{maximumFractionDigits:0}) + ' XRP');
-      }
-    }
-  } catch(e) {
-    // Fallback
-    try {
-      const r = await fetch('https://xrplcluster.com/', {
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({method:'server_state',params:[{}]})
-      });
-      const d = await r.json();
-      if (d.result && d.result.state && d.result.state.validated_ledger) {
-        const tc = d.result.state.validated_ledger.total_coins;
-        if (tc) {
-          const totalXrp = parseInt(tc) / 1000000;
-          const destroyed = 100000000000 - totalXrp;
-          const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-          set('totalXrp', (totalXrp / 1e9).toFixed(4) + 'B XRP');
-          set('xrpDestroyed', destroyed.toLocaleString(undefined,{maximumFractionDigits:0}) + ' XRP');
-          set('summaryBurned', destroyed.toLocaleString(undefined,{maximumFractionDigits:0}) + ' XRP');
-        }
-      }
-    } catch(e2) {}
-  }
-}
+// Removed direct s1.ripple.com / xrplcluster.com HTTP calls — CORS-blocked from browser.
+// summaryBurned is now populated from dashboard-data.json in fetchDashboardData().
+function fetchXRPSupply() {}
 
 // ===== DECISION JOURNAL =====
 function addJournalEntry() {
@@ -2270,6 +2203,11 @@ async function fetchDashboardData() {
       set('supplyDefi', defi != null ? fmtMx(defi) : '--');
       set('supplyCorpTreasuries', corp != null ? fmtMx(corp) : '--');
 
+      // XRP destroyed (fee burns) — from supply.xrp_burned; shown in Overview summary card
+      if (s.xrp_burned != null) {
+        set('summaryBurned', s.xrp_burned.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' XRP');
+      }
+
       // Effective float = exchange holdings minus all institutional locks
       if (exchanges != null && etfLocked != null) {
         const effFloat = exchanges - (etfLocked ?? 0) - (defi ?? 0) - (corp ?? 0);
@@ -2427,6 +2365,9 @@ async function fetchDashboardData() {
       if (m.current_ledger != null)      set('xrplCurrentLedger', m.current_ledger.toLocaleString());
       if (m.last_ledger_txns != null)    set('xrplLastTxns', m.last_ledger_txns.toLocaleString() + ' txns');
       if (m.avg_tx_per_ledger != null)   set('xrplAvgTx', m.avg_tx_per_ledger.toLocaleString() + ' tx');
+      // Overview summary fallback — WebSocket overwrites with live values when connected
+      if (m.current_ledger != null)      set('summaryLedger', '#' + m.current_ledger.toLocaleString());
+      if (m.last_ledger_txns != null)    set('summaryTxns', m.last_ledger_txns.toLocaleString());
       if (m.fee_burn_per_ledger_xrp != null) set('xrplFeeBurn', m.fee_burn_per_ledger_xrp.toFixed(4) + ' XRP');
       if (m.dex_volume_24h_usd != null)  set('xrplDexVol', '$' + (m.dex_volume_24h_usd / 1e6).toFixed(2) + 'M');
       if (m.dex_volume_24h_xrp != null)  set('xrplDexVolXrp', m.dex_volume_24h_xrp.toLocaleString() + ' XRP');
@@ -2471,16 +2412,9 @@ const GEO_CATEGORIES = [
 ];
 const GEO_HIGH_RISK = ['attack', 'strike', 'war', 'crisis', 'escalat', 'missile', 'invasion', 'collapse', 'blockade', 'conflict'];
 
-async function fetchGeopolitical() {
-  const rss = 'https://feeds.bbci.co.uk/news/world/rss.xml';
-  try {
-    const r = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rss) + '&count=50');
-    if (!r.ok) throw new Error(r.status);
-    const d = await r.json();
-    if (d.status !== 'ok' || !d.items) throw new Error('bad response');
-    renderGeoWatchlist(d.items);
-  } catch(e) {}
-}
+// fetchGeopolitical removed — rss2json.com is CORS-blocked from browser.
+// The geo watchlist card uses manually maintained static content.
+function fetchGeopolitical() {}
 
 function renderGeoWatchlist(articles) {
   const container = document.getElementById('geoWatchlist');
@@ -2724,9 +2658,7 @@ function renderBearAutoSignals() {
 function refreshAll() {
   fetchXRPPrice();
   fetchFearGreed();
-  fetchXRPSupply();
   fetchDashboardData();
-  fetchGeopolitical();
   fetchAnalysisHistory();
   if (!xrplWs || xrplWs.readyState > 1) { reconnectAttempts = 0; connectXRPL(); }
 }
@@ -2734,20 +2666,16 @@ function refreshAll() {
 // ===== INIT =====
 fetchXRPPrice();
 fetchFearGreed();
-fetchXRPSupply();
 fetchDashboardData();
 connectXRPL();
 renderJournal();
 renderEvents();
 initEventFilters();
 renderX402();
-fetchGeopolitical();
 fetchAnalysisHistory();
 setInterval(fetchXRPPrice, 120000);
 setInterval(fetchFearGreed, 300000);
-setInterval(fetchXRPSupply, 300000);
 setInterval(fetchDashboardData, 600000);
-setInterval(fetchGeopolitical, 1800000);
 </script>
 </body>
 </html>
