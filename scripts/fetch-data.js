@@ -111,20 +111,6 @@ async function fetchJSON(url, timeoutMs = 10_000) {
   }
 }
 
-/**
- * Fetch with custom headers and timeout. Used for APIs that require User-Agent.
- */
-async function fetchJSONHeaders(url, headers, timeoutMs = 12_000) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, { headers, signal: controller.signal });
-    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-    return await res.json();
-  } finally {
-    clearTimeout(timer);
-  }
-}
 
 // ─── Individual fetchers ──────────────────────────────────────────────────────
 
@@ -574,121 +560,157 @@ async function fetchXRPRadar(fallback) {
   }
 }
 
-// ─── XRPL on-chain metrics (ODL volume proxy) ────────────────────────────────
+// ─── XRPL on-chain metrics (native rippled JSON-RPC) ─────────────────────────
 
-const XRPSCAN_HEADERS = {
-  'User-Agent': 'Mozilla/5.0 (compatible; Overwatch-Terminal/1.0)',
-  'Accept':     'application/json',
-};
+const RIPPLED_URL = 'https://s1.ripple.com:51234';
 
 /**
- * Fetch XRPL network metrics.
- * Primary: XRPScan public API (with User-Agent to avoid 403).
- * Fallback: OnTheDex.live aggregate ticker when XRPScan is blocked.
+ * Send a JSON-RPC request to the public rippled server.
+ * Returns result object or throws on network/XRPL error.
+ */
+async function rippleRPC(method, params = {}, timeoutMs = 15_000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(RIPPLED_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ method, params: [params] }),
+      signal:  controller.signal,
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+    const json = await res.json();
+    if (json.result?.status === 'error') {
+      throw new Error(`XRPL ${method}: ${json.result.error_message ?? json.result.error}`);
+    }
+    return json.result;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * Fetch XRPL network metrics directly from a public rippled server.
+ * Queries: server_info, 6 consecutive ledgers (5-sample avg), book_offers XRP/USD.
  * Always returns an "xrpl_metrics" object — never throws.
  */
 async function fetchXRPLMetrics(fallback) {
-  // ── XRPScan (primary) ─────────────────────────────────────────────────
-  let xrpscanBlocked = false;
-  try {
-    const [tokensData, ledgerData] = await Promise.all([
-      withRetry(() => fetchJSONHeaders('https://xrpscan.com/api/v1/tokens', XRPSCAN_HEADERS, 15_000), 'XRPL-tokens'),
-      withRetry(() => fetchJSONHeaders('https://xrpscan.com/api/v1/ledger', XRPSCAN_HEADERS, 10_000), 'XRPL-ledger'),
-    ]);
+  const EMPTY_FALLBACK = fallback?.xrpl_metrics ?? {
+    last_fetched: null, source: 'none',
+    current_ledger: null, last_ledger_txns: null,
+    avg_tx_per_ledger: null, fee_burn_per_ledger_xrp: null,
+    book_depth_xrp_usd: null,
+    dex_volume_24h_usd: null, dex_volume_24h_xrp: null,
+    dex_exchanges_24h: null, dex_takers_24h: null,
+  };
 
-    // DEX volume = aggregate across all token pairs (USD, closest ODL proxy)
-    let dex_volume_24h_usd = null;
-    let dex_exchanges_24h = null;
-    let dex_takers_24h = null;
-    if (Array.isArray(tokensData)) {
-      dex_volume_24h_usd = tokensData.reduce((s, t) => s + (Number(t.metrics?.volume_24h) || 0), 0);
-      dex_exchanges_24h  = tokensData.reduce((s, t) => s + (Number(t.metrics?.exchanges_24h) || 0), 0);
-      dex_takers_24h     = tokensData.reduce((s, t) => s + (Number(t.metrics?.takers_24h) || 0), 0);
+  try {
+    // 1. server_info — get validated ledger sequence
+    const serverInfo = await withRetry(() => rippleRPC('server_info'), 'XRPL-server_info');
+    const validatedSeq = serverInfo?.info?.validated_ledger?.seq;
+    if (!validatedSeq) throw new Error('validated_ledger.seq missing from server_info');
+    log('XRPL', `server_info ok — validated ledger: ${validatedSeq}`);
+
+    // 2. Fetch 6 consecutive ledgers: (seq-5) through (seq).
+    //    transactions:true, expand:false  → hash list for tx counts.
+    //    total_coins in header → BigInt diff gives fee burn without precision loss.
+    const indices = Array.from({ length: 6 }, (_, i) => validatedSeq - 5 + i);
+    const ledgerResults = await Promise.all(
+      indices.map(idx =>
+        withRetry(
+          () => rippleRPC('ledger', { ledger_index: idx, transactions: true, expand: false }, 12_000),
+          `XRPL-ledger-${idx}`
+        )
+      )
+    );
+
+    // Tx counts for the 5 most recent ledgers (indices[1..5])
+    const sampleLedgers = ledgerResults.slice(1);
+    const txCounts = sampleLedgers.map(r => {
+      const txs = r?.ledger?.transactions;
+      return Array.isArray(txs) ? txs.length : 0;
+    });
+    const last_ledger_txns   = txCounts[txCounts.length - 1];
+    const avg_tx_per_ledger  = Math.round(txCounts.reduce((s, v) => s + v, 0) / txCounts.length);
+
+    // Fee burn: total_coins (drops) is a large integer string — use BigInt to avoid
+    // precision loss (value ~9.999e16 exceeds Number.MAX_SAFE_INTEGER).
+    let fee_burn_per_ledger_xrp = null;
+    const oldestCoins = ledgerResults[0]?.ledger?.total_coins;
+    const newestCoins = ledgerResults[5]?.ledger?.total_coins;
+    if (oldestCoins && newestCoins) {
+      const burnDrops = BigInt(oldestCoins) - BigInt(newestCoins);
+      if (burnDrops > 0n) {
+        fee_burn_per_ledger_xrp = parseFloat((Number(burnDrops) / 1_000_000 / 5).toFixed(4));
+      }
     }
 
-    // Ledger throughput + fee burn from recent closed ledgers
-    let avg_tx_per_ledger = null;
-    let fee_burn_per_ledger_xrp = null;
-    let current_ledger = null;
-    if (ledgerData?.ledgers && Array.isArray(ledgerData.ledgers) && ledgerData.ledgers.length > 0) {
-      const ledgers = ledgerData.ledgers;
-      current_ledger = ledgerData.current_ledger ?? ledgers[0]?.ledger_index ?? null;
-      avg_tx_per_ledger = Math.round(ledgers.reduce((s, l) => s + (l.tx_count ?? 0), 0) / ledgers.length);
-      const totalBurnedDrops = ledgers.reduce((s, l) => s - (l.destroyed_coins ?? 0), 0);
-      fee_burn_per_ledger_xrp = parseFloat((totalBurnedDrops / 1_000_000 / ledgers.length).toFixed(4));
+    log('XRPL', `ledgers ok — last_txns=${last_ledger_txns} | avg=${avg_tx_per_ledger} tx/ledger | burn=${fee_burn_per_ledger_xrp ?? 'N/A'} XRP/ledger`);
+
+    // 3. book_offers — XRP/USD.GateHub (rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq), top 10 each side
+    const GATEHUB_USD = { currency: 'USD', issuer: 'rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq' };
+    const XRP_NATIVE  = { currency: 'XRP' };
+
+    let book_depth_xrp_usd = null;
+    try {
+      const [bidsResult, asksResult] = await Promise.all([
+        // Bids: offer to give XRP, want USD (taker_gets XRP, taker_pays USD)
+        rippleRPC('book_offers', { taker_gets: XRP_NATIVE, taker_pays: GATEHUB_USD, limit: 10 }, 12_000),
+        // Asks: offer to give USD, want XRP (taker_gets USD, taker_pays XRP)
+        rippleRPC('book_offers', { taker_gets: GATEHUB_USD, taker_pays: XRP_NATIVE, limit: 10 }, 12_000),
+      ]);
+
+      // Bids: TakerGets is XRP (drops string), TakerPays is USD (object with .value)
+      const bids = (bidsResult?.offers ?? []).map(o => ({
+        xrp: Number(o.TakerGets) / 1_000_000,
+        usd: Number(o.TakerPays?.value ?? 0),
+      }));
+      // Asks: TakerGets is USD (object with .value), TakerPays is XRP (drops string)
+      const asks = (asksResult?.offers ?? []).map(o => ({
+        xrp: Number(o.TakerPays) / 1_000_000,
+        usd: Number(o.TakerGets?.value ?? 0),
+      }));
+
+      const totalBidXrp = bids.reduce((s, o) => s + o.xrp, 0);
+      const totalAskXrp = asks.reduce((s, o) => s + o.xrp, 0);
+
+      book_depth_xrp_usd = {
+        pair:          'XRP/USD.GateHub',
+        bids:          bids.length,
+        asks:          asks.length,
+        total_bid_xrp: Math.round(totalBidXrp),
+        total_ask_xrp: Math.round(totalAskXrp),
+        best_bid:      bids[0] ?? null,
+        best_ask:      asks[0] ?? null,
+      };
+
+      log('XRPL', `book XRP/USD.GateHub — ${bids.length} bids (${(totalBidXrp / 1000).toFixed(0)}K XRP) / ${asks.length} asks (${(totalAskXrp / 1000).toFixed(0)}K XRP)`);
+    } catch (bookErr) {
+      warn('XRPL', `book_offers failed: ${bookErr.message} — continuing without book depth`);
     }
 
     const result = {
       last_fetched:            new Date().toISOString(),
-      source:                  'xrpscan',
-      dex_volume_24h_usd,
-      dex_volume_24h_xrp:     null,   // computed in main() after XRP price is known
-      dex_exchanges_24h,
-      dex_takers_24h,
+      source:                  'xrpl_native',
+      current_ledger:          validatedSeq,
+      last_ledger_txns,
       avg_tx_per_ledger,
       fee_burn_per_ledger_xrp,
-      current_ledger,
+      book_depth_xrp_usd,
+      // DEX 24h volume not available from native API
+      dex_volume_24h_usd:      null,
+      dex_volume_24h_xrp:      null,
+      dex_exchanges_24h:       null,
+      dex_takers_24h:          null,
     };
 
-    log('XRPL', `DEX vol 24h=$${dex_volume_24h_usd != null ? (dex_volume_24h_usd / 1e6).toFixed(1) + 'M' : 'N/A'} | trades=${dex_exchanges_24h ?? 'N/A'} | avg_tx/ledger=${avg_tx_per_ledger ?? 'N/A'} | burn=${fee_burn_per_ledger_xrp ?? 'N/A'} XRP/ledger`);
     markHealth('xrpl_metrics', 'ok');
     return result;
   } catch (e) {
-    if (e.message.includes('403')) {
-      xrpscanBlocked = true;
-      warn('XRPL', `XRPScan returned 403 (blocked) — trying OnTheDex.live fallback`);
-    } else {
-      err('XRPL', e.message);
-      markHealth('xrpl_metrics', 'fail', e.message);
-      return fallback?.xrpl_metrics ?? {
-        last_fetched: null, source: 'none',
-        dex_volume_24h_usd: null, dex_volume_24h_xrp: null,
-        dex_exchanges_24h: null, dex_takers_24h: null,
-        avg_tx_per_ledger: null, fee_burn_per_ledger_xrp: null, current_ledger: null,
-      };
-    }
+    err('XRPL', e.message);
+    markHealth('xrpl_metrics', 'fail', e.message);
+    return EMPTY_FALLBACK;
   }
-
-  // ── OnTheDex.live (fallback when XRPScan is blocked) ──────────────────
-  if (xrpscanBlocked) {
-    try {
-      const tickerData = await withRetry(
-        () => fetchJSONHeaders('https://api.onthedex.live/public/v1/ticker', XRPSCAN_HEADERS, 12_000),
-        'XRPL-OnTheDex'
-      );
-      // OnTheDex returns an array of trading pairs; aggregate 24h volume across all
-      const pairs = Array.isArray(tickerData) ? tickerData : (tickerData?.data ?? []);
-      if (!Array.isArray(pairs) || pairs.length === 0) throw new Error('Empty OnTheDex ticker response');
-      const dex_volume_24h_usd = pairs.reduce((s, p) => s + (Number(p.volume_24h_usd ?? p.quoteVolume ?? 0)), 0) || null;
-      const dex_exchanges_24h  = pairs.reduce((s, p) => s + (Number(p.trades_24h   ?? p.count        ?? 0)), 0) || null;
-
-      const result = {
-        last_fetched:            new Date().toISOString(),
-        source:                  'onthedex',
-        dex_volume_24h_usd,
-        dex_volume_24h_xrp:     null,
-        dex_exchanges_24h,
-        dex_takers_24h:          null,
-        avg_tx_per_ledger:       null,
-        fee_burn_per_ledger_xrp: null,
-        current_ledger:          null,
-      };
-
-      log('XRPL', `DEX vol 24h=$${dex_volume_24h_usd != null ? (dex_volume_24h_usd / 1e6).toFixed(1) + 'M' : 'N/A'} | trades=${dex_exchanges_24h ?? 'N/A'} (OnTheDex — XRPScan 403)`);
-      markHealth('xrpl_metrics', 'ok');
-      return result;
-    } catch (e2) {
-      err('XRPL', `OnTheDex also failed: ${e2.message}`);
-      markHealth('xrpl_metrics', 'fail', 'XRPScan 403 (blocked); OnTheDex fallback also failed — check endpoint/auth');
-    }
-  }
-
-  return fallback?.xrpl_metrics ?? {
-    last_fetched: null, source: 'none',
-    dex_volume_24h_usd: null, dex_volume_24h_xrp: null,
-    dex_exchanges_24h: null, dex_takers_24h: null,
-    avg_tx_per_ledger: null, fee_burn_per_ledger_xrp: null, current_ledger: null,
-  };
 }
 
 // ─── News fetcher ─────────────────────────────────────────────────────────────
