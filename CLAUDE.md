@@ -226,3 +226,19 @@ Open `index.html` in a browser (no server needed — reads from GitHub raw URL).
 - **Thesis scores** are preserved on every fetch, only updated via `apply-analysis.js`
 - Prefer `etf.circ_supply` (from CoinGecko market_cap/price) for ETF % calculations
 - Prefer `supply.circ_supply` (from xrp-insights.com) for supply breakdown display
+
+---
+
+## FUTURE: XRPL Native API
+
+We can query the XRPL ledger directly via public rippled servers (e.g. `s1.ripple.com:51234`
+or `wss://s1.ripple.com`) using the public JSON-RPC / WebSocket API. This eliminates
+dependency on XRPScan and OnTheDex for on-chain metrics.
+
+Relevant methods:
+- `server_info` — ledger state, tx queue, fee levels
+- `ledger` — ledger header + transaction list for a specific ledger index
+- `book_offers` — order book for a given currency pair (DEX volume proxy)
+- `amm_info` — AMM pool state (liquidity, fees)
+
+Reference: https://xrpl.org/docs/references/http-websocket-apis/public-api-methods
