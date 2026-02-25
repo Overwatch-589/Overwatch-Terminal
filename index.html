@@ -1307,6 +1307,14 @@ textarea:focus { border-color:var(--accent-cyan); }
         <span class="data-value amber" id="x402AgentNetwork">XRPL TESTNET</span>
       </div>
       <div class="data-row">
+        <span class="data-label">PROTOCOL</span>
+        <span class="data-value blue" id="x402Protocol">x402 v2</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">FACILITATOR</span>
+        <span class="signal" id="x402FacilitatorStatus">—</span>
+      </div>
+      <div class="data-row">
         <span class="data-label">AGENT ADDRESS</span>
         <span class="data-value" id="x402AgentAddress" style="font-family:'JetBrains Mono',monospace;font-size:10px;">Awaiting first run…</span>
       </div>
@@ -1334,8 +1342,8 @@ textarea:focus { border-color:var(--accent-cyan); }
           <span class="data-value cyan" id="x402PaymentAmount">—</span>
         </div>
         <div class="data-row">
-          <span class="data-label">PURPOSE</span>
-          <span class="data-value" id="x402PaymentMemo" style="font-size:10px;">—</span>
+          <span class="data-label">INVOICE ID</span>
+          <span class="data-value" id="x402PaymentMemo" style="font-family:'JetBrains Mono',monospace;font-size:10px;">—</span>
         </div>
         <div class="data-row">
           <span class="data-label">TX HASH</span>
@@ -1349,6 +1357,11 @@ textarea:focus { border-color:var(--accent-cyan); }
           <span class="data-label">TIMESTAMP</span>
           <span class="data-value" id="x402PaymentTime">—</span>
         </div>
+      </div>
+
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);margin-bottom:8px;">x402 PROTOCOL FLOW</div>
+        <div id="x402FlowLog" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-secondary);">Waiting for first agent run…</div>
       </div>
 
       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
@@ -1895,6 +1908,15 @@ function renderX402AgentWallet(d) {
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
 
   set('x402AgentNetwork', a.network ?? 'XRPL TESTNET');
+  if (a.protocol) set('x402Protocol', a.protocol);
+
+  // Facilitator status badge
+  const facEl = document.getElementById('x402FacilitatorStatus');
+  if (facEl) {
+    if (a.facilitator_ok === true)       { facEl.textContent = 'T54 — ONLINE';  facEl.className = 'signal green'; }
+    else if (a.facilitator_ok === false) { facEl.textContent = 'T54 — OFFLINE'; facEl.className = 'signal red'; }
+    else                                 { facEl.textContent = 'T54 — UNKNOWN'; facEl.className = 'signal amber'; }
+  }
 
   if (a.agent_address) {
     const addr = a.agent_address;
@@ -1928,11 +1950,21 @@ function renderX402AgentWallet(d) {
       }
     }
 
-    if (p.amount_xrp != null) {
+    if (p.amount_drops != null) {
+      set('x402PaymentAmount', p.amount_drops + ' drops (' + (parseInt(p.amount_drops, 10) / 1e6).toFixed(6) + ' XRP testnet)');
+    } else if (p.amount_xrp != null) {
       set('x402PaymentAmount', p.amount_xrp + ' XRP (testnet)');
     }
 
-    set('x402PaymentMemo', p.memo ?? '—');
+    if (p.invoice_id) {
+      const invEl = document.getElementById('x402PaymentMemo');
+      if (invEl) {
+        invEl.textContent = p.invoice_id.slice(0, 12) + '…' + p.invoice_id.slice(-8);
+        invEl.title = p.invoice_id;
+      }
+    } else {
+      set('x402PaymentMemo', p.memo ?? '—');
+    }
 
     if (p.tx_hash) {
       const hashEl = document.getElementById('x402PaymentHash');
@@ -1952,6 +1984,20 @@ function renderX402AgentWallet(d) {
       const dt = new Date(p.timestamp);
       set('x402PaymentTime', dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' +
         dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    }
+  }
+
+  // x402 protocol flow log
+  const flowEl = document.getElementById('x402FlowLog');
+  if (flowEl) {
+    const flow = a.x402_flow ?? [];
+    if (flow.length > 0) {
+      flowEl.innerHTML = flow.map(step => {
+        const isError = step.startsWith('ERROR');
+        const isIn    = step.startsWith('←');
+        const col     = isError ? 'var(--accent-red)' : isIn ? 'var(--accent-green)' : 'var(--accent-cyan)';
+        return `<div style="padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.04);color:${col};">${escHtml(step)}</div>`;
+      }).join('');
     }
   }
 
