@@ -430,6 +430,212 @@ challenge the thesis. That is the entire point.`;
   }
 }
 
+// ─── 360 Assessment — Pass 2 ──────────────────────────────────────────────────
+
+/**
+ * Runs the 360 counter-thesis assessment (Pass 2).
+ * Takes Pass 1 sweep findings and structures them into a prioritized,
+ * scored assessment with tactical recommendation.
+ * Writes the result to data/360-report.json.
+ * Returns the full assessment object, or null on any failure.
+ *
+ * @param {Array}  sweepResults  — threat array returned by runSweep()
+ * @param {object} marketData    — current dashboard data
+ * @param {number} previousScore — previous bear pressure score (0-100)
+ * @returns {Promise<object|null>}
+ */
+async function runAssessment(sweepResults, marketData, previousScore) {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    err('360-assess', 'ANTHROPIC_API_KEY not set — cannot run assessment');
+    return null;
+  }
+
+  // Compute RLUSD daily pace needed toward $5B target by EOY 2026
+  const rlusdCap       = marketData?.rlusd?.market_cap ?? 0;
+  const rlusdRemaining = Math.max(0, 5_000_000_000 - rlusdCap);
+  const daysToEOY      = Math.max(1, Math.ceil((new Date('2027-01-01') - new Date()) / 86_400_000));
+  const rlusdPaceNeeded = rlusdRemaining > 0
+    ? `$${(rlusdRemaining / daysToEOY / 1_000_000).toFixed(2)}M`
+    : 'target reached';
+
+  const assessPrompt = `You are reviewing a counter-thesis sweep report for the XRPL institutional
+settlement thesis. The sweep team has returned findings. Your job:
+
+1. PRIORITIZE — Which findings change the tactical picture?
+2. VALIDATE — Do any findings compound each other?
+3. DECIDE — Do any findings trigger existing kill switches or warrant new ones?
+4. REPORT — Produce a clear command report.
+
+SWEEP FINDINGS:
+${JSON.stringify(sweepResults)}
+
+CURRENT MARKET DATA:
+${JSON.stringify(marketData)}
+
+PREVIOUS BEAR PRESSURE SCORE: ${previousScore}
+
+EXISTING KILL SWITCHES:
+- ODL Volume: Growth trajectory toward institutional-grade volume by Q3 2026
+- RLUSD Circulation: Tracking toward $5B; currently needs ${rlusdPaceNeeded}/day
+- PermissionedDEX: Institutional count must be verifiable
+- XRP ETF: Sustained outflows beyond 30 days
+- Fear & Greed: Extended period below 20
+
+INSTRUCTIONS:
+
+A) THREAT MATRIX — For each finding, calculate:
+   - impact (1-10): How much damage if this materializes?
+   - probability (1-10): How likely based on current evidence?
+   - time_weight: immediate=10, near-term=7, medium-term=4, long-term=2
+   - composite = (impact × probability × time_weight) / 10
+   Sort by composite descending. Return top 8 max.
+
+B) COMPOUNDING RISKS — Which threats amplify each other?
+   Show the chain: A → B → C → [outcome]
+   Explain why the combination is worse than individual threats.
+
+C) BLIND SPOTS — Which findings were NOT previously tracked?
+   For each:
+   - Should it become a permanent monitoring item?
+   - What data source would track it?
+   - Is there an x402 endpoint opportunity?
+
+D) BIAS CHECK — Count indicators:
+   - How many data points in the system support the bull case?
+   - How many actively challenge it?
+   - Ratio assessment and recommendation.
+
+E) KILL SWITCH STATUS — For each existing kill switch:
+   - Current status: safe | warning | danger | triggered | no_data
+   - Supporting detail
+   - Any new kill switches recommended?
+
+F) TACTICAL RECOMMENDATION (one of):
+   - HOLD_POSITION: No findings warrant tactical change
+   - INCREASE_MONITORING: Specific areas need closer watch
+   - REDUCE_EXPOSURE: Conditions suggest partial de-risk
+   - EXIT_SIGNAL: Kill switch triggered or compounding threats critical
+
+G) UPDATED BEAR PRESSURE SCORE (0-100):
+   Weight composite threats against thesis strength.
+   Explain any change from previous score.
+
+H) COMMANDER SUMMARY:
+   2-3 sentences. Plain language. Lead with the most important finding.
+   State the tactical recommendation. No hedging.
+
+Respond with ONLY JSON:
+{
+  "threat_matrix": [
+    {
+      "threat": "name",
+      "description": "...",
+      "impact": number,
+      "probability": number,
+      "time_weight": number,
+      "composite": number,
+      "severity": "critical|high|moderate|low",
+      "proximity": "immediate|near-term|medium-term|long-term",
+      "blind_spot": boolean,
+      "is_new": boolean,
+      "category": "string"
+    }
+  ],
+  "compounding_risks": [
+    {
+      "chain": ["threat A", "threat B", "threat C"],
+      "outcome": "what happens when these combine",
+      "severity": "critical|high|moderate"
+    }
+  ],
+  "blind_spots": [
+    {
+      "threat": "name",
+      "importance": "critical|high|moderate",
+      "suggested_source": "...",
+      "x402_opportunity": boolean,
+      "recommend_permanent_monitoring": boolean
+    }
+  ],
+  "bias_check": {
+    "bull_indicators": number,
+    "bear_indicators": number,
+    "ratio": "string",
+    "assessment": "string",
+    "recommended_additions": ["..."]
+  },
+  "kill_switches": [
+    {
+      "name": "...",
+      "status": "safe|warning|danger|triggered|no_data",
+      "detail": "..."
+    }
+  ],
+  "new_kill_switches_recommended": [
+    {
+      "name": "...",
+      "trigger": "...",
+      "reasoning": "..."
+    }
+  ],
+  "tactical_recommendation": "HOLD_POSITION|INCREASE_MONITORING|REDUCE_EXPOSURE|EXIT_SIGNAL",
+  "recommendation_reasoning": "...",
+  "bear_pressure_score": number,
+  "score_delta": number,
+  "score_reasoning": "...",
+  "commander_summary": "..."
+}`;
+
+  const client = new Anthropic({ apiKey });
+
+  let response;
+  for (let attempt = 0; attempt <= 1; attempt++) {
+    try {
+      log('360-assess', `Calling claude-opus-4-6… (attempt ${attempt + 1})`);
+      response = await client.messages.create({
+        model:      'claude-opus-4-6',
+        max_tokens: 4000,
+        messages:   [{ role: 'user', content: assessPrompt }],
+      });
+      break;
+    } catch (e) {
+      if (attempt === 0) {
+        warn('360-assess', `Attempt 1 failed: ${e.message} — retrying in 5s`);
+        await sleep(5_000);
+      } else {
+        err('360-assess', `API call failed after retry: ${e.message}`);
+        return null;
+      }
+    }
+  }
+
+  const raw = response.content[0].text;
+  log('360-assess', `Response received (${raw.length} chars)`);
+
+  const cleaned = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+
+  let result;
+  try {
+    result = JSON.parse(cleaned);
+    log('360-assess', `Assessment complete — recommendation: ${result.tactical_recommendation ?? 'unknown'}`);
+  } catch (parseErr) {
+    err('360-assess', `JSON parse failed: ${parseErr.message}`);
+    return null;
+  }
+
+  // Write to data/360-report.json
+  const reportPath = path.join(__dirname, '..', 'data', '360-report.json');
+  try {
+    fs.writeFileSync(reportPath, JSON.stringify(result, null, 2));
+    log('360-assess', `Wrote ${reportPath}`);
+  } catch (writeErr) {
+    err('360-assess', `Could not write 360-report.json: ${writeErr.message}`);
+  }
+
+  return result;
+}
+
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
