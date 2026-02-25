@@ -1295,13 +1295,9 @@ textarea:focus { border-color:var(--accent-cyan); }
     <!-- TESTNET Agent Wallet -->
     <div class="full-card" style="border-color:rgba(255,179,71,0.35);background:linear-gradient(135deg,rgba(255,179,71,0.03),transparent);">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <h3 style="margin-bottom:0;">⚡ TESTNET AGENT WALLET</h3>
-        <span class="signal amber">TESTNET</span>
+        <h3 style="margin-bottom:0;">⚡ x402 AGENT WALLET</h3>
+        <span class="signal" style="color:#22c55e;border-color:#22c55e;">MAINNET</span>
       </div>
-      <div style="background:rgba(255,179,71,0.06);border:1px solid rgba(255,179,71,0.2);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:12px;">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent-amber);letter-spacing:0.5px;">⚠ TESTNET ONLY — Not real XRP. Demonstrates autonomous AI agent micropayments via x402 protocol.</span>
-      </div>
-
       <div class="data-row">
         <span class="data-label">NETWORK</span>
         <span class="data-value amber" id="x402AgentNetwork">XRPL TESTNET</span>
@@ -1370,8 +1366,8 @@ textarea:focus { border-color:var(--accent-cyan); }
       </div>
 
       <div class="interpret-box" style="margin-top:12px;border-color:rgba(255,179,71,0.2);">
-        <div class="label" style="color:var(--accent-amber);">DEMO SCENARIO</div>
-        <p id="x402DemoScenario">Overwatch analyst agent auto-pays for premium data feeds using x402 micropayments on XRPL testnet</p>
+        <div class="label" style="color:var(--accent-amber);">LIVE SCENARIO</div>
+        <p id="x402DemoScenario">Overwatch analyst agent autonomously pays for premium data feeds using x402 micropayments on XRPL mainnet</p>
       </div>
     </div>
 
@@ -1929,7 +1925,7 @@ function renderX402AgentWallet(d) {
   }
 
   if (a.balance_xrp != null) {
-    set('x402AgentBalance', a.balance_xrp.toFixed(4) + ' XRP (testnet)');
+    set('x402AgentBalance', a.balance_xrp.toFixed(4) + ' XRP');
   }
 
   set('x402PaymentCount', a.demo_payments_sent != null ? a.demo_payments_sent.toLocaleString() : '—');
@@ -1951,9 +1947,9 @@ function renderX402AgentWallet(d) {
     }
 
     if (p.amount_drops != null) {
-      set('x402PaymentAmount', p.amount_drops + ' drops (' + (parseInt(p.amount_drops, 10) / 1e6).toFixed(6) + ' XRP testnet)');
+      set('x402PaymentAmount', p.amount_drops + ' drops (' + (parseInt(p.amount_drops, 10) / 1e6).toFixed(6) + ' XRP)');
     } else if (p.amount_xrp != null) {
-      set('x402PaymentAmount', p.amount_xrp + ' XRP (testnet)');
+      set('x402PaymentAmount', p.amount_xrp + ' XRP');
     }
 
     if (p.invoice_id) {
