@@ -393,15 +393,24 @@
   "x402_agent": {
     "network": "XRPL TESTNET",
     "network_warning": "⚠ TESTNET ONLY — Not real XRP",
-    "agent_address": null,
+    "agent_address": "rwtXERjcdatXvsgnza2E34revBYhamEuqe",
     "agent_label": "Overwatch Analyst Agent",
-    "provider_address": null,
+    "provider_address": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
     "provider_label": "Premium Data Service (DEMO)",
-    "balance_xrp": null,
-    "demo_payments_sent": 0,
-    "last_payment": null,
+    "balance_xrp": 998.999988,
+    "demo_payments_sent": 1,
+    "last_payment": {
+      "to": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
+      "to_label": "Premium Data Service (DEMO)",
+      "amount_xrp": 1,
+      "memo": "x402:premium_data_access:overwatch-terminal",
+      "tx_hash": "FF8B885042F0E0AE922C1C245E76389DCB43FFD4839E923D0814C85B5B2F65A2",
+      "ledger_index": 15184709,
+      "timestamp": "2026-02-25T06:59:50.721Z",
+      "status": "SUCCESS"
+    },
     "tx_history": [],
     "demo_scenario": "Overwatch analyst agent auto-pays for premium data feeds using x402 micropayments on XRPL testnet",
-    "last_updated": null
+    "last_updated": "2026-02-25T06:59:50.929Z"
   }
 }
