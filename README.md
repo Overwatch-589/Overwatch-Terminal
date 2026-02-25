@@ -90,6 +90,24 @@ Approximately **$1–2/month** in Claude API usage. All data sources operate on 
 
 ---
 
+## Safety Architecture
+
+The system is built adversarially — against itself. Several layers prevent the most dangerous failure mode in any decision system: acting with false certainty.
+
+**Kill switches defined before data collection begins.** Falsification criteria and thresholds are written into `config.js` before any analysis runs, so they can't be quietly adjusted to avoid triggering. Formal reviews are documented; informal goal-post moves are architecturally blocked.
+
+**Dual-mandate AI analyst.** The analysis prompt requires the model to argue both the bull and bear case in every cycle. It cannot produce a one-sided bullish assessment — a counter-thesis score and bear narrative are mandatory outputs, not optional fields.
+
+**Counter-thesis evaluated every cycle.** Five specific competing infrastructure platforms (SWIFT GPI, Visa B2B Connect, JPMorgan Kinexys, BIS Project Nexus, Ethereum institutional) are evaluated in every analysis cycle. Competitive displacement is harder to detect than internal failure; forcing attention to it prevents a monitoring blind spot.
+
+**Recursive audit loop.** The monthly audit reads both analysis history and previous audit results — so it can evaluate whether its own corrections worked, not just flag new bias patterns. This is second-order feedback: the system grading itself.
+
+**Epistemic humility under data failure.** When the x402 agent cannot acquire premium data, the system flags the gap explicitly rather than continuing with silent assumptions. Missing data widens the uncertainty range automatically; the analyst is required to state what it doesn't know before stating what it does.
+
+**Spending guardrails on autonomous economic action.** The x402 micropayment agent enforces a balance floor (11 XRP), session cap (10,000 drops), per-transaction max (5,000 drops), and a payment-type whitelist. The agent cannot spend its way past these limits regardless of what a merchant requests.
+
+---
+
 ## Status
 
 **Phase 5 complete.** The system is running autonomously with full data ingestion, AI analysis, counter-thesis evaluation, Telegram delivery, approval gating, health monitoring, and backup/restore.
