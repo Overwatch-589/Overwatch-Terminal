@@ -265,16 +265,19 @@ async function main() {
       forward:          false,
     });
 
-    txHistory = (txRes.result.transactions ?? []).slice(0, 10).map(({ tx, meta }) => {
+    txHistory = (txRes.result.transactions ?? []).slice(0, 10).map((entry) => {
+      // xrpl.js v4 uses tx_json; v3 uses tx — handle both
+      const tx   = entry.tx_json ?? entry.tx ?? {};
+      const meta = entry.meta ?? entry.metadata ?? {};
       const amountDrops = tx.Amount && typeof tx.Amount === 'string' ? tx.Amount : null;
       return {
-        type:         tx.TransactionType,
-        hash:         tx.hash,
+        type:         tx.TransactionType ?? null,
+        hash:         tx.hash ?? entry.hash ?? null,
         amount_xrp:   amountDrops ? parseFloat(xrpl.dropsToXrp(amountDrops)) : null,
         direction:    tx.Account === agentWallet.address ? 'out' : 'in',
         counterparty: tx.Account === agentWallet.address
           ? (tx.Destination ?? null)
-          : tx.Account,
+          : (tx.Account ?? null),
         result:       meta?.TransactionResult ?? null,
         // XRPL epoch: seconds since 2000-01-01 → Unix milliseconds
         date: tx.date ? new Date((tx.date + 946684800) * 1000).toISOString() : null,
