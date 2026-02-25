@@ -670,7 +670,26 @@ async function main() {
   const runType = getRunType();
   log('run', `Run type: ${runType}`);
 
-  // 4. Build prompt
+  // 4. Run 360 two-pass sweep (before main analysis — falls back gracefully on failure)
+  let assessment360 = null;
+  const previousBearScore = dashboardData.bear_case?.counter_thesis_score ?? 50;
+
+  console.log('\n360 SWEEP: starting...');
+  const sweepResults = await runSweep(dashboardData);
+
+  if (sweepResults.length > 0) {
+    console.log(`360 ASSESS: starting with ${sweepResults.length} threats from sweep`);
+    assessment360 = await runAssessment(sweepResults, dashboardData, previousBearScore);
+    if (assessment360) {
+      log('360', `Assessment complete — bear pressure: ${assessment360.bear_pressure_score}, recommendation: ${assessment360.tactical_recommendation}`);
+    } else {
+      warn('360', 'Assessment returned null — falling back to standard analysis');
+    }
+  } else {
+    warn('360', 'Sweep returned empty — falling back to standard analysis');
+  }
+
+  // 5. Build prompt
   const newsHeadlines = dashboardData.news?.headlines ?? [];
   const userPrompt = `## CURRENT DASHBOARD DATA
 ${JSON.stringify(dashboardData, null, 2)}
@@ -751,6 +770,15 @@ Respond with the JSON analysis object only.`;
   // Ensure timestamp and run_type are set
   analysis.timestamp = analysis.timestamp ?? new Date().toISOString();
   analysis.run_type  = analysis.run_type  ?? runType;
+
+  // Overlay 360 results if the two-pass system succeeded
+  if (assessment360) {
+    analysis.bear_case = analysis.bear_case ?? {};
+    analysis.bear_case.counter_thesis_score = assessment360.bear_pressure_score;
+    analysis.bear_case.bear_narrative       = assessment360.commander_summary;
+    analysis.assessment_360                 = assessment360;
+    log('360', 'Overlaid 360 bear pressure score and commander summary onto analysis');
+  }
 
   // 6. Write analysis-output.json
   fs.writeFileSync(ANALYSIS_PATH, JSON.stringify(analysis, null, 2));
