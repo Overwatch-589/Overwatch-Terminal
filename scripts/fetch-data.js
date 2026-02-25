@@ -189,7 +189,25 @@ async function fetchFearGreed(fallback) {
 }
 
 async function fetchUSDJPY(fallback) {
-  // ── Alpha Vantage (primary — real-time FX) ─────────────────────────────
+  // ── Twelve Data (primary — real-time FX) ──────────────────────────────
+  const tdKey = process.env.TWELVE_DATA_KEY;
+  if (tdKey) {
+    try {
+      const url = `https://api.twelvedata.com/quote?symbol=USD/JPY&apikey=${encodeURIComponent(tdKey)}`;
+      const data = await withRetry(() => fetchJSON(url, 12_000), 'USD/JPY-TD');
+      const rate = parseFloat(data?.close);
+      if (!rate || isNaN(rate)) throw new Error(`Could not parse Twelve Data rate (close=${data?.close})`);
+      log('USD/JPY', `Source: Twelve Data | ${rate} (date: ${data?.datetime ?? 'unknown'})`);
+      markHealth('usd_jpy', 'ok');
+      return rate;
+    } catch (e) {
+      warn('USD/JPY', `Twelve Data failed (${e.message}) — trying Alpha Vantage`);
+    }
+  } else {
+    warn('USD/JPY', 'TWELVE_DATA_KEY not set — trying Alpha Vantage');
+  }
+
+  // ── Alpha Vantage (secondary — real-time FX) ───────────────────────────
   const avKey = process.env.ALPHA_VANTAGE_KEY;
   if (avKey) {
     try {
@@ -200,14 +218,14 @@ async function fetchUSDJPY(fallback) {
       const latestDate = Object.keys(timeSeries).sort().pop();
       const rate = parseFloat(timeSeries[latestDate]?.['4. close']);
       if (!rate || isNaN(rate)) throw new Error('Could not parse Alpha Vantage FX rate');
-      log('USD/JPY', `${rate} (Alpha Vantage, date: ${latestDate})`);
+      log('USD/JPY', `Source: Alpha Vantage | ${rate} (date: ${latestDate})`);
       markHealth('usd_jpy', 'ok');
       return rate;
     } catch (e) {
       warn('USD/JPY', `Alpha Vantage failed (${e.message}) — trying Frankfurter`);
     }
   } else {
-    warn('USD/JPY', 'ALPHA_VANTAGE_KEY not set — using Frankfurter');
+    warn('USD/JPY', 'ALPHA_VANTAGE_KEY not set — trying Frankfurter');
   }
 
   // ── Frankfurter (fallback — ECB rates, may lag 1-2 days) ───────────────
@@ -215,7 +233,7 @@ async function fetchUSDJPY(fallback) {
     const data = await withRetry(() => fetchJSON(ENDPOINTS.usd_jpy), 'USD/JPY-FX');
     const rate = data?.rates?.JPY;
     if (!rate) throw new Error('Unexpected response shape');
-    log('USD/JPY', `${rate} (Frankfurter)`);
+    log('USD/JPY', `Source: Frankfurter | ${rate}`);
     markHealth('usd_jpy', 'ok');
     return rate;
   } catch (e) {
@@ -390,11 +408,97 @@ function fetchETHETF(fallback) {
 // ─── XRP ETF fetcher ──────────────────────────────────────────────────────────
 
 /**
- * Fetch XRP ETF data from xrp-insights.com's internal API.
+ * Fetch XRP ETF data.
+ * Primary:  SoSoValue API (currentEtfDataMetrics + historicalInflowChart).
+ * Fallback: xrp-insights.com internal API.
  * Returns total AUM, total XRP locked, daily flows, and per-fund breakdown.
  * Always returns an "etf" object — never throws.
  */
 async function fetchETF(fallback) {
+  // ── SoSoValue (primary) ────────────────────────────────────────────────
+  const ssKey = process.env.SOSOVALUE_API_KEY;
+  if (ssKey) {
+    try {
+      const ssPost = async (endpoint) => {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 15_000);
+        try {
+          const r = await fetch(endpoint, {
+            method:  'POST',
+            headers: {
+              'x-soso-api-key': ssKey,
+              'Content-Type':   'application/json',
+              'Accept':         'application/json',
+            },
+            body:   JSON.stringify({ type: 'us-xrp-spot' }),
+            signal: controller.signal,
+          });
+          if (!r.ok) throw new Error(`HTTP ${r.status} ${r.statusText}`);
+          return await r.json();
+        } finally {
+          clearTimeout(timer);
+        }
+      };
+
+      const [metricsData, histData] = await Promise.all([
+        withRetry(() => ssPost('https://api.sosovalue.xyz/openapi/v2/etf/currentEtfDataMetrics'), 'ETF-SS-metrics'),
+        withRetry(() => ssPost('https://api.sosovalue.xyz/openapi/v2/etf/historicalInflowChart'),  'ETF-SS-hist'),
+      ]);
+
+      if (metricsData?.code !== 0 || !metricsData?.data) {
+        throw new Error(`SoSoValue metrics error (code=${metricsData?.code}, msg=${metricsData?.msg})`);
+      }
+      const m = metricsData.data;
+
+      // Weekly net flow from historical chart — last 5 entries with data
+      const histList = (histData?.data?.list ?? [])
+        .filter(d => d.totalNetInflow !== null)
+        .sort((a, b) => b.date.localeCompare(a.date));
+      const week5ss = histList.slice(0, 5);
+      const weeklyNetFlow   = week5ss.length ? week5ss.reduce((s, d) => s + (d.totalNetInflow ?? 0), 0) : null;
+      const weeklyStartDate = week5ss.at(-1)?.date ?? null;
+
+      // Cumulative from most recent historical entry (more reliable than snapshot field)
+      const cumNetFlow = histList[0]?.cumNetInflow ?? m.cumNetInflow?.value ?? null;
+
+      const funds = (m.list ?? []).map(f => ({
+        ticker:     f.ticker,
+        issuer:     f.institute,
+        aum:        f.netAssets?.value      ?? null,
+        xrp_locked: null,  // SoSoValue does not provide per-fund token holdings
+        daily_flow: f.dailyNetInflow?.value ?? null,
+      }));
+
+      const result = {
+        last_fetched:       new Date().toISOString(),
+        source:             'sosovalue',
+        as_of_date:         m.totalNetAssets?.lastUpdateDate ?? histList[0]?.date ?? null,
+        total_aum:          m.totalNetAssets?.value      ?? null,
+        total_xrp_locked:   m.totalTokenHoldings?.value  ?? null,
+        daily_net_flow:     m.dailyNetInflow?.value       ?? null,
+        daily_inflow:       null,  // SoSoValue does not split inflow/outflow
+        daily_outflow:      null,
+        flow_date:          m.dailyNetInflow?.lastUpdateDate ?? null,
+        weekly_net_flow:    weeklyNetFlow,
+        weekly_inflow:      null,
+        weekly_outflow:     null,
+        weekly_start_date:  weeklyStartDate,
+        cum_net_flow:       cumNetFlow,
+        cum_inflow:         null,
+        funds,
+      };
+
+      log('ETF', `Source: SoSoValue | AUM=$${result.total_aum != null ? (result.total_aum / 1e6).toFixed(1) + 'M' : 'N/A'} | daily=${result.daily_net_flow != null ? (result.daily_net_flow / 1e6).toFixed(2) + 'M' : 'N/A'} | funds=${funds.length}`);
+      markHealth('etf', 'ok');
+      return result;
+    } catch (e) {
+      warn('ETF', `SoSoValue failed (${e.message}) — falling back to xrp-insights`);
+    }
+  } else {
+    warn('ETF', 'SOSOVALUE_API_KEY not set — using xrp-insights');
+  }
+
+  // ── xrp-insights.com (fallback) ───────────────────────────────────────
   try {
     const res = await withRetry(async () => {
       const controller = new AbortController();
@@ -425,7 +529,7 @@ async function fetchETF(fallback) {
       .filter(d => !d.isWeekend)
       .sort((a, b) => b.date.localeCompare(a.date));
 
-    const latest       = tradingDays[0];
+    const latest         = tradingDays[0];
     const latestWithFlow = tradingDays.find(d => d.inflow !== 0 || d.outflow !== 0) ?? latest;
 
     // Weekly = last 5 trading days
@@ -466,7 +570,7 @@ async function fetchETF(fallback) {
       funds,
     };
 
-    log('ETF', `AUM=$${(result.total_aum / 1e6).toFixed(1)}M | XRP=${(result.total_xrp_locked / 1e6).toFixed(0)}M | 5D flow=${(weeklyNetFlow / 1e6).toFixed(2)}M | funds=${funds.length}`);
+    log('ETF', `Source: xrp-insights | AUM=$${(result.total_aum / 1e6).toFixed(1)}M | XRP=${(result.total_xrp_locked / 1e6).toFixed(0)}M | 5D flow=${(weeklyNetFlow / 1e6).toFixed(2)}M | funds=${funds.length}`);
     markHealth('etf', 'ok');
     return result;
   } catch (e) {
