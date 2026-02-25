@@ -240,7 +240,7 @@ async function x402Request(url, label, agentWallet, xrplClient, { sessionDropsSp
   log(`${prefix} Step 5 — confirmed: tx=${txHash.slice(0, 12)}… ✓`);
   flowLog.push(`← 200  tx=${txHash.slice(0, 12)}…  payer=${agentWallet.address.slice(0, 10)}…`);
 
-  return { data: responseData, paymentResponse, signedTxHash: signed.hash, invoiceId, flowLog };
+  return { data: responseData, paymentResponse, signedTxHash: signed.hash, invoiceId, flowLog, payTo: req.payTo };
 }
 
 // ─── Balance check ─────────────────────────────────────────────────────────
@@ -409,6 +409,7 @@ async function main() {
       transactions.push({
         endpoint:     endpoint.path,
         label:        endpoint.label,
+        pay_to:       result.payTo,
         amount_drops: drops,
         amount_xrp:   dropsInt > 0 ? parseFloat((dropsInt / 1_000_000).toFixed(7)) : null,
         invoice_id:   result.invoiceId,
@@ -459,6 +460,7 @@ async function main() {
   // ── Write to dashboard-data.json ──────────────────────────────────────────
   const x402Agent = {
     network:             'XRPL MAINNET',
+    merchant_address:    transactions.find(t => t.pay_to)?.pay_to ?? null,
     protocol:            'x402 v2',
     facilitator:         FACILITATOR_URL,
     facilitator_ok:      facilitatorOk,

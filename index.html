@@ -1312,7 +1312,7 @@ textarea:focus { border-color:var(--accent-cyan); }
       </div>
       <div class="data-row">
         <span class="data-label">AGENT ADDRESS</span>
-        <span class="data-value" id="x402AgentAddress" style="font-family:'JetBrains Mono',monospace;font-size:10px;">Awaiting first run…</span>
+        <a id="x402AgentAddress" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent-blue);" target="_blank" rel="noopener">Awaiting first run…</a>
       </div>
       <div class="data-row">
         <span class="data-label">BALANCE</span>
@@ -1331,7 +1331,7 @@ textarea:focus { border-color:var(--accent-cyan); }
         <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);margin-bottom:8px;">LAST MICROPAYMENT</div>
         <div class="data-row">
           <span class="data-label">TO (PROVIDER)</span>
-          <span class="data-value" id="x402ProviderAddress" style="font-family:'JetBrains Mono',monospace;font-size:10px;">—</span>
+          <a id="x402ProviderAddress" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent-blue);" target="_blank" rel="noopener">—</a>
         </div>
         <div class="data-row">
           <span class="data-label">AMOUNT</span>
@@ -1343,7 +1343,7 @@ textarea:focus { border-color:var(--accent-cyan); }
         </div>
         <div class="data-row">
           <span class="data-label">TX HASH</span>
-          <span id="x402PaymentHash" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent-blue);">—</span>
+          <a id="x402PaymentHash" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent-blue);" target="_blank" rel="noopener">—</a>
         </div>
         <div class="data-row">
           <span class="data-label">STATUS</span>
@@ -1365,9 +1365,65 @@ textarea:focus { border-color:var(--accent-cyan); }
         <div id="x402TxHistory" style="font-size:11px;color:var(--text-secondary);">Waiting for first agent run…</div>
       </div>
 
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);margin-bottom:8px;">SPENDING GUARDRAILS</div>
+        <div class="data-row">
+          <span class="data-label">BALANCE FLOOR</span>
+          <span class="data-value green" id="x402GuardFloor">11 XRP ✓</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">SESSION CAP</span>
+          <span class="data-value green" id="x402GuardCap">10,000 drops ✓</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">PER-TX MAX</span>
+          <span class="data-value green" id="x402GuardMax">5,000 drops ✓</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">PAYMENT TYPE</span>
+          <span class="data-value green">Payment only ✓</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">LIFETIME SPENT</span>
+          <span class="data-value cyan" id="x402LifetimeSpent">—</span>
+        </div>
+      </div>
+
       <div class="interpret-box" style="margin-top:12px;border-color:rgba(255,179,71,0.2);">
         <div class="label" style="color:var(--accent-amber);">LIVE SCENARIO</div>
         <p id="x402DemoScenario">Overwatch analyst agent autonomously pays for premium data feeds using x402 micropayments on XRPL mainnet</p>
+      </div>
+    </div>
+
+    <!-- Merchant Info -->
+    <div class="full-card" style="border-color:rgba(0,229,153,0.2);background:linear-gradient(135deg,rgba(0,229,153,0.02),transparent);">
+      <h3 style="margin-bottom:12px;">🏪 MERCHANT INFO</h3>
+      <div class="data-row">
+        <span class="data-label">MERCHANT ADDRESS</span>
+        <a href="https://livenet.xrpl.org/accounts/r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent-blue);">r4K5EDq2UP…fBYZP</a>
+      </div>
+      <div class="data-row">
+        <span class="data-label">NETWORK</span>
+        <span class="data-value green">xrpl:0 (mainnet)</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">FACILITATOR</span>
+        <span class="data-value" style="font-size:10px;">T54 mainnet</span>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);margin-bottom:8px;">PAYWALLED ENDPOINTS</div>
+        <div class="data-row">
+          <span class="data-label" style="font-family:'JetBrains Mono',monospace;font-size:9px;">/api/v1/premium-analysis</span>
+          <span class="data-value cyan">1,000 drops</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label" style="font-family:'JetBrains Mono',monospace;font-size:9px;">/api/v1/bear-case</span>
+          <span class="data-value cyan">1,500 drops</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label" style="font-family:'JetBrains Mono',monospace;font-size:9px;">/api/v1/stress-report</span>
+          <span class="data-value cyan">500 drops</span>
+        </div>
       </div>
     </div>
 
@@ -1929,9 +1985,9 @@ function renderX402AgentWallet(d) {
     const addr = a.agent_address;
     const el = document.getElementById('x402AgentAddress');
     if (el) {
-      // Show first 8 + … + last 8 chars for readability
       el.textContent = addr.length > 20 ? addr.slice(0, 10) + '…' + addr.slice(-8) : addr;
       el.title = addr;
+      el.href = `https://livenet.xrpl.org/accounts/${addr}`;
     }
   }
 
@@ -1939,7 +1995,8 @@ function renderX402AgentWallet(d) {
     set('x402AgentBalance', a.balance_xrp.toFixed(4) + ' XRP');
   }
 
-  set('x402PaymentCount', a.demo_payments_sent != null ? a.demo_payments_sent.toLocaleString() : '—');
+  const paymentsSent = a.payments_sent ?? a.demo_payments_sent;
+  set('x402PaymentCount', paymentsSent != null ? paymentsSent.toLocaleString() : '—');
 
   if (a.last_updated) {
     const dt = new Date(a.last_updated);
@@ -1949,11 +2006,13 @@ function renderX402AgentWallet(d) {
 
   const p = a.last_payment;
   if (p) {
-    if (p.to) {
+    const merchantAddr = a.merchant_address ?? p.pay_to ?? p.to ?? null;
+    if (merchantAddr) {
       const addrEl = document.getElementById('x402ProviderAddress');
       if (addrEl) {
-        addrEl.textContent = p.to.length > 20 ? p.to.slice(0, 10) + '…' + p.to.slice(-8) : p.to;
-        addrEl.title = p.to + (p.to_label ? ' (' + p.to_label + ')' : '');
+        addrEl.textContent = merchantAddr.length > 20 ? merchantAddr.slice(0, 10) + '…' + merchantAddr.slice(-8) : merchantAddr;
+        addrEl.title = merchantAddr;
+        addrEl.href = `https://livenet.xrpl.org/accounts/${merchantAddr}`;
       }
     }
 
@@ -1978,6 +2037,7 @@ function renderX402AgentWallet(d) {
       if (hashEl) {
         hashEl.textContent = p.tx_hash.slice(0, 12) + '…' + p.tx_hash.slice(-8);
         hashEl.title = p.tx_hash;
+        hashEl.href = `https://livenet.xrpl.org/transactions/${p.tx_hash}`;
       }
     }
 
@@ -2008,25 +2068,53 @@ function renderX402AgentWallet(d) {
     }
   }
 
-  // Tx history table
-  const hist = a.tx_history ?? [];
+  // Transactions table (from a.transactions[])
+  const txns   = a.transactions ?? [];
   const histEl = document.getElementById('x402TxHistory');
-  if (histEl && hist.length > 0) {
-    histEl.innerHTML = hist.slice(0, 7).map(tx => {
-      const arrow   = tx.direction === 'out' ? '↑' : '↓';
-      const color   = tx.direction === 'out' ? 'var(--accent-red)' : 'var(--accent-green)';
-      const amtStr  = tx.amount_xrp != null ? tx.amount_xrp.toFixed(2) + ' XRP' : '—';
-      const hashStr = tx.hash ? tx.hash.slice(0, 10) + '…' : '—';
-      const tsStr   = tx.date ? new Date(tx.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' +
-        new Date(tx.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—';
-      const res     = tx.result === 'tesSUCCESS' ? '' : ' ⚠';
-      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);gap:6px;">` +
-        `<span style="font-family:'JetBrains Mono',monospace;color:${color};min-width:80px;">${arrow} ${tx.type}${res}</span>` +
-        `<span style="color:var(--text-secondary);min-width:70px;text-align:right;">${amtStr}</span>` +
-        `<span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);flex:1;text-align:right;">${hashStr}</span>` +
-        `<span style="font-size:10px;color:var(--text-muted);min-width:80px;text-align:right;">${tsStr}</span>` +
+  if (histEl) {
+    if (txns.length > 0) {
+      const header = `<div style="display:grid;grid-template-columns:1fr 90px 110px 72px 72px;gap:4px;padding:3px 0 5px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:2px;">` +
+        `<span style="font-size:9px;letter-spacing:1px;color:var(--text-muted);">ENDPOINT</span>` +
+        `<span style="font-size:9px;letter-spacing:1px;color:var(--text-muted);text-align:right;">DROPS</span>` +
+        `<span style="font-size:9px;letter-spacing:1px;color:var(--text-muted);text-align:right;">TX HASH</span>` +
+        `<span style="font-size:9px;letter-spacing:1px;color:var(--text-muted);text-align:right;">STATUS</span>` +
+        `<span style="font-size:9px;letter-spacing:1px;color:var(--text-muted);text-align:right;">TIME</span>` +
         `</div>`;
-    }).join('');
+      const rows = txns.map(tx => {
+        const statusColor = tx.status === 'SUCCESS' ? 'var(--accent-green)'
+                          : tx.status === 'SKIPPED'  ? 'var(--accent-amber)'
+                          : 'var(--accent-red)';
+        const endpoint = (tx.endpoint ?? tx.label ?? '—').replace('/api/v1/', '');
+        const drops    = tx.amount_drops != null ? tx.amount_drops : '—';
+        const hashCell = tx.tx_hash
+          ? `<a href="https://livenet.xrpl.org/transactions/${escHtml(tx.tx_hash)}" target="_blank" rel="noopener" ` +
+            `title="${escHtml(tx.tx_hash)}" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent-blue);">` +
+            `${tx.tx_hash.slice(0, 8)}…</a>`
+          : `<span style="color:var(--text-muted);">—</span>`;
+        const tsStr = tx.timestamp
+          ? new Date(tx.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          : '—';
+        return `<div style="display:grid;grid-template-columns:1fr 90px 110px 72px 72px;gap:4px;padding:4px 0;border-bottom:1px solid var(--border);align-items:center;">` +
+          `<span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-secondary);">${escHtml(endpoint)}</span>` +
+          `<span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent-cyan);text-align:right;">${escHtml(String(drops))}</span>` +
+          `<span style="text-align:right;">${hashCell}</span>` +
+          `<span style="font-size:9px;color:${statusColor};text-align:right;">${escHtml(tx.status ?? '—')}</span>` +
+          `<span style="font-size:9px;color:var(--text-muted);text-align:right;">${escHtml(tsStr)}</span>` +
+          `</div>`;
+      }).join('');
+      histEl.innerHTML = header + rows;
+    }
+  }
+
+  // Guardrails
+  const g = a.guardrails;
+  if (g) {
+    set('x402GuardFloor', (g.balance_floor_xrp ?? 11) + ' XRP ✓');
+    set('x402GuardCap',   (g.session_cap_drops ?? 10000).toLocaleString() + ' drops ✓');
+    set('x402GuardMax',   (g.max_single_drops  ?? 5000).toLocaleString()  + ' drops ✓');
+  }
+  if (a.lifetime_drops_spent != null) {
+    set('x402LifetimeSpent', a.lifetime_drops_spent.toLocaleString() + ' drops (' + (a.lifetime_xrp_spent ?? '') + ' XRP)');
   }
 
   if (a.demo_scenario) {
