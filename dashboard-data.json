@@ -400,23 +400,55 @@
     "agent_label": "Overwatch Analyst Agent",
     "provider_address": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
     "provider_label": "Premium Data Service (DEMO)",
-    "balance_xrp": 997.999976,
-    "demo_payments_sent": 2,
+    "balance_xrp": 997.999864,
+    "demo_payments_sent": 3,
     "last_payment": {
+      "protocol": "x402 v2",
       "to": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
       "to_label": "Premium Data Service (DEMO)",
-      "amount_xrp": 1,
-      "memo": "x402:premium_data_access:overwatch-terminal",
-      "tx_hash": "9A806B2296F534595084A36FA052592F03511A1835C21ED73BAD2E2E2145744C",
-      "ledger_index": 15184719,
-      "timestamp": "2026-02-25T07:00:21.480Z",
+      "amount_drops": "100",
+      "amount_xrp": 0.0001,
+      "invoice_id": "B0605AB933FD412EB35DC3BAFEF30C5A",
+      "tx_hash": "3284A345EFCF4837FE6A7702CB313B6A674AA000694E09187EBAB58387027A19",
+      "facilitator": "https://xrpl-facilitator-testnet.t54.ai",
+      "timestamp": "2026-02-25T07:18:29.871Z",
       "status": "SUCCESS"
     },
-    "last_data_received": null,
+    "last_data_received": {
+      "access": "GRANTED",
+      "resource": "Overwatch Terminal — Premium XRPL Testnet Data Feed",
+      "timestamp": "2026-02-25T07:18:29.870Z",
+      "payload": {
+        "description": "XRPL testnet metrics snapshot (x402 paid access demo)",
+        "network": "XRPL TESTNET",
+        "facilitator": "https://xrpl-facilitator-testnet.t54.ai",
+        "note": "Real x402 v2 payment settled on XRPL testnet by T54 facilitator"
+      },
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "tx_hash": "3284A345EFCF4837FE6A7702CB313B6A674AA000694E09187EBAB58387027A19",
+        "payer": "rwtXERjcdatXvsgnza2E34revBYhamEuqe",
+        "amount_drops": "100"
+      }
+    },
     "x402_flow": [
-      "ERROR: Payment rejected (HTTP 402): {\"error\":\"Settlement failed\"}"
+      "→ GET http://127.0.0.1:4402/api/premium-data  →  HTTP 402",
+      "← 402 PAYMENT-REQUIRED  amount=100 drops  invoiceId=B0605AB933FD…",
+      "→ Signed XRPL Payment  hash=3284A345EFCF…  MemoData+InvoiceID bound",
+      "→ GET http://127.0.0.1:4402/api/premium-data (PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200 PAYMENT-RESPONSE  tx=3284A345EFCF…  payer=rwtXERjcda…"
     ],
     "tx_history": [
+      {
+        "type": "Payment",
+        "hash": "3284A345EFCF4837FE6A7702CB313B6A674AA000694E09187EBAB58387027A19",
+        "amount_xrp": null,
+        "direction": "out",
+        "counterparty": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
+        "result": "tesSUCCESS",
+        "date": "2026-02-25T07:18:30.000Z"
+      },
       {
         "type": "Payment",
         "hash": "9A806B2296F534595084A36FA052592F03511A1835C21ED73BAD2E2E2145744C",
@@ -446,6 +478,6 @@
       }
     ],
     "demo_scenario": "Agent (rwtXERjc…) sends HTTP GET → receives 402 → signs XRPL Payment with invoice binding → retries with PAYMENT-SIGNATURE → T54 facilitator settles on XRPL testnet → 200 + data returned",
-    "last_updated": "2026-02-25T07:17:20.318Z"
+    "last_updated": "2026-02-25T07:18:30.089Z"
   }
 }
