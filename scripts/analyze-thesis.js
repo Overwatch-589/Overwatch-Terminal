@@ -31,6 +31,49 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+/**
+ * Checks whether a Claude response looks complete (ends with ] or }).
+ * If truncated, warns and attempts to repair by cutting back to the last
+ * complete object/element and appending necessary closing brackets.
+ *
+ * @param {string} text  — cleaned response text (fences already stripped)
+ * @param {string} label — log label for warnings
+ * @returns {string} — original text if complete, repaired text otherwise
+ */
+function repairTruncatedJSON(text, label) {
+  const trimmed = text.trimEnd();
+  if (trimmed.endsWith(']') || trimmed.endsWith('}')) return text;
+
+  warn(label, 'Response appears truncated — attempting repair');
+
+  // Cut back to the last closing brace (end of last complete object/element)
+  const lastBrace = trimmed.lastIndexOf('}');
+  if (lastBrace === -1) {
+    warn(label, 'Repair failed — no closing brace found in response');
+    return text;
+  }
+
+  const candidate = trimmed.slice(0, lastBrace + 1);
+
+  // Walk candidate with string-awareness to build an open-bracket stack
+  const stack = [];
+  let inStr = false, esc = false;
+  for (const ch of candidate) {
+    if (esc)              { esc = false; continue; }
+    if (ch === '\\' && inStr) { esc = true;  continue; }
+    if (ch === '"')       { inStr = !inStr;  continue; }
+    if (inStr)            continue;
+    if (ch === '{' || ch === '[') stack.push(ch);
+    else if (ch === '}' || ch === ']') stack.pop();
+  }
+
+  // Append closers in reverse nesting order
+  const closers = stack.reverse().map(c => c === '{' ? '}' : ']').join('');
+  const repaired = candidate + closers;
+  warn(label, `Repair applied — appended: ${JSON.stringify(closers)}`);
+  return repaired;
+}
+
 // ─── Telegram ─────────────────────────────────────────────────────────────────
 
 async function sendTelegram(text) {
@@ -386,7 +429,9 @@ Respond with ONLY a JSON array. Each element:
 }
 
 Find everything. No limit on count. Do not self-censor findings that
-challenge the thesis. That is the entire point.`;
+challenge the thesis. That is the entire point.
+
+IMPORTANT: Keep each threat description under 100 words. Return a maximum of 12 threats. Ensure your response is valid, complete JSON with all brackets closed.`;
 
   const client = new Anthropic({ apiKey });
 
@@ -396,7 +441,7 @@ challenge the thesis. That is the entire point.`;
       log('360-sweep', `Calling claude-opus-4-6… (attempt ${attempt + 1})`);
       response = await client.messages.create({
         model:      'claude-opus-4-6',
-        max_tokens: 3000,
+        max_tokens: 6000,
         messages:   [{ role: 'user', content: sweepPrompt }],
       });
       break;
@@ -414,7 +459,10 @@ challenge the thesis. That is the entire point.`;
   const raw = response.content[0].text;
   log('360-sweep', `Response received (${raw.length} chars)`);
 
-  const cleaned = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+  const cleaned = repairTruncatedJSON(
+    raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim(),
+    '360-sweep'
+  );
 
   try {
     const threats = JSON.parse(cleaned);
@@ -585,7 +633,9 @@ Respond with ONLY JSON:
   "score_delta": number,
   "score_reasoning": "...",
   "commander_summary": "..."
-}`;
+}
+
+IMPORTANT: Keep descriptions concise — under 100 words each. Ensure your response is valid, complete JSON with all brackets and braces closed.`;
 
   const client = new Anthropic({ apiKey });
 
@@ -595,7 +645,7 @@ Respond with ONLY JSON:
       log('360-assess', `Calling claude-opus-4-6… (attempt ${attempt + 1})`);
       response = await client.messages.create({
         model:      'claude-opus-4-6',
-        max_tokens: 4000,
+        max_tokens: 8000,
         messages:   [{ role: 'user', content: assessPrompt }],
       });
       break;
@@ -613,7 +663,10 @@ Respond with ONLY JSON:
   const raw = response.content[0].text;
   log('360-assess', `Response received (${raw.length} chars)`);
 
-  const cleaned = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+  const cleaned = repairTruncatedJSON(
+    raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim(),
+    '360-assess'
+  );
 
   let result;
   try {
@@ -713,7 +766,9 @@ ${JSON.stringify(newsHeadlines, null, 2)}
 - Only include headlines that materially affect the thesis framework — ignore routine price commentary, opinion pieces, and speculation
 - Flag if any headline suggests a kill switch status change
 
-Respond with the JSON analysis object only.`;
+Respond with the JSON analysis object only.
+
+IMPORTANT: Keep all text fields concise. Ensure your response is valid, complete JSON with all brackets and braces closed.`;
 
   // 5. Call Claude API (1 retry after 5s on failure)
   let analysis;
@@ -721,7 +776,7 @@ Respond with the JSON analysis object only.`;
   const client = new Anthropic({ apiKey });
   const callParams = {
     model:      'claude-opus-4-6',
-    max_tokens: 4000,
+    max_tokens: 8000,
     system:     SYSTEM_PROMPT,
     messages:   [{ role: 'user', content: userPrompt }],
   };
@@ -747,8 +802,11 @@ Respond with the JSON analysis object only.`;
   raw = response.content[0].text;
   log('Claude', `Response received (${raw.length} chars)`);
 
-  // Strip any accidental markdown code fences
-  const cleaned = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim();
+  // Strip any accidental markdown code fences, then check for truncation
+  const cleaned = repairTruncatedJSON(
+    raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '').trim(),
+    'Claude'
+  );
 
   try {
     analysis = JSON.parse(cleaned);
