@@ -161,6 +161,15 @@ body {
   color:var(--accent-cyan);
   border-bottom-color:var(--accent-cyan);
 }
+.tab-btn.bear-tab {
+  border-left:3px solid #ef4444;
+  background:rgba(239,68,68,0.1);
+}
+.tab-btn.bear-tab.active {
+  color:#fca5a5;
+  border-bottom-color:#ef4444;
+  background:#7f1d1d;
+}
 /* Content */
 .content { padding:12px 12px 24px; }
 .tab-panel { display:none; }
@@ -643,12 +652,12 @@ textarea:focus { border-color:var(--accent-cyan); }
 <!-- TAB NAV -->
 <div class="tab-nav">
   <button class="tab-btn active" data-tab="summary">OVERVIEW</button>
+  <button class="tab-btn bear-tab" data-tab="bear">⚠️ Bear</button>
   <button class="tab-btn" data-tab="stress">STRESS</button>
   <button class="tab-btn" data-tab="etf">ETF</button>
   <button class="tab-btn" data-tab="macro">MACRO</button>
   <button class="tab-btn" data-tab="infra">XRPL</button>
   <button class="tab-btn" data-tab="thesis">SCORE</button>
-  <button class="tab-btn" data-tab="bear">BEAR</button>
   <button class="tab-btn" data-tab="journal">LOG</button>
   <button class="tab-btn" data-tab="x402">x402</button>
   <button class="tab-btn" data-tab="links">LINKS</button>
