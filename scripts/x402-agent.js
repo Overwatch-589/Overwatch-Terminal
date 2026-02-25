@@ -68,11 +68,35 @@ const SOURCE_TAG   = 804681468;  // T54 analytics tag
 const WARN_BALANCE  = 15;
 const ERROR_BALANCE = 2;
 
+// ─── Spending guardrails ────────────────────────────────────────────────────
+// All configurable via env; defaults are conservative.
+
+// Minimum balance before any transaction is attempted.
+// 10 XRP = XRPL base reserve; +1 XRP safety buffer = 11 XRP.
+const BALANCE_FLOOR = parseFloat(process.env.X402_BALANCE_FLOOR ?? '11');
+
+// Maximum total drops the agent may spend in a single session.
+// Default: 10000 drops = 0.01 XRP.
+const SESSION_CAP_DROPS = parseInt((process.env.X402_SESSION_CAP_DROPS ?? '10000').replace(/\D/g, ''), 10);
+
+// Maximum drops the agent will pay for any single transaction.
+// Default: 5000 drops = 0.005 XRP. Rejects rogue/misconfigured merchant prices.
+const MAX_SINGLE_DROPS = parseInt((process.env.X402_MAX_SINGLE_DROPS ?? '5000').replace(/\D/g, ''), 10);
+
 // ─── Logging ───────────────────────────────────────────────────────────────
 
 function log(msg)  { console.log(`[x402-agent] ${msg}`); }
 function warn(msg) { console.warn(`[x402-agent] WARN: ${msg}`); }
 function err(msg)  { console.error(`[x402-agent] ERROR: ${msg}`); }
+function guardrail(msg) { console.warn(`[x402-agent] GUARDRAIL: ${msg}`); }
+
+// ─── Guardrail error ────────────────────────────────────────────────────────
+
+// Thrown when a spending guardrail is triggered. Caught separately from
+// protocol errors so the loop can skip cleanly rather than counting a failure.
+class GuardrailError extends Error {
+  constructor(msg) { super(msg); this.name = 'GuardrailError'; }
+}
 
 // ─── x402 Header Codec ─────────────────────────────────────────────────────
 
@@ -100,7 +124,7 @@ function decodeX402Header(b64) {
  *   3. Retry GET with PAYMENT-SIGNATURE
  *   4. Return data + payment receipt
  */
-async function x402Request(url, label, agentWallet, xrplClient) {
+async function x402Request(url, label, agentWallet, xrplClient, { sessionDropsSpent, sessionCapDrops, maxSingleDrops }) {
   const flowLog = [];
   const prefix  = `[${label}]`;
 
@@ -133,6 +157,22 @@ async function x402Request(url, label, agentWallet, xrplClient) {
   req.amount = String(req.amount).replace(/\D/g, '');
   if (!req.amount) throw new Error(`${prefix} Payment amount empty after sanitizing`);
 
+  const drops = parseInt(req.amount, 10);
+
+  // Guardrail: per-transaction max
+  if (drops > maxSingleDrops) {
+    throw new GuardrailError(
+      `skipped ${url} — merchant requested ${drops} drops, exceeds per-tx max of ${maxSingleDrops} drops`
+    );
+  }
+
+  // Guardrail: session spending cap
+  if (sessionDropsSpent + drops > sessionCapDrops) {
+    throw new GuardrailError(
+      `skipped ${url} — session spending cap reached (${sessionDropsSpent} + ${drops} = ${sessionDropsSpent + drops} > ${sessionCapDrops} drops cap)`
+    );
+  }
+
   log(`${prefix} Step 2 — 402: ${req.amount} drops → ${req.payTo.slice(0, 10)}… invoiceId ${invoiceId.slice(0, 12)}…`);
   flowLog.push(`← 402  amount=${req.amount} drops  invoiceId=${invoiceId.slice(0, 12)}…`);
 
@@ -153,6 +193,14 @@ async function x402Request(url, label, agentWallet, xrplClient) {
   };
 
   const filled = await xrplClient.autofill(tx);
+
+  // Guardrail: payment-type whitelist — only sign simple Payment transactions.
+  // Guards against autofill mutation or a malicious server injecting a different type.
+  if (filled.TransactionType !== 'Payment') {
+    throw new GuardrailError(
+      `blocked non-Payment transaction type: ${filled.TransactionType}`
+    );
+  }
 
   // Set LastLedgerSequence per x402 spec
   const serverInfo    = await xrplClient.request({ command: 'server_info' });
@@ -300,35 +348,69 @@ async function main() {
     process.exit(1);
   }
 
-  // Load existing data for payment count continuity
-  let existingAgent = null;
-  let prevCount     = 0;
+  // Load existing data for payment count and lifetime spend continuity
+  let existingAgent     = null;
+  let prevCount         = 0;
+  let lifetimeDrops     = 0;
   try {
     existingAgent = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'))?.x402_agent;
-    prevCount     = existingAgent?.payments_sent ?? 0;
+    prevCount     = existingAgent?.payments_sent          ?? 0;
+    lifetimeDrops = existingAgent?.lifetime_drops_spent   ?? 0;
   } catch (_) {}
 
+  log(`Guardrails: balance floor=${BALANCE_FLOOR} XRP | session cap=${SESSION_CAP_DROPS} drops | per-tx max=${MAX_SINGLE_DROPS} drops`);
+
   // ── Execute x402 flow for each endpoint in sequence ────────────────────────
-  const transactions = [];
-  const allFlowLogs  = [];
-  let   successCount = 0;
+  const transactions    = [];
+  const allFlowLogs     = [];
+  let   successCount    = 0;
+  let   sessionDropsSpent = 0;
 
   for (const endpoint of ENDPOINTS) {
     const url = `${MERCHANT_BASE}${endpoint.path}`;
     console.log(`\n  ── ${endpoint.label} (${url}) ──`);
 
+    // Guardrail: re-check balance before each transaction
+    let currentBalance;
     try {
-      const result  = await x402Request(url, endpoint.label, agentWallet, client);
-      const txHash  = result.paymentResponse?.transaction ?? result.signedTxHash;
-      const drops   = result.data?.payment?.amount_drops ?? '?';
+      currentBalance = await checkBalance(client, agentWallet.address);
+    } catch (e) {
+      err(`Balance check failed before ${endpoint.label}: ${e.message}`);
+      break;
+    }
+
+    if (currentBalance < BALANCE_FLOOR) {
+      guardrail(`skipped ${endpoint.path} — balance ${currentBalance} XRP below ${BALANCE_FLOOR} XRP floor`);
+      transactions.push({
+        endpoint:  endpoint.path,
+        label:     endpoint.label,
+        status:    'SKIPPED',
+        reason:    `balance ${currentBalance} XRP below ${BALANCE_FLOOR} XRP floor`,
+        timestamp: new Date().toISOString(),
+      });
+      allFlowLogs.push(`── ${endpoint.label} ──`, `GUARDRAIL: balance floor hit (${currentBalance} XRP)`);
+      // Floor hit — stop all remaining endpoints
+      break;
+    }
+
+    try {
+      const result = await x402Request(url, endpoint.label, agentWallet, client, {
+        sessionDropsSpent,
+        sessionCapDrops: SESSION_CAP_DROPS,
+        maxSingleDrops:  MAX_SINGLE_DROPS,
+      });
+
+      const txHash = result.paymentResponse?.transaction ?? result.signedTxHash;
+      const drops  = result.data?.payment?.amount_drops ?? '?';
+      const dropsInt = typeof drops === 'string' && drops !== '?' ? parseInt(drops, 10) : 0;
+
+      sessionDropsSpent += dropsInt;
 
       transactions.push({
         endpoint:     endpoint.path,
         label:        endpoint.label,
         amount_drops: drops,
-        amount_xrp:   typeof drops === 'string' && drops !== '?'
-                        ? parseFloat((parseInt(drops, 10) / 1_000_000).toFixed(7))
-                        : null,
+        amount_xrp:   dropsInt > 0 ? parseFloat((dropsInt / 1_000_000).toFixed(7)) : null,
         invoice_id:   result.invoiceId,
         tx_hash:      txHash,
         status:       'SUCCESS',
@@ -343,15 +425,27 @@ async function main() {
         console.log(`  ✓ explorer: https://livenet.xrpl.org/transactions/${txHash}`);
       }
     } catch (e) {
-      err(`${endpoint.label} failed: ${e.message}`);
-      transactions.push({
-        endpoint:  endpoint.path,
-        label:     endpoint.label,
-        status:    'FAILED',
-        error:     e.message,
-        timestamp: new Date().toISOString(),
-      });
-      allFlowLogs.push(`── ${endpoint.label} ──`, `ERROR: ${e.message}`);
+      if (e.name === 'GuardrailError') {
+        guardrail(e.message);
+        transactions.push({
+          endpoint:  endpoint.path,
+          label:     endpoint.label,
+          status:    'SKIPPED',
+          reason:    e.message,
+          timestamp: new Date().toISOString(),
+        });
+        allFlowLogs.push(`── ${endpoint.label} ──`, `GUARDRAIL: ${e.message}`);
+      } else {
+        err(`${endpoint.label} failed: ${e.message}`);
+        transactions.push({
+          endpoint:  endpoint.path,
+          label:     endpoint.label,
+          status:    'FAILED',
+          error:     e.message,
+          timestamp: new Date().toISOString(),
+        });
+        allFlowLogs.push(`── ${endpoint.label} ──`, `ERROR: ${e.message}`);
+      }
     }
   }
 
@@ -360,22 +454,27 @@ async function main() {
   await client.disconnect();
   log('XRPL mainnet disconnected');
 
-  const totalDropsSpent = transactions
-    .filter(t => t.status === 'SUCCESS' && t.amount_drops !== '?')
-    .reduce((sum, t) => sum + parseInt(t.amount_drops, 10), 0);
+  const totalDropsSpent = sessionDropsSpent;
 
   // ── Write to dashboard-data.json ──────────────────────────────────────────
   const x402Agent = {
-    network:            'XRPL MAINNET',
-    protocol:           'x402 v2',
-    facilitator:        FACILITATOR_URL,
-    facilitator_ok:     facilitatorOk,
-    agent_address:      agentWallet.address,
-    merchant_base:      MERCHANT_BASE,
-    balance_xrp:        parseFloat(finalBalance.toFixed(6)),
-    payments_sent:      prevCount + successCount,
+    network:             'XRPL MAINNET',
+    protocol:            'x402 v2',
+    facilitator:         FACILITATOR_URL,
+    facilitator_ok:      facilitatorOk,
+    agent_address:       agentWallet.address,
+    merchant_base:       MERCHANT_BASE,
+    balance_xrp:         parseFloat(finalBalance.toFixed(6)),
+    payments_sent:       prevCount + successCount,
     session_drops_spent: totalDropsSpent,
-    session_xrp_spent:  parseFloat((totalDropsSpent / 1_000_000).toFixed(7)),
+    session_xrp_spent:   parseFloat((totalDropsSpent / 1_000_000).toFixed(7)),
+    lifetime_drops_spent: lifetimeDrops + totalDropsSpent,
+    lifetime_xrp_spent:   parseFloat(((lifetimeDrops + totalDropsSpent) / 1_000_000).toFixed(7)),
+    guardrails: {
+      balance_floor_xrp: BALANCE_FLOOR,
+      session_cap_drops: SESSION_CAP_DROPS,
+      max_single_drops:  MAX_SINGLE_DROPS,
+    },
     transactions,
     // last_payment kept for dashboard backward compat — mirrors most recent success
     last_payment: transactions.filter(t => t.status === 'SUCCESS').slice(-1)[0] ?? null,
@@ -396,14 +495,18 @@ async function main() {
   console.log('\n─── x402 Agent Summary ──────────────────────────────');
   console.log(`Network:       XRPL MAINNET`);
   console.log(`Agent:         ${agentWallet.address}`);
-  console.log(`Balance:       ${finalBalance} XRP  (was ${balance} XRP)`);
-  console.log(`Session:       ${successCount}/${ENDPOINTS.length} endpoints paid  |  ${totalDropsSpent} drops (${(totalDropsSpent / 1_000_000).toFixed(6)} XRP)`);
-  console.log(`Total sent:    ${prevCount + successCount} payments`);
+  console.log(`Balance:       ${finalBalance} XRP  (was ${balance} XRP)  [floor: ${BALANCE_FLOOR} XRP]`);
+  console.log(`Session:       ${successCount}/${ENDPOINTS.length} paid  |  ${totalDropsSpent} drops spent  |  cap: ${SESSION_CAP_DROPS} drops`);
+  console.log(`Lifetime:      ${lifetimeDrops + totalDropsSpent} drops (${((lifetimeDrops + totalDropsSpent) / 1_000_000).toFixed(6)} XRP) across ${prevCount + successCount} payments`);
   console.log('');
   transactions.forEach(t => {
-    const icon = t.status === 'SUCCESS' ? '✓' : '✗';
-    const hash = t.tx_hash ? `  tx=${t.tx_hash.slice(0, 14)}…` : '';
-    console.log(`  ${icon} ${t.label.padEnd(20)} ${t.amount_drops ?? '—'} drops${hash}`);
+    const icon = t.status === 'SUCCESS' ? '✓' : t.status === 'SKIPPED' ? '⊘' : '✗';
+    const detail = t.status === 'SUCCESS' && t.tx_hash ? `  tx=${t.tx_hash.slice(0, 14)}…`
+                 : t.status === 'SKIPPED'              ? `  (${t.reason?.slice(0, 60)})`
+                 : t.error                             ? `  ERR: ${t.error.slice(0, 60)}`
+                 : '';
+    const drops = t.amount_drops != null && t.amount_drops !== '?' ? `${t.amount_drops} drops` : '—';
+    console.log(`  ${icon} ${t.label.padEnd(20)} ${drops.padEnd(12)}${detail}`);
   });
   console.log('─────────────────────────────────────────────────────\n');
 }
