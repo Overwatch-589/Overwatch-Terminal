@@ -408,24 +408,199 @@
     "facilitator_ok": true,
     "agent_address": "rPiok45Qs88WMYQbYzDqXQbPgaCr9PnX5M",
     "merchant_url": "http://127.0.0.1:4403/api/v1/premium-analysis",
-    "balance_xrp": 15.000001,
-    "payments_sent": 0,
+    "balance_xrp": 14.998989,
+    "payments_sent": 1,
     "last_payment": {
       "protocol": "x402 v2",
-      "to": "rBtHhTERCBL3u1L9m42kheS3codUL3fYBB",
-      "to_label": "Premium Data Service (DEMO)",
-      "amount_drops": "100",
-      "amount_xrp": 0.0001,
-      "invoice_id": "B0605AB933FD412EB35DC3BAFEF30C5A",
-      "tx_hash": "3284A345EFCF4837FE6A7702CB313B6A674AA000694E09187EBAB58387027A19",
-      "facilitator": "https://xrpl-facilitator-testnet.t54.ai",
-      "timestamp": "2026-02-25T07:18:29.871Z",
+      "network": "xrpl:0",
+      "amount_drops": "1000",
+      "amount_xrp": 0.001,
+      "invoice_id": "51A069BF4B994134918FCEE482CA9E0E",
+      "tx_hash": "A7A027C5FAEFBF02C0C02AD26FCCD400384F4184CACF8AEFA8925B259C0F9919",
+      "facilitator": "https://xrpl-facilitator-mainnet.t54.ai",
+      "timestamp": "2026-02-25T09:28:54.724Z",
       "status": "SUCCESS"
     },
-    "last_data": null,
+    "last_data": {
+      "access": "GRANTED",
+      "resource": "Overwatch Terminal — Premium Analysis Feed",
+      "timestamp": "2026-02-25T09:28:54.722Z",
+      "data": {
+        "probability": {
+          "bear": 8,
+          "base": 40,
+          "mid": 40,
+          "bull": 12,
+          "last_updated": "2026-02-23T01:36:29.537Z",
+          "last_reasoning": "SBI bond launch validates Japan adoption thesis, shifting 5% from base to mid despite ETF outflow headwinds"
+        },
+        "thesis_scores": {
+          "regulatory": {
+            "status": "CONFIRMED",
+            "confidence": "high"
+          },
+          "institutional_custody": {
+            "status": "STRONG",
+            "confidence": "high"
+          },
+          "etf_adoption": {
+            "status": "CONFIRMED",
+            "confidence": "high"
+          },
+          "xrpl_infrastructure": {
+            "status": "ACCELERATING",
+            "confidence": "high"
+          },
+          "stablecoin_adoption": {
+            "status": "GROWING",
+            "confidence": "medium"
+          },
+          "odl_volume": {
+            "status": "NEEDS_DATA",
+            "confidence": "low"
+          },
+          "japan_adoption": {
+            "status": "FAVORABLE",
+            "confidence": "medium"
+          },
+          "macro_environment": {
+            "status": "STRESSED",
+            "confidence": "medium"
+          }
+        },
+        "kill_switches": {
+          "odl_volume": {
+            "target": 25000000000,
+            "current": null,
+            "deadline": "2026-12-31",
+            "status": "NEEDS_DATA",
+            "pct_complete": null
+          },
+          "rlusd_circulation": {
+            "target": 5000000000,
+            "current": 1558437950.8539026,
+            "deadline": "2026-12-31",
+            "status": "TRACKING",
+            "pct_complete": 31
+          },
+          "xrp_etf_aum": {
+            "target": 5000000000,
+            "current": 1097779873.25,
+            "deadline": "2026-12-31",
+            "status": "TRACKING",
+            "pct_complete": 22
+          },
+          "permissioned_dex_adoption": {
+            "target_institutions": 5,
+            "current": null,
+            "deadline": "2026-09-30",
+            "status": "NEEDS_DATA"
+          },
+          "clarity_act": {
+            "target": "passed_or_advanced",
+            "current": "pending",
+            "deadline": "2026-12-31",
+            "status": "PENDING"
+          }
+        },
+        "stress_assessment": null,
+        "bear_case": {
+          "counter_thesis_score": 35,
+          "score_reasoning": "Counter-thesis pressure increasing with China-Japan trade escalation adding to existing yen/JGB stress. ETF outflows slowing but persistent institutional retreat signal continues.",
+          "competing_infrastructure": [
+            {
+              "name": "SWIFT GPI",
+              "status": "LOW_RISK",
+              "status_text": "No major expansion signals amid institutional crypto adoption trends"
+            },
+            {
+              "name": "Visa B2B Connect",
+              "status": "LOW_RISK",
+              "status_text": "Limited cross-border settlement expansion observed"
+            },
+            {
+              "name": "JPMorgan Kinexys",
+              "status": "MONITORING",
+              "status_text": "Established platform stable, no XRPL competitive expansion"
+            },
+            {
+              "name": "BIS Project Nexus",
+              "status": "ELEVATED_RISK",
+              "status_text": "Multi-CBDC platform development could bypass XRPL bridge currency role entirely"
+            },
+            {
+              "name": "Ethereum Institutional",
+              "status": "MONITORING",
+              "status_text": "Stable institutional presence, no major settlement infrastructure advances"
+            }
+          ],
+          "odl_stagnation": "Critical data gap persists - inability to track ODL volume prevents assessment of core utility thesis momentum",
+          "token_velocity_concern": "Persistent ETF outflows despite slowing pace indicate institutional confidence erosion continues amid extreme fear environment",
+          "macro_headwinds": [
+            {
+              "name": "Global Recession Risk",
+              "status": "ELEVATED_RISK",
+              "status_text": "Extreme fear (F&G: 8) and China-Japan trade escalation signal broader economic stress building"
+            },
+            {
+              "name": "Crypto Winter Signals",
+              "status": "ELEVATED_RISK",
+              "status_text": "Persistent ETF outflows across multiple funds indicate institutional capital retreat continuing"
+            },
+            {
+              "name": "Regulatory Reversal Risk",
+              "status": "LOW_RISK",
+              "status_text": "Clarity Act pending, no negative regulatory signals from current administration"
+            },
+            {
+              "name": "Rate Hike Extension",
+              "status": "MONITORING",
+              "status_text": "JGB yields 2.24% indicate global central bank credibility stress persisting"
+            }
+          ],
+          "bear_narrative": "China blacklisting Japanese shipbuilders escalates trade pressure on Japan stress thesis while ETF outflows persist despite slowing. BIS Project Nexus remains credible bypass threat to XRPL bridge utility. Institutional confidence erosion continues amid extreme fear environment despite positive adoption signals.",
+          "last_updated": "2026-02-24T17:31:29.901Z"
+        },
+        "last_analysis": {
+          "timestamp": "2026-02-24T17:31:29.901Z",
+          "run_type": "morning",
+          "stress_level": "ELEVATED",
+          "stress_score": 82,
+          "applied_at": "2026-02-24T17:35:12.699Z",
+          "changes_applied": 1
+        },
+        "market": {
+          "xrp_price_usd": 1.37,
+          "xrp_change_24h_pct": 3.0833402360665767,
+          "fear_greed": null,
+          "rlusd_market_cap": 1558437950.8539026,
+          "etf_total_aum": 1097779873.25,
+          "etf_daily_flow": -2621.639999985695,
+          "etf_cum_flow": 21908237.946199983,
+          "us_10y": null,
+          "brent_crude": 69.77,
+          "usd_jpy": 155.88
+        },
+        "data_as_of": "2026-02-25T08:06:17.731Z"
+      },
+      "payment": {
+        "protocol": "x402",
+        "version": 2,
+        "tx_hash": "A7A027C5FAEFBF02C0C02AD26FCCD400384F4184CACF8AEFA8925B259C0F9919",
+        "payer": "rPiok45Qs88WMYQbYzDqXQbPgaCr9PnX5M",
+        "amount_drops": "1000",
+        "amount_xrp": "0.001000",
+        "network": "xrpl:0",
+        "facilitator": "https://xrpl-facilitator-mainnet.t54.ai"
+      }
+    },
     "x402_flow": [
-      "ERROR: Cannot convert 1000ø to a BigInt"
+      "→ GET http://127.0.0.1:4403/api/v1/premium-analysis  →  HTTP 402",
+      "← 402 PAYMENT-REQUIRED  amount=1000 drops  invoiceId=51A069BF4B99…  network=xrpl:0",
+      "→ Signed XRPL Payment  hash=A7A027C5FAEF…  drops=1000  MemoData+InvoiceID bound",
+      "→ GET http://127.0.0.1:4403/api/v1/premium-analysis (+PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200 PAYMENT-RESPONSE  tx=A7A027C5FAEF…  payer=rPiok45Qs8…"
     ],
-    "last_updated": "2026-02-25T09:24:10.226Z"
+    "last_updated": "2026-02-25T09:28:55.056Z"
   }
 }
