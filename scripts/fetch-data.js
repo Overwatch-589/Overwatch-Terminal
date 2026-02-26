@@ -433,7 +433,11 @@ async function fetchETF(fallback) {
             body:   JSON.stringify({ type: 'us-xrp-spot' }),
             signal: controller.signal,
           });
-          if (!r.ok) throw new Error(`HTTP ${r.status} ${r.statusText}`);
+          if (!r.ok) {
+            const body = await r.text().catch(() => '<unreadable>');
+            console.warn(`[ETF] SoSoValue error: ${r.status} ${r.statusText} — ${endpoint.split('/').pop()} — body: ${body}`);
+            throw new Error(`HTTP ${r.status} ${r.statusText}`);
+          }
           return await r.json();
         } finally {
           clearTimeout(timer);
@@ -446,6 +450,7 @@ async function fetchETF(fallback) {
       ]);
 
       if (metricsData?.code !== 0 || !metricsData?.data) {
+        console.warn('[ETF] SoSoValue metrics response:', JSON.stringify(metricsData));
         throw new Error(`SoSoValue metrics error (code=${metricsData?.code}, msg=${metricsData?.msg})`);
       }
       const m = metricsData.data;
