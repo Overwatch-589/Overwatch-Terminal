@@ -2139,13 +2139,23 @@ function renderX402AgentWallet(d) {
   const histEl = document.getElementById('x402TxHistory');
   if (histEl) {
     if (txns.length > 0) {
-      const header = `<div style="display:grid;grid-template-columns:1fr 90px 110px 72px 72px;gap:4px;padding:3px 0 5px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:2px;">` +
-        `<span style="font-size:9px;letter-spacing:1px;color:var(--text-muted);">ENDPOINT</span>` +
-        `<span style="font-size:9px;letter-spacing:1px;color:var(--text-muted);text-align:right;">DROPS</span>` +
-        `<span style="font-size:9px;letter-spacing:1px;color:var(--text-muted);text-align:right;">TX HASH</span>` +
-        `<span style="font-size:9px;letter-spacing:1px;color:var(--text-muted);text-align:right;">STATUS</span>` +
-        `<span style="font-size:9px;letter-spacing:1px;color:var(--text-muted);text-align:right;">TIME</span>` +
-        `</div>`;
+      const thStyle = `padding:3px 6px 5px;font-size:9px;font-weight:normal;letter-spacing:1px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;white-space:nowrap;`;
+      const header = `<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">` +
+        `<table style="width:100%;table-layout:fixed;border-collapse:collapse;min-width:340px;">` +
+        `<colgroup>` +
+        `<col style="width:36%">` +
+        `<col style="width:13%">` +
+        `<col style="width:18%">` +
+        `<col style="width:17%">` +
+        `<col style="width:16%">` +
+        `</colgroup>` +
+        `<thead><tr style="border-bottom:1px solid rgba(255,255,255,0.1);">` +
+        `<th style="${thStyle}text-align:left;padding-left:0;">ENDPOINT</th>` +
+        `<th style="${thStyle}text-align:right;">DROPS</th>` +
+        `<th style="${thStyle}text-align:right;">TX HASH</th>` +
+        `<th style="${thStyle}text-align:right;">STATUS</th>` +
+        `<th style="${thStyle}text-align:right;padding-right:0;">TIME</th>` +
+        `</tr></thead><tbody>`;
       const rows = txns.map(tx => {
         const statusColor = tx.status === 'SUCCESS' ? 'var(--accent-green)'
                           : tx.status === 'SKIPPED'  ? 'var(--accent-amber)'
@@ -2160,15 +2170,15 @@ function renderX402AgentWallet(d) {
         const tsStr = tx.timestamp
           ? new Date(tx.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
           : '—';
-        return `<div style="display:grid;grid-template-columns:1fr 90px 110px 72px 72px;gap:4px;padding:4px 0;border-bottom:1px solid var(--border);align-items:center;">` +
-          `<span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-secondary);">${escHtml(endpoint)}</span>` +
-          `<span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent-cyan);text-align:right;">${escHtml(String(drops))}</span>` +
-          `<span style="text-align:right;">${hashCell}</span>` +
-          `<span style="font-size:9px;color:${statusColor};text-align:right;">${escHtml(tx.status ?? '—')}</span>` +
-          `<span style="font-size:9px;color:var(--text-muted);text-align:right;">${escHtml(tsStr)}</span>` +
-          `</div>`;
+        return `<tr style="border-bottom:1px solid var(--border);">` +
+          `<td style="padding:4px 6px 4px 0;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escHtml(endpoint)}</td>` +
+          `<td style="padding:4px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent-cyan);text-align:right;">${escHtml(String(drops))}</td>` +
+          `<td style="padding:4px 6px;font-size:9px;text-align:right;">${hashCell}</td>` +
+          `<td style="padding:4px 6px;font-size:9px;color:${statusColor};text-align:right;">${escHtml(tx.status ?? '—')}</td>` +
+          `<td style="padding:4px 0 4px 6px;font-size:9px;color:var(--text-muted);text-align:right;">${escHtml(tsStr)}</td>` +
+          `</tr>`;
       }).join('');
-      histEl.innerHTML = header + rows;
+      histEl.innerHTML = header + rows + `</tbody></table></div>`;
     }
   }
 
