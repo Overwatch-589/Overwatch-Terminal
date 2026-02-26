@@ -749,8 +749,20 @@ async function main() {
   const sweepResults = await runSweep(dashboardData);
 
   if (sweepResults.length > 0) {
-    console.log(`360 ASSESS: starting with ${sweepResults.length} threats from sweep`);
-    assessment360 = await runAssessment(sweepResults, dashboardData, previousBearScore);
+    // Prune to top 15 threats: critical → high → moderate → low, preserving original order within tier
+    const SEVERITY_RANK = { critical: 0, high: 1, moderate: 2, low: 3 };
+    let threatsToAssess = sweepResults;
+    if (sweepResults.length > 15) {
+      threatsToAssess = sweepResults
+        .map((t, i) => ({ t, i }))
+        .sort((a, b) => (SEVERITY_RANK[a.t.severity] ?? 9) - (SEVERITY_RANK[b.t.severity] ?? 9) || a.i - b.i)
+        .slice(0, 15)
+        .sort((a, b) => a.i - b.i)
+        .map(({ t }) => t);
+      console.log(`[360] PRUNE: trimmed sweep from ${sweepResults.length} to 15 threats`);
+    }
+    console.log(`360 ASSESS: starting with ${threatsToAssess.length} threats from sweep`);
+    assessment360 = await runAssessment(threatsToAssess, dashboardData, previousBearScore);
     if (assessment360) {
       log('360', `Assessment complete — bear pressure: ${assessment360.bear_pressure_score}, recommendation: ${assessment360.tactical_recommendation}`);
     } else {
