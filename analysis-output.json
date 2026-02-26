@@ -1,187 +1,187 @@
 {
-  "timestamp": "2026-02-25T23:44:14.966Z",
+  "timestamp": "2026-02-26T00:30:54.131Z",
   "run_type": "evening",
-  "market_summary": "XRP at $1.43 with a +6.1% 24h bounce on massive $4.75B volume, diverging sharply from BTC/ETH ETF outflows. Fear & Greed at 11 (Extreme Fear) — near historic floor. Macro stress remains severe: USD/JPY 156.25, JGB 10Y 2.24% (deep in critical zone), US 10Y 4.04%.",
-  "thesis_pulse": "XRP's +6.1% intraday recovery diverges from broader crypto capital flight (IBIT -$117M, ETHA -$46M), while XRP ETF registered a modest +$2.2M net inflow on Feb 24. RLUSD market cap ticked up to $1.56B (31% of $5B kill switch target) — marginal but directionally correct. ETF AUM at $1.10B (22% of $5B target) with 792M XRP locked (1.29% of supply). Two critical kill switches — ODL volume and PermissionedDEX adoption — remain at zero data with deadlines approaching, which is the single largest vulnerability in the thesis framework.",
+  "market_summary": "XRP at $1.44 with a strong +7.4% daily bounce, diverging sharply from BTC and ETH which saw significant ETF outflows. Fear & Greed at 11 (Extreme Fear) — near historical floor. Macro stress remains elevated with JGB 10Y at 2.24% (critical threshold breached), USD/JPY at 156.08 (elevated), and Brent at $71.90 (within normal range).",
+  "thesis_pulse": "XRP's +7.4% bounce to $1.44 in an extreme fear environment (F&G: 11) is notable but must be contextualized against the broader crypto outflow pattern — IBIT saw -$117M and ETHA -$46M on Feb 24. XRP ETF net daily flow of +$2.2M is positive but marginal relative to $1.1B AUM. RLUSD at $1.56B (31% of kill switch target) continues steady growth. The two critical blind spots — ODL volume and PermissionedDEX institutional adoption — remain unresolved with deadlines approaching in Q3 2026.",
   "stress_assessment": {
     "level": "ELEVATED",
-    "score": 82,
-    "interpretation": "Three of four stress indicators are breached: USD/JPY at 156.25 (elevated >155 threshold), JGB 10Y at 2.24% (critical >2% threshold), and Fear & Greed at 11 (extreme fear <20 threshold). Brent at $71.90 is the only indicator in safe zone. Score elevated 2 points from morning's 80 due to sustained JGB pressure and F&G remaining pinned at floor."
+    "score": 79,
+    "interpretation": "Three of four stress indicators are in warning or critical zones: JGB 10Y at 2.24% is deep into critical territory (threshold: >2%), USD/JPY at 156.08 exceeds the elevated threshold of 155, and Fear & Greed at 11 is at extreme fear floor. Only Brent crude at $71.90 provides relief, remaining well below the $85 elevated threshold. Score marginally improved from 80 as oil declined slightly, but the Japan stress complex (yields + yen) remains the dominant risk factor."
   },
   "kill_switch_updates": [
     {
-      "name": "rlusd_circulation",
+      "name": "RLUSD Circulation",
       "previous_status": "TRACKING",
       "recommended_status": "TRACKING",
-      "reasoning": "RLUSD at $1.56B, 31% of $5B target. Pace is adequate for EOY but needs acceleration — roughly $350M/month required for remaining 10 months. No change warranted."
+      "reasoning": "RLUSD at $1.56B, 31% of $5B target. Growth trajectory is steady but needs to accelerate materially to reach $5B by Q3 2026 (~4 months away). No change warranted but pace requires monitoring."
     },
     {
-      "name": "xrp_etf_aum",
+      "name": "XRP ETF AUM",
       "previous_status": "TRACKING",
       "recommended_status": "TRACKING",
-      "reasoning": "ETF AUM at $1.10B, 22% of $5B target. Requires ~$390M/month to hit EOY target. Current weekly flows (~$2M) are vastly insufficient — needs a 40-50x acceleration. XRP price recovery would help organically but pace is concerning."
+      "reasoning": "AUM at $1.10B, 22% of $5B EOY target. 792M XRP locked (1.3% of circulating supply). Positive daily flow of $2.2M is constructive but insufficient acceleration. 10 months remain to reach target — needs ~$390M/month average inflow."
     },
     {
-      "name": "odl_volume",
+      "name": "ODL Volume",
       "previous_status": "NEEDS_DATA",
       "recommended_status": "NEEDS_DATA",
-      "reasoning": "Still zero verifiable ODL data. Q3 transparency deadline is 7 months away. This kill switch cannot be evaluated. Escalation warranted if no data surfaces by Q2."
+      "reasoning": "Still zero verifiable ODL volume data. Q3 transparency deadline (~4 months) is approaching without any public disclosure mechanism in sight. This remains the most critical thesis vulnerability."
     },
     {
-      "name": "permissioned_dex_adoption",
+      "name": "Permissioned DEX Adoption",
       "previous_status": "NEEDS_DATA",
       "recommended_status": "NEEDS_DATA",
-      "reasoning": "PermissionedDEX amendment went live Feb 20. Zero confirmed institutional deployments reported yet. 7 months to Q3 deadline for 5 institutions. Amendment activation is a prerequisite milestone met, but adoption evidence is the actual test."
+      "reasoning": "PermissionedDEX amendment went live Feb 20 but zero institutional adoption data available. Q3 deadline for 5 institutions is aggressive given amendment is only 6 days old."
     },
     {
-      "name": "clarity_act",
+      "name": "Clarity Act",
       "previous_status": "PENDING",
       "recommended_status": "PENDING",
-      "reasoning": "No legislative movement detected. SCOTUS tariff ruling and Section 122 invocation dominate DC bandwidth. Clarity Act advancement may be crowded out."
+      "reasoning": "No legislative movement detected in today's news cycle. Status unchanged."
     }
   ],
   "scorecard_updates": [
     {
-      "category": "macro_environment",
+      "category": "Macro Environment",
       "previous_status": "STRESSED",
       "recommended_status": "STRESSED",
-      "reasoning": "JGB 10Y at 2.24% is deep in critical territory. F&G at 11 is extreme. USD/JPY at 156.25 is in elevated zone. No improvement from morning assessment — if anything, sustained pressure at these levels through end of day is incrementally worse."
+      "reasoning": "JGB 10Y at 2.24% (critical), USD/JPY at 156.08 (elevated), F&G at 11 (extreme fear). No improvement from morning analysis. Oil easing slightly to $71.90 is the only marginal positive."
     },
     {
-      "category": "etf_adoption",
+      "category": "ETF Adoption",
       "previous_status": "CONFIRMED",
       "recommended_status": "CONFIRMED",
-      "reasoning": "7 funds live, $1.10B AUM, positive daily flow of $2.2M while BTC/ETH ETFs saw significant outflows. Structural confirmation intact. Flow magnitude still needs to scale dramatically to hit $5B target."
+      "reasoning": "7 funds live, $1.1B AUM, positive daily flow of $2.2M while BTC and ETH ETFs saw heavy outflows. Divergence is constructive. Confidence remains high."
     },
     {
-      "category": "stablecoin_adoption",
+      "category": "Stablecoin (RLUSD)",
       "previous_status": "GROWING",
       "recommended_status": "GROWING",
-      "reasoning": "RLUSD at $1.56B, steady growth trajectory. No new institutional integration announcements to upgrade confidence. Maintaining medium confidence."
+      "reasoning": "RLUSD at $1.56B. Steady trajectory but $5B Q3 target requires significant acceleration. Medium confidence maintained."
     }
   ],
   "alerts": [
     {
-      "severity": "CRITICAL",
-      "message": "JGB 10Y yield at 2.24% — sustained in critical zone (>2.0%). BOJ intervention risk is elevated. A disorderly JGB selloff would cascade through USD/JPY and global risk assets."
+      "severity": "WARNING",
+      "message": "JGB 10Y at 2.24% — remains deep in CRITICAL zone (>2.0%). BOJ intervention risk is acute. Any disorderly yield spike could cascade through global risk assets."
     },
     {
       "severity": "WARNING",
-      "message": "Fear & Greed Index at 11 — near absolute floor. Historically signals either capitulation bottom or onset of deeper systemic stress. Context-dependent."
-    },
-    {
-      "severity": "WARNING",
-      "message": "BTC ETF (IBIT) -$117M and ETH ETF (ETHA) -$46M daily outflows indicate broad institutional crypto de-risking. XRP ETF +$2.2M divergence is notable but fragile."
+      "message": "Fear & Greed at 11 — at extreme fear floor. Historically, sustained readings below 15 precede either capitulation events or sharp reversals. Monitor for multi-day persistence."
     },
     {
       "severity": "INFO",
-      "message": "XRP +6.1% bounce on $4.75B volume against extreme fear backdrop. Could indicate speculative relief rally or accumulation — requires multi-day confirmation."
+      "message": "XRP ETF flow divergence continues — +$2.2M net inflow on Feb 24 vs. IBIT -$117M and ETHA -$46M. Small but notable relative signal amid broad crypto institutional exits."
     },
     {
       "severity": "WARNING",
-      "message": "XRP ETF AUM at 22% of $5B kill switch target with 10 months remaining. Current weekly inflow rate (~$2M/week) projects to only ~$1.18B by EOY — dramatically short of target without price appreciation or flow acceleration."
+      "message": "ODL volume and PermissionedDEX adoption data remain completely absent. Q3 2026 deadlines are now ~4 months away. If no public data mechanism emerges by Q2, kill switch trip becomes likely."
+    },
+    {
+      "severity": "INFO",
+      "message": "No thesis-relevant headlines in current news feed. News API returning only Canadian domestic stories — may indicate API filtering issue or quiet news cycle for XRP/crypto."
     }
   ],
-  "etf_analysis": "XRP ETF posted +$2.2M net inflow on Feb 24 (Bitwise +$2.24M, Canary -$2.6K) while IBIT lost $117M and ETHA lost $46M — a clear divergence favoring XRP. However, cumulative XRP ETF inflows of $19M against $1.10B AUM represent a 1.7% flow rate, indicating institutional accumulation is occurring but at a pace far too slow to reach the $5B kill switch target organically.",
-  "macro_analysis": "USD/JPY at 156.25 remains in the elevated stress band, while JGB 10Y at 2.24% is deep in the critical zone — the BOJ's yield curve control framework is under existential pressure. Brent at $71.90 provides some relief on the energy front, but the Japan stress feedback loop (weak yen → higher import costs → wider trade deficit → BOJ pressure) is self-reinforcing at these levels.",
+  "etf_analysis": "XRP ETFs showed +$2.2M net inflow on Feb 24 (Bitwise +$2.24M, Canary -$2.6K) while IBIT bled -$117M and ETHA lost -$46M — a clear divergence favoring XRP. However, weekly XRP ETF net flow of +$2.0M is modest, and cumulative net flow of $19M against $1.1B AUM suggests accumulation is slow-drip rather than accelerating.",
+  "macro_analysis": "USD/JPY at 156.08 and JGB 10Y at 2.24% form a dangerous feedback loop — BOJ is trapped between defending the yen (requiring tightening) and containing yield spikes (requiring easing). US 10Y at 4.04% is stable but elevated, while Brent at $71.90 provides rare relief in the stress matrix.",
   "recommended_probability_adjustment": {
     "bear": 9,
     "base": 40,
     "mid": 39,
     "bull": 12,
-    "reasoning": "Marginal bear increase from 8% to 9% warranted: JGB 10Y sustaining above 2.24% through end of day with F&G at 11 represents incrementally worse macro conditions than morning assessment. The XRP bounce is constructive but one-day relief rallies in extreme fear environments are unreliable. Mid reduced 1 point to compensate. ETF flow divergence prevents further bear escalation but cannot offset sustained macro deterioration."
+    "reasoning": "Slight upward adjustment to bear case probability (8→9%) driven by persistent extreme fear (F&G: 11), JGB yields at 2.24% deepening the Japan crisis, and BTC/ETH ETF outflows indicating broader institutional capital flight from crypto. XRP's positive flow divergence is real but too small to offset systemic stress. Mid-case trimmed 1% to accommodate the bear increase. No change to bull case — the structural thesis inputs (ETFs, RLUSD, PermissionedDEX) are intact but unproven at scale."
   },
   "events_draft": [],
   "geopolitical_watchlist": [
     {
       "region": "Japan / BOJ",
-      "status_text": "JGB 10Y at 2.24% — deep critical zone. USD/JPY 156.25 elevated. Takaichi supermajority limits BOJ independence. Emergency intervention risk rising with each sustained session above 2%."
+      "status_text": "CRITICAL — JGB 10Y at 2.24%, USD/JPY 156.08. BOJ trapped in policy vise: yen defense requires tightening but yield curve is already destabilizing. Takaichi government faces fiscal credibility test."
     },
     {
       "region": "Middle East",
-      "status_text": "Strait of Hormuz remains CRITICAL with dual carrier group presence. Russia-Iran-China exercises ongoing. Brent at $71.90 suggests no active supply disruption yet, but risk is fully priced for escalation."
+      "status_text": "ELEVATED — Dual carrier groups in Hormuz theater with Russia-Iran-China exercises. Brent at $71.90 suggests no active supply disruption, but escalation risk premium persists."
     },
     {
       "region": "US-China",
-      "status_text": "Section 122 tariffs (10% global) active with ~145 days remaining on 150-day clock. No de-escalation signals detected. Trade tension continues to weigh on risk assets."
+      "status_text": "MONITORING — Section 122 tariffs (10% global) active with ~5-month clock remaining (expires ~Jul 20). No new escalation signals in current cycle."
     },
     {
       "region": "Trade / Tariffs",
-      "status_text": "SCOTUS IEEPA ruling forced Section 122 pivot. 150-day authorization expires ~Jul 20, 2026. Congressional extension uncertain. Trade policy uncertainty is a sustained headwind."
+      "status_text": "ELEVATED — Section 122 framework operative after SCOTUS struck IEEPA tariffs. 150-day clock creates a defined policy uncertainty window through July 2026."
     },
     {
       "region": "Arctic / Russia",
-      "status_text": "Russia-Iran-China military exercises near Hormuz are the primary escalation vector. No new Arctic-specific developments detected this cycle."
+      "status_text": "MONITORING — Russia-Iran-China naval exercises in proximity to Hormuz remain the primary multi-theater risk. No independent Arctic escalation signals detected."
     }
   ],
-  "energy_interpretation": "Brent crude at $71.90 is well below the $85 elevated threshold, providing the one bright spot in an otherwise stressed macro picture. However, Japan's feedback loop persists: USD/JPY 156.25 means energy imports denominated in dollars continue to pressure Japan's trade balance, contributing to the JGB stress at 2.24%. If Hormuz tensions materialize into actual supply disruption, oil spikes would amplify Japan's fiscal strain exponentially.",
-  "thesis_pulse_assessment": "Infrastructure thesis milestones remain intact — 7 ETFs live ($1.10B AUM, 792M XRP locked), RLUSD at $1.56B, PermissionedDEX amendment activated. XRP's +6.1% divergence from BTC/ETH ETF capital flight is the most constructive signal today. However, two critical kill switches (ODL, PermissionedDEX adoption) have zero data with deadlines at 7 months. ETF AUM growth rate of ~$2M/week projects to massive shortfall against the $5B target. Thesis is structurally sound but operationally unvalidated on its most important metrics.",
-  "stress_interpretation": "Composite stress at 82/100 — ELEVATED. Three of four primary indicators breached: JGB 10Y 2.24% (critical >2%), USD/JPY 156.25 (elevated >155), Fear & Greed 11 (extreme fear <20). Only Brent crude at $71.90 remains below threshold. The sustained JGB breach is the most dangerous signal — this is not a spike but a persistent condition suggesting structural Japanese bond market stress.",
+  "energy_interpretation": "Brent at $71.90 is the one stress relief valve in an otherwise compressed macro environment. Japan's trade deficit feedback loop — weak yen (156.08) + energy import costs — is partially cushioned by sub-$75 oil, but JGB yields at 2.24% indicate bond markets are pricing in fiscal stress regardless. If Hormuz escalation drives Brent above $85, the Japan stress complex accelerates rapidly: higher energy import costs → wider trade deficit → weaker yen → higher yields → BOJ intervention risk.",
+  "thesis_pulse_assessment": "Infrastructure thesis remains structurally intact but operationally unproven. XRP at $1.44 with 7 live ETFs ($1.1B AUM, 792M XRP locked) and RLUSD at $1.56B represent real institutional footprint. However, the two metrics that would validate actual utility — ODL volume and PermissionedDEX institutional adoption — have zero data with Q3 deadlines 4 months away. The XRP ETF positive flow divergence (+$2.2M vs. BTC -$117M, ETH -$46M) is a genuine signal but must sustain across multiple sessions to be meaningful. Macro environment at extreme fear (F&G: 11) with Japan in crisis zone (JGB 2.24%) presents the most severe headwind since monitoring began.",
+  "stress_interpretation": "Composite stress at 79/100 (ELEVATED). JGB 10Y at 2.24% breaches the 2.0% critical threshold for the second consecutive session — this is the primary systemic risk vector. USD/JPY at 156.08 holds above the 155 elevated threshold. Fear & Greed at 11 is at extreme fear floor, signaling maximum pessimism. Only Brent crude at $71.90 (well below $85 elevated threshold) prevents escalation to HIGH stress classification.",
   "bear_case": {
-    "counter_thesis_score": 62,
-    "score_reasoning": "Marginal increase from 33 to 34. JGB 10Y sustained at 2.24% through evening session deepens macro concern. XRP's intraday bounce and ETF flow divergence are marginally positive but do not offset the two data-void kill switches and persistent macro stress. Bear pressure is incrementally higher than morning.",
+    "counter_thesis_score": 52,
+    "score_reasoning": "Marginal increase from 33 to 34. XRP's +7.4% bounce is encouraging but F&G at 11 and BTC/ETH institutional outflows suggest the broader environment is deteriorating. Two critical data gaps (ODL, PermissionedDEX) remain the structural weakness. BIS Nexus threat unchanged.",
     "competing_infrastructure": [
       {
         "name": "SWIFT GPI",
         "status": "LOW_RISK",
-        "status_text": "No material competitive developments detected. Legacy messaging layer continues to lag crypto-native settlement infrastructure in speed and cost."
+        "status_text": "No material updates detected. Legacy messaging infrastructure continues losing mindshare to crypto-native settlement layers but remains deeply embedded in bank operations."
       },
       {
         "name": "Visa B2B Connect",
         "status": "LOW_RISK",
-        "status_text": "No expansion into XRPL's target cross-border corridors observed. Remains focused on traditional card network adjacencies."
+        "status_text": "No expansion into XRPL target corridors observed. Primarily serving existing Visa network bank relationships rather than emerging market corridors."
       },
       {
         "name": "JPMorgan Kinexys",
         "status": "MONITORING",
-        "status_text": "Institutional platform with deep banking distribution. Stable competitive presence but not actively displacing XRPL's bridge corridor thesis. Coexistence remains most likely scenario."
+        "status_text": "JPM's institutional distribution gives Kinexys persistent optionality to expand into cross-border settlement. Coexistence model remains most probable but competitive overlap risk is non-trivial."
       },
       {
         "name": "BIS Project Nexus",
         "status": "ELEVATED_RISK",
-        "status_text": "Remains the most credible structural alternative — multi-CBDC interoperability with sovereign-grade backing could bypass XRPL's bridge function entirely. No new deployment milestones detected but the structural threat is persistent and growing as CBDCs mature."
+        "status_text": "The most credible existential threat to XRPL's bridge currency thesis. Multi-CBDC interoperability with sovereign backing could structurally bypass private bridge assets. No new deployment milestones detected but the architecture remains the primary long-term competitive risk."
       },
       {
         "name": "Ethereum Institutional",
         "status": "MONITORING",
-        "status_text": "ETHA outflows of -$46M daily and -$44M weekly signal continued institutional confidence erosion in ETH. No settlement infrastructure developments threatening XRPL's niche. Competitive pressure is low but Ethereum's smart contract ecosystem retains optionality."
+        "status_text": "ETHA outflows of -$46M daily and -$44M weekly signal continued institutional retreat from Ethereum. ETH is not gaining ground as a settlement infrastructure competitor, but L2 ecosystem development warrants continued monitoring."
       }
     ],
-    "odl_stagnation": "Zero verifiable ODL volume data available — this is the single most dangerous blind spot in the thesis. If ODL has not materially grown beyond pre-2025 levels, the entire utility-driven value proposition collapses regardless of infrastructure milestones.",
-    "token_velocity_concern": "XRP's +6.1% bounce on extreme fear (F&G: 11) with $4.75B volume skews speculative; ETF net inflow of only $2.2M against that volume suggests the price action is overwhelmingly trader-driven, not institutional accumulation. Hold time data remains unavailable.",
+    "odl_stagnation": "Zero verifiable ODL volume data with Q3 2026 transparency deadline now ~4 months away — this is the single most dangerous kill switch gap because it directly tests the core utility thesis that differentiates XRP from a pure speculative asset.",
+    "token_velocity_concern": "XRP's +7.4% bounce at F&G 11 amid $4.4B daily volume is consistent with speculative capitulation-buying rather than utility-driven demand; ETF net inflows of only $2.2M ($19M cumulative) against $88B market cap suggest institutional accumulation is not matching retail enthusiasm.",
     "macro_headwinds": [
       {
         "name": "Global Recession Risk",
         "status": "ELEVATED_RISK",
-        "status_text": "Fear & Greed at 11 is 1 point above absolute floor. JGB crisis, trade war escalation, and sustained institutional crypto outflows collectively signal recession-tier risk positioning across markets."
+        "status_text": "Fear & Greed at 11 is 1 point above the historical floor of 10. Japan's yield crisis (2.24%), trade tariff uncertainty (Section 122), and broad institutional risk-off positioning collectively signal recession probability is elevated."
       },
       {
         "name": "Crypto Winter Signals",
         "status": "ELEVATED_RISK",
-        "status_text": "IBIT -$117M and ETHA -$46M on same day is a $163M institutional exodus from crypto's two largest products. XRP's divergence may be a lagging indicator rather than genuine resilience — requires multi-day confirmation."
+        "status_text": "BTC ETF outflows -$117M and ETH ETF outflows -$46M on Feb 24 represent the most significant single-day institutional exit signals in recent weeks. XRP's divergence may prove temporary if broad risk-off persists."
       },
       {
         "name": "Regulatory Reversal Risk",
         "status": "LOW_RISK",
-        "status_text": "No negative regulatory signals detected. Current administration remains crypto-constructive. Clarity Act pending but no opposition momentum. Low risk maintained."
+        "status_text": "No negative regulatory signals detected. Current administration framework remains supportive. Clarity Act pending but no opposition momentum."
       },
       {
         "name": "Rate Hike Extension",
         "status": "MONITORING",
-        "status_text": "US 10Y at 4.04% is stable but elevated. JGB 10Y at 2.24% in critical zone is the primary rate concern — BOJ policy response could cascade through global fixed income markets and trigger risk-off acceleration."
+        "status_text": "US 10Y at 4.04% stable but elevated. JGB 10Y at 2.24% is the acute concern — BOJ forced tightening could transmit rate shock through global bond markets, tightening financial conditions broadly."
       }
     ],
-    "bear_narrative": "XRPL's on-chain data has falsified the institutional settlement thesis in real-time: $234K DEX depth and $197M DeFi TVL after 12 years are hobby-project metrics, not institutional infrastructure — and this was a blind spot the system wasn't weighting. Combined with zero verifiable ODL data, non-binding partnerships, and USDC/CCTP capturing the exact corridors with 40x more adoption, the thesis now rests entirely on announcements rather than measurable outcomes. REDUCE EXPOSURE — the compounding of utility void, on-chain falsification, and competitive capture constitutes a structural deterioration that macro recovery alone cannot repair."
+    "bear_narrative": "The counter-thesis sweep has exposed a critical evidence vacuum at the center of the XRP institutional settlement thesis: after eight years of partnership announcements, there is zero verifiable demand-side data — ODL volumes are deliberately hidden, on-chain DEX liquidity is $234K (orders of magnitude below institutional requirements), and the thesis scoring system has been confirming supply-side narratives as proof of demand that may not exist. Compounding this, a stablecoin substitution chain shows Ripple's rational corporate incentives now favor RLUSD over XRP bridge utility, meaning Ripple can succeed while XRP's token thesis fails. Tactical recommendation is REDUCE_EXPOSURE until ODL volume data becomes verifiable or XRPL DEX liquidity reaches institutional-grade depth; holding full position against two DANGER-status kill switches with Q3 deadlines and 7 newly discovered blind spots is not defensible risk management."
   },
   "assessment_360": {
     "threat_matrix": [
       {
-        "threat": "ODL Data Void Masks Possible Volume Collapse",
-        "description": "Zero verifiable ODL data with Q3 2026 deadline approaching. Ripple removed public reporting — silence is bearish signal. Without ODL growth, XRP has no utility thesis. This is the single highest-priority threat because it undermines the foundational claim that XRP serves as settlement infrastructure rather than speculative asset.",
-        "impact": 10,
-        "probability": 8,
+        "threat": "ODL Data Void Masks Potential Utility Collapse",
+        "description": "Zero verifiable ODL data with Q3 2026 deadline. Ripple deliberately stopped publishing volume metrics after rebranding to 'Ripple Payments.' Two critical kill switches at null simultaneously. The core utility thesis is unfalsifiable by design — which is itself the strongest bear signal in the dataset.",
+        "impact": 9,
+        "probability": 9,
         "time_weight": 10,
-        "composite": 80,
+        "composite": 81,
         "severity": "critical",
         "proximity": "immediate",
         "blind_spot": false,
@@ -189,21 +189,8 @@
         "category": "assumption_decay"
       },
       {
-        "threat": "XRPL On-Chain Activity Shows No Institutional Settlement Signal",
-        "description": "DEX best bid $2,414, total bid depth ~$234K, DeFi TVL $197M, AMM locked $8.75M. These metrics are incompatible with institutional settlement claims. No treasury would route through a book this thin. On-chain data directly contradicts the adoption narrative — this is falsifiable evidence, not opinion.",
-        "impact": 9,
-        "probability": 9,
-        "time_weight": 10,
-        "composite": 81,
-        "severity": "critical",
-        "proximity": "immediate",
-        "blind_spot": true,
-        "is_new": true,
-        "category": "market_structure"
-      },
-      {
-        "threat": "Circle/USDC Cross-Border Rails Render Bridge Asset Obsolete",
-        "description": "CCTP v2 live on 8+ chains. USDC at $60B+ vs RLUSD at $1.5B — 40x adoption gap. Stablecoin-to-stablecoin settlement eliminates the two-hop friction XRP was designed to solve. If banks settle in USDC directly, bridge currency thesis is structurally redundant. BlackRock/Coinbase institutional trust exceeds Ripple's.",
+        "threat": "Institutional Adoption Narrative Is Circular and Unfalsifiable",
+        "description": "Eight years of partnership announcements with no proportional on-chain utility growth. ~70 txns/ledger is trivial for 'global settlement infrastructure.' Thesis scores show CONFIRMED/STRONG status based on announcements, not usage. The system is confirming supply-side buildout while demand-side evidence is absent or deliberately hidden.",
         "impact": 9,
         "probability": 8,
         "time_weight": 10,
@@ -212,37 +199,24 @@
         "proximity": "immediate",
         "blind_spot": true,
         "is_new": true,
-        "category": "competing_infra"
-      },
-      {
-        "threat": "Narrative Trap: Institutional Adoption as Permanent Forward Promise",
-        "description": "11 years of promised institutional adoption with zero verifiable production-scale deployment. Pattern of rotating catalysts (xRapid→ODL→RLUSD→Permissioned Domains) while prior catalysts quietly fade. DeFi TVL $197M after 12+ years is damning. The absence of evidence IS evidence at this timeline.",
-        "impact": 8,
-        "probability": 8,
-        "time_weight": 10,
-        "composite": 64,
-        "severity": "high",
-        "proximity": "immediate",
-        "blind_spot": true,
-        "is_new": true,
-        "category": "narrative"
-      },
-      {
-        "threat": "Ripple's Institutional Partnerships Are Non-Binding and Non-Exclusive",
-        "description": "No public production contract between any G20 central bank and Ripple. BIS simultaneously runs Nexus, Aurora, Mariana on non-XRPL infra. MOU-level pilots are standard central bank exploration — not commitments. Pilot-to-production gap is where institutional blockchain dies.",
-        "impact": 8,
-        "probability": 8,
-        "time_weight": 10,
-        "composite": 64,
-        "severity": "high",
-        "proximity": "immediate",
-        "blind_spot": true,
-        "is_new": true,
         "category": "assumption_decay"
       },
       {
-        "threat": "BIS Project Nexus Goes Live Before XRPL Proves ODL Scale",
-        "description": "Nexus connects instant payment systems with central bank endorsement. Malaysia, Singapore, Thailand, India connected. Europe 2026-2027. Settles in domestic fiat natively — no bridge asset needed. Targets exact corridors Ripple claims. Sovereign-grade infrastructure will always be preferred over private ledgers.",
+        "threat": "XRPL DEX Volume Reveals Dangerously Thin On-Chain Liquidity",
+        "description": "Top-10 book depth shows ~$234K bids and ~$1.6M asks for XRP/USD. Institutional transfers range $10M-$1B. Current liquidity is 3-4 orders of magnitude insufficient. DEX 24h volume is null. The mechanical foundation for institutional settlement does not exist on-chain today.",
+        "impact": 8,
+        "probability": 9,
+        "time_weight": 10,
+        "composite": 72,
+        "severity": "high",
+        "proximity": "immediate",
+        "blind_spot": true,
+        "is_new": true,
+        "category": "market_structure"
+      },
+      {
+        "threat": "CBDC Interop Layers Bypass Bridge Currency Model",
+        "description": "BIS mBridge, Nexus, and Agorá architect direct CBDC-to-CBDC settlement with sovereign backing. 2026-2027 go-live directly collides with XRP adoption timeline. If central banks settle directly, XRP's bridge currency function becomes architecturally unnecessary at the sovereign layer.",
         "impact": 9,
         "probability": 7,
         "time_weight": 7,
@@ -254,8 +228,34 @@
         "category": "competing_infra"
       },
       {
-        "threat": "Extreme Fear Regime Triggers Institutional Mandate Violations",
-        "description": "F&G at 11 near all-time lows. BTC ETF -$117M, ETH ETF -$46M same day. Institutions execute mandate-driven liquidations, not gradual exits. XRP ETF's small AUM ($1.1B) means even modest institutional exits create outsized price impact. Cascade risk is real.",
+        "threat": "Circle/USDC Cross-Border Rails Make XRP Redundant",
+        "description": "USDC at $60B+ circulation with MiCA compliance, bank partnerships, and near-zero volatility already functions as settlement infrastructure. Banks may rationally prefer stablecoin rails over volatile bridge assets for the same corridors. RLUSD at $1.56B has a fraction of USDC's network effects.",
+        "impact": 8,
+        "probability": 7,
+        "time_weight": 10,
+        "composite": 56,
+        "severity": "high",
+        "proximity": "immediate",
+        "blind_spot": true,
+        "is_new": true,
+        "category": "competing_infra"
+      },
+      {
+        "threat": "RLUSD Cannibalizes XRP Bridge Utility",
+        "description": "RLUSD growing (31% of $5B target) while ODL data is invisible. Ripple earns reserve yield on RLUSD but no direct revenue from XRP bridge usage. Rational corporate incentive favors RLUSD promotion. RLUSD success may paradoxically prove Ripple's business while undermining XRP's token value proposition.",
+        "impact": 7,
+        "probability": 7,
+        "time_weight": 7,
+        "composite": 34.3,
+        "severity": "high",
+        "proximity": "near-term",
+        "blind_spot": true,
+        "is_new": true,
+        "category": "market_structure"
+      },
+      {
+        "threat": "Extreme Fear Environment Triggers Institutional De-Risking Cascade",
+        "description": "F&G at 11, BTC IBIT -$117M, ETH ETHA -$46M. Institutional capital fleeing crypto broadly. XRP ETF $2.2M daily inflow is noise against outflow magnitude. If macro stress deepens (JGB crisis, trade war), risk committees mandate blanket crypto reduction. 1.3% supply lock provides no price floor.",
         "impact": 7,
         "probability": 7,
         "time_weight": 10,
@@ -267,182 +267,181 @@
         "category": "macro"
       },
       {
-        "threat": "XRP ETF AUM Stalls at Sub-Scale Levels",
-        "description": "At $2.2M daily net flow, reaching $5B target would take 40+ years. Currently 22% of target with 10 months remaining. BTC/ETH ETFs seeing outflows suggesting crypto ETF demand saturation. XRP divergence may be small-cap anomaly. Reflexive price support mechanism failing to engage.",
+        "threat": "Japan BOJ Crisis Collapses SBI/JPY Corridor Thesis",
+        "description": "JGB 10Y at 2.24% is multi-decade extreme. BOJ emergency tightening would unwind yen carry trade and freeze JPY cross-border corridors — exactly the flows SBI targets for XRP settlement. Japan adoption thesis score of FAVORABLE assumes stable corridor growth that a JGB crisis directly inverts.",
         "impact": 7,
-        "probability": 7,
+        "probability": 6,
         "time_weight": 10,
-        "composite": 49,
+        "composite": 42,
         "severity": "high",
         "proximity": "immediate",
-        "blind_spot": false,
-        "is_new": false,
-        "category": "market_structure"
+        "blind_spot": true,
+        "is_new": true,
+        "category": "geopolitical"
       }
     ],
     "compounding_risks": [
       {
         "chain": [
-          "ODL Data Void",
-          "XRPL On-Chain Activity Shows No Institutional Settlement",
-          "Narrative Trap: Permanent Forward Promise"
+          "ODL Data Void Masks Potential Utility Collapse",
+          "Institutional Adoption Narrative Is Circular and Unfalsifiable",
+          "XRPL DEX Volume Reveals Dangerously Thin On-Chain Liquidity"
         ],
-        "outcome": "The utility thesis triple-kill: ODL is unverifiable, on-chain metrics show no institutional activity, and the pattern of perpetual forward promises becomes the dominant explanation. XRP is reclassified by the market as a pure speculative asset with no utility premium. Price collapses to velocity-adjusted fair value which, without settlement demand, approaches zero utility premium.",
+        "outcome": "THESIS INTEGRITY FAILURE: The three highest-composite threats form a single devastating chain. ODL opacity prevents falsification → circular narrative substitutes announcements for evidence → on-chain liquidity data proves the mechanical infrastructure doesn't support institutional settlement. Together they reveal the thesis may be validating a supply-side buildout narrative while the demand-side reality is either nonexistent or deliberately hidden. This is not three separate risks — it is one systemic evidence failure viewed from three angles.",
         "severity": "critical"
       },
       {
         "chain": [
-          "Circle/USDC Rails",
-          "Solana/Base Capture Settlement Layer",
-          "BIS Project Nexus"
+          "RLUSD Cannibalizes XRP Bridge Utility",
+          "Circle/USDC Cross-Border Rails Make XRP Redundant",
+          "Stablecoin Legislation Commoditizes RLUSD"
         ],
-        "outcome": "Complete corridor capture: stablecoins take private institutional settlement (USDC on Solana/Base), Nexus takes sovereign settlement (central bank corridors). XRPL is squeezed from both directions — no addressable market remains for bridge currency function. RLUSD at $1.5B cannot compete with $60B+ USDC or sovereign fiat rails.",
+        "outcome": "STABLECOIN SUBSTITUTION CASCADE: RLUSD growth validates stablecoin settlement demand but cannibalizes XRP bridge utility. USDC already dominates the same use case with 40x the network effect. Stablecoin legislation then commoditizes even RLUSD's differentiation. Net result: settlement demand proven real but routed through stablecoins, not XRP. Ripple the company wins; XRP the token loses.",
         "severity": "critical"
       },
       {
         "chain": [
-          "Extreme Fear Regime",
-          "XRP ETF AUM Stalls",
-          "Japan BOJ Yield Crisis"
+          "Extreme Fear Environment Triggers De-Risking",
+          "Japan BOJ Crisis Collapses SBI/JPY Corridor",
+          "CBDC Interop Layers Bypass Bridge Currency"
         ],
-        "outcome": "Institutional capital flight cascade: F&G at 11 triggers mandate reviews, ETF flows stall or reverse, Japan financial stress freezes SBI/XRPL institutional activity. The three strongest institutional adoption vectors (ETF, Japan corridor, risk-on allocation) all fail simultaneously. Price support collapses without speculative floor.",
+        "outcome": "MACRO-STRUCTURAL PINCER: Immediate macro stress forces institutional capital out of crypto while JGB crisis freezes XRP's strongest regional corridor (Japan/SBI). Meanwhile, CBDC platforms advance as sovereign alternatives. XRP loses both the cyclical window (institutions de-risk) and the structural window (CBDCs fill the gap). Recovery requires both macro normalization AND CBDC platform failure — low probability combination.",
         "severity": "high"
       },
       {
         "chain": [
-          "Ripple Partnerships Non-Binding",
-          "mBridge/CBDC Interop",
-          "BIS Project Nexus"
+          "AI-Native Settlement Agents Disintermediate Chain-Specific Infrastructure",
+          "XRPL DEX Volume Reveals Thin Liquidity",
+          "Circle/USDC Cross-Border Rails"
         ],
-        "outcome": "Sovereign-grade settlement bifurcation: Western corridors go Nexus, Eastern/BRICS corridors go mBridge/CBDC. Both are sovereign-controlled, neither needs private bridge assets. Ripple's MOU-level relationships provide no contractual defense. XRPL becomes structurally excluded from the highest-value settlement corridors globally.",
+        "outcome": "COMMODITIZATION DEATH SPIRAL: AI agents route settlements to cheapest/fastest rail dynamically. XRPL's thin liquidity means higher slippage vs competitors. Agents rationally route to USDC rails with deeper liquidity. XRPL volume stays thin → liquidity never develops → agents never route there. Self-reinforcing exclusion from the AI-mediated settlement future.",
         "severity": "high"
       }
     ],
     "blind_spots": [
       {
-        "threat": "XRPL On-Chain Activity Shows No Institutional Settlement Signal",
+        "threat": "Institutional Adoption Narrative Is Circular and Unfalsifiable",
         "importance": "critical",
-        "suggested_source": "Direct XRPL ledger monitoring — DEX depth, transaction count, unique address growth, large-value transaction frequency (>$100K equivalent). Already partially captured but not weighted in thesis scoring.",
+        "suggested_source": "Create a 'Narrative vs. Evidence' scorecard tracking partnership announcements against on-chain settlement volume, active addresses in settlement corridors, and DEX liquidity growth. Cross-reference with XRPL on-chain metrics.",
         "x402_opportunity": true,
         "recommend_permanent_monitoring": true
       },
       {
-        "threat": "Circle/USDC Cross-Border Rails",
+        "threat": "XRPL DEX Volume Reveals Dangerously Thin On-Chain Liquidity",
         "importance": "critical",
-        "suggested_source": "CCTP volume tracking via Circle API, USDC cross-chain transfer volumes, bank partnership announcements. DefiLlama bridge volume data.",
+        "suggested_source": "XRPL native book depth monitoring (already partially implemented). Expand to track top-5 pairs, aggregate DEX volume via XRPL websocket, and benchmark against institutional order size thresholds ($10M, $50M, $100M).",
         "x402_opportunity": true,
         "recommend_permanent_monitoring": true
       },
       {
-        "threat": "Narrative Trap: Institutional Adoption as Permanent Forward Promise",
+        "threat": "Circle/USDC Cross-Border Rails Make XRP Redundant",
         "importance": "high",
-        "suggested_source": "Create a 'promise tracker' — log each Ripple institutional claim with date, then track to verifiable production deployment. Measure promise-to-delivery ratio over rolling 12 months.",
+        "suggested_source": "Track USDC cross-border settlement volume via Circle's transparency reports, CCTP bridge volume, and bank partnership announcements. Compare corridor-by-corridor against Ripple Payments targets.",
         "x402_opportunity": false,
         "recommend_permanent_monitoring": true
       },
       {
-        "threat": "Ripple's Partnerships Are Non-Binding",
+        "threat": "RLUSD Cannibalizes XRP Bridge Utility",
         "importance": "high",
-        "suggested_source": "Track binding production contracts vs MOUs/pilots. Monitor government procurement databases for Ripple/XRPL contracts. Freedom of Information requests to central banks.",
-        "x402_opportunity": false,
-        "recommend_permanent_monitoring": true
-      },
-      {
-        "threat": "Solana/Base Capture Stablecoin Settlement Layer",
-        "importance": "high",
-        "suggested_source": "Track stablecoin settlement volumes by chain (Artemis, DefiLlama). Monitor Visa/PayPal/Stripe chain selection announcements. Compare XRPL stablecoin TVL vs competitors.",
+        "suggested_source": "Track RLUSD-to-XRP usage ratio on XRPL. Monitor whether RLUSD settlement transactions use XRP as bridge or settle directly. Ripple revenue disclosures (if IPO materializes) would clarify incentive alignment.",
         "x402_opportunity": true,
         "recommend_permanent_monitoring": true
       },
       {
-        "threat": "mBridge/CBDC Interop Layer",
+        "threat": "AI-Native Settlement Agents Disintermediate Chain-Specific Infrastructure",
         "importance": "high",
-        "suggested_source": "BIS Innovation Hub publications, PBoC digital currency reports, BRICS summit communiqués on settlement infrastructure.",
+        "suggested_source": "Monitor multi-chain agent framework adoption (Olas, Fetch.ai, x402 protocol usage stats). Track which chains receive autonomous agent settlement volume. Ironically, our own x402 agent data is a leading indicator.",
+        "x402_opportunity": true,
+        "recommend_permanent_monitoring": true
+      },
+      {
+        "threat": "Japan BOJ Crisis Collapses SBI/JPY Corridor Thesis",
+        "importance": "high",
+        "suggested_source": "Already tracking JGB 10Y and USD/JPY. Add BOJ policy meeting calendar alerts, SBI Holdings quarterly XRP volume disclosures, and JPY remittance corridor flow data from World Bank bilateral remittance matrices.",
         "x402_opportunity": false,
         "recommend_permanent_monitoring": true
       },
       {
-        "threat": "AI-Native Payment Agents Bypass Traditional Settlement",
+        "threat": "Ripple Equity IPO Decouples Company from Token",
         "importance": "moderate",
-        "suggested_source": "Track AI agent framework payment integrations (LangChain, CrewAI, OpenAI plugins). Monitor chain selection in agent payment protocols.",
-        "x402_opportunity": true,
+        "suggested_source": "Monitor SEC filings, Ripple executive statements, and secondary market Ripple equity pricing (Forge Global, etc.). Track whether institutional Ripple investors hold XRP or equity exclusively.",
+        "x402_opportunity": false,
         "recommend_permanent_monitoring": true
       },
       {
-        "threat": "Japan BOJ Yield Crisis",
-        "importance": "high",
-        "suggested_source": "Already tracking JGB 10Y (2.24%) and USD/JPY (156.25). Add: BOJ policy statements, SBI Holdings crypto-related announcements, FSA regulatory posture changes.",
+        "threat": "Stablecoin Legislation Commoditizes RLUSD",
+        "importance": "moderate",
+        "suggested_source": "Congressional bill tracker for GENIUS Act, STABLE Act. Monitor bank stablecoin issuance announcements. Track total stablecoin issuer count post-legislation.",
         "x402_opportunity": false,
         "recommend_permanent_monitoring": true
       }
     ],
     "bias_check": {
-      "bull_indicators": 6,
+      "bull_indicators": 7,
       "bear_indicators": 18,
-      "ratio": "1:3 bear-favored",
-      "assessment": "The system has a severe bull-lean embedded in thesis_scores — 5 of 8 are rated 'CONFIRMED' or 'STRONG' or 'ACCELERATING' with 'high' confidence, yet the underlying data contradicts these ratings. 'XRPL Infrastructure: ACCELERATING (high confidence)' is directly falsified by $234K DEX depth and $197M DeFi TVL. 'Institutional Custody: STRONG (high confidence)' has no verifiable on-chain evidence. The thesis scoring system appears to be grading Ripple's announcements, not measurable outcomes. Bull indicators: XRP ETF exists (confirmed), regulatory clarity improving (confirmed), RLUSD launched ($1.5B), XRP price +6% daily, ETF positive divergence from BTC/ETH, x402 protocol functional. Bear indicators: ODL null, on-chain metrics hobby-scale, DEX depth trivial, DeFi TVL minimal, ETF AUM at 22% of target, ETF flow rate projects 40+ year timeline, F&G at 11, BTC/ETH ETF outflows, USDC 40x larger than RLUSD, Nexus targeting same corridors, partnerships non-binding, no production contracts, narrative recycling pattern, Japan yield stress, mBridge sovereign alternative, Solana/Base capturing stablecoin settlement, AI agents choosing other chains, XRPL 12 years old with $197M TVL.",
+      "ratio": "7:18 (bull:bear) — 2.6x bear overweight",
+      "assessment": "SEVERE BULL BIAS IN THESIS SCORES despite overwhelming bear data. The system currently shows regulatory=CONFIRMED, institutional_custody=STRONG, etf_adoption=CONFIRMED, xrpl_infrastructure=ACCELERATING — all high confidence. But these scores are based on supply-side announcements. The sweep reveals zero demand-side confirmation: no ODL volume, no DEX liquidity, no permissioned DEX adoption data, ~70 txns/ledger. The thesis scoring mechanism is structurally biased toward narrative confirmation over utility evidence. Bull indicators: (1) XRP ETF exists with $1.1B AUM, (2) RLUSD at $1.56B, (3) 7 ETF funds live, (4) positive XRP daily flow divergence, (5) regulatory clarity favorable, (6) x402 protocol working on XRPL, (7) permissioned domains feature shipped. Bear indicators: (1) ODL null, (2) DEX liquidity trivial, (3) F&G=11, (4) BTC outflows -$117M, (5) ETH outflows -$46M, (6) JGB crisis, (7) CBDC platforms advancing, (8) USDC dominance, (9) RLUSD cannibalization risk, (10) AI agent commoditization, (11) circular narrative, (12) permissioned DEX null, (13) 70 txns/ledger, (14) stablecoin legislation threat, (15) IPO decoupling risk, (16) liquidity fragmentation risk, (17) Ripple opacity on volumes, (18) 1.3% supply lock insufficient.",
       "recommended_additions": [
-        "Downgrade 'XRPL Infrastructure' from ACCELERATING/high to UNVERIFIED/low based on on-chain data",
-        "Downgrade 'Institutional Custody' from STRONG/high to UNVERIFIED/low until production contracts verified",
-        "Add competing_infra_pressure metric tracking USDC/CCTP volume vs RLUSD",
-        "Add on-chain institutional activity score based on large-value transactions and DEX depth",
-        "Add promise-to-delivery tracker for Ripple institutional claims"
+        "Add demand-side utility metrics to thesis scoring (actual settlement volume, DEX liquidity depth, active settlement corridor count)",
+        "Separate 'infrastructure shipped' from 'infrastructure used' in scoring",
+        "Add USDC/stablecoin cross-border volume as competing infrastructure tracker",
+        "Weight thesis scores by evidence quality — announcements scored lower than on-chain data"
       ]
     },
     "kill_switches": [
       {
         "name": "ODL Volume",
         "status": "danger",
-        "detail": "NULL data with Q3 2026 deadline 7 months away. Ripple removed public reporting. No third-party verification source exists. The sweep confirms this isn't just a data gap — it's likely evidence of stagnation. If data remains null by Q3 2026, this kill switch triggers automatically."
+        "detail": "NULL data with Q3 2026 deadline. Not merely 'needs data' — Ripple actively stopped publishing metrics. Combined with circular narrative finding, this is a deliberate opacity pattern. Upgrading from no_data to DANGER because the inability to measure is now itself evidence of potential failure. Zero progress verifiable toward $25B target."
       },
       {
         "name": "RLUSD Circulation",
         "status": "warning",
-        "detail": "At $1.56B against $5B target (31%), needs $11M/day growth for remaining 10 months. Achievable mathematically but faces headwind from USDC at $60B+ and competing stablecoin settlement rails. The sweep reveals RLUSD's competitive position is far weaker than raw numbers suggest — 40x smaller than primary competitor."
+        "detail": "At $1.56B (31% of $5B target) with 10 months remaining, requires $11.12M/day growth — aggressive but not impossible. However, new finding that RLUSD may cannibalize XRP utility means this kill switch succeeding could paradoxically harm the broader thesis. The metric is tracking but the interpretation is inverted."
       },
       {
         "name": "PermissionedDEX Adoption",
         "status": "danger",
-        "detail": "NULL data with Q3 2026 deadline. No verifiable institutional count. On-chain data shows DEX depth of $234K — incompatible with any institutional participation. This kill switch compounds with ODL void."
+        "detail": "NULL data with Q3 2026 deadline (Sept 30). Zero institutions verified. New finding on liquidity fragmentation suggests even if institutions join, siloed domains may not produce unified liquidity. The kill switch target of 5 institutions may be insufficient — need to also verify cross-domain liquidity sharing."
       },
       {
         "name": "XRP ETF AUM",
         "status": "warning",
-        "detail": "At $1.1B (22% of $5B target). Daily net flow $2.2M projects 40+ years to target at current pace. Positive divergence from BTC/ETH is real but insufficient. Needs 10x acceleration in flow rate to hit target by deadline. BTC/ETH ETF outflows suggest broader crypto ETF demand saturation."
+        "detail": "At $1.1B (22% of $5B target). Daily inflow of $2.2M is positive but marginal — requires $12.6M/day to hit target. In extreme fear environment with BTC/ETH outflows, sustained acceleration is unlikely near-term. Weekly net flow of $2M is constructive but 6x acceleration needed."
       },
       {
         "name": "Fear & Greed Extended Below 20",
-        "status": "danger",
-        "detail": "F&G at 11 — deep into danger zone. Duration below 20 is the trigger metric, not yet measured. BTC ETF -$117M and ETH ETF -$46M confirm institutional mandate-driven selling is active. XRP's small ETF base is vulnerable to outsized impact from even modest institutional exits."
+        "status": "warning",
+        "detail": "F&G at 11 — deep in trigger zone. Kill switch requires 'extended period' below 20. Currently one confirmed reading. If this persists 7+ days, approaches trigger threshold. BTC/ETH outflow pattern suggests this isn't a one-day anomaly."
       }
     ],
     "new_kill_switches_recommended": [
       {
-        "name": "XRPL On-Chain Institutional Activity",
-        "trigger": "If DEX depth remains below $5M and DeFi TVL below $500M by Q3 2026, institutional settlement thesis is falsified by on-chain evidence.",
-        "reasoning": "The sweep revealed XRPL's on-chain metrics ($234K DEX depth, $197M TVL, $8.75M AMM) are incompatible with institutional settlement claims. This is the most objective falsifiability test available — chains being used for settlement show it in their data."
+        "name": "XRPL DEX Liquidity Depth",
+        "trigger": "Top-10 book depth for XRP/USD below $5M in bids for 30 consecutive days. Currently at ~$234K — already 20x below proposed trigger.",
+        "reasoning": "Institutional settlement requires sufficient on-chain liquidity. Current $234K bid depth cannot support even a single small institutional transaction without catastrophic slippage. This is the mechanical precondition for the entire thesis. If the DEX can't clear institutional orders, partnerships are irrelevant."
       },
       {
-        "name": "Competing Stablecoin Settlement Dominance",
-        "trigger": "If USDC cross-chain settlement volume exceeds $10B/month on CCTP while RLUSD remains below $5B circulation, bridge asset thesis is competitively obsolete.",
-        "reasoning": "Circle's CCTP directly competes with XRP's bridge function. The 40x market cap gap ($60B vs $1.5B) represents a potentially insurmountable network effect advantage. This was a critical blind spot."
+        "name": "RLUSD-to-XRP Cannibalization Ratio",
+        "trigger": "RLUSD settlement volume exceeds XRP bridge volume on XRPL for 3 consecutive months (requires both metrics becoming measurable).",
+        "reasoning": "RLUSD success that doesn't generate XRP bridge demand proves the stablecoin substitution thesis. Ripple's corporate incentives favor RLUSD revenue. Need to detect whether XRPL activity growth accrues to RLUSD or XRP."
       },
       {
-        "name": "BIS Nexus Production Corridors",
-        "trigger": "If Nexus achieves 3+ production corridors overlapping Ripple's target markets before XRPL demonstrates comparable institutional volume.",
-        "reasoning": "Nexus is the sovereign-grade alternative that central banks will default to. Already connected 4 Asian markets. Europe onboarding 2026-2027. Production deployment in Ripple's target corridors would structurally eliminate the addressable market."
+        "name": "Competing Stablecoin Settlement Volume",
+        "trigger": "USDC cross-border settlement volume exceeds $50B annualized in corridors overlapping Ripple Payments targets.",
+        "reasoning": "Direct evidence that the settlement demand XRP targets is being captured by stablecoins. USDC already has massive network advantage; this kill switch detects when that advantage becomes deterministic."
       },
       {
-        "name": "Ripple Production Contract Verification",
-        "trigger": "If no verifiable production contract (not MOU/pilot) with a G20 central bank or top-50 global bank is announced by Q4 2026.",
-        "reasoning": "After 12+ years, the absence of a single verifiable production contract is the strongest evidence against the institutional thesis. This creates a clear, falsifiable deadline."
+        "name": "CBDC Platform Go-Live",
+        "trigger": "Any BIS-backed CBDC interop platform (mBridge, Nexus, Agorá) achieves production settlement in 3+ currency corridors.",
+        "reasoning": "Sovereign-backed direct settlement renders bridge currency architecturally unnecessary. Production go-live in multiple corridors — not pilots — is the structural kill shot for XRP's core value proposition."
       }
     ],
     "tactical_recommendation": "REDUCE_EXPOSURE",
-    "recommendation_reasoning": "Three critical-severity findings compound into a thesis-invalidation chain: (1) ODL data void means utility is unverifiable, (2) on-chain metrics actively contradict institutional settlement claims with hard evidence ($234K DEX depth), and (3) competing infrastructure (USDC/CCTP, BIS Nexus) is capturing the exact corridors XRPL targets with 40x more adoption. The combination of zero verifiable utility + falsifying on-chain evidence + accelerating competitive capture represents a structural challenge, not a cyclical one. Two of five kill switches are in DANGER status, one is WARNING trending danger. The macro environment (F&G 11, institutional crypto outflows) removes the speculative floor that might otherwise compensate for utility absence. This is not a single-threat escalation — it is a multi-vector convergence that the existing thesis scoring system has been masking with optimistic ratings disconnected from measurable outcomes.",
-    "bear_pressure_score": 62,
-    "score_delta": 29,
-    "score_reasoning": "Previous score of 33 was anchored to the existing bear case framework which tracked BIS Nexus and ODL stagnation but missed six critical blind spots. The sweep revealed: (1) XRPL on-chain data actively falsifies institutional settlement claims (+12 points — this is hard evidence, not speculation), (2) USDC/CCTP competitive threat is immediate and 40x larger than RLUSD (+8 points), (3) 12-year narrative recycling pattern with zero production contracts (+5 points), (4) partnership quality is MOU-level not production-grade (+4 points). These are not temporary conditions — they are structural. Score moderated from potential 70+ because: XRP ETF positive flow divergence is real (constructive), regulatory environment remains favorable, and RLUSD at $1.5B shows some traction. The 62 reflects a thesis where the bull case rests entirely on future promises while present evidence trends bearish across every measurable dimension.",
-    "commander_summary": "XRPL's on-chain data has falsified the institutional settlement thesis in real-time: $234K DEX depth and $197M DeFi TVL after 12 years are hobby-project metrics, not institutional infrastructure — and this was a blind spot the system wasn't weighting. Combined with zero verifiable ODL data, non-binding partnerships, and USDC/CCTP capturing the exact corridors with 40x more adoption, the thesis now rests entirely on announcements rather than measurable outcomes. REDUCE EXPOSURE — the compounding of utility void, on-chain falsification, and competitive capture constitutes a structural deterioration that macro recovery alone cannot repair."
+    "recommendation_reasoning": "Three critical-severity threats compound into a thesis integrity failure: ODL opacity + circular narrative + trivial on-chain liquidity collectively demonstrate that the institutional settlement thesis has no demand-side evidence after 8 years. Two kill switches are in DANGER (ODL, PermissionedDEX) with deadlines approaching. The stablecoin substitution chain (RLUSD cannibalization + USDC competition + legislation commoditization) presents a scenario where Ripple succeeds but XRP fails. Macro environment (F&G=11, BTC/ETH outflows, JGB crisis) removes the rising-tide tailwind needed to paper over structural weaknesses. The thesis is not yet killed — ETF infrastructure exists, regulatory clarity is real, RLUSD is growing — but the risk/reward has shifted materially against holding full position while two critical data voids remain unresolved. Reduce exposure until ODL volume data becomes verifiable or XRPL DEX liquidity reaches institutional-grade thresholds.",
+    "bear_pressure_score": 52,
+    "score_delta": 19,
+    "score_reasoning": "Significant increase from 33 to 52 driven by three factors: (1) The sweep revealed 7 previously untracked blind spots, 3 of which are critical or high severity and compound with existing threats — this was not priced into the previous score. (2) The thesis integrity failure compound chain (ODL void + circular narrative + thin DEX liquidity) is qualitatively different from individual threats — it challenges whether the thesis scoring mechanism itself is reliable. (3) The stablecoin substitution chain (RLUSD cannibalization + USDC + legislation) presents a new structural scenario where Ripple corporate success decouples from XRP token value. Previous score of 33 assumed threats were individually manageable; the compounding analysis proves they are mutually reinforcing. Score held below 60 because: ETF infrastructure is real ($1.1B AUM, 7 funds), regulatory environment is genuinely favorable, RLUSD growth is on a viable trajectory, and macro stress may be cyclical rather than structural.",
+    "commander_summary": "The counter-thesis sweep has exposed a critical evidence vacuum at the center of the XRP institutional settlement thesis: after eight years of partnership announcements, there is zero verifiable demand-side data — ODL volumes are deliberately hidden, on-chain DEX liquidity is $234K (orders of magnitude below institutional requirements), and the thesis scoring system has been confirming supply-side narratives as proof of demand that may not exist. Compounding this, a stablecoin substitution chain shows Ripple's rational corporate incentives now favor RLUSD over XRP bridge utility, meaning Ripple can succeed while XRP's token thesis fails. Tactical recommendation is REDUCE_EXPOSURE until ODL volume data becomes verifiable or XRPL DEX liquidity reaches institutional-grade depth; holding full position against two DANGER-status kill switches with Q3 deadlines and 7 newly discovered blind spots is not defensible risk management."
   }
 }
