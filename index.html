@@ -623,6 +623,23 @@ textarea:focus { border-color:var(--accent-cyan); }
   color:var(--text-muted);
   letter-spacing:1px;
 }
+/* ─── x402 Transactions Table ───────────────────────────────────────────── */
+.tx-table { width:100%; table-layout:fixed; border-collapse:collapse; }
+.tx-table th { font-size:9px; font-weight:normal; letter-spacing:1px; color:var(--text-muted); font-family:'JetBrains Mono',monospace; white-space:nowrap; padding:3px 6px 5px; }
+.tx-table td { font-size:9px; padding:4px 6px; vertical-align:middle; }
+.tx-ep     { width:36%; text-align:left;  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.tx-drops  { width:13%; text-align:right; }
+.tx-hash   { width:18%; text-align:right; }
+.tx-status { width:17%; text-align:right; }
+.tx-time   { width:16%; text-align:right; }
+@media (max-width:640px) {
+  .tx-time   { display:none; }
+  .tx-ep     { width:40%; }
+  .tx-drops  { width:17%; }
+  .tx-hash   { width:23%; }
+  .tx-status { width:20%; }
+  .tx-table th, .tx-table td { font-size:11px; padding:4px; }
+}
 </style>
 </head>
 <body>
@@ -2139,22 +2156,14 @@ function renderX402AgentWallet(d) {
   const histEl = document.getElementById('x402TxHistory');
   if (histEl) {
     if (txns.length > 0) {
-      const thStyle = `padding:3px 6px 5px;font-size:9px;font-weight:normal;letter-spacing:1px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;white-space:nowrap;`;
       const header = `<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">` +
-        `<table style="width:100%;table-layout:fixed;border-collapse:collapse;min-width:340px;">` +
-        `<colgroup>` +
-        `<col style="width:36%">` +
-        `<col style="width:13%">` +
-        `<col style="width:18%">` +
-        `<col style="width:17%">` +
-        `<col style="width:16%">` +
-        `</colgroup>` +
+        `<table class="tx-table">` +
         `<thead><tr style="border-bottom:1px solid rgba(255,255,255,0.1);">` +
-        `<th style="${thStyle}text-align:left;padding-left:0;">ENDPOINT</th>` +
-        `<th style="${thStyle}text-align:right;">DROPS</th>` +
-        `<th style="${thStyle}text-align:right;">TX HASH</th>` +
-        `<th style="${thStyle}text-align:right;">STATUS</th>` +
-        `<th style="${thStyle}text-align:right;padding-right:0;">TIME</th>` +
+        `<th class="tx-ep">ENDPOINT</th>` +
+        `<th class="tx-drops">DROPS</th>` +
+        `<th class="tx-hash">TX HASH</th>` +
+        `<th class="tx-status">STATUS</th>` +
+        `<th class="tx-time">TIME</th>` +
         `</tr></thead><tbody>`;
       const rows = txns.map(tx => {
         const statusColor = tx.status === 'SUCCESS' ? 'var(--accent-green)'
@@ -2164,18 +2173,18 @@ function renderX402AgentWallet(d) {
         const drops    = tx.amount_drops != null ? tx.amount_drops : '—';
         const hashCell = tx.tx_hash
           ? `<a href="https://livenet.xrpl.org/transactions/${escHtml(tx.tx_hash)}" target="_blank" rel="noopener" ` +
-            `title="${escHtml(tx.tx_hash)}" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent-blue);">` +
+            `title="${escHtml(tx.tx_hash)}" style="font-family:'JetBrains Mono',monospace;color:var(--accent-blue);">` +
             `${tx.tx_hash.slice(0, 8)}…</a>`
           : `<span style="color:var(--text-muted);">—</span>`;
         const tsStr = tx.timestamp
           ? new Date(tx.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
           : '—';
         return `<tr style="border-bottom:1px solid var(--border);">` +
-          `<td style="padding:4px 6px 4px 0;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escHtml(endpoint)}</td>` +
-          `<td style="padding:4px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--accent-cyan);text-align:right;">${escHtml(String(drops))}</td>` +
-          `<td style="padding:4px 6px;font-size:9px;text-align:right;">${hashCell}</td>` +
-          `<td style="padding:4px 6px;font-size:9px;color:${statusColor};text-align:right;">${escHtml(tx.status ?? '—')}</td>` +
-          `<td style="padding:4px 0 4px 6px;font-size:9px;color:var(--text-muted);text-align:right;">${escHtml(tsStr)}</td>` +
+          `<td class="tx-ep" style="font-family:'JetBrains Mono',monospace;color:var(--text-secondary);">${escHtml(endpoint)}</td>` +
+          `<td class="tx-drops" style="font-family:'JetBrains Mono',monospace;color:var(--accent-cyan);">${escHtml(String(drops))}</td>` +
+          `<td class="tx-hash">${hashCell}</td>` +
+          `<td class="tx-status" style="color:${statusColor};">${escHtml(tx.status ?? '—')}</td>` +
+          `<td class="tx-time" style="color:var(--text-muted);">${escHtml(tsStr)}</td>` +
           `</tr>`;
       }).join('');
       histEl.innerHTML = header + rows + `</tbody></table></div>`;
