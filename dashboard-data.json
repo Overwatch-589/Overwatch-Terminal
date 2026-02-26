@@ -405,12 +405,12 @@
     "facilitator_ok": true,
     "agent_address": "rPiok45Qs88WMYQbYzDqXQbPgaCr9PnX5M",
     "merchant_base": "http://127.0.0.1:4403",
-    "balance_xrp": 14.992917,
-    "payments_sent": 6,
+    "balance_xrp": 14.989881,
+    "payments_sent": 9,
     "session_drops_spent": 3000,
     "session_xrp_spent": 0.003,
-    "lifetime_drops_spent": 6000,
-    "lifetime_xrp_spent": 0.006,
+    "lifetime_drops_spent": 9000,
+    "lifetime_xrp_spent": 0.009,
     "guardrails": {
       "balance_floor_xrp": 11,
       "session_cap_drops": 10000,
@@ -423,10 +423,10 @@
         "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
         "amount_drops": "1000",
         "amount_xrp": 0.001,
-        "invoice_id": "BA32A9D5E1244E688AC8BDD38026563F",
-        "tx_hash": "F05D4EEFD82F66C34E22277C4606BBBA239CA41A3CE60894641811F4EC042E8B",
+        "invoice_id": "A29A532176B6411D932462C1064A0BCF",
+        "tx_hash": "4CE4764648385E29244FF27662B7B8EC56A1EC5B68A36560F0C2A6A6FD368AA3",
         "status": "SUCCESS",
-        "timestamp": "2026-02-25T16:40:22.429Z"
+        "timestamp": "2026-02-26T04:22:38.809Z"
       },
       {
         "endpoint": "/api/v1/bear-case",
@@ -434,10 +434,10 @@
         "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
         "amount_drops": "1500",
         "amount_xrp": 0.0015,
-        "invoice_id": "8FAF4ECC30B74AB4AC7A693401978F36",
-        "tx_hash": "E0145699EF5C2359EDC68EABE52BC24C657B755D23BEBE7AA9FE1F423A9DD053",
+        "invoice_id": "2A57B55394C045B3A63353DE2EFC05E2",
+        "tx_hash": "A2320F4CB41368ED1EB41C8B0BA00CD39E183456CFE8D5A0DD894DCB447A0C3D",
         "status": "SUCCESS",
-        "timestamp": "2026-02-25T16:40:30.104Z"
+        "timestamp": "2026-02-26T04:22:47.343Z"
       },
       {
         "endpoint": "/api/v1/stress-report",
@@ -445,10 +445,10 @@
         "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
         "amount_drops": "500",
         "amount_xrp": 0.0005,
-        "invoice_id": "47FF0ADFEE494D3187949F3944E5EB53",
-        "tx_hash": "307340511901488A87DC7AC07A83FAAF3274DD0DD1D0B3CB717515CC7626F423",
+        "invoice_id": "3F63F1CABF9C4547B804B87CA39EFF19",
+        "tx_hash": "55A572A9A798D24BF334EA557FD237314D6B0788F604DFFDAC845F51BAEFABBD",
         "status": "SUCCESS",
-        "timestamp": "2026-02-25T16:40:37.784Z"
+        "timestamp": "2026-02-26T04:22:54.756Z"
       }
     ],
     "last_payment": {
@@ -457,31 +457,31 @@
       "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
       "amount_drops": "500",
       "amount_xrp": 0.0005,
-      "invoice_id": "47FF0ADFEE494D3187949F3944E5EB53",
-      "tx_hash": "307340511901488A87DC7AC07A83FAAF3274DD0DD1D0B3CB717515CC7626F423",
+      "invoice_id": "3F63F1CABF9C4547B804B87CA39EFF19",
+      "tx_hash": "55A572A9A798D24BF334EA557FD237314D6B0788F604DFFDAC845F51BAEFABBD",
       "status": "SUCCESS",
-      "timestamp": "2026-02-25T16:40:37.784Z"
+      "timestamp": "2026-02-26T04:22:54.756Z"
     },
     "x402_flow": [
       "── Premium Analysis ──",
       "→ GET http://127.0.0.1:4403/api/v1/premium-analysis  →  HTTP 402",
-      "← 402  amount=1000 drops  invoiceId=BA32A9D5E124…",
-      "→ Signed Payment  hash=F05D4EEFD82F…  drops=1000",
+      "← 402  amount=1000 drops  invoiceId=A29A532176B6…",
+      "→ Signed Payment  hash=4CE476464838…  drops=1000",
       "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
-      "← 200  tx=F05D4EEFD82F…  payer=rPiok45Qs8…",
+      "← 200  tx=4CE476464838…  payer=rPiok45Qs8…",
       "── Bear Case ──",
       "→ GET http://127.0.0.1:4403/api/v1/bear-case  →  HTTP 402",
-      "← 402  amount=1500 drops  invoiceId=8FAF4ECC30B7…",
-      "→ Signed Payment  hash=E0145699EF5C…  drops=1500",
+      "← 402  amount=1500 drops  invoiceId=2A57B55394C0…",
+      "→ Signed Payment  hash=A2320F4CB413…  drops=1500",
       "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
-      "← 200  tx=E0145699EF5C…  payer=rPiok45Qs8…",
+      "← 200  tx=A2320F4CB413…  payer=rPiok45Qs8…",
       "── Stress Report ──",
       "→ GET http://127.0.0.1:4403/api/v1/stress-report  →  HTTP 402",
-      "← 402  amount=500 drops  invoiceId=47FF0ADFEE49…",
-      "→ Signed Payment  hash=307340511901…  drops=500",
+      "← 402  amount=500 drops  invoiceId=3F63F1CABF9C…",
+      "→ Signed Payment  hash=55A572A9A798…  drops=500",
       "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
-      "← 200  tx=307340511901…  payer=rPiok45Qs8…"
+      "← 200  tx=55A572A9A798…  payer=rPiok45Qs8…"
     ],
-    "last_updated": "2026-02-25T16:40:38.167Z"
+    "last_updated": "2026-02-26T04:22:54.907Z"
   }
 }
