@@ -245,31 +245,49 @@ async function fetchUSDJPY(fallback) {
 
 /**
  * Fetch Japan 10Y bond yield.
- * Tries Twelve Data (daily updates) first, falls back to FRED (2-day lag).
+ * Primary: Stooq (free, no key, daily updates).
+ * Fallback: FRED IRLTLT01JPM156N (monthly — 4-6 weeks stale).
+ * Returns { value: number|null, as_of: string }.
  */
 async function fetchJPN10Y(fallbackValue) {
-  // ── Twelve Data (primary — daily bond yield) ──────────────────────────
-  const tdKey = process.env.TWELVE_DATA_KEY;
-  if (tdKey) {
+  // ── Stooq (primary — free, daily, no API key required) ────────────────
+  try {
+    const now = new Date();
+    const d2 = now.toISOString().slice(0, 10).replace(/-/g, '');
+    const past = new Date(now); past.setDate(past.getDate() - 7);
+    const d1 = past.toISOString().slice(0, 10).replace(/-/g, '');
+    const stooqUrl = `https://stooq.com/q/d/l/?s=10yjpy.b&i=d&d1=${d1}&d2=${d2}`;
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 12_000);
+    let csv;
     try {
-      const url = `https://api.twelvedata.com/time_series?symbol=JP10Y&interval=1day&outputsize=1&apikey=${encodeURIComponent(tdKey)}`;
-      const data = await withRetry(() => fetchJSON(url, 12_000), 'JPN10Y-TD');
-      const values = data?.values;
-      if (!Array.isArray(values) || values.length === 0) throw new Error('No values in Twelve Data response');
-      const value = parseFloat(values[0]?.close);
-      if (isNaN(value)) throw new Error('Could not parse Twelve Data yield');
-      log('FRED', `JPN_10Y = ${value} (Twelve Data, date: ${values[0]?.datetime})`);
-      markHealth('fred_jpn_10y', 'ok');
-      return value;
-    } catch (e) {
-      warn('JPN10Y', `Twelve Data failed (${e.message}) — falling back to FRED`);
+      const res = await fetch(stooqUrl, { signal: controller.signal });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      csv = await res.text();
+    } finally {
+      clearTimeout(timer);
     }
-  } else {
-    warn('JPN10Y', 'TWELVE_DATA_KEY not set — using FRED');
+
+    const lines = csv.trim().split('\n').filter(l => l.trim());
+    if (lines.length < 2) throw new Error('No data rows in Stooq response');
+    // Last line is the most recent trading day
+    const parts = lines[lines.length - 1].split(',');
+    const date = parts[0]?.trim();
+    const close = parseFloat(parts[4]);
+    if (isNaN(close)) throw new Error(`Could not parse Stooq close: ${lines[lines.length - 1]}`);
+
+    log('JPN10Y', `JPN_10Y = ${close}% (Stooq daily, date: ${date})`);
+    markHealth('fred_jpn_10y', 'ok');
+    return { value: close, as_of: date };
+  } catch (e) {
+    warn('JPN10Y', `Stooq failed (${e.message}) — falling back to FRED monthly (stale)`);
   }
 
-  // ── FRED (fallback — monthly series, may lag 1-3 days) ────────────────
-  return fetchFRED('JPN_10Y', ENDPOINTS.fred.jpn_10y, fallbackValue);
+  // ── FRED (fallback — IRLTLT01JPM156N is monthly, ~4-6 weeks stale) ────
+  const fredValue = await fetchFRED('JPN_10Y', ENDPOINTS.fred.jpn_10y, fallbackValue);
+  markHealth('fred_jpn_10y', 'stale');
+  return { value: fredValue, as_of: 'monthly-fred' };
 }
 
 /**
@@ -1002,7 +1020,7 @@ async function main() {
   etf.num_funds = etf.funds?.length ?? 0;
 
   // FRED/Twelve Data calls are sequential to avoid hammering the APIs
-  const jpn10y = await fetchJPN10Y(existing?.macro?.jpn_10y);
+  const { value: jpn10y, as_of: jpn10y_as_of } = await fetchJPN10Y(existing?.macro?.jpn_10y);
   const brent  = await fetchFRED('BRENT',   ENDPOINTS.fred.brent,   existing?.macro?.brent_crude);
   const us10y  = await fetchFRED('US_10Y',  ENDPOINTS.fred.us_10y,  existing?.macro?.us_10y_yield);
 
@@ -1041,6 +1059,7 @@ async function main() {
     macro: {
       usd_jpy:       usdJpy,
       jpn_10y: jpn10y,
+      jpn_10y_as_of: jpn10y_as_of,
       us_10y_yield:  us10y,
       brent_crude:   brent,
       fear_greed:    fearGreed,
@@ -1076,7 +1095,7 @@ async function main() {
   console.log(`XRP price:       $${xrp.price ?? 'N/A'}`);
   console.log(`RLUSD mktcap:    $${rlusd.market_cap?.toLocaleString() ?? 'N/A'} (${rlusd.source})`);
   console.log(`USD/JPY:         ${usdJpy ?? 'N/A'}`);
-  console.log(`JPN 10Y yield:   ${jpn10y ?? 'N/A'}%`);
+  console.log(`JPN 10Y yield:   ${jpn10y ?? 'N/A'}% (as_of: ${jpn10y_as_of ?? 'N/A'})`);
   console.log(`US 10Y yield:    ${us10y ?? 'N/A'}%`);
   console.log(`Brent crude:     $${brent ?? 'N/A'}`);
   console.log(`Fear & Greed:    ${fearGreed.value ?? 'N/A'} (${fearGreed.label ?? 'N/A'})`);
