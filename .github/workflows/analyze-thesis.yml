@@ -1,0 +1,51 @@
+name: Overwatch Stage 3 — Thesis Analysis
+
+on:
+  schedule:
+    # Morning analysis: 6:00 AM Chicago time (12:00 UTC winter / 11:00 UTC summer)
+    - cron: '0 12 * * *'
+    # Evening analysis: 6:00 PM Chicago time (0:00 UTC next day winter / 23:00 UTC summer)
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: cd scripts && npm install
+
+      - name: Run Stage 1 data fetch (ensure fresh data)
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          SOSOVALUE_API_KEY: ${{ secrets.SOSOVALUE_API_KEY }}
+          NEWSDATA_API_KEY: ${{ secrets.NEWSDATA_API_KEY }}
+          CRYPTOPANIC_API_KEY: ${{ secrets.CRYPTOPANIC_API_KEY }}
+          ALPHA_VANTAGE_KEY: ${{ secrets.ALPHA_VANTAGE_KEY }}
+          TWELVE_DATA_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+        run: node scripts/fetch-data.js
+
+      - name: Run Stage 3 analysis
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: node scripts/analyze-thesis.js
+
+      - name: Commit analysis output
+        run: |
+          git config user.name "overwatch-bot"
+          git config user.email "overwatch-bot@users.noreply.github.com"
+          git add analysis-output.json dashboard-data.json scripts/analysis-history.json data/
+          git diff --staged --quiet || git commit -m "analysis: $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push

@@ -1,25 +1,232 @@
 {
-  "updated": "2026-02-21T19:22:30.471Z",
+  "updated": "2026-02-27T15:19:30.399Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.44,
-    "change_24h": 1.239099788372511,
-    "volume_24h": 1502359755.728656,
-    "market_cap": 88131034530.8004
+    "price": 1.36,
+    "change_24h": -3.888465404100007,
+    "volume_24h": 3306610152.4601884,
+    "market_cap": 83198543043.29895
   },
   "rlusd": {
-    "market_cap": 1558347398.6482031,
+    "market_cap": 1583138479.1203308,
     "source": "coingecko"
   },
+  "etf": {
+    "last_fetched": "2026-02-27T15:19:23.539Z",
+    "source": "xrp-insights",
+    "as_of_date": "2026-02-26",
+    "total_aum": 1138530951.41,
+    "total_xrp_locked": 795192732.3307,
+    "daily_net_flow": 332527.60069999844,
+    "daily_inflow": 335669.9199999869,
+    "daily_outflow": 3142.3192999884486,
+    "flow_date": "2026-02-26",
+    "weekly_net_flow": 5195995.540700026,
+    "weekly_inflow": 5212246.270000011,
+    "weekly_outflow": 16250.729299984872,
+    "weekly_start_date": "2026-02-20",
+    "cum_net_flow": 5395003.4673999995,
+    "cum_inflow": 18199756.532300003,
+    "funds": [
+      {
+        "ticker": "XRPC",
+        "issuer": "Canary Capital",
+        "aum": 269044756.7,
+        "xrp_locked": 191901640.52,
+        "daily_flow": -2628.8299999833107
+      },
+      {
+        "ticker": "XRP",
+        "issuer": "Bitwise",
+        "aum": 266723524.67,
+        "xrp_locked": 190255880.98,
+        "daily_flow": 335669.9199999869
+      },
+      {
+        "ticker": "XRPZ",
+        "issuer": "Franklin Templeton",
+        "aum": 232966108.55,
+        "xrp_locked": 166176464.1,
+        "daily_flow": 0
+      },
+      {
+        "ticker": "TOXR",
+        "issuer": "21Shares",
+        "aum": 172283539.49,
+        "xrp_locked": 122971034.88,
+        "daily_flow": 0
+      },
+      {
+        "ticker": "XRPR",
+        "issuer": "REX-Osprey",
+        "aum": 88368750,
+        "xrp_locked": 45862550,
+        "daily_flow": 0
+      },
+      {
+        "ticker": "GXRP",
+        "issuer": "Grayscale",
+        "aum": 74632061,
+        "xrp_locked": 53549126.8507,
+        "daily_flow": -513.4893000051379
+      },
+      {
+        "ticker": "BITW",
+        "issuer": "Bitwise Index",
+        "aum": 34512211,
+        "xrp_locked": 24476035,
+        "daily_flow": 0
+      }
+    ],
+    "pct_supply": 1.3,
+    "circ_supply": 61175399297,
+    "num_funds": 7
+  },
+  "btc_etf": {
+    "last_fetched": "2026-02-27T15:19:21.715Z",
+    "source": "ishares-ibit",
+    "ticker": "IBIT",
+    "as_of_date": "2026-02-26",
+    "total_aum": 50977148925.93,
+    "shares_outstanding": 1341840000,
+    "nav_per_share": 37.990482416629405,
+    "daily_flow": 288727666.3663835,
+    "weekly_net_flow": 318118672.7988418,
+    "daily_flow_history": [
+      {
+        "date": "2026-02-20",
+        "flow": 0
+      },
+      {
+        "date": "2026-02-23",
+        "flow": 62104485.44665329
+      },
+      {
+        "date": "2026-02-24",
+        "flow": -116823393.83758333
+      },
+      {
+        "date": "2026-02-25",
+        "flow": 84109914.82338831
+      },
+      {
+        "date": "2026-02-26",
+        "flow": 288727666.3663835
+      }
+    ]
+  },
+  "eth_etf": {
+    "last_fetched": "2026-02-27T15:19:21.656Z",
+    "source": "ishares-etha",
+    "ticker": "ETHA",
+    "as_of_date": "2026-02-26",
+    "total_aum": 6255397170.09,
+    "shares_outstanding": 416560000,
+    "nav_per_share": 15.016797508378145,
+    "daily_flow": 30033595.016756292,
+    "weekly_net_flow": -13774038.086465757,
+    "daily_flow_history": [
+      {
+        "date": "2026-02-20",
+        "flow": 0
+      },
+      {
+        "date": "2026-02-23",
+        "flow": 1695090.63979416
+      },
+      {
+        "date": "2026-02-24",
+        "flow": -45502723.74301621
+      },
+      {
+        "date": "2026-02-25",
+        "flow": 0
+      },
+      {
+        "date": "2026-02-26",
+        "flow": 30033595.016756292
+      }
+    ]
+  },
+  "supply": {
+    "last_fetched": "2026-02-27T15:19:22.281Z",
+    "source": "xrp-insights",
+    "total_supply": 100000000000,
+    "circ_supply": 63075832961,
+    "escrow": 36895592731,
+    "exchanges": 14223306393.190004,
+    "defi_total": 202243732.08,
+    "corp_treasuries": 473276430,
+    "amm_locked": 8750000,
+    "xrp_burned": 14287104
+  },
+  "xrpl_metrics": {
+    "last_fetched": "2026-02-27T15:19:29.461Z",
+    "source": "xrpl_native",
+    "current_ledger": 102532020,
+    "last_ledger_txns": 136,
+    "avg_tx_per_ledger": 140,
+    "fee_burn_per_ledger_xrp": 0.0114,
+    "book_depth_xrp_usd": {
+      "pair": "XRP/USD.GateHub",
+      "bids": 10,
+      "asks": 10,
+      "total_bid_xrp": 33014,
+      "total_ask_xrp": 1030298,
+      "best_bid": {
+        "xrp": 990.9528,
+        "usd": 1356.420816
+      },
+      "best_ask": {
+        "xrp": 3756.099586,
+        "usd": 5085.863099
+      }
+    },
+    "dex_volume_24h_usd": null,
+    "dex_volume_24h_xrp": null,
+    "dex_exchanges_24h": null,
+    "dex_takers_24h": null
+  },
   "macro": {
-    "usd_jpy": 155.21,
-    "jpn_10y_yield": 2.24,
-    "us_10y_yield": 4.08,
-    "brent_crude": 69.77,
+    "usd_jpy": 156.11,
+    "jpn_10y": 2.156,
+    "jpn_10y_as_of": "2026-02-26",
+    "us_10y_yield": 4.05,
+    "brent_crude": 71.9,
     "fear_greed": {
-      "value": 8,
+      "value": 13,
       "label": "Extreme Fear"
     }
+  },
+  "news": {
+    "last_fetched": "2026-02-27T15:19:24.443Z",
+    "source": "newsdata",
+    "headlines": [
+      {
+        "title": "XRP's Price Slumps With Bitcoin Dip, BNB Outperforms Amid Crypto Regulatory Fog",
+        "source": "menafn",
+        "url": "https://menafn.com/1110797647/XRPs-Price-Slumps-With-Bitcoin-Dip-BNB-Outperforms-Amid-Crypto-Regulatory-Fog",
+        "published": "2026-02-27 03:07:44"
+      },
+      {
+        "title": "XRP vs. Dogecoin: Which Crypto Has the Better Risk/Reward Right Now?",
+        "source": "fool",
+        "url": "https://www.fool.com/investing/2026/02/26/xrp-vs-dogecoin-which-crypto-has-the-better-riskre/",
+        "published": "2026-02-27 03:00:00"
+      },
+      {
+        "title": "XRP Sees 212% Purchase Spike as Buyers Top Sellers 2x on Bitrue",
+        "source": "news_bitcoin",
+        "url": "https://news.bitcoin.com/xrp-sees-212-purchase-spike-as-buyers-top-sellers-2x-on-bitrue/",
+        "published": "2026-02-27 02:30:58"
+      },
+      {
+        "title": "Bitcoin, Ethereum, XRP, Dogecoin Retreat As Nvidia Drags Down Tech Stocks: Analyst Highlights Historical 'Sweet Spot' Where BTC Bottomed",
+        "source": "benzinga",
+        "url": "https://www.benzinga.com/crypto/cryptocurrency/26/02/50918288/bitcoin-ethereum-xrp-dogecoin-retreat-as-nvidia-drags-down-tech-stocks-analyst-highlights-h",
+        "published": "2026-02-27 02:11:39"
+      }
+    ]
   },
   "manual": {
     "odl_volume_annualized": null,
@@ -39,17 +246,17 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1558347398.6482031,
+      "current": 1583138479.1203308,
       "deadline": "2026-12-31",
       "status": "TRACKING",
-      "pct_complete": 31
+      "pct_complete": 32
     },
     "xrp_etf_aum": {
       "target": 5000000000,
-      "current": null,
+      "current": 1138530951.41,
       "deadline": "2026-12-31",
-      "status": "NEEDS_DATA",
-      "pct_complete": null
+      "status": "TRACKING",
+      "pct_complete": 23
     },
     "permissioned_dex_adoption": {
       "target_institutions": 5,
@@ -97,5 +304,219 @@
       "status": "STRESSED",
       "confidence": "medium"
     }
+  },
+  "health_check": {
+    "xrp": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:21.422Z"
+    },
+    "fear_greed": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:21.448Z"
+    },
+    "usd_jpy": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:21.489Z"
+    },
+    "etha": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:21.657Z"
+    },
+    "ibit": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:21.715Z"
+    },
+    "supply": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:22.281Z"
+    },
+    "rlusd": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:22.894Z"
+    },
+    "etf": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:23.540Z"
+    },
+    "news": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:24.443Z"
+    },
+    "xrpl_metrics": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:29.461Z"
+    },
+    "fred_jpn_10y": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:30.072Z"
+    },
+    "fred_brent": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:30.228Z"
+    },
+    "fred_us_10y": {
+      "status": "ok",
+      "ts": "2026-02-27T15:19:30.399Z"
+    }
+  },
+  "bear_case": {
+    "counter_thesis_score": 33,
+    "score_reasoning": "Slight reduction from 35 to 33 based on XRP ETF positive flow divergence, but macro stress indicators remain severe and two critical kill switch data gaps (ODL, PermissionedDEX) prevent thesis validation. Bear pressure is structurally unchanged.",
+    "competing_infrastructure": [
+      {
+        "name": "SWIFT GPI",
+        "status": "LOW_RISK",
+        "status_text": "No material expansion announcements; institutional crypto infrastructure momentum continues to outpace traditional messaging layer upgrades."
+      },
+      {
+        "name": "Visa B2B Connect",
+        "status": "LOW_RISK",
+        "status_text": "Limited cross-border settlement expansion observed; no direct competitive threat to XRPL bridge utility currently evidenced."
+      },
+      {
+        "name": "JPMorgan Kinexys",
+        "status": "MONITORING",
+        "status_text": "Established institutional platform with JPM distribution network. Stable but not expanding into XRPL's target corridors. Coexistence model most likely."
+      },
+      {
+        "name": "BIS Project Nexus",
+        "status": "ELEVATED_RISK",
+        "status_text": "Multi-CBDC interoperability platform remains the most credible structural bypass threat to XRPL's bridge currency thesis. Central bank backing gives it sovereign-grade legitimacy that XRPL cannot match."
+      },
+      {
+        "name": "Ethereum Institutional",
+        "status": "MONITORING",
+        "status_text": "ETH ETF outflows (-$46M daily, -$44M weekly) indicate institutional confidence erosion. No major settlement infrastructure advances challenging XRPL's niche."
+      }
+    ],
+    "odl_stagnation": "Critical blind spot — zero verifiable ODL volume data available with Q3 2026 transparency deadline approaching. If ODL volume is not growing proportionally to institutional rhetoric, the core utility thesis collapses.",
+    "token_velocity_concern": "XRP's +6.8% bounce on extreme fear (F&G: 11) may indicate speculative rather than utility-driven demand; ETF net inflows at only $2.2M are constructive but tiny relative to $1.1B AUM base, suggesting accumulation pace is marginal.",
+    "macro_headwinds": [
+      {
+        "name": "Global Recession Risk",
+        "status": "ELEVATED_RISK",
+        "status_text": "Fear & Greed at 11 is extreme — near floor levels. Combined with Japan yield crisis and trade escalation, recession risk signals are at their strongest in this monitoring period."
+      },
+      {
+        "name": "Crypto Winter Signals",
+        "status": "ELEVATED_RISK",
+        "status_text": "BTC ETF outflows of -$117M and ETH ETF outflows of -$46M on same day indicate institutional capital continuing to exit crypto broadly. XRP divergence may be temporary."
+      },
+      {
+        "name": "Regulatory Reversal Risk",
+        "status": "LOW_RISK",
+        "status_text": "No negative regulatory signals from current administration. Clarity Act pending but no opposition momentum detected. Section 122 framework stable."
+      },
+      {
+        "name": "Rate Hike Extension",
+        "status": "MONITORING",
+        "status_text": "US 10Y at 4.03% is elevated but stable. JGB 10Y at 2.24% is the primary rate concern — BOJ may be forced into emergency action that could cascade through global rates."
+      }
+    ],
+    "bear_narrative": "The two most critical kill switches — ODL volume and PermissionedDEX institutional count — have zero data with Q3 deadlines approaching. Without verifiable utility growth, XRP's thesis rests entirely on infrastructure buildout and ETF accumulation in an extreme fear environment where BTC and ETH institutional capital is actively exiting. BIS Project Nexus remains the most credible structural alternative that could render XRPL's bridge currency function obsolete at the sovereign level. The XRP ETF flow divergence is real but tiny ($2.2M against $1.1B AUM), and one day of positive flow does not establish a trend against the backdrop of $117M+ outflows from the crypto market's anchor product.",
+    "last_updated": "2026-02-25T15:14:04.203Z"
+  },
+  "probability": {
+    "bear": 8,
+    "base": 40,
+    "mid": 40,
+    "bull": 12,
+    "last_updated": "2026-02-25T15:14:04.203Z",
+    "last_reasoning": "No adjustment recommended. XRP ETF flow divergence is constructive but insufficient to shift probabilities given persistent extreme stress across macro indicators. JGB yields remain critical, F&G at extreme fear floor. The +6.8% XRP bounce needs multi-day confirmation before being treated as a trend reversal signal."
+  },
+  "last_analysis": {
+    "timestamp": "2026-02-25T15:14:04.203Z",
+    "run_type": "morning",
+    "stress_level": "ELEVATED",
+    "stress_score": 80,
+    "applied_at": "2026-02-25T16:02:19.733Z",
+    "changes_applied": 2
+  },
+  "x402_agent": {
+    "network": "XRPL MAINNET",
+    "merchant_address": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+    "protocol": "x402 v2",
+    "facilitator": "https://xrpl-facilitator-mainnet.t54.ai",
+    "facilitator_ok": true,
+    "agent_address": "rPiok45Qs88WMYQbYzDqXQbPgaCr9PnX5M",
+    "merchant_base": "http://127.0.0.1:4403",
+    "balance_xrp": 14.989881,
+    "payments_sent": 9,
+    "session_drops_spent": 3000,
+    "session_xrp_spent": 0.003,
+    "lifetime_drops_spent": 9000,
+    "lifetime_xrp_spent": 0.009,
+    "guardrails": {
+      "balance_floor_xrp": 11,
+      "session_cap_drops": 10000,
+      "max_single_drops": 5000
+    },
+    "transactions": [
+      {
+        "endpoint": "/api/v1/premium-analysis",
+        "label": "Premium Analysis",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": "1000",
+        "amount_xrp": 0.001,
+        "invoice_id": "A29A532176B6411D932462C1064A0BCF",
+        "tx_hash": "4CE4764648385E29244FF27662B7B8EC56A1EC5B68A36560F0C2A6A6FD368AA3",
+        "status": "SUCCESS",
+        "timestamp": "2026-02-26T04:22:38.809Z"
+      },
+      {
+        "endpoint": "/api/v1/bear-case",
+        "label": "Bear Case",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": "1500",
+        "amount_xrp": 0.0015,
+        "invoice_id": "2A57B55394C045B3A63353DE2EFC05E2",
+        "tx_hash": "A2320F4CB41368ED1EB41C8B0BA00CD39E183456CFE8D5A0DD894DCB447A0C3D",
+        "status": "SUCCESS",
+        "timestamp": "2026-02-26T04:22:47.343Z"
+      },
+      {
+        "endpoint": "/api/v1/stress-report",
+        "label": "Stress Report",
+        "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+        "amount_drops": "500",
+        "amount_xrp": 0.0005,
+        "invoice_id": "3F63F1CABF9C4547B804B87CA39EFF19",
+        "tx_hash": "55A572A9A798D24BF334EA557FD237314D6B0788F604DFFDAC845F51BAEFABBD",
+        "status": "SUCCESS",
+        "timestamp": "2026-02-26T04:22:54.756Z"
+      }
+    ],
+    "last_payment": {
+      "endpoint": "/api/v1/stress-report",
+      "label": "Stress Report",
+      "pay_to": "r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP",
+      "amount_drops": "500",
+      "amount_xrp": 0.0005,
+      "invoice_id": "3F63F1CABF9C4547B804B87CA39EFF19",
+      "tx_hash": "55A572A9A798D24BF334EA557FD237314D6B0788F604DFFDAC845F51BAEFABBD",
+      "status": "SUCCESS",
+      "timestamp": "2026-02-26T04:22:54.756Z"
+    },
+    "x402_flow": [
+      "── Premium Analysis ──",
+      "→ GET http://127.0.0.1:4403/api/v1/premium-analysis  →  HTTP 402",
+      "← 402  amount=1000 drops  invoiceId=A29A532176B6…",
+      "→ Signed Payment  hash=4CE476464838…  drops=1000",
+      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200  tx=4CE476464838…  payer=rPiok45Qs8…",
+      "── Bear Case ──",
+      "→ GET http://127.0.0.1:4403/api/v1/bear-case  →  HTTP 402",
+      "← 402  amount=1500 drops  invoiceId=2A57B55394C0…",
+      "→ Signed Payment  hash=A2320F4CB413…  drops=1500",
+      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200  tx=A2320F4CB413…  payer=rPiok45Qs8…",
+      "── Stress Report ──",
+      "→ GET http://127.0.0.1:4403/api/v1/stress-report  →  HTTP 402",
+      "← 402  amount=500 drops  invoiceId=3F63F1CABF9C…",
+      "→ Signed Payment  hash=55A572A9A798…  drops=500",
+      "→ GET (+PAYMENT-SIGNATURE)  →  HTTP 200",
+      "← 200  tx=55A572A9A798…  payer=rPiok45Qs8…"
+    ],
+    "last_updated": "2026-02-26T04:22:54.907Z"
   }
 }
