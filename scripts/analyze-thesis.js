@@ -76,6 +76,50 @@ function repairTruncatedJSON(text, label) {
 
 // ─── Telegram ─────────────────────────────────────────────────────────────────
 
+/**
+ * Split a message into chunks of at most maxLen characters, breaking only on
+ * newline boundaries so we never cut mid-word or mid-HTML-tag.
+ */
+function chunkMessage(text, maxLen = 4000) {
+  if (text.length <= maxLen) return [text];
+  const chunks = [];
+  const lines  = text.split('\n');
+  let current  = '';
+  for (const line of lines) {
+    const next = current ? `${current}\n${line}` : line;
+    if (next.length > maxLen && current) {
+      chunks.push(current);
+      current = line;
+    } else {
+      current = next;
+    }
+  }
+  if (current) chunks.push(current);
+  return chunks;
+}
+
+async function sendTelegramChunk(token, chatId, text) {
+  const url        = `https://api.telegram.org/bot${token}/sendMessage`;
+  const controller = new AbortController();
+  const timer      = setTimeout(() => controller.abort(), 15_000);
+  try {
+    const res  = await fetch(url, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' }),
+      signal:  controller.signal,
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error(`Telegram API error: ${json.description}`);
+    return true;
+  } catch (e) {
+    err('Telegram', e.message);
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function sendTelegram(text) {
   const token  = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -85,31 +129,27 @@ async function sendTelegram(text) {
     return false;
   }
 
-  const url = `https://api.telegram.org/bot${token}/sendMessage`;
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 15_000);
-
-  try {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id:    chatId,
-        text:       text,
-        parse_mode: 'HTML',
-      }),
-      signal: controller.signal,
-    });
-    const json = await res.json();
-    if (!json.ok) throw new Error(`Telegram error: ${json.description}`);
-    log('Telegram', 'Message sent successfully');
-    return true;
-  } catch (e) {
-    err('Telegram', e.message);
-    return false;
-  } finally {
-    clearTimeout(timer);
+  const chunks = chunkMessage(text, 4000);
+  if (chunks.length > 1) {
+    log('Telegram', `Message is ${text.length} chars — splitting into ${chunks.length} chunks`);
   }
+
+  let allOk = true;
+  for (let i = 0; i < chunks.length; i++) {
+    // Append chunk indicator when sending multiple messages
+    const body = chunks.length > 1
+      ? `${chunks[i]}\n\n<i>(${i + 1}/${chunks.length})</i>`
+      : chunks[i];
+    const ok = await sendTelegramChunk(token, chatId, body);
+    if (ok) {
+      log('Telegram', chunks.length > 1 ? `Chunk ${i + 1}/${chunks.length} sent` : 'Message sent');
+    } else {
+      allOk = false;
+    }
+    // Brief pause between chunks to respect Telegram rate limits
+    if (i < chunks.length - 1) await new Promise(r => setTimeout(r, 500));
+  }
+  return allOk;
 }
 
 // ─── Format analysis as Telegram message ──────────────────────────────────────
