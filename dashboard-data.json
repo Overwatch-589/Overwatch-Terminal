@@ -1,14 +1,14 @@
 {
-  "updated": "2026-02-28T19:11:25.798Z",
+  "updated": "2026-03-01T02:35:33.892Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.34,
-    "change_24h": -0.812306160424502,
-    "volume_24h": 3631153482.2810626,
-    "market_cap": 81843163601.57852
+    "price": 1.43,
+    "change_24h": 4.937616530883724,
+    "volume_24h": 5159634533.681501,
+    "market_cap": 87225035981.73193
   },
   "rlusd": {
-    "market_cap": 1495114718.1572187,
+    "market_cap": 1495042165.1456473,
     "source": "coingecko"
   },
   "macro": {
@@ -17,7 +17,7 @@
     "us_10y_yield": 4.02,
     "brent_crude": 71.9,
     "fear_greed": {
-      "value": 11,
+      "value": 14,
       "label": "Extreme Fear"
     }
   },
@@ -39,7 +39,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1495114718.1572187,
+      "current": 1495042165.1456473,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 30
@@ -82,7 +82,7 @@
       "confidence": "high"
     },
     "stablecoin_adoption": {
-      "status": "GROWING — MOMENTUM WATCH",
+      "status": "STALLING — MOMENTUM WATCH",
       "confidence": "medium"
     },
     "odl_volume": {
@@ -94,81 +94,81 @@
       "confidence": "medium"
     },
     "macro_environment": {
-      "status": "STRESSED — APPROACHING ELEVATED",
+      "status": "STRESSED — ELEVATED",
       "confidence": "medium"
     }
   },
   "probability": {
-    "bear": 13,
+    "bear": 12,
     "base": 42,
-    "mid": 34,
+    "mid": 35,
     "bull": 11,
-    "last_updated": "2026-02-28T19:14:01.486Z",
-    "last_reasoning": "Bear case increases from 10% to 13%: XRP at $1.34 with F&G at 11 and compounding macro stress. Price is only 25% above the <$1 bear threshold. RLUSD momentum stalling. Base case narrows slightly from 40% to 42% — this remains the most likely outcome but with less upside skew. Mid case reduced from 38% to 34% — the institutional buildout hasn't translated to price action, and the macro headwind is real. Bull case trimmed from 12% to 11% — nothing in current data supports expansion of the tail scenario. The overall shift is toward caution, driven by sentiment capitulation and JGB stress acceleration."
+    "last_updated": "2026-03-01T02:38:19.615Z",
+    "last_reasoning": "Bear case increased from 10% to 12%: RLUSD contraction, extreme fear, and worsening macro stress reduce confidence in near-term institutional momentum. Base narrowed slightly from 40% to 42% as the $2-8 range becomes the most likely outcome given stalling metrics. Mid reduced from 38% to 35% — the acceleration required for mid-case outcomes is not materializing in current data. Bull trimmed from 12% to 11% — no new catalysts support the aggressive scenario."
   },
   "bear_case": {
     "counter_thesis_score": 72,
-    "score_reasoning": "Score elevated from prior baseline due to: RLUSD momentum stalling at $1.495B (declining, not growing), XRP price action disconnected from institutional narrative, extreme fear sentiment, and 3/5 kill switches unmonitorable. The infrastructure-without-activity gap is the core vulnerability.",
+    "score_reasoning": "RLUSD contraction, persistent data gaps on ODL/ETF/DEX, and extreme fear environment create genuine thesis execution risk. Competing infrastructure continues advancing. Score reflects real uncertainty — not thesis failure, but measurable erosion of the acceleration narrative.",
     "competing_infrastructure": [
       {
         "name": "SWIFT GPI",
         "status": "MONITORING",
-        "status_text": "SWIFT gpi continues expanding same-day settlement coverage. No XRPL integration signals. SWIFT's incumbency advantage remains the primary competitive threat to the thesis."
+        "status_text": "SWIFT continues expanding GPI to 150+ countries with same-day settlement. No urgency to migrate to blockchain rails when incremental improvements satisfy most institutional needs."
       },
       {
         "name": "Visa B2B Connect",
         "status": "LOW_RISK",
-        "status_text": "B2B Connect operational but not expanding aggressively into the settlement layer space XRP targets. Watching for stablecoin integration announcements."
+        "status_text": "Limited traction in cross-border settlement niche. Not a credible near-term threat to XRPL institutional positioning."
       },
       {
         "name": "JPMorgan Kinexys",
-        "status": "MONITORING",
-        "status_text": "Kinexys (ex-Onyx) continues processing significant daily volumes for JPM clients. Direct competitor to Ripple's institutional custody/settlement positioning. Monitor for expansion beyond JPM ecosystem."
+        "status": "ELEVATED_RISK",
+        "status_text": "Kinexys processes $2B+/day in interbank transfers on proprietary blockchain. JPMorgan's distribution advantage and existing client relationships make this the most credible competing infrastructure for institutional settlement."
       },
       {
         "name": "BIS Project Nexus",
-        "status": "ELEVATED_RISK",
-        "status_text": "BIS Nexus advancing as central-bank-endorsed alternative for cross-border instant payments. If Nexus achieves independent operation without XRPL dependency, it directly threatens the thesis. Kill switch #9 applies."
+        "status": "MONITORING",
+        "status_text": "Nexus connecting domestic fast payment systems could bypass blockchain entirely for cross-border settlement. Kill switch 9 specifically tracks this risk. No confirmed XRPL integration."
       },
       {
         "name": "Ethereum Institutional",
         "status": "MONITORING",
-        "status_text": "Ethereum L2s and institutional DeFi continue attracting capital. BlackRock's BUIDL fund on Ethereum remains the largest tokenized treasury product, outpacing XRPL equivalents."
+        "status_text": "Ethereum L2 ecosystem expanding with institutional DeFi protocols. BlackRock BUIDL fund on Ethereum demonstrates institutional preference for ETH ecosystem in tokenized assets. XRPL must prove superior throughput and cost advantages in production."
       }
     ],
-    "odl_stagnation": "ODL volume remains entirely unverifiable — no public data exists. The thesis's central payment-rail claim is unsubstantiated by observable metrics, which is a structural weakness, not merely a data gap.",
-    "token_velocity_concern": "Token velocity data unavailable (kill switch #8 UNKNOWN). If XRP is being used as a bridge currency with immediate conversion, price appreciation may be structurally limited regardless of volume growth.",
+    "odl_stagnation": "Complete absence of verifiable ODL volume data for 3+ months is the single most dangerous thesis gap — a $25B target with zero visibility is indistinguishable from a $0 reality until proven otherwise.",
+    "token_velocity_concern": "Token velocity data (kill switch 8) remains UNKNOWN. If XRP is being used purely as a transit currency with sub-second hold times, price appreciation from utility alone is structurally limited regardless of volume growth.",
     "macro_headwinds": [
       {
         "name": "Global Recession Risk",
         "status": "ELEVATED_RISK",
-        "status_text": "F&G at 11, JGB stress rising, Section 122 tariffs active — multiple recessionary signals converging. Cross-border payment volume correlates with trade activity, which contracts in recession."
+        "status_text": "Fear & Greed at 14, tariff uncertainty, and Japan stress compound to create genuine recession risk that would freeze institutional adoption timelines across all new infrastructure."
       },
       {
         "name": "Crypto Winter Signals",
-        "status": "ELEVATED_RISK",
-        "status_text": "F&G at 11 is consistent with early crypto winter conditions. XRP at $1.34 has retraced significantly. Extended drawdown would pressure ETF flows and institutional commitment timelines."
+        "status": "MONITORING",
+        "status_text": "Extreme fear at 14 is consistent with early crypto winter readings but insufficient alone to confirm. ETF flow data needed to assess institutional conviction vs. retail capitulation."
       },
       {
         "name": "Regulatory Reversal Risk",
         "status": "LOW_RISK",
-        "status_text": "Current US administration is crypto-favorable. Clarity Act pending. Risk remains low but political bandwidth consumed by tariff expiry (Jul 20) and geopolitical crises could delay legislative progress."
+        "status_text": "Clarity Act pending but current administration is crypto-favorable. Section 122 tariff expiration in July could shift legislative priorities away from crypto framework bills."
       },
       {
         "name": "Rate Hike Extension",
         "status": "MONITORING",
-        "status_text": "US 10Y at 4.02% suggests rates staying higher for longer. BOJ hiking to 1.0% would further tighten global liquidity. Not yet acute but direction is hawkish across major central banks."
+        "status_text": "US 10Y at 4.02% suggests rate cut expectations are muted. Extended restrictive policy compresses institutional risk appetite for new infrastructure deployments."
       }
     ],
-    "bear_narrative": "The XRP institutional settlement thesis is flying blind: its core metric (ODL volume) has been dark for two years while three competing settlement infrastructures — SWIFT-Chainlink CCIP (12+ banks live), CBDC mBridge (real-value MVP complete), and USDC-CCTP ($15B+ cumulative) — are advancing across every institutional lane XRP claims to serve, all without any XRP involvement. Fear & Greed has triggered at 11, the bias ratio is 2.5:1 bearish against thesis scoring that still reads CONFIRMED/HIGH, and the system has seven critical blind spots it wasn't tracking. REDUCE EXPOSURE — hold only what you can justify with verifiable data, which right now is very little.",
-    "last_updated": "2026-02-28T19:14:01.486Z"
+    "bear_narrative": "The XRP institutional settlement thesis is flying blind on its three most important demand metrics — ODL volume, ETF AUM, and permissioned DEX adoption all show null data — while seven previously untracked threats have been identified, including the critical finding that stablecoin interoperability protocols are commoditizing the exact corridor settlement function XRP was designed to monopolize. The Fear & Greed kill switch has triggered at 14 with JPY carry unwind risk compounding, and the newly discovered RLUSD cannibalization paradox means Ripple's own success may structurally decouple from XRP token demand. Recommendation is REDUCE_EXPOSURE — partial de-risk immediately, resolve data gaps on ODL and ETF flows before re-entering full position.",
+    "last_updated": "2026-03-01T02:38:19.615Z"
   },
   "last_analysis": {
-    "timestamp": "2026-02-28T19:14:01.486Z",
+    "timestamp": "2026-03-01T02:38:19.615Z",
     "run_type": "evening",
     "stress_level": "ELEVATED",
     "stress_score": 62,
-    "applied_at": "2026-02-28T19:15:22.476Z",
-    "changes_applied": 2
+    "applied_at": "2026-03-01T02:39:40.345Z",
+    "changes_applied": 4
   }
 }
