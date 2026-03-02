@@ -331,6 +331,7 @@ async function main() {
 
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));
   log('io', `Wrote ${OUTPUT_PATH}`);
+  await validateDataContract();
 
   console.log('\n─── Summary ───────────────────────────────────');
   console.log(`XRP price:       $${xrp.price ?? 'N/A'}`);
@@ -353,3 +354,50 @@ main().catch(e => {
   console.error('\nFATAL:', e);
   process.exit(1);
 });
+
+// ─── Data Contract Validation ─────────────────────────────────────────────────
+
+/**
+ * Validates the freshly-written dashboard-data.json against data-contract.json.
+ *
+ * WHY: fetch-data.js owns a specific subset of dashboard-data.json fields (listed
+ * under "required_from_fetch" in data-contract.json). Silent failures — API timeouts,
+ * shape changes, rate-limit fallbacks — can leave fields null without crashing the
+ * pipeline. This validation makes those failures visible in the run log so they can
+ * be caught before the next analysis cycle reads stale or missing data.
+ *
+ * data-contract.json is the source of truth for what this script is responsible for.
+ * Validation runs after the write so it reflects exactly what landed on disk.
+ * Wrapped in try/catch: validation MUST NOT crash the pipeline under any circumstance.
+ */
+async function validateDataContract() {
+  try {
+    const contractPath = path.join(__dirname, '..', 'data-contract.json');
+    const contract     = JSON.parse(fs.readFileSync(contractPath, 'utf8'));
+    const dashboard    = JSON.parse(fs.readFileSync(OUTPUT_PATH,  'utf8'));
+
+    const fields  = contract?.fields?.required_from_fetch ?? [];
+    let populated = 0;
+    const missing = [];
+
+    for (const fieldPath of fields) {
+      const keys = fieldPath.split('.');
+      let value  = dashboard;
+      for (const key of keys) {
+        value = value?.[key];
+      }
+      if (value !== null && value !== undefined) {
+        populated++;
+      } else {
+        missing.push(fieldPath);
+      }
+    }
+
+    log('contract', `DATA CONTRACT: ${populated}/${fields.length} fields populated`);
+    for (const f of missing) {
+      warn('contract', `missing field: ${f}`);
+    }
+  } catch (e) {
+    err('contract', `Validation failed (non-fatal): ${e.message}`);
+  }
+}
