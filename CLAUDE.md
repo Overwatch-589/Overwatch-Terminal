@@ -46,12 +46,41 @@ fetch-data.js writes dashboard-data.json (partial: macro, rlusd, xrp, thesis_sco
 - Dashboard on GitHub Pages
 - x402 agent (12 mainnet transactions, 9,000 drops lifetime spend)
 
-## What's Being Built (March 3-7, 2026)
-- Layer 2 CONTEXTUALIZE (replaces current ASSESS — adds knowledge audit phase)
-- Layer 3 INFER (new — strategic game theory with circuit breakers)
-- Layer 4 RECONCILE (new — final judgment with burden of proof)
-- Corrections ledger (data/corrections-ledger.json + data/rejection-log.json)
-- Compound stress matrix integration into Layer 2
+## Build State (as of March 3, 2026 — end of session)
+
+### Completed Today
+- thesis-context.md updated: March 3 market data, compound stress matrix, key players section
+- Dashboard bug fixed: d.thesis → d.thesis_scores in index.html
+- Data contract: data-contract.json created, validation wired into fetch-data.js (18 fields checked)
+- Pipeline heartbeat: data contract status appended to Telegram briefing via pipeline-health.json
+- CLAUDE.md rewritten with current build state
+- Empty corrections ledger files created: data/corrections-ledger.json, data/rejection-log.json
+- Layer 2 CONTEXTUALIZE function written and tested: 12/12 validation checks passed
+
+### In Progress — Stashed
+- scripts/analyze-thesis.js has Layer 2 CONTEXTUALIZE replacing runAssessment(). Changes are in git stash:
+  `git stash pop` to restore
+- The stashed version includes: new runContextualize() function (lines 538-749), updated call site (line 869), updated overlay bridge (lines 967-971)
+- Layer 2 was tested with Sonnet locally (Opus timed out on local network — works fine in GitHub Actions)
+- Test fixtures: scripts/test-layer2.js and scripts/test-layer2-output.json are committed to main
+
+### Still To Build
+- Layer 3 INFER: write runInfer(), test in isolation against test-layer2-output.json
+- Layer 4 RECONCILE: write runReconcile(), test in isolation against Layer 3 output
+- Wire full pipeline: runSweep() → runContextualize() → runInfer() → runReconcile()
+- Update render360Report() in index.html to read Layer 4 output schema
+- Update Telegram formatting to use Layer 4 final_report field
+- Update caller overlay (lines 967-971) for Layer 4 field names
+- Full end-to-end test before committing to main
+- Production system (current 2-layer) keeps running untouched until all 4 layers are verified
+
+### Key Decision: Option C3
+All four layers are built and tested before any dashboard changes. The 360 tab reads Layer 4 output. One coordinated commit, not incremental pushes. Each layer tested in isolation first (progressive isolation testing).
+
+### Test Approach
+- Local test scripts call the API with real pipeline data as fixtures
+- Opus times out locally (SDK default timeout) — add timeout: 300000 to Anthropic client, or test with Sonnet locally and let GitHub Actions validate Opus
+- Each layer's test output becomes the next layer's test input
 
 ## Architectural Authority
 If code contradicts an architectural decision document, the document wins. The code has a bug. Architectural documents live in the Claude.ai project files, not in this repo. Key documents:
