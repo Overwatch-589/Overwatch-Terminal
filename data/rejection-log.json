@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "layer3_inference": "RLUSD contraction is structural (from thesis context framing, inherited into Layer 1)",
+    "rejection_reason": "Layer 2 data shows RLUSD recovered from $1.494B to $1.583B — ABOVE the pre-contraction level of $1.564B. The 'contraction' framing is stale and contradicted by current data. The real threat is pace insufficiency, not structural contraction.",
+    "root_cause": "CONTRADICTED_BY_DATA",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-02T23:45:04.100Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "XRP +3.1% during F&G=10 indicates non-speculative holding base (Layer 3 behavioral pattern, 'low' significance)",
+    "rejection_reason": "A single 24-hour price movement during extreme fear has minimal signal value. Could be dead-cat bounce, short covering, or delayed contagion. Insufficient evidence to infer holding base composition from one day's price action.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-02T23:45:04.100Z",
+    "source": "layer4_reconcile"
+  }
+]
