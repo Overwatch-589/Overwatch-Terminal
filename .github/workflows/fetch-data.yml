@@ -31,5 +31,6 @@ jobs:
       - name: Fetch data and push
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
         run: node fetch-data.js
         working-directory: scripts

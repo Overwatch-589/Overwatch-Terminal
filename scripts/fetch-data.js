@@ -12,6 +12,7 @@ const fs      = require('fs');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const { ENDPOINTS, COINGECKO_DELAY_MS, KILL_SWITCH_TARGETS } = require('./config');
+const { fetchXIntelligence } = require('./fetch-x');
 const pushToGitHub = require('./push-to-github');
 
 const OUTPUT_PATH = path.join(__dirname, '..', 'dashboard-data.json');
@@ -302,6 +303,8 @@ async function main() {
   const dxy   = await fetchTwelveData('DXY',   ENDPOINTS.twelve_data.dxy,   existing?.macro?.dxy);
   const sp500 = await fetchTwelveData('SP500', ENDPOINTS.twelve_data.sp500, existing?.macro?.sp500);
 
+  const xIntelligence = await fetchXIntelligence(existing?.x_intelligence);
+
   // Preserve manually-managed fields from existing JSON (never overwrite with null)
   const manual = {
     odl_volume_annualized:          existing?.manual?.odl_volume_annualized          ?? null,
@@ -338,6 +341,7 @@ async function main() {
       sp500:         sp500,      // { value, data_date, source }
       fear_greed:    fearGreed,  // { value, label, data_date, source }
     },
+    x_intelligence: xIntelligence,
     manual,
     kill_switches:  buildKillSwitches(manual, rlusd),
     thesis_scores,
