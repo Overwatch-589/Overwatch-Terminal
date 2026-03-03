@@ -1,14 +1,14 @@
 {
-  "updated": "2026-03-02T23:34:03.513Z",
+  "updated": "2026-03-02T23:56:10.131Z",
   "auto_fetched": true,
   "xrp": {
     "price": 1.39,
-    "change_24h": 3.144545047765943,
-    "volume_24h": 3624453039.185376,
-    "market_cap": 84968601363.60948
+    "change_24h": 3.184160390759598,
+    "volume_24h": 3635190096.167907,
+    "market_cap": 85165748421.79579
   },
   "rlusd": {
-    "market_cap": 1583525069.202952,
+    "market_cap": 1583578865.492007,
     "source": "coingecko"
   },
   "macro": {
@@ -41,7 +41,7 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1583525069.202952,
+      "current": 1583578865.492007,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 32
@@ -105,72 +105,72 @@
     "base": 42,
     "mid": 35,
     "bull": 11,
-    "last_updated": "2026-03-02T23:45:04.108Z",
-    "last_reasoning": "Upgrading bear from 10% to 12% due to Extreme Fear environment (F&G 10), compound stress at ELEVATED, and persistent data gaps on ODL/ETF/PermDEX. Shifting 2% from base to mid: RLUSD stabilization at $1.584B, XRPL infrastructure acceleration, and institutional evidence pipeline remain intact. If macro stress resolves without cascade, the mid-tier infrastructure thesis strengthens. Bull unchanged — requires catalyst not yet visible. Net: macro deterioration slightly increases downside risk, but fundamental institutional infrastructure buildout continues beneath the surface."
+    "last_updated": "2026-03-03T00:06:25.536Z",
+    "last_reasoning": "Adjusting bear case up from 10% to 12% — extreme fear at 10, compound stress upgraded to ELEVATED with USD/JPY above threshold and JGB converging, and three kill switches still lacking data at 25% through measurement year. Shifting 2% from base to mid to reflect RLUSD recovery and institutional infrastructure momentum (Ripple Prime, Metallicus FedNow, XRPL records) that continues building despite macro headwinds. The thesis paradox is sharpening: macro stress validates the need for alternative settlement infrastructure while simultaneously threatening the position."
   },
   "bear_case": {
-    "counter_thesis_score": 42,
-    "score_reasoning": "Score elevated from baseline due to: persistent ODL data opacity (Ripple's silence is itself a signal), zero permissioned DEX adoption after 10 days live, extreme market fear suppressing institutional deployment appetite, and compound stress at ELEVATED. The RLUSD stabilization prevents further score increase, but the gap between institutional announcements and on-chain activity remains the core vulnerability.",
+    "counter_thesis_score": 74,
+    "score_reasoning": "Score reflects three compounding concerns: (1) three of five kill switches are data-dark 3+ months into the measurement year, preventing thesis validation; (2) RLUSD growth pace is ~5x below what's needed for target; (3) extreme fear at 10 with XRP at $1.39 — price action is not reflecting institutional adoption momentum. The counter-thesis has real teeth right now.",
     "competing_infrastructure": [
       {
         "name": "SWIFT GPI",
         "status": "MONITORING",
-        "status_text": "SWIFT continues iterating on GPI with 11,500 bank network. No dramatic upgrade announced but incumbent advantage in institutional inertia remains formidable."
+        "status_text": "SWIFT continues incremental upgrades across 11,500-bank network. No disruptive capability yet, but network effects remain the strongest moat in cross-border payments."
       },
       {
         "name": "Visa B2B Connect",
         "status": "LOW_RISK",
-        "status_text": "Limited cross-border traction. Not currently displacing settlement layer demand but retains card network distribution capability."
+        "status_text": "B2B Connect expanding but focused on high-value corridors with traditional rails. Not directly competing for the same settlement layer thesis."
       },
       {
         "name": "JPMorgan Kinexys",
         "status": "MONITORING",
-        "status_text": "Kinexys (formerly Onyx) processes significant daily volumes on permissioned infrastructure. The most credible single-institution alternative to XRPL for institutional settlement."
+        "status_text": "Kinexys (ex-Onyx) processing significant institutional volumes on permissioned infrastructure. JPMorgan's balance sheet backing gives it credibility advantages over XRP for risk-averse institutions."
       },
       {
         "name": "BIS Project Nexus",
         "status": "ELEVATED_RISK",
-        "status_text": "Central bank-backed, multi-country coordination advancing. If Nexus achieves independent operation without bridge currencies, it directly undermines XRP's core settlement thesis. Kill switch 9 applies."
+        "status_text": "Nexus explicitly designed for sovereign settlement without private tokens. If operational at scale, it directly competes with the XRP bridge currency thesis. Kill switch #9 exists for this reason."
       },
       {
         "name": "Ethereum Institutional",
         "status": "MONITORING",
-        "status_text": "Ethereum L2 ecosystem expanding institutional on-ramps. Tokenization activity on Ethereum (BlackRock BUIDL) represents credible competition for the RWA/settlement layer narrative."
+        "status_text": "BlackRock BUIDL, Ondo, Franklin Templeton all building on Ethereum for tokenized assets. Ethereum's institutional footprint in RWA tokenization exceeds XRPL's despite technical disadvantages."
       }
     ],
-    "odl_stagnation": "ODL volume data has been opaque for an extended period — Ripple's decision to stop publishing this data is the single most concerning signal for the thesis, as it prevents external verification of the core utility claim.",
-    "token_velocity_concern": "No token velocity or average hold time data available. If XRP functions primarily as a bridge currency with sub-second hold times, price appreciation from utility alone may be structurally limited regardless of volume growth.",
+    "odl_stagnation": "ODL volume data has been dark for months — the absence of public reporting from Ripple, combined with the kill switch at NEEDS_DATA, means we cannot verify the core utility thesis at all.",
+    "token_velocity_concern": "No token velocity or average hold time data available. If XRP is being used purely as a bridge with sub-second hold times, price appreciation from utility is structurally limited regardless of volume.",
     "macro_headwinds": [
       {
         "name": "Global Recession Risk",
         "status": "ELEVATED_RISK",
-        "status_text": "Fear & Greed at 10 (Extreme Fear), compound stress ELEVATED, yen crisis deepening — recession signals are accumulating across multiple indicators simultaneously."
+        "status_text": "Fear & Greed at 10, VIX >20, S&P flat, compound stress ELEVATED — recession signals are flashing across multiple indicators simultaneously."
       },
       {
         "name": "Crypto Winter Signals",
         "status": "MONITORING",
-        "status_text": "XRP at $1.39 is significantly off highs. Extreme Fear environment could suppress crypto investment for extended periods, but institutional infrastructure buildout (ETFs, custody) provides structural floor absent in prior cycles."
+        "status_text": "XRP at $1.39 is significantly off highs, but ETF infrastructure and institutional on-ramps provide structural support that prior cycles lacked. Not yet winter, but cooling rapidly."
       },
       {
         "name": "Regulatory Reversal Risk",
         "status": "LOW_RISK",
-        "status_text": "Regulatory clarity largely confirmed with ETF approvals and SEC settlement. Reversal would require major political shift — currently low probability."
+        "status_text": "7 spot ETFs live, Clarity Act pending, SEC case resolved. Regulatory direction is clearly favorable; reversal would require extraordinary political shift."
       },
       {
         "name": "Rate Hike Extension",
         "status": "MONITORING",
-        "status_text": "US 10Y at 3.97% suggests rates stabilizing but not declining rapidly. BOJ rate action could tighten global liquidity through carry trade unwind, compounding crypto headwinds."
+        "status_text": "US 10Y at 3.97% suggests market pricing cuts, but BOJ tightening pressure and global yield divergence create unpredictable cross-currents for risk assets."
       }
     ],
-    "bear_narrative": "INCREASE MONITORING. The thesis sits at bear pressure 42 — stressed but not broken. Two kill switches escalated to WARNING: both relate to ODL data opacity, the system's central blind spot. Institutional behavioral evidence (7 live ETFs, SBI equity commitment, Dubai/SocGen deployments, Hidden Road acquisition) is the strongest it has ever been and argues against product failure, but this evidence is circumstantial for a claim that requires direct volume verification by Q3 2026. The compound stress structure is pre-loaded and approaching cascade: BOJ March meeting is the nearest catalyst that could push USD/JPY past 160 and JGB past 2.3% simultaneously, triggering the carry trade feedback loop that crashed crypto 15% in August 2024. The thesis paradox holds: the same macro fragility that threatens XRP price is the exact condition that validates the need for alternative settlement infrastructure. I do not know — and cannot currently determine — whether Ripple Payments processes $500M or $15B annually. That is the gap that determines everything.",
-    "last_updated": "2026-03-02T23:45:04.108Z"
+    "bear_narrative": "INCREASE MONITORING. Core thesis validation remains blind: ODL volume is a suspicious absence (304 days to $25B target, zero baseline), RLUSD is stalling at 32% of target with first contraction detected, and pilot purgatory explains the gap between Ripple's announcement velocity and production reality. Bear pressure 74 — elevated but not terminal because no kill switch is triggered, genuine infrastructure is being built (Hidden Road registrations, PermissionedDEX live, SBI committed, 7 ETFs), and competitive threats are less severe than feared after audit (SWIFT and mBridge serve different layers). The paradox stands: compound stress at MONITORING but pre-loaded across all three legs means the macro environment that would validate demand for alternative settlement rails is the same environment that destroys risk appetite for XRP-as-asset. The Q3 2026 kill switch cluster is the decisive test. Until then, we are watching infrastructure being built toward a deadline with no evidence it will be used.",
+    "last_updated": "2026-03-03T00:06:25.536Z"
   },
   "last_analysis": {
-    "timestamp": "2026-03-02T23:45:04.108Z",
+    "timestamp": "2026-03-03T00:06:25.536Z",
     "run_type": "evening",
     "stress_level": "ELEVATED",
-    "stress_score": 58,
-    "applied_at": "2026-03-02T23:46:23.266Z",
+    "stress_score": 62,
+    "applied_at": "2026-03-03T00:07:46.139Z",
     "changes_applied": 2
   }
 }
