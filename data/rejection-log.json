@@ -61,5 +61,32 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-03T15:34:13.922Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Layer 2 scored JoelKatz engagement pattern as severity 2 threat, which Layer 3 then elevated based on engagement anomaly",
+    "rejection_reason": "Layer 4 ACCEPTS Layer 3's behavioral analysis of the engagement anomaly but REJECTS the framing as a 'threat.' The 129K impression tweet is potentially a positive catalyst signal, not a threat. Moving to severity 1 as a threat (nearly zero) while noting the potential positive catalyst separately.",
+    "root_cause": "APOPHENIA",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-03T17:45:23.902Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "DTCC positioning scored at severity 5 by Layer 2, with Layer 3 holding null hypothesis",
+    "rejection_reason": "Layer 2 overweighted a marketing tweet. Layer 3 correctly identified NULL_HYPOTHESIS_HOLDS. Layer 4 reduces to 3. A marketing tweet from an organization with a demonstrated track record of slow digital asset innovation does not warrant severity 5.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-03T17:45:23.902Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "SBI Holdings likely evaluating accelerated XRPL deployment due to yen stress",
+    "rejection_reason": "FLAGGED classification with LOW confidence from Layer 3 itself. No evidence of actual deployment acceleration. SBI's equity stake is real but 'evaluating accelerated deployment' is speculative inference from macro conditions. Not rejected entirely but stripped from bear pressure scoring. Retained as contextual narrative only.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-03T17:45:23.902Z",
+    "source": "layer4_reconcile"
   }
 ]
