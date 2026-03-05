@@ -649,6 +649,7 @@ For each significant threat or signal from Layer 1, perform the following check 
    - If a matching trigger is found, apply the stored lesson to inform this assessment
    - If a lesson prevents a repeat error, flag it: "LESSON_APPLIED": "CL-XXX"
    - Do NOT skip this step. The ledger exists because the system made this exact type of mistake before.
+   - You MUST populate the corrections_referenced field in your output. List every correction entry you consulted, what trigger matched, and how it influenced your assessment. If no corrections matched, return an empty array. This field is required.
 
 3. COMPOUND STRESS CHECK
    - Stress indicators are NOT independent. They compound.
@@ -766,7 +767,14 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   },
   "bear_pressure": 0,
   "bear_pressure_reasoning": "...",
-  "layer2_summary": "2-3 sentences. What does Layer 3 need to know? What was verified, what remains uncertain, what is the compound stress state?"
+  "layer2_summary": "2-3 sentences. What does Layer 3 need to know? What was verified, what remains uncertain, what is the compound stress state?",
+  "corrections_referenced": [
+    {
+      "correction_id": "CL-XXX",
+      "trigger_matched": "what specific trigger condition matched this analysis",
+      "influence_on_assessment": "how the stored lesson changed this assessment"
+    }
+  ]
 }`;
 
   let result;
