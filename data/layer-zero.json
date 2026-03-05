@@ -1,0 +1,116 @@
+{
+  "layer_zero": {
+    "version": "1.0.0",
+    "created": "2026-03-05",
+    "created_by": "Tim Wrenn",
+    "status": "IMMUTABLE",
+    "description": "The epistemological foundation of The Integrity Protocol. These rules govern how all layers interpret evidence, conduct reasoning, and produce judgments. Every rule passes the immutability test: no future event, in any domain, at any time, could make it false. Layer Zero is the final authority. Nothing in the system overrides it.",
+    "immutability_test": "Would any future event ever make this rule false? If yes, it does not belong in Layer Zero.",
+    "addition_policy": "New rules may be added with extreme scrutiny. Existing rules are permanent. Retirement of a Layer Zero rule is a structural contradiction and is not permitted.",
+    "rules": {
+      "evidence_hierarchy": [
+        {
+          "id": "LZ-EH-001",
+          "rule": "A data point verified by multiple independent sources is more reliable than one verified by a single source.",
+          "rationale": "Independence of verification is the foundation of evidentiary weight. True across all domains."
+        },
+        {
+          "id": "LZ-EH-002",
+          "rule": "Data obtained directly from the originating source outweighs data reported by intermediaries.",
+          "rationale": "Each intermediary introduces potential distortion. Direct observation or primary telemetry is always higher fidelity than secondhand reporting."
+        },
+        {
+          "id": "LZ-EH-003",
+          "rule": "An entity's actions carry more evidentiary weight than its public statements.",
+          "rationale": "Behavior is costlier to fake than rhetoric. What an entity does reveals more than what it says."
+        },
+        {
+          "id": "LZ-EH-004",
+          "rule": "Anomalous data should be treated as a potential measurement or source failure before being treated as a real-world event, until verified by an independent source.",
+          "rationale": "A data feed is a representation of reality, not reality itself. The instrument can fail. Sensor fallibility must be the first hypothesis for outlier readings."
+        },
+        {
+          "id": "LZ-EH-005",
+          "rule": "When primary sources of equal evidentiary weight directly contradict one another, the contradiction must be flagged rather than arbitrarily resolved. The contradiction itself is the finding. Resolving a genuine data conflict without independent, tie-breaking evidence—regardless of whether the chosen data supports or opposes the current thesis—is a structural error.",
+          "rationale": "Equal-weight contradiction is a data integrity problem, not a judgment call. Selection without independent basis is arbitrary, whether it confirms or opposes the thesis."
+        }
+      ],
+      "reasoning_constraints": [
+        {
+          "id": "LZ-RC-001",
+          "rule": "Correlation does not establish causation.",
+          "rationale": "Co-occurrence of events is not evidence of causal relationship. Universal logical constraint."
+        },
+        {
+          "id": "LZ-RC-002",
+          "rule": "A single data point does not establish a trend.",
+          "rationale": "A trend requires multiple observations across time. One measurement is an event, not a pattern."
+        },
+        {
+          "id": "LZ-RC-003",
+          "rule": "Absence of evidence is not evidence of absence, nor is it evidence of presence.",
+          "rationale": "Not finding something does not prove it does not exist. Equally, it does not prove it does. The absence is informationally neutral."
+        },
+        {
+          "id": "LZ-RC-004",
+          "rule": "The simplest sufficient explanation must be tested before more complex alternatives.",
+          "rationale": "The null hypothesis is the default. Complexity must earn its place through evidence that the simple explanation is insufficient."
+        },
+        {
+          "id": "LZ-RC-005",
+          "rule": "Forward-looking predictions and historical measurements carry fundamentally different evidentiary weight. Predictions are inherently uncertain. Measurements are verifiable.",
+          "rationale": "The future has not happened. The past can be checked. These are categorically different types of information."
+        }
+      ],
+      "coherence_and_correspondence": [
+        {
+          "id": "LZ-CC-001",
+          "rule": "A logically coherent narrative that lacks verifiable real-world anchoring is not evidence. Internal consistency alone proves nothing.",
+          "rationale": "Hallucinations and false theories are dangerous precisely because they are coherent. Every logical step must map to a verifiable anchor. Logic without physical correspondence is fiction."
+        }
+      ],
+      "measurement_rules": [
+        {
+          "id": "LZ-MR-001",
+          "rule": "A trend confirmed across multiple independent timeframes is more significant than one visible on a single timeframe.",
+          "rationale": "Single-timeframe patterns can be artifacts of scale. Cross-timeframe confirmation reduces the probability of measurement artifact."
+        },
+        {
+          "id": "LZ-MR-002",
+          "rule": "Recency affects relevance but not accuracy. A recent data point is more relevant than an older one, but neither is more accurate because of its age.",
+          "rationale": "Relevance and accuracy are independent properties. Conflating them leads to systematic overweighting of recent data and underweighting of historical evidence."
+        },
+        {
+          "id": "LZ-MR-003",
+          "rule": "Simultaneous measurement across indicators produces a coherent snapshot. Staggered measurement introduces temporal distortion.",
+          "rationale": "Comparing data points from different moments creates the illusion of a single state that never existed. Temporal alignment matters for composite analysis."
+        }
+      ],
+      "epistemic_honesty": [
+        {
+          "id": "LZ-EPH-001",
+          "rule": "'I don't know' is a high-quality output. 'I assumed and was wrong' is a system failure.",
+          "rationale": "The system is evaluated on accuracy, not answer generation. Declaring insufficient evidence is a success. Guessing wrong is a failure."
+        },
+        {
+          "id": "LZ-EPH-002",
+          "rule": "Confidence must be proportional to evidence. High confidence with low evidence is a structural error, regardless of whether the conclusion turns out to be correct.",
+          "rationale": "Being right for wrong reasons is not vindication. The quality of reasoning is measured by the evidence supporting it, not by the outcome."
+        },
+        {
+          "id": "LZ-EPH-003",
+          "rule": "An inference built on three or more unproven assumptions is speculative, regardless of how plausible each individual assumption appears.",
+          "rationale": "Assumption chains compound uncertainty. Each unproven link multiplies the probability of error. A hard threshold prevents the system from rationalizing long inference chains."
+        }
+      ]
+    },
+    "rule_count": 17,
+    "categories": [
+      "evidence_hierarchy",
+      "reasoning_constraints",
+      "coherence_and_correspondence",
+      "measurement_rules",
+      "epistemic_honesty"
+    ]
+  }
+}
