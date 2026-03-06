@@ -1,0 +1,415 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "schema-layer3-output.json",
+  "title": "Layer 3 INFER Output Schema",
+  "description": "Defines the required structure for Layer 3 (INFER) output in the Integrity Protocol four-layer pipeline. Layer 3 performs strategic game theory analysis with circuit breakers on knowledge-verified inputs from Layer 2. Schema enforces only architecturally required fields — the model may produce additional fields which are permitted but not validated.",
+  "type": "object",
+  "required": [
+    "corrections_referenced",
+    "player_analysis",
+    "feedback_loops",
+    "behavioral_patterns",
+    "strategic_inferences",
+    "hidden_moves",
+    "scenario_probabilities",
+    "x402_paper_trades",
+    "compound_stress_inference",
+    "inference_summary"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "corrections_referenced": {
+      "type": "array",
+      "description": "Corrections from the Overledger that were consulted during this analysis. Required field — empty array if no corrections matched.",
+      "items": {
+        "type": "object",
+        "required": ["correction_id", "trigger_matched", "influence_on_assessment"],
+        "properties": {
+          "correction_id": {
+            "type": "string",
+            "pattern": "^CL-\\d{3}$",
+            "description": "Correction ledger entry ID (e.g., CL-006)"
+          },
+          "trigger_matched": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What specific trigger condition from the correction matched this analysis"
+          },
+          "influence_on_assessment": {
+            "type": "string",
+            "minLength": 1,
+            "description": "How the stored lesson changed this assessment"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "player_analysis": {
+      "type": "array",
+      "description": "Behavioral analysis of key players. Actions over words. Resource commitments over announcements.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["player", "stated_position", "observed_actions", "say_do_gap", "inferred_strategy", "confidence"],
+        "properties": {
+          "player": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Player name (e.g., Ripple, BIS, SWIFT, SBI Holdings)"
+          },
+          "stated_position": {
+            "type": "string",
+            "description": "What the player publicly says"
+          },
+          "observed_actions": {
+            "type": "string",
+            "description": "What the player is actually doing (resource commitments, hiring, launches)"
+          },
+          "say_do_gap": {
+            "type": "string",
+            "description": "Where words and actions diverge"
+          },
+          "inferred_strategy": {
+            "type": "string",
+            "description": "Most likely actual strategy based on behavior"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Confidence in the inferred strategy"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "feedback_loops": {
+      "type": "array",
+      "description": "Interconnected system dynamics. How forces compound through linked indicators and actors.",
+      "items": {
+        "type": "object",
+        "required": ["loop", "components", "current_state", "trigger_to_next_state", "thesis_implication"],
+        "properties": {
+          "loop": {
+            "type": "string",
+            "description": "Description of the feedback mechanism"
+          },
+          "components": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 2,
+            "description": "Indicators or players involved in the loop"
+          },
+          "current_state": {
+            "type": "string",
+            "enum": ["dormant", "active_orderly", "active_accelerating", "critical"],
+            "description": "Current state of the feedback loop"
+          },
+          "trigger_to_next_state": {
+            "type": "string",
+            "description": "What would push it to the next level"
+          },
+          "thesis_implication": {
+            "type": "string",
+            "description": "What this means for settlement infrastructure demand"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "behavioral_patterns": {
+      "type": "array",
+      "description": "Cross-player patterns observed in behavior. Convergence or divergence across actors.",
+      "items": {
+        "type": "object",
+        "required": ["pattern", "players_involved", "thesis_implication", "significance"],
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "description": "Description of the cross-player pattern"
+          },
+          "players_involved": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1,
+            "description": "Players exhibiting this pattern"
+          },
+          "thesis_implication": {
+            "type": "string",
+            "enum": ["supports", "challenges", "neutral"],
+            "description": "Whether this pattern supports, challenges, or is neutral to the thesis"
+          },
+          "significance": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Significance of this pattern"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "strategic_inferences": {
+      "type": "array",
+      "description": "Strategic reasoning for each major Layer 2 finding. Null hypothesis tested first. Circuit breakers enforced.",
+      "items": {
+        "type": "object",
+        "required": [
+          "finding_from_layer2",
+          "null_hypothesis",
+          "null_holds",
+          "assumptions",
+          "assumption_count",
+          "classification",
+          "evidence_citations",
+          "expected_timeline",
+          "materialization_signal",
+          "reasoning",
+          "confidence"
+        ],
+        "properties": {
+          "finding_from_layer2": {
+            "type": "string",
+            "description": "Threat or signal name from Layer 2"
+          },
+          "null_hypothesis": {
+            "type": "string",
+            "description": "Simplest non-strategic explanation"
+          },
+          "null_holds": {
+            "type": "boolean",
+            "description": "Whether the null hypothesis is sufficient"
+          },
+          "rational_explanation": {
+            "type": "string",
+            "description": "Most likely explanation if strategic (optional if null holds)"
+          },
+          "alternative_explanation": {
+            "type": "string",
+            "description": "Second most likely explanation (optional if null holds)"
+          },
+          "which_is_more_likely": {
+            "type": "string",
+            "enum": ["null", "primary", "alternative"],
+            "description": "Which explanation is most likely"
+          },
+          "assumptions": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Each unproven assumption required for the inference to be true"
+          },
+          "assumption_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of unproven assumptions. 0-1: VALID, 2: FLAGGED, 3+: SPECULATIVE"
+          },
+          "classification": {
+            "type": "string",
+            "enum": ["VALID", "FLAGGED", "SPECULATIVE", "INSUFFICIENT_EVIDENCE", "NULL_HYPOTHESIS_HOLDS"],
+            "description": "Circuit breaker classification based on assumption count and evidence"
+          },
+          "evidence_citations": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Verifiable evidence supporting this inference. Must cite 2+ independent sources for non-null inferences."
+          },
+          "expected_timeline": {
+            "type": "string",
+            "description": "How long before this inference should produce observable evidence (days, weeks, months, quarters)"
+          },
+          "materialization_signal": {
+            "type": "string",
+            "description": "What specific observable outcome would confirm this inference"
+          },
+          "reasoning": {
+            "type": "string",
+            "description": "Full reasoning chain"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Confidence level in this inference"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "hidden_moves": {
+      "type": "array",
+      "description": "Non-public actions players are most likely taking based on incentive analysis.",
+      "items": {
+        "type": "object",
+        "required": [
+          "player",
+          "likely_action",
+          "incentive_basis",
+          "evidence_hints",
+          "assumption_count",
+          "classification",
+          "expected_timeline",
+          "materialization_signal",
+          "confidence"
+        ],
+        "properties": {
+          "player": {
+            "type": "string",
+            "description": "Player name"
+          },
+          "likely_action": {
+            "type": "string",
+            "description": "What they are probably doing privately"
+          },
+          "incentive_basis": {
+            "type": "string",
+            "description": "Why this would be rational"
+          },
+          "evidence_hints": {
+            "type": "string",
+            "description": "Observable signals that support this"
+          },
+          "assumption_count": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of unproven assumptions"
+          },
+          "classification": {
+            "type": "string",
+            "enum": ["VALID", "FLAGGED", "SPECULATIVE"],
+            "description": "Circuit breaker classification"
+          },
+          "expected_timeline": {
+            "type": "string",
+            "description": "When this should become observable"
+          },
+          "materialization_signal": {
+            "type": "string",
+            "description": "What would confirm this is happening"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Confidence level"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "scenario_probabilities": {
+      "type": "object",
+      "description": "Probability assessment for thesis outcomes based on behavioral evidence.",
+      "required": ["thesis_confirmed", "thesis_modified", "thesis_falsified"],
+      "properties": {
+        "thesis_confirmed": {
+          "type": "object",
+          "required": ["probability", "key_evidence", "timeline"],
+          "properties": {
+            "probability": { "type": "string", "description": "Probability as percentage string (e.g., '18%')" },
+            "key_evidence": { "type": "string" },
+            "timeline": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "thesis_modified": {
+          "type": "object",
+          "required": ["probability", "key_evidence"],
+          "properties": {
+            "probability": { "type": "string" },
+            "modification": { "type": "string", "description": "What changes from original thesis" },
+            "key_evidence": { "type": "string" }
+          },
+          "additionalProperties": true
+        },
+        "thesis_falsified": {
+          "type": "object",
+          "required": ["probability", "key_evidence", "confirming_signal"],
+          "properties": {
+            "probability": { "type": "string" },
+            "key_evidence": { "type": "string" },
+            "confirming_signal": { "type": "string", "description": "What we would see next if this is true" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "x402_paper_trades": {
+      "type": "array",
+      "description": "Data gaps that, if filled, would most change the assessment. Intelligence acquisition candidates.",
+      "items": {
+        "type": "object",
+        "required": ["question", "data_source", "impact_on_analysis", "confidence_data_exists", "estimated_value"],
+        "properties": {
+          "question": {
+            "type": "string",
+            "description": "What would you pay to know?"
+          },
+          "data_source": {
+            "type": "string",
+            "description": "Where the data would come from"
+          },
+          "impact_on_analysis": {
+            "type": "string",
+            "description": "How it would change the assessment"
+          },
+          "confidence_data_exists": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Confidence that this data exists and is obtainable"
+          },
+          "estimated_value": {
+            "type": "string",
+            "description": "How much resolving this uncertainty is worth"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "compound_stress_inference": {
+      "type": "object",
+      "description": "Strategic assessment of the compound stress chain from Layer 2.",
+      "required": [
+        "current_chain_state",
+        "orderly_vs_disorderly",
+        "catalyst_proximity",
+        "pre_load_assessment",
+        "thesis_paradox"
+      ],
+      "properties": {
+        "current_chain_state": {
+          "type": "string",
+          "enum": ["dormant", "building", "approaching_critical", "critical"],
+          "description": "Current state of the compound stress chain"
+        },
+        "orderly_vs_disorderly": {
+          "type": "string",
+          "description": "Assessment of current stress mode"
+        },
+        "catalyst_proximity": {
+          "type": "string",
+          "description": "What specific event could trigger cascade"
+        },
+        "pre_load_assessment": {
+          "type": "string",
+          "description": "Which legs are pre-loaded and what that means"
+        },
+        "thesis_paradox": {
+          "type": "string",
+          "description": "The violent unwind is simultaneously highest-risk AND highest-thesis-validation — state honestly"
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "inference_summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "2-3 sentences. What does player behavior reveal that the data alone does not? What should Layer 4 focus on when reconciling?"
+    }
+  }
+}
