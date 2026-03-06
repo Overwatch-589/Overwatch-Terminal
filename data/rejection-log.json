@@ -235,5 +235,16 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-06T01:35:44.978Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Fear & Greed at 18 signals ETF outflow cascade risk (Layer 1 threat that persisted to Layer 2 at severity 3)",
+    "rejection_reason": "Fifth occurrence of this pattern. Four corrections ledger entries directly apply. XRP at -0.88% during F&G 18 contradicts cascade behavior. No ETF outflow data exists. The inference chain (extreme fear → ETF outflows → cascade) has been falsified repeatedly.",
+    "root_cause": "APOPHENIA",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-06T02:21:51.838Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-06T02:21:51.839Z"
   }
 ]
