@@ -266,5 +266,47 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-06T04:12:22.855Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Hidden Move — Ripple timing RLUSD XRPL migration with PermissionedDEX adoption",
+    "rejection_reason": "3 assumptions required. Per [LZ-EPH-003], speculative. No evidence of coordinated migration plan. Infrastructure existence does not imply coordinated deployment per CL-007. The simpler explanation per [LZ-RC-004] is that RLUSD lives on Ethereum because that's where institutional demand is, and Ripple follows demand rather than engineering supply-side migration.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-06T13:39:32.416Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Fear & Greed at 18 as institutional capitulation signal",
+    "rejection_reason": "Fifth occurrence of identical false pattern. Null hypothesis holds definitively. No ETF flow data. Per [LZ-EPH-002], confidence without evidence is structural error.",
+    "root_cause": "APOPHENIA",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-06T13:39:32.416Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-06T13:39:32.418Z"
+  },
+  {
+    "layer3_inference": "XRP ETF as exit liquidity vehicle",
+    "rejection_reason": "Zero supporting data. Null hypothesis holds. Per [LZ-RC-003], absence of outflow data is not evidence of outflows. Historical analogy fails CL-002 structural equivalence test.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-06T13:39:32.416Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-06T13:39:32.418Z"
+  },
+  {
+    "layer3_inference": "Ripple CTO disengagement from personal tweets",
+    "rejection_reason": "Sixth occurrence. Permanently retired. Null hypothesis holds definitively per 5 corrections ledger entries.",
+    "root_cause": "APOPHENIA",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-06T13:39:32.416Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-06T13:39:32.418Z"
   }
 ]
