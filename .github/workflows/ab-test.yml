@@ -1,0 +1,57 @@
+name: A/B Test — Overledger Causal Impact
+
+# Manual trigger only — never runs on cron, never touches production
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type YES to confirm you want to run this test (costs ~3 API calls)'
+        required: true
+        type: string
+
+jobs:
+  ab-test:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.confirm == 'YES' }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify test prerequisites
+        run: |
+          echo "Checking required files..."
+          test -f dashboard-data.json || (echo "ERROR: dashboard-data.json missing" && exit 1)
+          test -f scripts/thesis-context.md || (echo "ERROR: thesis-context.md missing" && exit 1)
+          test -f data/corrections-ledger.json || (echo "ERROR: corrections-ledger.json missing" && exit 1)
+          echo "Ledger entries:"
+          node -e "const d=JSON.parse(require('fs').readFileSync('data/corrections-ledger.json','utf8')); console.log(d.length + ' entries');"
+          echo "All prerequisites verified."
+
+      - name: Run A/B Test
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/ab-test-overledger.js
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: ab-test-results
+          path: data/ab-test-results.json
+          retention-days: 90
+
+      - name: Commit results to repo
+        run: |
+          git config user.name "overwatch-bot"
+          git config user.email "overwatch-bot@users.noreply.github.com"
+          git add data/ab-test-results.json
+          git diff --cached --quiet || git commit -m "test: A/B overledger causal impact — $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
