@@ -246,5 +246,16 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-06T02:21:51.839Z"
+  },
+  {
+    "layer3_inference": "Layer 2 stated 'all three legs deteriorating simultaneously' for compound stress",
+    "rejection_reason": "JGB 10Y actually improved from 2.24% (March 3) to 2.166% (March 6). This is a decrease of 7.4bps, moving AWAY from the elevated threshold, not toward it. Layer 2's claim that 'all three legs deteriorating' is factually incorrect for the JGB leg.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-06T03:13:59.521Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-06T03:13:59.523Z"
   }
 ]
