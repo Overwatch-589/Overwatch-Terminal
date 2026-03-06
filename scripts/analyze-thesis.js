@@ -850,6 +850,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       const raw = response.content[0].text;
       result = parseClaudeJSON(raw, 'layer2');
       log('analysis', `Layer 2 complete: ${result.scored_threats?.length || 0} scored, ${result.unscored_threats?.length || 0} unscored, bear pressure: ${result.bear_pressure}`);
+      await enforceCorrectionsReferenced(result, 'layer2', client, correctionsLedger);
       break;
     } catch (e) {
       err('analysis', `Layer 2 attempt ${attempt} failed: ${e.message}`);
@@ -1113,6 +1114,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       const validCount = (result.strategic_inferences || []).filter(i => i.classification === 'VALID').length;
       const specCount = (result.strategic_inferences || []).filter(i => i.classification === 'SPECULATIVE').length;
       log('analysis', `Layer 3 complete: ${inferCount} inferences (${validCount} VALID, ${specCount} SPECULATIVE), ${result.player_analysis?.length || 0} players analyzed`);
+      await enforceCorrectionsReferenced(result, 'layer3', client, correctionsLedger);
       break;
     } catch (e) {
       err('analysis', `Layer 3 attempt ${attempt} failed: ${e.message}`);
