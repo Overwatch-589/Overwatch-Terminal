@@ -71,7 +71,7 @@ async function fetchXRP(fallback) {
       data_date:  fetchedAt,
       source:     'coingecko',
     };
-    log('XRP', `price=$${result.price}  24h=${result.change_24h?.toFixed(2)}%`);
+    log('XRP', `price=${result.price}  24h=${result.change_24h?.toFixed(2)}%`);
     return result;
   } catch (e) {
     err('XRP', e.message);
@@ -87,7 +87,7 @@ async function fetchRLUSD(fallback) {
     const r = data?.['ripple-usd'];
     if (!r) throw new Error('Unexpected response shape — will try search');
     const result = { market_cap: r.usd_market_cap ?? null, data_date: fetchedAt, source: 'coingecko' };
-    log('RLUSD', `market_cap=$${result.market_cap?.toLocaleString()}`);
+    log('RLUSD', `market_cap=${result.market_cap?.toLocaleString()}`);
     return result;
   } catch (e) {
     warn('RLUSD', `Primary ID failed (${e.message}), trying search…`);
@@ -103,7 +103,7 @@ async function fetchRLUSD(fallback) {
       );
       const r2 = data2?.[coin.id];
       const result = { market_cap: r2?.usd_market_cap ?? null, data_date: fetchedAt, source: 'coingecko' };
-      log('RLUSD', `market_cap=$${result.market_cap?.toLocaleString()} (via search id=${coin.id})`);
+      log('RLUSD', `market_cap=${result.market_cap?.toLocaleString()} (via search id=${coin.id})`);
       return result;
     } catch (e2) {
       err('RLUSD', e2.message);
@@ -363,6 +363,200 @@ async function fetchXRPL(fallback) {
   return result;
 }
 
+// ─── x402 Agent Wallet fetcher ──────────────────────────────────────────────
+
+/**
+ * Fetches x402 agent wallet data directly from XRPL mainnet.
+ * Two calls:
+ *   1. account_info  — current XRP balance
+ *   2. account_tx    — recent transactions (filtered to payments to merchant)
+ *
+ * This populates the x402 tab on the dashboard with live on-chain data
+ * without requiring a manual x402-agent.js run.
+ */
+async function fetchX402Agent(fallback) {
+  const AGENT_WALLET    = 'rPiok45Qs88WMYQbYzDqXQbPgaCr9PnX5M';
+  const MERCHANT_WALLET = 'r4K5EDq2UPA2J6kecNKuFVAxs65gmfBYZP';
+  const XRPL_URL        = ENDPOINTS.xrpl.server_info; // same rippled endpoint
+  const fetchedAt       = new Date().toISOString();
+
+  const result = {
+    network:          'XRPL MAINNET',
+    protocol:         'x402 v2',
+    facilitator:      'T54 mainnet',
+    agent_address:    AGENT_WALLET,
+    merchant_address: MERCHANT_WALLET,
+    merchant_base:    'https://t54.ai',
+    balance_xrp:      null,
+    payments_sent:    null,
+    session_xrp_spent: 0,
+    lifetime_xrp_spent: null,
+    guardrails: {
+      balance_floor_xrp: 11,
+      session_cap_drops:  10000,
+      max_single_drops:   5000,
+    },
+    transactions:     [],
+    last_payment:     null,
+    x402_flow:        null,
+    last_updated:     fetchedAt,
+  };
+
+  // 1. account_info — get balance
+  try {
+    const controller1 = new AbortController();
+    const timer1 = setTimeout(() => controller1.abort(), 15000);
+    const r1 = await fetch(XRPL_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        method: 'account_info',
+        params: [{ account: AGENT_WALLET, ledger_index: 'validated' }],
+      }),
+      signal: controller1.signal,
+    });
+    clearTimeout(timer1);
+    const d1 = await r1.json();
+    const balanceDrops = d1?.result?.account_data?.Balance;
+    if (balanceDrops) {
+      result.balance_xrp = parseFloat((parseInt(balanceDrops, 10) / 1_000_000).toFixed(6));
+      log('x402', `agent balance = ${result.balance_xrp} XRP`);
+    } else {
+      warn('x402', 'Could not read Balance from account_info');
+    }
+  } catch (e) {
+    err('x402', `account_info: ${e.message}`);
+  }
+
+  // 2. account_tx — get recent transactions
+  try {
+    const controller2 = new AbortController();
+    const timer2 = setTimeout(() => controller2.abort(), 15000);
+    const r2 = await fetch(XRPL_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        method: 'account_tx',
+        params: [{
+          account: AGENT_WALLET,
+          ledger_index_min: -1,
+          ledger_index_max: -1,
+          limit: 50,
+          forward: false,
+        }],
+      }),
+      signal: controller2.signal,
+    });
+    clearTimeout(timer2);
+    const d2 = await r2.json();
+    const txs = d2?.result?.transactions;
+
+    if (txs && Array.isArray(txs)) {
+      // Filter to Payment transactions sent FROM agent TO merchant
+      const payments = txs
+        .filter(t => {
+          const tx = t.tx || t.tx_json || {};
+          return tx.TransactionType === 'Payment'
+            && tx.Account === AGENT_WALLET
+            && tx.Destination === MERCHANT_WALLET;
+        })
+        .map(t => {
+          const tx = t.tx || t.tx_json || {};
+          const meta = t.meta || {};
+          const amountDrops = typeof tx.Amount === 'string' ? parseInt(tx.Amount, 10) : 0;
+          const amountXrp = parseFloat((amountDrops / 1_000_000).toFixed(6));
+
+          // Try to extract invoice ID from memos
+          let invoiceId = null;
+          if (tx.Memos && Array.isArray(tx.Memos)) {
+            for (const m of tx.Memos) {
+              const memoData = m.Memo?.MemoData;
+              if (memoData) {
+                try {
+                  invoiceId = Buffer.from(memoData, 'hex').toString('utf8');
+                } catch (_) {
+                  invoiceId = memoData;
+                }
+                break;
+              }
+            }
+          }
+
+          // Determine endpoint label from invoice or memo
+          let endpoint = null;
+          let label = 'x402 payment';
+          if (invoiceId) {
+            if (invoiceId.includes('premium-analysis') || invoiceId.includes('premium')) {
+              endpoint = '/api/v1/premium-analysis';
+              label = 'Premium Analysis';
+            } else if (invoiceId.includes('bear-case') || invoiceId.includes('bear')) {
+              endpoint = '/api/v1/bear-case';
+              label = 'Bear Case Deep Dive';
+            } else if (invoiceId.includes('stress-report') || invoiceId.includes('stress')) {
+              endpoint = '/api/v1/stress-report';
+              label = 'Stress Report';
+            } else {
+              endpoint = invoiceId;
+              label = invoiceId;
+            }
+          }
+
+          // Convert ripple epoch to ISO timestamp
+          let timestamp = null;
+          if (tx.date) {
+            // XRPL epoch starts 2000-01-01T00:00:00Z = 946684800 unix
+            timestamp = new Date((tx.date + 946684800) * 1000).toISOString();
+          }
+
+          return {
+            endpoint:     endpoint,
+            label:        label,
+            pay_to:       MERCHANT_WALLET,
+            amount_drops: amountDrops,
+            amount_xrp:   amountXrp,
+            invoice_id:   invoiceId,
+            tx_hash:      tx.hash || null,
+            status:       meta.TransactionResult === 'tesSUCCESS' ? 'confirmed' : (meta.TransactionResult || 'unknown'),
+            timestamp:    timestamp,
+          };
+        });
+
+      result.payments_sent = payments.length;
+      result.transactions = payments;
+
+      // Calculate lifetime spent
+      const totalDrops = payments.reduce((sum, p) => sum + (p.amount_drops || 0), 0);
+      result.lifetime_xrp_spent = parseFloat((totalDrops / 1_000_000).toFixed(6));
+
+      // Last payment
+      if (payments.length > 0) {
+        result.last_payment = payments[0]; // already sorted newest-first by account_tx
+      }
+
+      // x402 flow description
+      if (payments.length > 0) {
+        result.x402_flow = `${payments.length} mainnet payments • ${totalDrops.toLocaleString()} drops lifetime (${result.lifetime_xrp_spent} XRP)`;
+      } else {
+        result.x402_flow = 'No payments detected on-chain';
+      }
+
+      log('x402', `${payments.length} payments found, ${totalDrops} drops lifetime`);
+    } else {
+      warn('x402', 'No transactions in account_tx response');
+    }
+  } catch (e) {
+    err('x402', `account_tx: ${e.message}`);
+  }
+
+  // If both calls failed completely, fall back to existing data
+  if (result.balance_xrp === null && result.payments_sent === null) {
+    warn('x402', 'Both calls failed, using fallback');
+    return fallback?.x402_agent ?? result;
+  }
+
+  return result;
+}
+
 // ─── Kill-switch helpers ──────────────────────────────────────────────────────
 
 function pct(current, target) {
@@ -463,6 +657,7 @@ async function main() {
 
   const xrplMetrics = await fetchXRPL(existing);
   const xIntelligence = await fetchXIntelligence(existing?.x_intelligence);
+  const x402Agent = await fetchX402Agent(existing);
 
   // Preserve manually-managed fields from existing JSON (never overwrite with null)
   const manual = {
@@ -502,6 +697,7 @@ async function main() {
     },
     xrpl_metrics: xrplMetrics,
     x_intelligence: xIntelligence,
+    x402_agent: x402Agent,
     manual,
     kill_switches:  buildKillSwitches(manual, rlusd),
     thesis_scores,
@@ -512,15 +708,16 @@ async function main() {
   await validateDataContract();
 
   console.log('\n─── Summary ───────────────────────────────────');
-  console.log(`XRP price:       $${xrp.price ?? 'N/A'}`);
-  console.log(`RLUSD mktcap:    $${rlusd.market_cap?.toLocaleString() ?? 'N/A'} (${rlusd.source})`);
+  console.log(`XRP price:       ${xrp.price ?? 'N/A'}`);
+  console.log(`RLUSD mktcap:    ${rlusd.market_cap?.toLocaleString() ?? 'N/A'} (${rlusd.source})`);
   console.log(`USD/JPY:         ${usdJpy.value ?? 'N/A'} (${usdJpy.data_date ?? 'no date'})`);
   console.log(`JPN 10Y yield:   ${jpn10y.value ?? 'N/A'}% (${jpn10y.data_date ?? 'no date'})`);
   console.log(`US 10Y yield:    ${us10y.value ?? 'N/A'}% (${us10y.data_date ?? 'no date'})`);
-  console.log(`Brent crude:     $${brent.value ?? 'N/A'} (${brent.data_date ?? 'no date'})`);
+  console.log(`Brent crude:     ${brent.value ?? 'N/A'} (${brent.data_date ?? 'no date'})`);
   console.log(`DXY:             ${dxy.value ?? 'N/A'} (${dxy.data_date ?? 'no date'})`);
   console.log(`S&P 500:         ${sp500.value ?? 'N/A'} (${sp500.data_date ?? 'no date'})`);
   console.log(`Fear & Greed:    ${fearGreed.value ?? 'N/A'} (${fearGreed.label ?? 'N/A'}) (${fearGreed.data_date ?? 'no date'})`);
+  console.log(`x402 agent:      ${x402Agent.payments_sent ?? 0} payments, ${x402Agent.balance_xrp ?? 'N/A'} XRP balance`);
   console.log('───────────────────────────────────────────────\n');
 
   await pushToGitHub();
