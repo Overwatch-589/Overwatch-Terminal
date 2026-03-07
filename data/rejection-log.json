@@ -370,5 +370,38 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-07T02:26:29.828Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "SWIFT hidden settlement capability inference",
+    "rejection_reason": "CL-021 and CL-024 correctly applied by Layer 3. SWIFT Connector and ISO 20022 are not evidence of settlement layer development. 3+ unproven assumptions required. Layer 3 already classified this correctly — confirming the rejection.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-07T13:21:01.397Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-07T13:21:01.399Z"
+  },
+  {
+    "layer3_inference": "Institutional accumulation during extreme fear (CL-022 correctly caught)",
+    "rejection_reason": "Zero ETF flow data. XRP -1.8% is consistent with multiple explanations. Cannot infer accumulation without flow data. Layer 3 correctly stripped this per CL-022 — confirming the rejection.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-07T13:21:01.398Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-07T13:21:01.399Z"
+  },
+  {
+    "layer3_inference": "JoelKatz CTO disengagement from XRPL development",
+    "rejection_reason": "Seventh occurrence of definitively identified apophenia pattern. CL-006, CL-007, CL-012, CL-013, CL-015, CL-020 all address this. Layer 3 correctly applied all six corrections. Permanently retired. This should not appear in Layer 1 output going forward.",
+    "root_cause": "APOPHENIA",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-07T13:21:01.398Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-07T13:21:01.399Z"
   }
 ]
