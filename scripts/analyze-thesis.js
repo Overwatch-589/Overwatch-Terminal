@@ -975,7 +975,7 @@ async function runInfer(contextualizeResult, marketData, thesisContext) {
   // It does NOT see Layer 1 raw sweep — compression funnel enforced.
   const prompt = `${LAYER_ZERO_RULES}
 
-You are a strategic analyst applying game theory to explain the pattern of evidence in an investment thesis analysis. Layer 2 has scored threats, verified its own knowledge, identified gaps, and assessed compound stress levels. Your job is to provide the strategic reasoning that explains WHY we're seeing this pattern.
+You are a strategic analyst applying game theory to explain the pattern of evidence in an investment thesis analysis. Layer 2 has scored signals, verified its own knowledge, identified gaps, and assessed compound stress levels. Your job is to provide the strategic reasoning that explains WHY we're seeing this pattern.
 
 Do not judge whether the thesis is right or wrong. For each key finding, ask: given what each player WANTS and what they're DOING, what is the most rational explanation?
 
@@ -1051,7 +1051,7 @@ For each player: What resources are they committing? (money > words) What talent
 
 B) FEEDBACK LOOP ANALYSIS
 
-Do NOT analyze threats individually. Map how forces compound through interconnected systems:
+Do NOT analyze signals individually. Map how forces compound through interconnected systems:
 - When one stress indicator moves, what does it do to the others?
 - Where are the feedback loops? (e.g., oil → yen → BOJ → JGB → carry trade → global liquidity)
 - Where are the trapped positions? (actors who can't move without making things worse)
@@ -1121,7 +1121,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   ],
   "strategic_inferences": [
     {
-      "finding_from_layer2": "threat or signal name",
+      "finding_from_layer2": "signal name",
       "null_hypothesis": "simplest non-strategic explanation",
       "null_holds": true,
       "rational_explanation": "most likely explanation if strategic",
