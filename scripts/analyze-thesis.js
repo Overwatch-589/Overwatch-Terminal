@@ -1668,11 +1668,28 @@ async function main() {
   // ═══════════════════════════════════════════════════════════════════════════
 
   let assessment360 = null;
+  let prunedSignals = [];
   const previousBearScore = dashboardData.bear_case?.counter_thesis_score ?? 50;
 
   // ── Layer 1: SWEEP ──────────────────────────────────────────────────────
   console.log('\n═══ LAYER 1: SWEEP ═══');
   const sweepResults = await runSweep(dashboardData);
+
+  // ── Signal ID Assignment ──────────────────────────────────────────────
+  // Deterministic, code-assigned identifiers for Cognitive Trace.
+  // Stamped before validators, gates, and pruning so every signal
+  // carries its ID through the entire pipeline. The LLM never generates
+  // or reasons about these IDs — they are pure metadata.
+  // Format: YYYYMMDD-HHMM-SIG-NNN (e.g., 20260308-1145-SIG-007)
+  const runTs = new Date().toISOString().replace(/[-:]/g, '').slice(0, 13).replace('T', '-');
+  if (Array.isArray(sweepResults)) {
+    for (let i = 0; i < sweepResults.length; i++) {
+      sweepResults[i].signal_id = `${runTs}-SIG-${String(i + 1).padStart(3, '0')}`;
+    }
+    if (sweepResults.length > 0) {
+      log('pipeline', `Signal IDs assigned: ${sweepResults.length} signals (${runTs}-SIG-001 through ${runTs}-SIG-${String(sweepResults.length).padStart(3, '0')})`);
+    }
+  }
 
   // Tier 1 validators — Layer 1
   let tier1Layer1 = { flags: [], hard_fails: 0, total_flags: 0, layer: 1 };
@@ -1699,17 +1716,30 @@ async function main() {
   }
 
   if (sweepResults.length > 0) {
-    // Prune to top 15 threats: critical → high → moderate → low
+    // Prune to top 15 signals: critical → high → moderate → low
+    // Pruned signals are recorded for Cognitive Trace — the pruning step
+    // is a perceptual filter and its behavior must be auditable.
     const SEVERITY_RANK = { critical: 0, high: 1, moderate: 2, low: 3 };
     let threatsToAssess = sweepResults;
     if (sweepResults.length > 15) {
-      threatsToAssess = sweepResults
+      const sorted = sweepResults
         .map((t, i) => ({ t, i }))
-        .sort((a, b) => (SEVERITY_RANK[a.t.severity] ?? 9) - (SEVERITY_RANK[b.t.severity] ?? 9) || a.i - b.i)
+        .sort((a, b) => (SEVERITY_RANK[a.t.severity] ?? 9) - (SEVERITY_RANK[b.t.severity] ?? 9) || a.i - b.i);
+      threatsToAssess = sorted
         .slice(0, 15)
         .sort((a, b) => a.i - b.i)
         .map(({ t }) => t);
-      log('pipeline', `Pruned sweep from ${sweepResults.length} to 15 threats`);
+      prunedSignals = sorted
+        .slice(15)
+        .map(({ t }) => ({
+          signal_id:      t.signal_id,
+          threat:         t.threat,
+          severity:       t.severity,
+          direction:      t.direction,
+          category:       t.category,
+          pruning_reason: 'severity_rank_cutoff'
+        }));
+      log('pipeline', `Pruned sweep from ${sweepResults.length} to 15 signals — ${prunedSignals.length} pruned: ${prunedSignals.map(p => p.signal_id).join(', ')}`);
     }
 
     // ── Layer 2: CONTEXTUALIZE ────────────────────────────────────────────
@@ -1847,6 +1877,13 @@ async function main() {
     // Attached here (not in bridge) so it persists in all pipeline paths including fallbacks
     if (sweepResults && sweepResults.length > 0) {
       assessment360._layer1_raw = sweepResults;
+    }
+    // Persist pruning record — which signals were dropped by the severity-rank filter.
+    // Enables Cognitive Trace to detect systematic pruning bias across runs
+    // (e.g., consistently dropping acceleration signals or specific categories).
+    // Kept in history (not deleted) because pruning patterns require cross-run analysis.
+    if (prunedSignals.length > 0) {
+      assessment360._pruned_signals = prunedSignals;
     }
     try {
       const reportPath = path.join(__dirname, '..', 'data', '360-report.json');
