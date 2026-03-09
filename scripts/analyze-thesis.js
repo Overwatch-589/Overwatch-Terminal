@@ -1323,6 +1323,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
 {
   "burden_of_proof_applied": [
     {
+      "source_signals": ["signal_id(s) from the Layer 3 inference being reviewed"],
       "inference": "name from Layer 3",
       "layer3_classification": "VALID | FLAGGED | SPECULATIVE | INSUFFICIENT_EVIDENCE | NULL_HYPOTHESIS_HOLDS",
       "data_support": "full | partial | none",
@@ -1353,6 +1354,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   ],
   "final_threat_matrix": [
     {
+      "signal_id": "from Layer 2 input",
       "threat": "name",
       "layer2_composite": 0,
       "layer3_adjustment": "description of behavioral evidence applied",
@@ -1389,6 +1391,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   ],
   "rejection_log": [
     {
+      "source_signals": ["signal_id(s) from the rejected inference"],
       "layer3_inference": "what Layer 3 believed",
       "rejection_reason": "why Layer 4 rejected it",
       "root_cause": "ASSUMPTION_FAILURE | APOPHENIA | INSUFFICIENT_EVIDENCE | CONTRADICTED_BY_DATA",
