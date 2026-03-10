@@ -582,8 +582,8 @@ function getRunType() {
 /**
  * Runs the 360 counter-thesis sweep (Layer 1 — SWEEP).
  * Widest intake, no filtering, no judgment.
- * Feeds all market data to Claude with no checklist — lets it find threats
- * on its own. Returns the array of threat objects, or [] on any failure.
+ * Feeds all market data to Claude with no checklist — lets it find signals
+ * on its own. Returns the array of signal objects, or [] on any failure.
  *
  * @param {object} marketData — current dashboard data (from dashboard-data.json)
  * @returns {Promise<Array>}
@@ -652,7 +652,7 @@ These principles were identified through repeated errors in production runs and 
 
 Respond with ONLY a JSON array. Each element:
 {
-  "threat": "Short name",
+  "signal": "Short name",
   "description": "What specifically is happening and why it matters",
   "direction": "ACCELERATION | DETERIORATION | AMBIGUOUS | CONTRADICTORY",
   "severity": "critical | high | moderate | low",
@@ -692,13 +692,13 @@ IMPORTANT: Keep each signal description under 100 words. Return a maximum of 15 
   log('360-sweep', `Response received (${raw.length} chars)`);
 
   try {
-    const threats = parseClaudeJSON(raw, '360-sweep');
-    if (!Array.isArray(threats)) {
+    const signals = parseClaudeJSON(raw, '360-sweep');
+    if (!Array.isArray(signals)) {
       err('360-sweep', 'Response is not a JSON array — returning empty');
       return [];
     }
-    log('360-sweep', `Sweep complete — ${threats.length} threats found`);
-    return threats;
+    log('360-sweep', `Sweep complete — ${signals.length} signals found`);
+    return signals;
   } catch (parseErr) {
     err('360-sweep', `JSON parse failed: ${parseErr.message}`);
     return [];
@@ -715,7 +715,7 @@ IMPORTANT: Keep each signal description under 100 words. Return a maximum of 15 
  * Design rationale: ARCHITECTURE-DECISION-LAYER2-CONTEXTUALIZE.md
  * Prompt source: LAYER-2-3-4-PROMPTS-DRAFT.md
  *
- * @param {Array}  sweepResults  — threat array returned by runSweep()
+ * @param {Array}  sweepResults  — signal array returned by runSweep()
  * @param {object} marketData    — current dashboard data
  * @param {number} previousScore — previous bear pressure score (0-100)
  * @param {string} thesisContext  — contents of thesis-context.md
@@ -723,7 +723,7 @@ IMPORTANT: Keep each signal description under 100 words. Return a maximum of 15 
  */
 async function runContextualize(sweepResults, marketData, previousScore, thesisContext) {
   log('analysis', '=== LAYER 2: CONTEXTUALIZE ===');
-  log('analysis', `Processing ${sweepResults.length} threats from Layer 1 SWEEP`);
+  log('analysis', `Processing ${sweepResults.length} signals from Layer 1 SWEEP`);
 
   const correctionsLedger = loadCorrectionsLedger();
 
@@ -813,7 +813,7 @@ For each significant signal from Layer 1, perform the following check BEFORE sco
    - THESIS_CAPABILITY_GAP: "I don't know if the thesis asset can handle this specific technical challenge"
    - THRESHOLD_CALIBRATION_GAP: "This threshold was set under different conditions and may need recalibration"
    - DATA_AVAILABILITY_GAP: "I need data that isn't in my current inputs to score this accurately"
-   - COMPETITIVE_KNOWLEDGE_GAP: "I don't understand the competing infrastructure well enough to assess this threat"
+   - COMPETITIVE_KNOWLEDGE_GAP: "I don't understand the competing infrastructure well enough to assess this signal"
 
 === PHASE 2: CONTEXTUAL SCORING ===
 
@@ -869,7 +869,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "knowledge_audit": [
     {
       "signal_ids": ["from Layer 1 input"],
-      "threat": "name from Layer 1",
+      "signal": "name from Layer 1",
       "knowledge_check": "what I verified before scoring",
       "gap_identified": "description of gap, or NONE",
       "gap_type": "THESIS_CAPABILITY_GAP | THRESHOLD_CALIBRATION_GAP | DATA_AVAILABILITY_GAP | COMPETITIVE_KNOWLEDGE_GAP | NONE",
@@ -880,10 +880,10 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       "status": "SCORED | REQUIRES_DEEPER_CONTEXT"
     }
   ],
-  "scored_threats": [
+  "scored_signals": [
     {
       "signal_ids": ["from Layer 1 input"],
-      "threat": "name",
+      "signal": "name",
       "severity": 0,
       "source_tier": "1 | 2 | 3",
       "weighted_severity": 0,
@@ -893,10 +893,10 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       "knowledge_verified": true
     }
   ],
-  "unscored_threats": [
+  "unscored_signals": [
     {
       "signal_ids": ["from Layer 1 input"],
-      "threat": "name",
+      "signal": "name",
       "reason": "description of why it cannot be scored",
       "knowledge_needed": "what would be needed to score this",
       "acquisition_type": "KNOWLEDGE | INTELLIGENCE"
@@ -936,7 +936,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       });
       const raw = response.content[0].text;
       result = parseClaudeJSON(raw, 'layer2');
-      log('analysis', `Layer 2 complete: ${result.scored_threats?.length || 0} scored, ${result.unscored_threats?.length || 0} unscored, bear pressure: ${result.bear_pressure}`);
+      log('analysis', `Layer 2 complete: ${result.scored_signals?.length || 0} scored, ${result.unscored_signals?.length || 0} unscored, bear pressure: ${result.bear_pressure}`);
       await enforceCorrectionsReferenced(result, 'layer2', client, correctionsLedger);
       break;
     } catch (e) {
@@ -957,7 +957,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
 
 /**
  * Layer 3: INFER — Strategic Game Theory with Circuit Breakers.
- * Receives Layer 2's knowledge-verified, contextually scored threats.
+ * Receives Layer 2's knowledge-verified, contextually scored signals.
  * Explains WHY we're seeing this pattern using player behavior analysis,
  * feedback loop mapping, and strategic inference with circuit breakers.
  *
@@ -1522,9 +1522,9 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
   // Fields without natural mapping (impact, probability, time_weight, is_new) → null
   // The dashboard renders ?? '—' for nulls.
   const threatMatrix = (reconcileResult.final_signal_matrix || []).map(t => {
-    // Try to find the original sweep threat data via Layer 2's scored_threats
-    const l2Match = (contextualizeResult.scored_threats || []).find(
-      s => s.threat === t.signal
+    // Try to find the original sweep signal data via Layer 2's scored_signals
+    const l2Match = (contextualizeResult.scored_signals || []).find(
+      s => s.signal === t.signal
     );
     return {
       threat:      t.signal,
@@ -1569,11 +1569,11 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
       });
     });
 
-  // 3. blind_spots[] — derive from Layer 2's unscored_threats + Layer 3's x402_paper_trades
+  // 3. blind_spots[] — derive from Layer 2's unscored_signals + Layer 3's x402_paper_trades
   const blindSpots = [];
-  (contextualizeResult.unscored_threats || []).forEach(ut => {
+  (contextualizeResult.unscored_signals || []).forEach(ut => {
     blindSpots.push({
-      threat:                       ut.threat,
+      threat:                       ut.signal,
       importance:                   'high',
       suggested_source:             ut.knowledge_needed || 'Unknown',
       x402_opportunity:             ut.acquisition_type === 'INTELLIGENCE',
@@ -1754,12 +1754,12 @@ async function main() {
     // Pruned signals are recorded for Cognitive Trace — the pruning step
     // is a perceptual filter and its behavior must be auditable.
     const SEVERITY_RANK = { critical: 0, high: 1, moderate: 2, low: 3 };
-    let threatsToAssess = sweepResults;
+    let signalsToAssess = sweepResults;
     if (sweepResults.length > 15) {
       const sorted = sweepResults
         .map((t, i) => ({ t, i }))
         .sort((a, b) => (SEVERITY_RANK[a.t.severity] ?? 9) - (SEVERITY_RANK[b.t.severity] ?? 9) || a.i - b.i);
-      threatsToAssess = sorted
+      signalsToAssess = sorted
         .slice(0, 15)
         .sort((a, b) => a.i - b.i)
         .map(({ t }) => t);
@@ -1767,7 +1767,7 @@ async function main() {
         .slice(15)
         .map(({ t }) => ({
           signal_ids:     t.signal_ids,
-          threat:         t.threat,
+          signal:         t.signal,
           severity:       t.severity,
           direction:      t.direction,
           category:       t.category,
@@ -1778,7 +1778,7 @@ async function main() {
 
     // ── Layer 2: CONTEXTUALIZE ────────────────────────────────────────────
     console.log('\n═══ LAYER 2: CONTEXTUALIZE ═══');
-    const contextualizeResult = await runContextualize(threatsToAssess, dashboardData, previousBearScore, thesisContext);
+    const contextualizeResult = await runContextualize(signalsToAssess, dashboardData, previousBearScore, thesisContext);
 
     // Tier 1 validators — Layer 2
     let tier1Layer2 = { flags: [], hard_fails: 0, total_flags: 0, layer: 2 };
