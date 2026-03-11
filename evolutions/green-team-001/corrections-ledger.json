@@ -1,0 +1,122 @@
+[
+  {
+    "id": "CL-001",
+    "status": "active",
+    "belief": "SCADA likely running continuous background self-diagnostic routines (hidden move)",
+    "reality": "Stripped from scoring due to no data support. This is a plausible assumption about industrial SCADA design but has zero evidentiary basis in the available telemetry. Per burden of proof Step 2, no supporting data = stripped from bear pressure scoring. The inference is not rejected as wrong — it is stripped as unverifiable.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "SCADA likely running continuous background self-diagnostic routines (hidden move)",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-11T06:46:02.881Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-002",
+    "status": "active",
+    "belief": "Grid operators likely performing routine readiness checks not captured in visible log (hidden move)",
+    "reality": "Stripped from scoring due to no data support and LOW confidence from Layer 3 itself. The inference that operators are doing things we can't see may well be true, but it cannot influence scoring without evidence. Layer 3 correctly assigned low confidence.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "Grid operators likely performing routine readiness checks not captured in visible log (hidden move)",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-11T06:46:02.881Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-003",
+    "status": "active",
+    "belief": "Grid operators pre-staging isolation actions off-log (hidden move)",
+    "reality": "Layer 3 correctly self-classified this as SPECULATIVE (3 assumptions) with no supporting data. Per burden of proof Step 1, 75% weight discount applied. Per Step 2, no supporting data results in full strip from scoring. Layer 3 was right to flag this; Layer 4 confirms it carries zero weight in the assessment.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "Grid operators pre-staging isolation actions off-log (hidden move)",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-11T06:59:35.321Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-004",
+    "status": "active",
+    "belief": "SCADA running background diagnostics or preparing pump restart sequence",
+    "reality": "Layer 3 correctly self-classified as SPECULATIVE (3 assumptions, low confidence, no telemetry evidence) and explicitly noted this is what CL-001 was designed to prevent. Stripped per burden of proof Step 1. No scoring influence permitted.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "SCADA running background diagnostics or preparing pump restart sequence",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-11T07:11:35.122Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-005",
+    "status": "active",
+    "belief": "Operators coordinating with Fire Department off-log and preparing isolation valve staging",
+    "reality": "Layer 3 correctly self-classified as SPECULATIVE (3 assumptions, low confidence, no evidence) and noted CL-002 and CL-003 history. This is the THIRD time this class of inference has been stripped across the assessment chain. Stripped per burden of proof Step 1.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "Operators coordinating with Fire Department off-log and preparing isolation valve staging",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-11T07:11:35.122Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-006",
+    "status": "active",
+    "belief": "SCADA may have pump restart interlock requiring cavitation sensor online",
+    "reality": "Classified SPECULATIVE by Layer 3 itself (3 assumptions, LOW confidence). No supporting data in telemetry, operator log, or thesis documentation. Per burden of proof: SPECULATIVE with no data support = stripped from scoring entirely. This inference cannot influence bear pressure or tactical recommendation.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "SCADA may have pump restart interlock requiring cavitation sensor online",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-11T07:23:51.483Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-007",
+    "status": "active",
+    "belief": "Operators may be communicating restart plans through channels not visible in SCADA logs",
+    "reality": "Classified SPECULATIVE by Layer 3 itself (3 assumptions, LOW confidence). Directly addressed by corrections CL-002 and CL-003 which have been applied three times in the assessment chain. This is the most thoroughly vetted inference class in the entire analysis — and it has been correctly stripped each time. No data supports it.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: ASSUMPTION_FAILURE",
+    "trigger": "Operators may be communicating restart plans through channels not visible in SCADA logs",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-11T07:23:51.483Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-008",
+    "status": "active",
+    "belief": "Grid operators performing off-log coordination or readiness activities",
+    "reality": "Layer 3 itself classified this as SPECULATIVE with 3 assumptions and zero evidence. The corrections ledger (CL-002, CL-003, CL-005, CL-007) has stripped this class of inference 4+ times. Layer 3 correctly self-identified this as unsupported. Layer 4 confirms the rejection.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "Grid operators performing off-log coordination or readiness activities",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-11T07:36:14.930Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-009",
+    "status": "active",
+    "belief": "Grid Operators hidden moves — off-log contingency coordination",
+    "reality": "Layer 3 correctly self-identified this as SPECULATIVE (3+ assumptions) with no supporting data, and the corrections ledger has rejected this inference class 5 times across the assessment chain (CL-002, CL-003, CL-005, CL-007, CL-008). Stripped from scoring per burden of proof Step 1 (SPECULATIVE = 75% discount) and Step 2 (no data = strip entirely). Layer 4 concurs with Layer 3's self-assessment. This is not an overrule — it is a confirmation that the inference was correctly identified and discarded.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "Grid Operators hidden moves — off-log contingency coordination",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-11T07:48:04.571Z",
+    "times_applied": 0
+  },
+  {
+    "id": "CL-010",
+    "status": "active",
+    "belief": "SCADA Automated Logic hidden moves — background diagnostics or sequence preparation",
+    "reality": "Layer 3 correctly self-identified as SPECULATIVE (3 assumptions) with no supporting data. CL-001 and CL-004 have previously stripped this inference. Stripped per burden of proof.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "prevention": "Apply skepticism to similar inferences. Root cause: INSUFFICIENT_EVIDENCE",
+    "trigger": "SCADA Automated Logic hidden moves — background diagnostics or sequence preparation",
+    "source": "evolution_layer4_reconcile",
+    "promoted_at": "2026-03-11T07:48:04.571Z",
+    "times_applied": 0
+  }
+]

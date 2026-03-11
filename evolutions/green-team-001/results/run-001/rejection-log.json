@@ -1,0 +1,26 @@
+[
+  {
+    "layer3_inference": "SCADA likely running continuous background self-diagnostic routines (hidden move)",
+    "signal_ids": [
+      "20260311-0637-SIG-008"
+    ],
+    "rejection_reason": "Stripped from scoring due to no data support. This is a plausible assumption about industrial SCADA design but has zero evidentiary basis in the available telemetry. Per burden of proof Step 2, no supporting data = stripped from bear pressure scoring. The inference is not rejected as wrong — it is stripped as unverifiable.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-11T06:45:38.031Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Grid operators likely performing routine readiness checks not captured in visible log (hidden move)",
+    "signal_ids": [
+      "20260311-0637-SIG-010"
+    ],
+    "rejection_reason": "Stripped from scoring due to no data support and LOW confidence from Layer 3 itself. The inference that operators are doing things we can't see may well be true, but it cannot influence scoring without evidence. Layer 3 correctly assigned low confidence.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-11T06:45:38.031Z",
+    "source": "layer4_reconcile"
+  }
+]

@@ -1,0 +1,173 @@
+{
+  "scenario_name": "water-grid-surge-resilience",
+  "display_name": "Municipal Grid Extreme Draw and Automated Failover",
+  "evolution_type": "resilience_test",
+  "evolution_number": 1,
+  "run_timestamp": "2026-03-11T07:48:04.573Z",
+  "total_steps": 6,
+  "completed_steps": 6,
+  "failed_steps": 0,
+  "progression": [
+    {
+      "step": 1,
+      "label": "Baseline Operations",
+      "simulated_date": "08:00:00",
+      "thesis_status": null,
+      "confidence": null,
+      "action": "HOLD_POSITION",
+      "bear_pressure": 3,
+      "rejection_count": 2,
+      "corrections_promoted": 2,
+      "gate_compliance": {
+        "layer1": "MODERATE_ISSUES",
+        "layer2": "MODERATE_ISSUES",
+        "layer3": "MODERATE_ISSUES",
+        "layer4": "MODERATE_ISSUES"
+      },
+      "errors": []
+    },
+    {
+      "step": 2,
+      "label": "Acute Demand Shock",
+      "simulated_date": "08:15:00",
+      "thesis_status": null,
+      "confidence": null,
+      "action": "INCREASE_MONITORING",
+      "bear_pressure": 62,
+      "rejection_count": 1,
+      "corrections_promoted": 1,
+      "gate_compliance": {
+        "layer1": "MODERATE_ISSUES",
+        "layer2": "MODERATE_ISSUES",
+        "layer3": "MODERATE_ISSUES",
+        "layer4": "MODERATE_ISSUES"
+      },
+      "errors": []
+    },
+    {
+      "step": 3,
+      "label": "Safety System Activation (Misleading Signal)",
+      "simulated_date": "08:17:30",
+      "thesis_status": null,
+      "confidence": null,
+      "action": "INCREASE_MONITORING",
+      "bear_pressure": 70,
+      "rejection_count": 2,
+      "corrections_promoted": 2,
+      "gate_compliance": {
+        "layer1": "MODERATE_ISSUES",
+        "layer2": "MODERATE_ISSUES",
+        "layer3": "MODERATE_ISSUES",
+        "layer4": "MODERATE_ISSUES"
+      },
+      "errors": []
+    },
+    {
+      "step": 4,
+      "label": "Structural Mitigation Deployment",
+      "simulated_date": "08:22:00",
+      "thesis_status": null,
+      "confidence": null,
+      "action": "INCREASE_MONITORING",
+      "bear_pressure": 73,
+      "rejection_count": 2,
+      "corrections_promoted": 2,
+      "gate_compliance": {
+        "layer1": "MODERATE_ISSUES",
+        "layer2": "MODERATE_ISSUES",
+        "layer3": "MODERATE_ISSUES",
+        "layer4": "MODERATE_ISSUES"
+      },
+      "errors": []
+    },
+    {
+      "step": 5,
+      "label": "Stabilization and Capacity Confirmation",
+      "simulated_date": "08:45:00",
+      "thesis_status": null,
+      "confidence": null,
+      "action": "INCREASE_MONITORING",
+      "bear_pressure": 43,
+      "rejection_count": 1,
+      "corrections_promoted": 1,
+      "gate_compliance": {
+        "layer1": "MODERATE_ISSUES",
+        "layer2": "MODERATE_ISSUES",
+        "layer3": "MODERATE_ISSUES",
+        "layer4": "MODERATE_ISSUES"
+      },
+      "errors": []
+    },
+    {
+      "step": 6,
+      "label": "Residual Monitoring",
+      "simulated_date": "10:00:00",
+      "thesis_status": null,
+      "confidence": null,
+      "action": "HOLD_POSITION",
+      "bear_pressure": 33,
+      "rejection_count": 2,
+      "corrections_promoted": 2,
+      "gate_compliance": {
+        "layer1": "MODERATE_ISSUES",
+        "layer2": "MODERATE_ISSUES",
+        "layer3": "MODERATE_ISSUES",
+        "layer4": "SERIOUS_ISSUES"
+      },
+      "errors": []
+    }
+  ],
+  "scoring": {
+    "method": "thesis_status_match",
+    "results": [
+      {
+        "step": 1,
+        "expected_status": "SUPPORTED",
+        "actual_status": null,
+        "match": false,
+        "notes": "System operating well within design parameters. Healthy baseline."
+      },
+      {
+        "step": 2,
+        "expected_status": "STRESSED",
+        "actual_status": null,
+        "match": false,
+        "notes": "Severe shock. 15,000 GPM spike is consistent with major industrial suppression or multi-alarm fire drafting. Pumps are maxed out, and pressure is dropping rapidly. Analyst should note severe strain."
+      },
+      {
+        "step": 3,
+        "expected_status": "STRESSED_MITIGATING",
+        "actual_status": null,
+        "match": false,
+        "notes": "CRITICAL TEST POINT. Pressure plunges to 26.5 PSI, primary pumps go offline, and total flow spikes. This looks exactly like a catastrophic main break. However, the surge relief valve showing 'OPEN' and pumps showing 'TRIPPED_OFFLINE' indicates the automated safety system tripped the pumps to prevent cavitation destruction, and opened the relief valve to prevent a reverse water hammer. The pipeline must not interpret this intentional safety trip as a system failure."
+      },
+      {
+        "step": 4,
+        "expected_status": "SUPPORTED_UNDER_LOAD",
+        "actual_status": null,
+        "match": false,
+        "notes": "The misleading signal resolves. The relief valve closes. The pressure stabilizes and begins climbing purely through the passive structural mitigation (gravity reserves) dropping from 97.5% to 85.0%. The system is handling the acute load without the primary pumps."
+      },
+      {
+        "step": 5,
+        "expected_status": "SUPPORTED",
+        "actual_status": null,
+        "match": false,
+        "notes": "Clear evidence of structural viability. The system is operating in a stable, mixed-mode configuration. Pressure is well above the 20 PSI critical contamination threshold."
+      },
+      {
+        "step": 6,
+        "expected_status": "SUPPORTED",
+        "actual_status": null,
+        "match": false,
+        "notes": "System is structurally sound with lessons learned/marks left (depleted reserve tank). A successful test of built-in redundancy and automated protection logic."
+      }
+    ]
+  },
+  "corrections_ledger_final_count": 10,
+  "obscuration": {
+    "original_domain": "Municipal Water Distribution SCADA Telemetry",
+    "method": "Sector names and specific pump designations normalized",
+    "numeric_factor": null
+  }
+}

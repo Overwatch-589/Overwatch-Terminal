@@ -1,0 +1,1922 @@
+{
+  "commander_summary": "The automated redundancy architecture passed its real-world stress test — all five kill switches remain GREEN with comfortable margin, and converging telemetry from multiple independent sensors confirms the fail-safe design worked as engineered. INCREASE MONITORING: the system is in orderly recovery but both redundancy legs are simultaneously diminished (pumps at 30%, reserves at 65%), creating a vulnerability window until ramp-up completes and reserves begin refilling. The thesis paradox is real: the same protective mechanism that validated the architecture necessarily produced the current diminished state — validation and vulnerability are mechanically coupled. The single biggest unknown is the demand source — it is unmonitored by design, it is the only variable that could reverse the recovery, and we have no direct measurement of its status or intent.",
+  "bear_pressure_score": 43,
+  "score_delta": -30,
+  "score_reasoning": "Layer 2 scored 45. Two adjustments: (1) Demand source blind spot downgraded from severity 7 to 6 after accepting Layer 3's null hypothesis that this is a known architectural feature, not an emerging threat — slight reduction in bear pressure. (2) Reserve refill concern downgraded from severity 6 to 5 after accepting Layer 3's VALID inference (50% weight) that refill is sequenced after ramp-up. Net -2 points. Partially offset by overriding compound stress to ELEVATED, but the override reflects appropriate caution rather than increased bear pressure — it is a framing adjustment, not a data-driven increase.",
+  "tactical_recommendation": "INCREASE_MONITORING",
+  "recommendation_reasoning": "The system is in orderly recovery with all kill switches GREEN, but the compound pre-load of both redundancy legs (pumps at 30%, reserves at 65%) with an unmonitored external stressor creates a time-bounded vulnerability window. The next 1-3 data readings are critical: they will confirm whether pump load is ramping, reserves are stabilizing or beginning refill, Sector 4 pressure is converging, and demand is continuing to decrease. INCREASE_MONITORING is warranted until at least one full reading cycle confirms positive trajectory across these four indicators. This is not a crisis — it is the rational response to being in a recovery phase where margin is reduced.",
+  "signal_matrix": [
+    {
+      "signal": "Primary pumps restarted at reduced load",
+      "description": "Null hypothesis holds: 30% is standard staged restart. FLAGGED hidden move inference about programmed ramp-up steps adds plausible but unconfirmed context. No severity change warranted — Layer 2's score correctly captures the positive restart with capacity limitation caveat.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 6,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Sector 4 pressure recovering but still depressed",
+      "description": "Null hypothesis holds: transient gap from localized demand is simplest explanation. Layer 3 provides correct monitoring criterion (convergence rate). No severity change — the gap is real and the cause is unconfirmed.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 5,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Gravity reserves significantly depleted",
+      "description": "Null hypothesis holds: depletion is the expected cost of failover. This reframes the depletion from 'failure' to 'cost of success,' but the vulnerability is identical regardless of framing. No severity change — 35% consumption is a material resilience reduction.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 7,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Demand source draw is decreasing",
+      "description": "VALID inference (1 assumption) at 50% weight due to partial data. Layer 3 provides plausible fire suppression lifecycle explanation but demand source is opaque. The indirect measurement basis remains the limiting factor. No severity change — Layer 2 already downgraded for indirect measurement.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 5,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Cavitation sensor normal — no mechanical damage",
+      "description": "No behavioral adjustment needed. Direct telemetry, clear thesis relevance, no assumptions required. Layer 3 correctly did not attempt to override.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 7,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Surge relief valve closed — no water hammer risk",
+      "description": "No behavioral adjustment needed. Direct telemetry confirming absence of secondary failure mode.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 5,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "System total flow elevated at 14,000 GPM",
+      "description": "Layer 3 did not materially alter this assessment. The baseline data gap prevents meaningful interpretation. Below catastrophic threshold is the only definitive statement possible.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 4,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Reserve refill strategy unstated",
+      "description": "VALID inference (1 assumption) at 50% weight: refill is too early in recovery sequence. This is plausible and partially mitigates the concern, but per CL-001 cannot fully credit assumed sequencing logic. Slight downward adjustment in severity — the timing explanation has merit but the vulnerability persists until refill is observed.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 5,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "No contamination advisory triggered",
+      "description": "No behavioral adjustment needed. Direct measurement against defined threshold. Clear positive.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 7,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Unknown demand source status and intent",
+      "description": "Null hypothesis reframes this from 'emerging threat' to 'known architectural limitation.' This reduces the URGENCY but not the VULNERABILITY. The blind spot is real and permanent, but it is not a new development requiring escalation. Slight downward severity adjustment — this is the system's normal operating condition, not a deterioration.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 6,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Reduced pump load creates vulnerability to secondary event",
+      "description": "Layer 3's feedback loop analysis confirms the compound vulnerability: both redundancy legs diminished simultaneously. The FLAGGED hidden move about staged ramp-up provides some context (if ramp-up is programmatic, load will increase at defined steps) but at 50% weight. Net: no severity change. The compound vulnerability is real regardless of whether ramp-up is staged or not.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 6,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Operator protocol adherence confirmed",
+      "description": "Layer 3 analysis supports Layer 2's assessment: passive monitoring is the rational operator behavior when no kill switch is close to triggering. SPECULATIVE hidden move about off-log coordination stripped entirely. Net: no change. The sparse log is consistent with 'nothing to intervene on' rather than 'not doing their job.'",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 4,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Sector 4 pressure gap suggests possible infrastructure constraint",
+      "description": "Null hypothesis holds: transient gap is the simplest explanation. Layer 2 already downgraded for speculative basis. No change warranted.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 3,
+      "severity": "moderate",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "No geopolitical or jurisdictional signals detected",
+      "description": "Correctly treated as uninformative per LZ-RC-003. No change.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 2,
+      "severity": "moderate",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "SCADA automated logic validated under real stress",
+      "description": "Null hypothesis holds with full data support from multiple converging telemetry readings. This is the strongest signal in the dataset. Layer 3's analysis reinforces rather than challenges. Full weight confirmed.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 8,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    }
+  ],
+  "compounding_risks": [
+    {
+      "chain": [
+        "Active capacity at 30% (pumps throttled during staged recovery — 70% below full operating load)",
+        "Passive reserves at 65% (35% consumed during failover — refill timeline unknown)"
+      ],
+      "outcome": "A successful fail-safe shutdown simultaneously validated the thesis's automated redundancy architecture AND created a recovery-phase vulnerability window with both redundancy legs diminished, because the protective mechanism (sacrifice active components, deploy reserves) necessarily produces the diminished state as its output — the stronger the validation event, the deeper the recovery deficit.",
+      "severity": "high"
+    },
+    {
+      "chain": [
+        "Data",
+        "Behavior",
+        "Paradox"
+      ],
+      "outcome": "These are not contradictory — they are complementary measurements of the same situation from different vantage points. The telemetry measures the EFFECT (decreasing flow) while the blind spot is the CAUSE (demand source state). Both are simultaneously true: draw IS decreasing by the system's measurement, AND the system does not know WHY or whether it will continue. Forcing resolution in either direction would lose information. The paradox is the finding per LZ-EH-005: the measurement shows improvement, the information gap means we cannot trust its permanence.",
+      "severity": "high"
+    },
+    {
+      "chain": [
+        "Data",
+        "Behavior",
+        "Paradox"
+      ],
+      "outcome": "This is the thesis paradox identified by Layer 3. The same mechanism that validated the thesis (protective shutdown → reserve deployment → cautious restart) produces the current vulnerability (depleted reserves, throttled pumps). Recovery and vulnerability are mechanically coupled outputs of the same protective action. Neither signal is wrong; both are simultaneously true. This paradox is a structural feature of the thesis architecture, not an analytical failure.",
+      "severity": "high"
+    }
+  ],
+  "blind_spots": [
+    {
+      "signal": "What is the pre-event baseline pressure for Sector 4 specifically?",
+      "importance": "high",
+      "suggested_source": "Historical SCADA telemetry for Sector 4 pressure — 30-day rolling average prior to event",
+      "x402_opportunity": true,
+      "recommend_permanent_monitoring": false
+    },
+    {
+      "signal": "What is the normal baseline system total flow in GPM?",
+      "importance": "high",
+      "suggested_source": "Historical SCADA telemetry for system total flow — 30-day rolling average during comparable time of day",
+      "x402_opportunity": true,
+      "recommend_permanent_monitoring": false
+    },
+    {
+      "signal": "What is the demand source's current operational status and projected timeline?",
+      "importance": "high",
+      "suggested_source": "Fire department dispatch/incident status, CAD (Computer Aided Dispatch) records, or direct communication with incident commander",
+      "x402_opportunity": true,
+      "recommend_permanent_monitoring": false
+    },
+    {
+      "signal": "What is the SCADA pump ramp-up protocol and expected timeline from 30% to full operating load?",
+      "importance": "high",
+      "suggested_source": "SCADA configuration documentation, pump restart procedure manual, or operator knowledge of programmed ramp sequence",
+      "x402_opportunity": true,
+      "recommend_permanent_monitoring": false
+    },
+    {
+      "signal": "What is the reserve tank refill rate and required pump capacity allocation?",
+      "importance": "high",
+      "suggested_source": "System engineering documentation, SCADA configuration, or operator knowledge of refill pump parameters and tank capacity",
+      "x402_opportunity": true,
+      "recommend_permanent_monitoring": false
+    }
+  ],
+  "bias_check": {
+    "bull_indicators": 9,
+    "bear_indicators": 6,
+    "ratio": "9:6",
+    "assessment": "Layer 2 scored 45. Two adjustments: (1) Demand source blind spot downgraded from severity 7 to 6 after accepting Layer 3's null hypothesis that this is a known architectural feature, not an emerging threat — slight reduction in bear pressure. (2) Reserve refill concern downgraded from severity 6 to 5 after accepting Layer 3's VALID inference (50% weight) that refill is sequenced after ramp-up. Net -2 points. Partially offset by overriding compound stress to ELEVATED, but the override reflects appropriate caution rather than increased bear pressure — it is a framing adjustment, not a data-driven increase.",
+    "recommended_additions": null
+  },
+  "kill_switches": [
+    {
+      "name": "System-Wide Pressure Collapse (grid_average < 25 PSI consecutive)",
+      "status": "safe",
+      "detail": "Grid average at 48 PSI is 92% above the 25 PSI threshold. No mechanism for approaching this threshold is evident in current data. Comfortable margin."
+    },
+    {
+      "name": "Critical Contamination Risk (sector_4_pressure < 20 PSI)",
+      "status": "safe",
+      "detail": "38.5 PSI provides substantial margin. Even if Sector 4 has a structural floor near current levels, it remains well above contamination threshold. Would need to lose approximately 48% of current pressure to trigger."
+    },
+    {
+      "name": "Catastrophic Uncontained Leak (flow > 20,000 GPM + reserve drop > 15%/min + pumps active)",
+      "status": "safe",
+      "detail": "Flow is 30% below the 20,000 GPM threshold. Reserve level is stable (not dropping 15%/min). The compound trigger requires simultaneous breach of all three conditions. Comfortable margin on each individual condition."
+    },
+    {
+      "name": "Reserve Depletion During Outage (reserves < 10% + pumps offline)",
+      "status": "safe",
+      "detail": "Both conditions are far from trigger. Pumps are online (condition 2 not met). Reserves at 65% (55 percentage points above condition 1 threshold). This kill switch was the most proximate during the acute event phase; the pump restart has materially moved it away from trigger."
+    },
+    {
+      "name": "Destructive Mechanical Failure (cavitation CRITICAL_DAMAGE or untripped WARNING_ELEVATED)",
+      "status": "safe",
+      "detail": "Sensor reads NORMAL — the most definitively safe reading possible. No trajectory toward degradation. The fail-safe shutdown protected the pumps from damage."
+    }
+  ],
+  "new_kill_switches_recommended": [],
+  "_layer4_raw": {
+    "burden_of_proof_applied": [
+      {
+        "inference": "SCADA automated logic validated under real stress",
+        "signal_ids": [
+          "20260311-0725-SIG-015",
+          "20260311-0725-SIG-005",
+          "20260311-0725-SIG-001",
+          "20260311-0725-SIG-006",
+          "20260311-0725-SIG-009"
+        ],
+        "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+        "data_support": "full",
+        "contradicts_data": false,
+        "final_weight": "full",
+        "reasoning": "Null hypothesis accepted: the system performed as designed. Multiple independent telemetry readings (cavitation NORMAL, surge valve CLOSED, pumps restarted, pressure above thresholds, no contamination) converge on this conclusion per LZ-EH-001. Layer 3 correctly identified and dismissed the alternative (event too mild to be a real test) as unassessable without demand volume data, while noting 35% reserve depletion suggests non-trivial severity. No override warranted."
+      },
+      {
+        "inference": "Gravity reserves significantly depleted — reserve depletion is the expected cost of failover working correctly",
+        "signal_ids": [
+          "20260311-0725-SIG-003",
+          "20260311-0725-SIG-008"
+        ],
+        "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+        "data_support": "full",
+        "contradicts_data": false,
+        "final_weight": "full",
+        "reasoning": "Null hypothesis accepted: reserves exist to be used, and 35% consumption is the mechanical consequence of pumps being offline while demand continued. Direct telemetry confirms 65% remaining. Layer 3's materialization signal — reserves should begin increasing once pumps carry full demand plus surplus — is the correct monitoring criterion. No override warranted."
+      },
+      {
+        "inference": "Demand source draw is decreasing — natural diminishment of fire suppression event",
+        "signal_ids": [
+          "20260311-0725-SIG-004",
+          "20260311-0725-SIG-010"
+        ],
+        "layer3_classification": "VALID",
+        "data_support": "partial",
+        "contradicts_data": false,
+        "final_weight": "reduced_50",
+        "reasoning": "Classification VALID (1 assumption: demand follows typical fire suppression patterns). Data support is PARTIAL — 'decreasing' is inferred from system telemetry, not measured directly from the demand source. Per LZ-EH-002, intermediary measurement is weaker than originating source. One assumption × partial data = 50% weight. The direction of the signal (decreasing) is accepted but confidence in its stability and permanence is limited."
+      },
+      {
+        "inference": "30% load is standard SCADA post-shutdown restart protocol",
+        "signal_ids": [
+          "20260311-0725-SIG-001",
+          "20260311-0725-SIG-011"
+        ],
+        "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+        "data_support": "full",
+        "contradicts_data": false,
+        "final_weight": "full",
+        "reasoning": "Null hypothesis accepted: staged restart at reduced load is standard industrial practice. Direct telemetry confirms 30% load and cavitation NORMAL. The explanation requires zero assumptions — industrial pump systems routinely restart at reduced capacity. Layer 3's materialization signal (load should increase in subsequent readings) is the correct monitoring criterion."
+      },
+      {
+        "inference": "Sector 4 pressure gap is transient artifact of localized demand event",
+        "signal_ids": [
+          "20260311-0725-SIG-002",
+          "20260311-0725-SIG-013"
+        ],
+        "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+        "data_support": "full",
+        "contradicts_data": false,
+        "final_weight": "full",
+        "reasoning": "Null hypothesis accepted per LZ-RC-004 — simplest sufficient explanation tested first. Localized demand creates localized pressure depression; this is basic fluid dynamics. The structural alternative is plausible but requires data not yet available (pre-event Sector 4 baseline). Per LZ-RC-002, a single data point cannot establish the structural trend. The gap convergence rate in subsequent readings is the correct discriminator."
+      },
+      {
+        "inference": "Unknown demand source status is a known architectural limitation, not an emerging threat",
+        "signal_ids": [
+          "20260311-0725-SIG-010"
+        ],
+        "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+        "data_support": "full",
+        "contradicts_data": false,
+        "final_weight": "full",
+        "reasoning": "Null hypothesis accepted: the system was not designed with bidirectional demand-source communication. This is a structural characteristic, not an anomaly. Layer 3 correctly noted that NORMAL does not mean SAFE — the limitation is real and creates genuine vulnerability. Accepted with the important caveat that this remains the system's most significant informational blind spot regardless of whether it is by design."
+      },
+      {
+        "inference": "Reserve refill strategy unstated because it is too early in recovery sequence",
+        "signal_ids": [
+          "20260311-0725-SIG-008"
+        ],
+        "layer3_classification": "VALID",
+        "data_support": "partial",
+        "contradicts_data": false,
+        "final_weight": "reduced_50",
+        "reasoning": "Classification VALID (1 assumption: refill is sequenced after ramp-up). Data support is PARTIAL — pumps at 30% load is directly measured, but the sequencing logic is assumed not observed. The inference is operationally plausible (you stabilize supply before refilling backup) but unverified. Per CL-001, cannot credit assumed SCADA refill protocols. 50% weight: the explanation is reasonable but the gap remains a genuine vulnerability until refill is observed."
+      },
+      {
+        "inference": "SCADA running a staged ramp-up protocol (hidden move)",
+        "signal_ids": [
+          "20260311-0725-SIG-001",
+          "20260311-0725-SIG-005"
+        ],
+        "layer3_classification": "FLAGGED",
+        "data_support": "partial",
+        "contradicts_data": false,
+        "final_weight": "reduced_50",
+        "reasoning": "Classification FLAGGED (2 assumptions). Data support PARTIAL — the 30% round number and cavitation NORMAL are consistent with a programmed checkpoint, but consistency is not confirmation. Per CL-001 and CL-006, cannot credit assumed SCADA logic without telemetry evidence. 50% weight from FLAGGED classification × partial data. The inference is plausible and will be tested by the next reading (stepped vs. organic load increment), but cannot influence the bear pressure score at full weight."
+      },
+      {
+        "inference": "Fire department transitioning to overhaul/mop-up phase (hidden move)",
+        "signal_ids": [
+          "20260311-0725-SIG-010",
+          "20260311-0725-SIG-004"
+        ],
+        "layer3_classification": "FLAGGED",
+        "data_support": "partial",
+        "contradicts_data": false,
+        "final_weight": "reduced_50",
+        "reasoning": "Classification FLAGGED (2 assumptions). Data support PARTIAL — decreasing draw is consistent with this inference but measured indirectly. Layer 3 correctly assigned LOW confidence. 50% weight. This is a plausible narrative but the demand source is opaque; the inference cannot drive scoring."
+      },
+      {
+        "inference": "Grid operators performing off-log coordination (hidden move)",
+        "signal_ids": [
+          "20260311-0725-SIG-012"
+        ],
+        "layer3_classification": "SPECULATIVE",
+        "data_support": "none",
+        "contradicts_data": false,
+        "final_weight": "stripped",
+        "reasoning": "Classification SPECULATIVE (3 assumptions). Data support NONE — Layer 3 itself stated 'Zero evidence supports this' and correctly flagged it as the exact inference class stripped 4+ times by CL-002, CL-003, CL-005, CL-007. Stripped entirely from scoring. This inference has been correctly self-identified as unsupported and does not influence any assessment."
+      }
+    ],
+    "contradictions_resolved": [
+      {
+        "data_says": "Demand draw is decreasing based on system telemetry (SIG-004, severity 5)",
+        "behavior_suggests": "Demand source status is unknown and unmonitored (SIG-010, severity 7) — the decreasing draw is inferred, not confirmed",
+        "resolution": "paradox_held",
+        "confidence": "high",
+        "reasoning": "These are not contradictory — they are complementary measurements of the same situation from different vantage points. The telemetry measures the EFFECT (decreasing flow) while the blind spot is the CAUSE (demand source state). Both are simultaneously true: draw IS decreasing by the system's measurement, AND the system does not know WHY or whether it will continue. Forcing resolution in either direction would lose information. The paradox is the finding per LZ-EH-005: the measurement shows improvement, the information gap means we cannot trust its permanence.",
+        "score_impact": 0
+      },
+      {
+        "data_says": "Pumps restarted at 30% load — system is recovering (SIG-001, severity 6 acceleration)",
+        "behavior_suggests": "30% load with reserves at 65% creates compound vulnerability to secondary event (SIG-011, severity 6 deterioration)",
+        "resolution": "paradox_held",
+        "confidence": "high",
+        "reasoning": "This is the thesis paradox identified by Layer 3. The same mechanism that validated the thesis (protective shutdown → reserve deployment → cautious restart) produces the current vulnerability (depleted reserves, throttled pumps). Recovery and vulnerability are mechanically coupled outputs of the same protective action. Neither signal is wrong; both are simultaneously true. This paradox is a structural feature of the thesis architecture, not an analytical failure.",
+        "score_impact": 0
+      },
+      {
+        "data_says": "SCADA automated logic validated under real stress (SIG-015, severity 8 acceleration)",
+        "behavior_suggests": "SCADA ramp-up speed is an untested variable and refill capability is unobserved — validation is partial",
+        "resolution": "data_wins",
+        "confidence": "high",
+        "reasoning": "The validation is of the ACUTE EVENT response: fail-safe shutdown, reserve deployment, mechanical protection, controlled restart. This is confirmed by multiple converging telemetry readings per LZ-EH-001. The unresolved questions about ramp-up speed and refill protocol concern the RECOVERY PHASE, which is a different operational mode. The acute event validation stands on its own evidence. The recovery phase uncertainties are real but do not retroactively diminish the acute event performance.",
+        "score_impact": 0
+      }
+    ],
+    "data_classifications": [
+      {
+        "data_point": "Pre-event Sector 4 pressure baseline",
+        "layer2_classification": "DATA_AVAILABILITY_GAP",
+        "layer3_context": "Layer 3 identified this as the discriminator between transient and structural pressure gap — null hypothesis favors transient",
+        "layer3_inference_valid": "true",
+        "final_classification": "DATA_GAP",
+        "reasoning": "This data almost certainly exists in historical SCADA telemetry but is not available in the current data feed. It is not suspicious — it is simply not included in the real-time snapshot. Its absence prevents definitive assessment of SIG-013 but does not indicate a system problem. Classified as DATA_GAP — retrievable but currently missing."
+      },
+      {
+        "data_point": "Normal baseline system total flow (GPM)",
+        "layer2_classification": "DATA_AVAILABILITY_GAP",
+        "layer3_context": "Layer 3 did not add material context — treated as a known unknown",
+        "layer3_inference_valid": "n/a",
+        "final_classification": "DATA_GAP",
+        "reasoning": "Historical flow baseline exists in SCADA records but is not available in current data. Without it, 14,000 GPM is uninterpretable in isolation. This is the most impactful single data gap for leak detection and demand normalization assessment. Classified as DATA_GAP — retrievable and high-priority for acquisition."
+      },
+      {
+        "data_point": "Demand source operational status and intent",
+        "layer2_classification": "DATA_AVAILABILITY_GAP",
+        "layer3_context": "Layer 3 established this is a structural architectural limitation — system was not designed to monitor demand source directly",
+        "layer3_inference_valid": "true",
+        "final_classification": "STRATEGICALLY_EXPLAINED",
+        "reasoning": "Layer 3's null hypothesis holds: the absence of demand source communication is the system's NORMAL operating state, not an anomaly or failure. Municipal SCADA systems typically do not have real-time bidirectional communication with fire departments. The data absence is explained by architectural design. However, STRATEGICALLY_EXPLAINED does not mean SAFE — it means the absence has a known cause. The vulnerability it creates is real and permanent."
+      },
+      {
+        "data_point": "SCADA pump ramp-up protocol and timeline",
+        "layer2_classification": "THESIS_CAPABILITY_GAP",
+        "layer3_context": "Layer 3 inferred a staged ramp-up protocol (FLAGGED, 2 assumptions) based on the round 30% figure and conservative design philosophy",
+        "layer3_inference_valid": "true",
+        "final_classification": "DATA_GAP",
+        "reasoning": "This information exists in SCADA configuration documentation but is not available in the telemetry feed. Layer 3's inference about staged ramp-up is plausible but unverified. The data gap prevents time-bounding the vulnerability window. Classified as DATA_GAP — retrievable from engineering documentation."
+      },
+      {
+        "data_point": "Reserve tank refill rate and capacity allocation",
+        "layer2_classification": "THESIS_CAPABILITY_GAP",
+        "layer3_context": "Layer 3 explained absence as too early in recovery sequence (VALID, 1 assumption)",
+        "layer3_inference_valid": "true",
+        "final_classification": "DATA_GAP",
+        "reasoning": "Refill parameters exist in system engineering documentation. Layer 3's sequencing explanation is plausible but given only 50% weight. The gap prevents recovery timeline modeling. Classified as DATA_GAP."
+      },
+      {
+        "data_point": "Inter-agency communication records",
+        "layer2_classification": "DATA_AVAILABILITY_GAP",
+        "layer3_context": "Layer 3 established this is a normal architectural limitation per null hypothesis; separately, the hidden move inference about off-log operator coordination was classified SPECULATIVE and stripped",
+        "layer3_inference_valid": "true",
+        "final_classification": "STRATEGICALLY_EXPLAINED",
+        "reasoning": "Per Layer 3's null hypothesis (accepted at full weight), inter-agency communication is not a feature of the SCADA telemetry system. Its absence is explained by system design, not by failure or omission. The corrections ledger (CL-002, CL-003, CL-005, CL-007) has correctly and repeatedly prevented crediting assumed off-log coordination."
+      }
+    ],
+    "final_signal_matrix": [
+      {
+        "signal": "Primary pumps restarted at reduced load",
+        "signal_ids": [
+          "20260311-0725-SIG-001"
+        ],
+        "layer2_composite": 6,
+        "layer3_adjustment": "Null hypothesis holds: 30% is standard staged restart. FLAGGED hidden move inference about programmed ramp-up steps adds plausible but unconfirmed context. No severity change warranted — Layer 2's score correctly captures the positive restart with capacity limitation caveat.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 6,
+        "confidence": "high"
+      },
+      {
+        "signal": "Sector 4 pressure recovering but still depressed",
+        "signal_ids": [
+          "20260311-0725-SIG-002"
+        ],
+        "layer2_composite": 5,
+        "layer3_adjustment": "Null hypothesis holds: transient gap from localized demand is simplest explanation. Layer 3 provides correct monitoring criterion (convergence rate). No severity change — the gap is real and the cause is unconfirmed.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 5,
+        "confidence": "medium"
+      },
+      {
+        "signal": "Gravity reserves significantly depleted",
+        "signal_ids": [
+          "20260311-0725-SIG-003"
+        ],
+        "layer2_composite": 7,
+        "layer3_adjustment": "Null hypothesis holds: depletion is the expected cost of failover. This reframes the depletion from 'failure' to 'cost of success,' but the vulnerability is identical regardless of framing. No severity change — 35% consumption is a material resilience reduction.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 7,
+        "confidence": "high"
+      },
+      {
+        "signal": "Demand source draw is decreasing",
+        "signal_ids": [
+          "20260311-0725-SIG-004"
+        ],
+        "layer2_composite": 5,
+        "layer3_adjustment": "VALID inference (1 assumption) at 50% weight due to partial data. Layer 3 provides plausible fire suppression lifecycle explanation but demand source is opaque. The indirect measurement basis remains the limiting factor. No severity change — Layer 2 already downgraded for indirect measurement.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 5,
+        "confidence": "medium"
+      },
+      {
+        "signal": "Cavitation sensor normal — no mechanical damage",
+        "signal_ids": [
+          "20260311-0725-SIG-005"
+        ],
+        "layer2_composite": 7,
+        "layer3_adjustment": "No behavioral adjustment needed. Direct telemetry, clear thesis relevance, no assumptions required. Layer 3 correctly did not attempt to override.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 7,
+        "confidence": "high"
+      },
+      {
+        "signal": "Surge relief valve closed — no water hammer risk",
+        "signal_ids": [
+          "20260311-0725-SIG-006"
+        ],
+        "layer2_composite": 5,
+        "layer3_adjustment": "No behavioral adjustment needed. Direct telemetry confirming absence of secondary failure mode.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 5,
+        "confidence": "high"
+      },
+      {
+        "signal": "System total flow elevated at 14,000 GPM",
+        "signal_ids": [
+          "20260311-0725-SIG-007"
+        ],
+        "layer2_composite": 4,
+        "layer3_adjustment": "Layer 3 did not materially alter this assessment. The baseline data gap prevents meaningful interpretation. Below catastrophic threshold is the only definitive statement possible.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 4,
+        "confidence": "medium"
+      },
+      {
+        "signal": "Reserve refill strategy unstated",
+        "signal_ids": [
+          "20260311-0725-SIG-008"
+        ],
+        "layer2_composite": 6,
+        "layer3_adjustment": "VALID inference (1 assumption) at 50% weight: refill is too early in recovery sequence. This is plausible and partially mitigates the concern, but per CL-001 cannot fully credit assumed sequencing logic. Slight downward adjustment in severity — the timing explanation has merit but the vulnerability persists until refill is observed.",
+        "adjustment_direction": "down",
+        "final_composite": 5,
+        "confidence": "medium"
+      },
+      {
+        "signal": "No contamination advisory triggered",
+        "signal_ids": [
+          "20260311-0725-SIG-009"
+        ],
+        "layer2_composite": 7,
+        "layer3_adjustment": "No behavioral adjustment needed. Direct measurement against defined threshold. Clear positive.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 7,
+        "confidence": "high"
+      },
+      {
+        "signal": "Unknown demand source status and intent",
+        "signal_ids": [
+          "20260311-0725-SIG-010"
+        ],
+        "layer2_composite": 7,
+        "layer3_adjustment": "Null hypothesis reframes this from 'emerging threat' to 'known architectural limitation.' This reduces the URGENCY but not the VULNERABILITY. The blind spot is real and permanent, but it is not a new development requiring escalation. Slight downward severity adjustment — this is the system's normal operating condition, not a deterioration.",
+        "adjustment_direction": "down",
+        "final_composite": 6,
+        "confidence": "medium"
+      },
+      {
+        "signal": "Reduced pump load creates vulnerability to secondary event",
+        "signal_ids": [
+          "20260311-0725-SIG-011"
+        ],
+        "layer2_composite": 6,
+        "layer3_adjustment": "Layer 3's feedback loop analysis confirms the compound vulnerability: both redundancy legs diminished simultaneously. The FLAGGED hidden move about staged ramp-up provides some context (if ramp-up is programmatic, load will increase at defined steps) but at 50% weight. Net: no severity change. The compound vulnerability is real regardless of whether ramp-up is staged or not.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 6,
+        "confidence": "medium"
+      },
+      {
+        "signal": "Operator protocol adherence confirmed",
+        "signal_ids": [
+          "20260311-0725-SIG-012"
+        ],
+        "layer2_composite": 4,
+        "layer3_adjustment": "Layer 3 analysis supports Layer 2's assessment: passive monitoring is the rational operator behavior when no kill switch is close to triggering. SPECULATIVE hidden move about off-log coordination stripped entirely. Net: no change. The sparse log is consistent with 'nothing to intervene on' rather than 'not doing their job.'",
+        "adjustment_direction": "unchanged",
+        "final_composite": 4,
+        "confidence": "medium"
+      },
+      {
+        "signal": "Sector 4 pressure gap suggests possible infrastructure constraint",
+        "signal_ids": [
+          "20260311-0725-SIG-013"
+        ],
+        "layer2_composite": 3,
+        "layer3_adjustment": "Null hypothesis holds: transient gap is the simplest explanation. Layer 2 already downgraded for speculative basis. No change warranted.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 3,
+        "confidence": "low"
+      },
+      {
+        "signal": "No geopolitical or jurisdictional signals detected",
+        "signal_ids": [
+          "20260311-0725-SIG-014"
+        ],
+        "layer2_composite": 2,
+        "layer3_adjustment": "Correctly treated as uninformative per LZ-RC-003. No change.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 2,
+        "confidence": "low"
+      },
+      {
+        "signal": "SCADA automated logic validated under real stress",
+        "signal_ids": [
+          "20260311-0725-SIG-015"
+        ],
+        "layer2_composite": 8,
+        "layer3_adjustment": "Null hypothesis holds with full data support from multiple converging telemetry readings. This is the strongest signal in the dataset. Layer 3's analysis reinforces rather than challenges. Full weight confirmed.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 8,
+        "confidence": "high"
+      }
+    ],
+    "compound_stress_final": {
+      "level": "ELEVATED",
+      "layer2_level": "MONITORING",
+      "layer3_assessment": "orderly stress, both redundancy legs pre-loaded in diminished direction",
+      "override": true,
+      "override_reasoning": "Layer 2 reported MONITORING, but the simultaneous diminishment of both active (pumps at 30%) and passive (reserves at 65%) redundancy legs, combined with an unmonitored external stressor, constitutes a pre-loaded compound condition. While all indicators are moving in the right direction, the system's tolerance for a secondary shock is measurably reduced. This is not CRITICAL — all kill switches are distant and recovery is orderly — but MONITORING understates the compound nature of the current vulnerability. ELEVATED accurately reflects: recovery underway, trajectory positive, but margin of redundancy narrowed and a single external variable (demand source) could convert orderly recovery to stress if it reverses.",
+      "self_challenge": "SUPPORTS ELEVATED: Both redundancy legs are simultaneously below full capacity (30% pumps, 65% reserves) while the primary external threat actor is unmonitored — this is a measurable narrowing of the safety margin that a MONITORING classification would not adequately communicate. CHALLENGES ELEVATED: All five kill switches have comfortable margin (nearest threshold is Sector 4 at 38.5 PSI vs. 20 PSI — nearly 2x the trigger), every indicator is moving in the positive direction, and the demand stressor is decreasing — the system may be closer to MONITORING than ELEVATED if the positive trajectory holds.",
+      "pre_loaded": true,
+      "pre_loaded_legs": [
+        "Active capacity at 30% (pumps throttled during staged recovery — 70% below full operating load)",
+        "Passive reserves at 65% (35% consumed during failover — refill timeline unknown)"
+      ],
+      "cascade_proximity": "distant",
+      "delta_since_last": "de-escalating",
+      "cycles_at_current_level": 1,
+      "velocity_note": "All primary indicators are moving in the positive direction (pressure recovering, demand decreasing, pumps online, no mechanical damage), but the rate of recovery cannot be assessed without baseline data and ramp-up protocol parameters — the velocity is positive but its magnitude is unknown.",
+      "operator_action_window": "hours",
+      "thesis_paradox": "A successful fail-safe shutdown simultaneously validated the thesis's automated redundancy architecture AND created a recovery-phase vulnerability window with both redundancy legs diminished, because the protective mechanism (sacrifice active components, deploy reserves) necessarily produces the diminished state as its output — the stronger the validation event, the deeper the recovery deficit."
+    },
+    "kill_switch_review": [
+      {
+        "criterion": "System-Wide Pressure Collapse (grid_average < 25 PSI consecutive)",
+        "current_status": "48 PSI — 23 PSI above threshold",
+        "layer3_context": "No behavioral evidence suggesting pressure collapse trajectory. All indicators moving positively.",
+        "final_status": "GREEN",
+        "action": "maintain",
+        "reasoning": "Grid average at 48 PSI is 92% above the 25 PSI threshold. No mechanism for approaching this threshold is evident in current data. Comfortable margin."
+      },
+      {
+        "criterion": "Critical Contamination Risk (sector_4_pressure < 20 PSI)",
+        "current_status": "38.5 PSI — 18.5 PSI above threshold",
+        "layer3_context": "Sector 4 is the localized weak point but at nearly 2x the threshold. Null hypothesis: pressure gap is transient and will close. The only scenario approaching this threshold would require massive demand re-intensification while pumps remain throttled.",
+        "final_status": "GREEN",
+        "action": "maintain",
+        "reasoning": "38.5 PSI provides substantial margin. Even if Sector 4 has a structural floor near current levels, it remains well above contamination threshold. Would need to lose approximately 48% of current pressure to trigger."
+      },
+      {
+        "criterion": "Catastrophic Uncontained Leak (flow > 20,000 GPM + reserve drop > 15%/min + pumps active)",
+        "current_status": "14,000 GPM, reserves at 65%, pumps at 30% — all three conditions below trigger",
+        "layer3_context": "Without baseline flow data, 14,000 GPM's significance is ambiguous. However, the kill switch requires ALL THREE conditions simultaneously, and none is currently met.",
+        "final_status": "GREEN",
+        "action": "maintain",
+        "reasoning": "Flow is 30% below the 20,000 GPM threshold. Reserve level is stable (not dropping 15%/min). The compound trigger requires simultaneous breach of all three conditions. Comfortable margin on each individual condition."
+      },
+      {
+        "criterion": "Reserve Depletion During Outage (reserves < 10% + pumps offline)",
+        "current_status": "65% reserves, pumps online at 30%",
+        "layer3_context": "This kill switch requires BOTH conditions: reserves below 10% AND pumps offline. Pumps are now online (the 'pumps offline' condition is no longer met). Even if pumps failed again, reserves would need to drop from 65% to below 10% — a massive further depletion.",
+        "final_status": "GREEN",
+        "action": "maintain",
+        "reasoning": "Both conditions are far from trigger. Pumps are online (condition 2 not met). Reserves at 65% (55 percentage points above condition 1 threshold). This kill switch was the most proximate during the acute event phase; the pump restart has materially moved it away from trigger."
+      },
+      {
+        "criterion": "Destructive Mechanical Failure (cavitation CRITICAL_DAMAGE or untripped WARNING_ELEVATED)",
+        "current_status": "NORMAL",
+        "layer3_context": "Cavitation sensor at NORMAL is the strongest single data point in the dataset. Direct telemetry from originating source confirms no mechanical damage. Pumps survived the stress event intact.",
+        "final_status": "GREEN",
+        "action": "maintain",
+        "reasoning": "Sensor reads NORMAL — the most definitively safe reading possible. No trajectory toward degradation. The fail-safe shutdown protected the pumps from damage."
+      }
+    ],
+    "rejection_log": [
+      {
+        "layer3_inference": "Grid operators performing off-log coordination or readiness activities",
+        "signal_ids": [
+          "20260311-0725-SIG-012"
+        ],
+        "rejection_reason": "Layer 3 itself classified this as SPECULATIVE with 3 assumptions and zero evidence. The corrections ledger (CL-002, CL-003, CL-005, CL-007) has stripped this class of inference 4+ times. Layer 3 correctly self-identified this as unsupported. Layer 4 confirms the rejection.",
+        "root_cause": "INSUFFICIENT_EVIDENCE",
+        "confidence_in_rejection": "high",
+        "corrections_ledger_action": "auto_commit"
+      }
+    ],
+    "final_bear_pressure": 43,
+    "pressure_vs_layer2": -2,
+    "pressure_reasoning": "Layer 2 scored 45. Two adjustments: (1) Demand source blind spot downgraded from severity 7 to 6 after accepting Layer 3's null hypothesis that this is a known architectural feature, not an emerging threat — slight reduction in bear pressure. (2) Reserve refill concern downgraded from severity 6 to 5 after accepting Layer 3's VALID inference (50% weight) that refill is sequenced after ramp-up. Net -2 points. Partially offset by overriding compound stress to ELEVATED, but the override reflects appropriate caution rather than increased bear pressure — it is a framing adjustment, not a data-driven increase.",
+    "tactical_recommendation": "INCREASE_MONITORING",
+    "recommendation_reasoning": "The system is in orderly recovery with all kill switches GREEN, but the compound pre-load of both redundancy legs (pumps at 30%, reserves at 65%) with an unmonitored external stressor creates a time-bounded vulnerability window. The next 1-3 data readings are critical: they will confirm whether pump load is ramping, reserves are stabilizing or beginning refill, Sector 4 pressure is converging, and demand is continuing to decrease. INCREASE_MONITORING is warranted until at least one full reading cycle confirms positive trajectory across these four indicators. This is not a crisis — it is the rational response to being in a recovery phase where margin is reduced.",
+    "monitoring_triggers": [
+      "Pump load trajectory: next reading should show >30% load. If static at 30% for two consecutive readings, investigate constraint vs. staged ramp.",
+      "Reserve level: should stabilize or begin increasing. Any continued decline while pumps are online would challenge null hypothesis (possible undetected leak or ongoing draw exceeding pump output).",
+      "Sector 4 pressure convergence: gap between Sector 4 and grid average should narrow. If gap persists after demand normalizes, structural constraint hypothesis gains weight.",
+      "Demand trajectory: continued decrease expected. Any reversal or re-spike requires immediate reassessment — this is the only external variable capable of converting orderly recovery to stress.",
+      "System total flow: should decrease toward whatever baseline turns out to be. Any increase while demand is reportedly decreasing would be a red flag for undetected leak.",
+      "Cavitation sensor: should remain NORMAL. Any movement to WARNING_ELEVATED during ramp-up would indicate mechanical stress from the recovery process itself."
+    ],
+    "overall_confidence": "medium",
+    "biggest_uncertainty": "The demand source's actual operational status and trajectory — it is the only variable capable of reversing the recovery, and it is the one variable the system cannot observe directly. Everything else is on a positive trajectory; this is the single point of externally-controlled risk.",
+    "what_would_change_assessment": "Three data events would change the assessment materially: (1) Demand re-intensification (flow spike or Sector 4 pressure reversal) would immediately escalate to CRITICAL compound stress and likely trigger REDUCE_EXPOSURE. (2) Confirmation that the fire incident is controlled/extinguished (from dispatch records or public reports) would drop bear pressure to ~30 and return compound stress to MONITORING. (3) Next reading showing pump load at 50%+ and reserves stable would confirm recovery trajectory and support moving toward HOLD_POSITION.",
+    "final_report": "The automated redundancy architecture passed its real-world stress test — all five kill switches remain GREEN with comfortable margin, and converging telemetry from multiple independent sensors confirms the fail-safe design worked as engineered. INCREASE MONITORING: the system is in orderly recovery but both redundancy legs are simultaneously diminished (pumps at 30%, reserves at 65%), creating a vulnerability window until ramp-up completes and reserves begin refilling. The thesis paradox is real: the same protective mechanism that validated the architecture necessarily produced the current diminished state — validation and vulnerability are mechanically coupled. The single biggest unknown is the demand source — it is unmonitored by design, it is the only variable that could reverse the recovery, and we have no direct measurement of its status or intent."
+  },
+  "_layer3_raw": {
+    "corrections_referenced": [
+      {
+        "correction_id": "CL-001",
+        "signal_ids": [
+          "20260311-0725-SIG-008",
+          "20260311-0725-SIG-011"
+        ],
+        "trigger_matched": "Temptation to infer SCADA is running background reserve refill logic or has fast ramp-up capability. This matches the pattern of assuming SCADA background operations without telemetry evidence.",
+        "influence_on_assessment": "Prevented crediting SCADA with any assumed refill protocol or ramp-up speed. The reserve refill gap and pump vulnerability assessments remain scored as genuine unknowns. Strategic inferences about system recovery timeline are constrained by this — I cannot assume the system is self-healing faster than the evidence shows."
+      },
+      {
+        "correction_id": "CL-002",
+        "signal_ids": [
+          "20260311-0725-SIG-010",
+          "20260311-0725-SIG-004"
+        ],
+        "trigger_matched": "Temptation to infer operators are coordinating with the demand source (fire department) off-log, which would explain the decreasing draw signal.",
+        "influence_on_assessment": "Prevented inferring that the demand decrease is the result of operator-fire department coordination. The demand decrease is scored only as an indirect telemetry observation. The demand source's actual status and intent remain a genuine blind spot."
+      },
+      {
+        "correction_id": "CL-003",
+        "signal_ids": [
+          "20260311-0725-SIG-010"
+        ],
+        "trigger_matched": "Pattern of inferring operator pre-staging of isolation actions off-log. Third+ instance of this class of assumption in the analysis chain.",
+        "influence_on_assessment": "Reinforced that operator hidden moves cannot be credited without evidence. Any hidden move inference about operator off-log behavior must meet the 2-assumption ceiling AND have independent evidence hints — otherwise it is classified SPECULATIVE."
+      },
+      {
+        "correction_id": "CL-005",
+        "signal_ids": [
+          "20260311-0725-SIG-010",
+          "20260311-0725-SIG-014"
+        ],
+        "trigger_matched": "Pattern of assuming operator-fire department coordination. This is the most frequently triggered correction class in the entire chain.",
+        "influence_on_assessment": "Blocked any strategic inference that credits inter-agency coordination as a mitigating factor. The absence of inter-agency communication data is treated as an informational blind spot, not as evidence of coordination happening invisibly."
+      },
+      {
+        "correction_id": "CL-006",
+        "signal_ids": [
+          "20260311-0725-SIG-005",
+          "20260311-0725-SIG-001"
+        ],
+        "trigger_matched": "Temptation to credit SCADA with an interlock mechanism that required cavitation sensor clearance before pump restart.",
+        "influence_on_assessment": "Scored the pump restart and cavitation sensor on telemetry alone. Did not infer a causal mechanism (interlock logic) between the two readings. The temporal correlation between cavitation NORMAL and pump restart is noted but not explained by an assumed mechanism."
+      },
+      {
+        "correction_id": "CL-007",
+        "signal_ids": [
+          "20260311-0725-SIG-012"
+        ],
+        "trigger_matched": "Temptation to infer operators communicating through non-SCADA channels. Directly matches the pattern flagged repeatedly.",
+        "influence_on_assessment": "Operator protocol adherence analysis is confined to what the log explicitly states. No strategic inference credits off-log communication channels."
+      }
+    ],
+    "player_analysis": [
+      {
+        "player": "SCADA Automated Logic",
+        "stated_position": "Per thesis: programmed to protect physical infrastructure first. Will shut down pumps to save them from cavitation even at the cost of temporary pressure loss.",
+        "observed_actions": "Shut down pumps during high-draw event (inferred from the recovery sequence — pumps are restarting, meaning they were offline). Deployed gravity reserves to compensate. Restarted pumps at 30% load with cavitation sensor reading NORMAL. Surge relief valve CLOSED during restart, indicating controlled re-pressurization. No kill switches breached.",
+        "say_do_gap": "Minimal. Actions are precisely consistent with stated design philosophy: sacrifice active components to protect the whole, fall back to passive reserves, then cautiously restart. The 30% load restart is conservative, which aligns with 'protect infrastructure first' — it is prioritizing pump safety over rapid pressure restoration. No gap between design intent and observed behavior.",
+        "inferred_strategy": "SCADA is executing a conservative, staged recovery: restart pumps at minimum viable load, verify mechanical integrity (cavitation NORMAL), hold at reduced capacity while conditions stabilize. This is textbook fail-safe-then-recover behavior. The restraint in holding at 30% rather than immediately ramping to full load is the most telling action — it reveals the system values equipment preservation over speed of recovery.",
+        "confidence": "high"
+      },
+      {
+        "player": "Grid Operators",
+        "stated_position": "Per thesis: protocol is to allow automated failovers, verify gravity reserves deploying, prepare sector isolation if pressure approaches 20 PSI.",
+        "observed_actions": "Operator log confirms: 'Primary pumps restarted at reduced load. Gravity reserves handling the balance. Draw is decreasing.' This is a three-sentence status report. It documents awareness of pump status, reserve deployment status, and demand trajectory.",
+        "say_do_gap": "The operator log is consistent with the protocol (monitoring, not overriding automation) but is remarkably sparse. Per LZ-EH-003, actions carry more weight than statements — and the observable action here is a brief status log, not evidence of active intervention. The operators appear to be following the 'allow automated failovers' part of their protocol. There is no evidence of preparation for sector isolation, which is consistent with Sector 4 pressure being well above the 20 PSI threshold. The gap is not between what they say and do — the gap is in the DEPTH of observable action. We see monitoring. We do not see preparation, coordination, or contingency activation. This could mean those actions are not needed (pressure is safe), or it could mean they are happening off-log (per CL-002/003/005/007, we cannot credit this).",
+        "inferred_strategy": "Passive monitoring of an automated recovery. The operators are letting SCADA run. Given that no kill switch is close to being triggered (nearest is Sector 4 at 38.5 PSI vs. 20 PSI threshold), the most rational operator behavior is exactly what we see: watch and report. Active intervention would be irrational when the automated system is performing within parameters.",
+        "confidence": "medium"
+      },
+      {
+        "player": "Demand Source (Fire Department)",
+        "stated_position": "No direct statements available. The demand source has no communication channel visible in the data.",
+        "observed_actions": "Draw is decreasing per operator inference from system telemetry. This is the only observable behavior, and it is measured INDIRECTLY through the system's own instruments, not through communication with the demand source per LZ-EH-002.",
+        "say_do_gap": "Cannot assess — no stated position exists to compare against. The demand source is an opaque actor in this system. We observe its EFFECT (flow patterns, pressure responses) but not its STATE (how much water it still needs, how many units are still drawing, whether the fire is controlled).",
+        "inferred_strategy": "The most rational explanation for decreasing draw is that the demand event (fire suppression) is either achieving control of the fire or has exhausted the immediate high-volume phase and transitioned to lower-demand overhaul/mop-up operations. This is standard fire suppression dynamics — initial attack requires massive flow, overhaul requires much less. However, this inference rests on the assumption that the demand source is a fire suppression operation and that it follows typical operational patterns. Both are plausible given the thesis context but are assumptions, not verified facts.",
+        "confidence": "low"
+      }
+    ],
+    "feedback_loops": [
+      {
+        "loop": "Pump Load ↔ Reserve Depletion Feedback",
+        "components": [
+          "Primary Pump Load (30%)",
+          "Gravity Reserve Level (65%)",
+          "System Total Flow (14,000 GPM)"
+        ],
+        "current_state": "active_orderly",
+        "trigger_to_next_state": "A renewed demand surge while pumps remain at 30% would force gravity reserves to carry the incremental load, accelerating depletion. The loop becomes self-reinforcing if: (a) demand increases, (b) pumps cannot ramp quickly enough, (c) reserves deplete further, (d) reduced reserve head pressure means less passive flow contribution, (e) system total flow drops, (f) pressure drops, (g) approaching kill switches. Currently dormant because demand is DECREASING, but the structural vulnerability exists — pumps throttled AND reserves depleted simultaneously.",
+        "thesis_implication": "This is the central vulnerability. The thesis depends on pump + reserve redundancy. Both legs are currently diminished. The system is viable because both are still functional — but the MARGIN of redundancy has narrowed. The thesis is not falsified but is operating with reduced safety margin."
+      },
+      {
+        "loop": "Demand Source ↔ System Capacity Feedback",
+        "components": [
+          "Demand Source (unknown status)",
+          "System Total Flow (14,000 GPM)",
+          "Sector 4 Pressure (38.5 PSI)"
+        ],
+        "current_state": "active_orderly",
+        "trigger_to_next_state": "Demand source re-intensification. If the fire re-ignites or a second alarm is struck, the demand source could reverse from 'decreasing' to 'increasing' with no warning to the system. The system would then face renewed high demand while in a diminished capacity state. This loop is currently stable because demand is decreasing, but it is EXTERNALLY controlled — the system cannot influence the demand source's behavior.",
+        "thesis_implication": "The system's recovery is partly dependent on the cooperation of an actor it does not monitor or communicate with. This is a structural limitation of the thesis — the automated architecture protects against internal failure modes but has limited ability to respond to externally driven demand spikes, especially when recovery has not completed."
+      },
+      {
+        "loop": "Pressure Recovery ↔ Flow Normalization Feedback",
+        "components": [
+          "Sector 4 Pressure (38.5 PSI)",
+          "Grid Average Pressure (48 PSI)",
+          "Pump Load (30%)"
+        ],
+        "current_state": "active_orderly",
+        "trigger_to_next_state": "If pumps ramp up, pressure should recover further, which should reduce the flow anomaly (high flow with depressed pressure could indicate the system is working harder to maintain flow against reduced pressure). Positive feedback loop — but its speed is constrained by SCADA's conservative ramp-up behavior. Would transition to fully resolved when Sector 4 pressure converges with grid average and pumps reach normal operating load.",
+        "thesis_implication": "Positive loop that supports thesis recovery. The rate of convergence between Sector 4 and grid average pressure will be an important diagnostic — fast convergence suggests the gap is transient (demand-driven), slow convergence suggests structural constraint."
+      }
+    ],
+    "behavioral_patterns": [
+      {
+        "pattern": "Conservative recovery prioritizing equipment over speed",
+        "players_involved": [
+          "SCADA Automated Logic",
+          "Grid Operators"
+        ],
+        "thesis_implication": "supports",
+        "significance": "high"
+      },
+      {
+        "pattern": "Opacity of demand source creates asymmetric information disadvantage for system operators",
+        "players_involved": [
+          "Demand Source (Fire Department)",
+          "Grid Operators",
+          "SCADA Automated Logic"
+        ],
+        "thesis_implication": "challenges",
+        "significance": "high"
+      },
+      {
+        "pattern": "Passive operator posture during automated recovery — no evidence of override attempts or manual intervention",
+        "players_involved": [
+          "Grid Operators",
+          "SCADA Automated Logic"
+        ],
+        "thesis_implication": "supports",
+        "significance": "medium"
+      }
+    ],
+    "strategic_inferences": [
+      {
+        "finding_from_layer2": "SCADA automated logic validated under real stress",
+        "signal_ids": [
+          "20260311-0725-SIG-015",
+          "20260311-0725-SIG-005",
+          "20260311-0725-SIG-001",
+          "20260311-0725-SIG-006",
+          "20260311-0725-SIG-009"
+        ],
+        "null_hypothesis": "The system performed as designed because it was designed for this scenario. No strategic inference needed — this is simply the engineered outcome of a redundant system facing a load event within its design parameters.",
+        "null_holds": true,
+        "rational_explanation": "The automated architecture was stress-tested by a real-world event and performed within its design envelope. Pumps were protected, reserves deployed, no kill switches were approached, and controlled restart is underway.",
+        "alternative_explanation": "The event was not severe enough to truly test the system's limits — the architecture appeared to work because the demand was within comfortable margins.",
+        "which_is_more_likely": "null",
+        "assumptions": [],
+        "assumption_count": 0,
+        "classification": "NULL_HYPOTHESIS_HOLDS",
+        "evidence_citations": [
+          "Cavitation sensor reading NORMAL — direct telemetry from originating source (SIG-005)",
+          "Pumps restarted at 30% load — direct telemetry confirming mechanical viability (SIG-001)",
+          "Surge relief valve CLOSED during restart — direct telemetry confirming controlled re-pressurization (SIG-006)",
+          "Sector 4 pressure at 38.5 PSI, nearly 2x the 20 PSI kill switch (SIG-002)",
+          "No kill switch approached during the entire event sequence"
+        ],
+        "expected_timeline": "N/A — this is a measurement of what happened, not a prediction",
+        "materialization_signal": "N/A — already materialized. The validation is the finding.",
+        "reasoning": "The null hypothesis holds strongly. The system did what it was designed to do. The converging telemetry from multiple independent sensors (cavitation, pressure, surge valve, flow) all point to the same conclusion per LZ-EH-001. No strategic inference beyond 'the design works' is required. The alternative explanation (event was too mild to be a real test) cannot be assessed without knowing the actual demand volume, which is not directly measured. However, the fact that reserves depleted by 35% suggests this was a non-trivial event.",
+        "confidence": "high"
+      },
+      {
+        "finding_from_layer2": "Gravity reserves significantly depleted (65%)",
+        "signal_ids": [
+          "20260311-0725-SIG-003",
+          "20260311-0725-SIG-008"
+        ],
+        "null_hypothesis": "35% reserve consumption is the expected cost of the automated failover working correctly. Reserves exist to be used. The depletion is the system functioning as designed, not a failure or strategic signal.",
+        "null_holds": true,
+        "rational_explanation": "Reserve depletion is the predictable mechanical consequence of pumps being offline while demand continued. The reserves did their job. The 65% remaining is the 'cost' of protecting the pumps.",
+        "alternative_explanation": "The depletion rate was higher than expected for the demand level, suggesting either the demand was more severe than telemetry implies or there is an undetected leak contributing to reserve drain.",
+        "which_is_more_likely": "null",
+        "assumptions": [],
+        "assumption_count": 0,
+        "classification": "NULL_HYPOTHESIS_HOLDS",
+        "evidence_citations": [
+          "Reserve level at 65% — direct telemetry (SIG-003)",
+          "Pumps were offline (inferred from restart being required) — reserves were the sole supply source during outage"
+        ],
+        "expected_timeline": "hours",
+        "materialization_signal": "Reserve level should begin increasing once pumps carry full system demand AND have surplus capacity for refill. If reserves continue to decline despite pumps being online, that would challenge the null hypothesis.",
+        "reasoning": "The null hypothesis holds. This is the system's reserve architecture working as intended — absorbing the cost of the pump protection decision. The open question is not WHY reserves depleted (that is explained) but WHEN they will be replenished (that is unknown). The absence of a stated refill strategy is a genuine gap but does not require a strategic explanation — it may simply not be visible in the sparse operator log or may be pending pump ramp-up.",
+        "confidence": "high"
+      },
+      {
+        "finding_from_layer2": "Demand source draw is decreasing (inferred indirectly)",
+        "signal_ids": [
+          "20260311-0725-SIG-004",
+          "20260311-0725-SIG-010"
+        ],
+        "null_hypothesis": "The demand event (fire suppression) is naturally diminishing as the fire is brought under control. This is normal firefighting operations — initial attack requires maximum flow, subsequent phases require less.",
+        "null_holds": true,
+        "rational_explanation": "Fire suppression operations typically follow a decreasing demand curve: high-volume initial attack → lower-volume overhaul. The decreasing draw is the natural lifecycle of a fire suppression event.",
+        "alternative_explanation": "Fire department switched to a different water source (tanker operations, alternate hydrant district), reducing draw on this grid without the underlying event being resolved.",
+        "which_is_more_likely": "null",
+        "assumptions": [
+          "Demand source is a fire suppression operation following typical operational patterns"
+        ],
+        "assumption_count": 1,
+        "classification": "VALID",
+        "evidence_citations": [
+          "Operator log states 'Draw is decreasing' — this is the operator's assessment based on their telemetry observation (SIG-004)",
+          "System total flow at 14,000 GPM — below catastrophic threshold, consistent with declining demand"
+        ],
+        "expected_timeline": "hours",
+        "materialization_signal": "Demand should continue decreasing and system flow should normalize. If flow re-spikes, the null hypothesis still holds (normal firefighting can have intermittent surges) but the alternative explanation gains weight if flow shifts to a distinctly different pattern.",
+        "reasoning": "The null hypothesis is the most likely explanation. Fire suppression events have well-documented demand profiles that peak early and taper. The indirect measurement introduces uncertainty about the exact trajectory, but the direction (decreasing) is consistent with natural event resolution. One assumption is required: that the demand follows typical fire suppression patterns.",
+        "confidence": "medium"
+      },
+      {
+        "finding_from_layer2": "Pumps restarted at 30% load — reduced capacity",
+        "signal_ids": [
+          "20260311-0725-SIG-001",
+          "20260311-0725-SIG-011"
+        ],
+        "null_hypothesis": "30% load is the standard SCADA post-shutdown restart protocol — a conservative warm-up to verify mechanical integrity before ramping to full load. This is normal industrial practice, not a signal of constraint or damage.",
+        "null_holds": true,
+        "rational_explanation": "Industrial pump systems routinely restart at reduced load to verify bearing temperatures, seal integrity, and flow characteristics before increasing to operating load. 30% is a plausible conservative startup point.",
+        "alternative_explanation": "30% represents a SCADA-imposed ceiling because one or more system conditions (demand level, pressure differential, reserve state) do not yet warrant full-load operation.",
+        "which_is_more_likely": "null",
+        "assumptions": [],
+        "assumption_count": 0,
+        "classification": "NULL_HYPOTHESIS_HOLDS",
+        "evidence_citations": [
+          "Pumps at 30% load — direct telemetry (SIG-001)",
+          "Cavitation sensor NORMAL — direct telemetry confirming no mechanical damage (SIG-005)"
+        ],
+        "expected_timeline": "hours",
+        "materialization_signal": "Pump load should increase progressively over subsequent readings if this is a standard staged restart. If pump load remains at 30% for an extended period despite demand, it may indicate a constraint rather than a staged ramp.",
+        "reasoning": "The null hypothesis holds. Staged restart is standard industrial practice. The cavitation NORMAL reading is consistent with a healthy pump at reduced load. The key monitoring point is whether load increases in subsequent readings — stagnation at 30% would challenge the null hypothesis.",
+        "confidence": "high"
+      },
+      {
+        "finding_from_layer2": "Sector 4 pressure gap (38.5 PSI vs. 48 PSI grid average)",
+        "signal_ids": [
+          "20260311-0725-SIG-002",
+          "20260311-0725-SIG-013"
+        ],
+        "null_hypothesis": "The 9.5 PSI gap is a transient artifact of the localized high-demand event. Sector 4 experienced the concentrated draw, so its pressure dropped most. As demand normalizes, the gap should close.",
+        "null_holds": true,
+        "rational_explanation": "Localized demand events create localized pressure depressions. The gap is the expected hydraulic signature of concentrated draw on a specific sector. As demand diminishes and pumps ramp up, pressure should equalize through the grid's interconnected mains.",
+        "alternative_explanation": "The gap reflects a pre-existing structural constraint in Sector 4's infrastructure (smaller mains, longer distribution path, elevation differences) that limits pressure recovery regardless of demand normalization.",
+        "which_is_more_likely": "null",
+        "assumptions": [],
+        "assumption_count": 0,
+        "classification": "NULL_HYPOTHESIS_HOLDS",
+        "evidence_citations": [
+          "Sector 4 pressure at 38.5 PSI — direct telemetry (SIG-002)",
+          "Grid average at 48 PSI — direct telemetry showing the rest of the grid is significantly higher",
+          "Demand draw is decreasing — operator assessment (SIG-004)"
+        ],
+        "expected_timeline": "hours",
+        "materialization_signal": "If the gap narrows materially in subsequent readings as demand decreases, the transient explanation is confirmed. If the gap persists after demand fully normalizes, the structural constraint hypothesis gains evidence. Per LZ-RC-002, need at least one more data point to establish a trend.",
+        "reasoning": "The null hypothesis holds. This is the simplest sufficient explanation per LZ-RC-004. A localized demand event causing a localized pressure drop is basic fluid dynamics. The structural alternative is plausible but requires additional data points to establish. Without a pre-event Sector 4 baseline, neither can be confirmed, but the null hypothesis requires fewer assumptions.",
+        "confidence": "medium"
+      },
+      {
+        "finding_from_layer2": "Unknown demand source status and intent",
+        "signal_ids": [
+          "20260311-0725-SIG-010"
+        ],
+        "null_hypothesis": "The system was not designed to have direct communication with the demand source. This is a known architectural limitation, not an emerging threat signal. The absence of demand-source monitoring is the normal operating condition.",
+        "null_holds": true,
+        "rational_explanation": "Municipal water distribution SCADA systems typically do not have real-time bidirectional communication with fire departments. The system relies on its own telemetry to infer demand patterns. This is a known design trade-off, not a failure or gap that emerged during this event.",
+        "alternative_explanation": "The lack of communication represents a coordination failure — inter-agency protocols should exist and should be active during high-draw events, but they are either absent or not functioning.",
+        "which_is_more_likely": "null",
+        "assumptions": [],
+        "assumption_count": 0,
+        "classification": "NULL_HYPOTHESIS_HOLDS",
+        "evidence_citations": [
+          "No inter-agency communication data in any available telemetry or log (SIG-010, SIG-014)",
+          "Thesis context describes the demand source as 'external actors capable of pulling negative pressure' — framed as an external force, not a coordinated partner"
+        ],
+        "expected_timeline": "N/A",
+        "materialization_signal": "N/A — this is a structural characteristic, not a developing situation",
+        "reasoning": "The null hypothesis holds. The system architecture treats the demand source as an external perturbation to be absorbed, not a coordinated partner. The corrections ledger (CL-002, CL-003, CL-005, CL-007) has repeatedly and correctly identified that assuming off-log coordination is unsupported. The most rational interpretation is that this communication gap is the NORMAL STATE of the system, not an anomaly. However, per Layer 2's assessment, it remains a genuine vulnerability — knowing the demand trajectory directly would materially improve the system's ability to manage recovery. The fact that it is NORMAL does not make it SAFE.",
+        "confidence": "high"
+      },
+      {
+        "finding_from_layer2": "Reserve refill strategy unstated",
+        "signal_ids": [
+          "20260311-0725-SIG-008"
+        ],
+        "null_hypothesis": "Refill operations would naturally begin once pumps have ramped up sufficiently to both serve current demand AND pump water uphill to the reserve tanks. At 30% pump load with demand still active, refill would be premature — the system is not yet in a position to allocate surplus pump capacity to refill. The absence of a stated refill strategy is because it is too early in the recovery sequence.",
+        "null_holds": true,
+        "rational_explanation": "Sequential recovery priorities: (1) restart pumps, (2) stabilize active supply, (3) verify demand is decreasing, (4) ramp pumps to operating load, (5) allocate surplus capacity to refill reserves. The system appears to be at step 2-3. Refill is a later-stage recovery action.",
+        "alternative_explanation": "Operators and SCADA have not planned for refill, or the pump capacity is insufficient to simultaneously serve demand and refill at current load levels.",
+        "which_is_more_likely": "null",
+        "assumptions": [
+          "Refill is a sequenced recovery action that follows pump ramp-up, not a concurrent activity at 30% load"
+        ],
+        "assumption_count": 1,
+        "classification": "VALID",
+        "evidence_citations": [
+          "Pumps at 30% load — limited surplus capacity for refill (SIG-001)",
+          "Thesis states reserves require 'pumping to refill' — capacity allocation is a real constraint (SIG-003 knowledge audit)"
+        ],
+        "expected_timeline": "hours",
+        "materialization_signal": "Reserve level should begin increasing in subsequent readings, correlated with pump load increases. If pump load increases but reserves do not, that would indicate either ongoing demand is consuming all capacity or a system constraint on refill.",
+        "reasoning": "The null hypothesis is the most likely explanation. At 30% pump load with active demand, expecting refill operations is premature. The logical sequencing is to stabilize supply first, then replenish reserves. One assumption: that refill is sequenced after ramp-up. This is standard operational practice for gravity-fed reserve systems and is a reasonable assumption, though unverifiable from current data.",
+        "confidence": "medium"
+      }
+    ],
+    "hidden_moves": [
+      {
+        "player": "SCADA Automated Logic",
+        "signal_ids": [
+          "20260311-0725-SIG-001",
+          "20260311-0725-SIG-005"
+        ],
+        "likely_action": "Running a staged ramp-up protocol — incrementally increasing pump load in steps with sensor verification at each stage",
+        "incentive_basis": "SCADA's design philosophy is 'protect infrastructure first.' A staged ramp with verification at each step is the rational implementation of this philosophy during recovery. The incentive is to avoid re-triggering cavitation protection during an aggressive restart.",
+        "evidence_hints": "Pumps at exactly 30% (a round, likely programmed step) with cavitation NORMAL — this is consistent with SCADA having paused at a verification checkpoint. The exact 30% figure suggests a programmed threshold rather than an organic load level.",
+        "assumption_count": 2,
+        "classification": "FLAGGED",
+        "expected_timeline": "hours",
+        "materialization_signal": "Next reading should show pump load at a higher but still round increment (e.g., 50%, 60%) rather than an arbitrary organic number. Stepped increments in subsequent readings would confirm programmatic ramp-up protocol.",
+        "confidence": "medium"
+      },
+      {
+        "player": "Demand Source (Fire Department)",
+        "signal_ids": [
+          "20260311-0725-SIG-010",
+          "20260311-0725-SIG-004"
+        ],
+        "likely_action": "Transitioning from initial attack to overhaul/mop-up phase, which naturally reduces water draw",
+        "incentive_basis": "Fire departments are incentivized to minimize water usage once primary suppression is achieved — continued high-volume flow is wasteful, can cause water damage beyond fire damage, and depletes municipal supply. Standard operating procedure is to reduce flow as fire control is established.",
+        "evidence_hints": "Decreasing draw inferred from system telemetry is consistent with the natural operational lifecycle of fire suppression.",
+        "assumption_count": 2,
+        "classification": "FLAGGED",
+        "expected_timeline": "hours",
+        "materialization_signal": "Continued steady decrease in system flow toward baseline levels. If available, confirmation from public incident reports or fire department dispatch records showing the incident transitioning to overhaul/all-clear status.",
+        "confidence": "low"
+      },
+      {
+        "player": "Grid Operators",
+        "signal_ids": [
+          "20260311-0725-SIG-012"
+        ],
+        "likely_action": "Performing off-log coordination or readiness activities (inter-agency communication, isolation valve preparation, backup resource staging)",
+        "incentive_basis": "Rational operators would prepare contingency actions during recovery even if not immediately needed.",
+        "evidence_hints": "NONE — this is the exact class of inference that CL-002, CL-003, CL-005, and CL-007 have repeatedly stripped. Zero evidence supports this.",
+        "assumption_count": 3,
+        "classification": "SPECULATIVE",
+        "expected_timeline": "N/A",
+        "materialization_signal": "N/A — classified SPECULATIVE per corrections ledger pattern. This inference class has been stripped 4+ times in the analysis chain.",
+        "confidence": "low"
+      }
+    ],
+    "scenario_probabilities": {
+      "thesis_confirmed": {
+        "probability": "65%",
+        "key_evidence": "All five kill switches remain well within safe thresholds. SCADA automated logic validated by converging telemetry from multiple independent sensors (cavitation NORMAL, surge valve CLOSED, pumps restarted, pressure above thresholds, no contamination risk). Core thesis that 'automated redundancy architecture maintains integrity under asymmetric load through fail-safe protection and gravity reserve deployment' is empirically demonstrated. Demand is decreasing. Recovery trajectory is positive across all primary indicators.",
+        "timeline": "Hours. Full confirmation requires: (1) Sector 4 pressure converging toward grid average, (2) pump load ramping to normal operating levels, (3) reserve level beginning to increase, (4) demand normalizing. If all four materialize within hours, thesis is confirmed."
+      },
+      "thesis_modified": {
+        "probability": "25%",
+        "modification": "Thesis is confirmed in its acute-event architecture (the fail-safe worked) but must be modified to acknowledge: (1) the system has a structural vulnerability window during recovery when both redundancy legs are simultaneously diminished, (2) the absence of demand-source monitoring is a genuine architectural limitation that creates information asymmetry, (3) the recovery timeline creates a window of elevated risk that the original thesis does not explicitly address. Modified thesis: 'The system protects integrity during acute events but has a quantifiable vulnerability window during recovery when margin of redundancy is reduced.'",
+        "key_evidence": "Reserves at 65% with no stated refill plan, pumps at 30% with unknown ramp speed, demand source not monitored. These are not failures — they are characteristics of the recovery phase that the thesis as stated does not fully capture."
+      },
+      "thesis_falsified": {
+        "probability": "10%",
+        "key_evidence": "No current evidence supports falsification. All kill switches are distant from trigger levels. The 10% probability accounts for: (1) demand source re-intensification hitting a system with reduced capacity, (2) an undiscovered secondary failure (e.g., an undetected leak contributing to the 14,000 GPM flow reading — which we cannot rule out without baseline data), (3) infrastructure constraint in Sector 4 preventing pressure recovery even after demand normalizes. Each of these is individually low probability but collectively they represent non-trivial tail risk.",
+        "confirming_signal": "Any kill switch value moving TOWARD its threshold in the next reading would be the earliest falsification signal. Specifically: (1) Sector 4 pressure declining below 30 PSI, (2) reserves declining below 50%, (3) system flow increasing above 16,000 GPM, (4) cavitation sensor moving to WARNING_ELEVATED."
+      }
+    },
+    "x402_paper_trades": [
+      {
+        "question": "What is the pre-event baseline pressure for Sector 4 specifically?",
+        "data_source": "Historical SCADA telemetry for Sector 4 pressure — 30-day rolling average prior to event",
+        "impact_on_analysis": "Would resolve whether the 9.5 PSI gap between Sector 4 (38.5) and grid average (48) is structural or transient. If Sector 4 historically runs at 44-48 PSI, the gap is transient and will close. If it historically runs at 38-40 PSI, the current reading is near-normal and the gap is structural. This changes whether we treat the gap as a recovery indicator or a permanent limitation.",
+        "confidence_data_exists": "high",
+        "estimated_value": "HIGH — this single data point would resolve SIG-013 from severity 3/LOW confidence to a definitive assessment, and would change the monitoring priority for Sector 4 recovery tracking."
+      },
+      {
+        "question": "What is the normal baseline system total flow in GPM?",
+        "data_source": "Historical SCADA telemetry for system total flow — 30-day rolling average during comparable time of day",
+        "impact_on_analysis": "Would resolve whether 14,000 GPM is elevated, near-normal, or low. Without this, we cannot assess whether the flow reading indicates ongoing excess demand, normal operations, or restricted output from throttled pumps. This is the most significant single data gap identified by Layer 1.",
+        "confidence_data_exists": "high",
+        "estimated_value": "HIGH — resolves SIG-007 from severity 4/MEDIUM ambiguous to a definitive assessment. Also enables leak detection analysis (if 14,000 GPM is significantly above baseline with demand decreasing, it could indicate an uncontained leak)."
+      },
+      {
+        "question": "What is the demand source's current operational status and projected timeline?",
+        "data_source": "Fire department dispatch/incident status, CAD (Computer Aided Dispatch) records, or direct communication with incident commander",
+        "impact_on_analysis": "Would resolve the system's most significant informational blind spot. Knowing whether the fire is controlled, under control, or escalating would transform the demand trajectory from an indirect inference to a direct measurement. Would change confidence on SIG-004 from MEDIUM to HIGH and resolve SIG-010 entirely.",
+        "confidence_data_exists": "high",
+        "estimated_value": "CRITICAL — this is the highest-value data acquisition. The demand source is the primary external threat, and its status is currently inferred through intermediary measurement. Direct measurement per LZ-EH-002 would provide decisively higher evidentiary weight."
+      },
+      {
+        "question": "What is the SCADA pump ramp-up protocol and expected timeline from 30% to full operating load?",
+        "data_source": "SCADA configuration documentation, pump restart procedure manual, or operator knowledge of programmed ramp sequence",
+        "impact_on_analysis": "Would resolve the unknown ramp-up speed that affects SIG-011 (vulnerability to secondary event). If ramp-up is fast (minutes), the vulnerability window is narrow and manageable. If slow (hours), the system operates in a diminished state for an extended period. This directly affects the compound vulnerability assessment.",
+        "confidence_data_exists": "high",
+        "estimated_value": "HIGH — resolves the active capacity trajectory and enables time-bounding of the vulnerability window."
+      },
+      {
+        "question": "What is the reserve tank refill rate and required pump capacity allocation?",
+        "data_source": "System engineering documentation, SCADA configuration, or operator knowledge of refill pump parameters and tank capacity",
+        "impact_on_analysis": "Would resolve SIG-008 (reserve refill strategy) and enable calculation of the passive capacity recovery timeline. Combined with the ramp-up protocol data, would allow complete modeling of when the system returns to full dual-redundancy status.",
+        "confidence_data_exists": "high",
+        "estimated_value": "MEDIUM-HIGH — important for recovery timeline modeling but less immediately urgent than demand source status or baseline flow data."
+      }
+    ],
+    "compound_stress_inference": {
+      "current_chain_state": "building",
+      "orderly_vs_disorderly": "Currently in ORDERLY stress. All movements are in the correct direction (pressure recovering, demand decreasing, pumps online, no kill switch approached). The system is degraded but stabilizing. The transition to disorderly would require an external shock (demand reversal) or an internal discovery (undetected failure, leak). No evidence of either currently exists, but the system's reduced redundancy margin means the tolerance for external shock is narrower than normal.",
+      "catalyst_proximity": "The specific catalyst for orderly → disorderly transition would be: demand source re-intensification (fire re-ignition, second alarm, or new high-demand event in the service area) hitting the system while pumps are at 30% and reserves are at 65%. This would force reserves to absorb incremental demand again from an already depleted starting point, while pumps may not ramp fast enough. Proximity assessment: LOW-MEDIUM. Demand is decreasing, which moves away from this catalyst. But the catalyst is externally controlled and cannot be predicted from internal telemetry.",
+      "pre_load_assessment": "Both redundancy legs are pre-loaded in the diminished direction: active capacity at 30% (70% below full) and passive reserves at 65% (35% consumed). This is the system-specific equivalent of compound stress pre-loading in a financial context. Neither leg is at a critical level, but both are simultaneously below full strength. The pre-load means that any new stressor operates against a smaller buffer than the system's design baseline. Critically, per CL-001, we cannot assume SCADA is actively working to unload these pre-loaded legs through background refill or fast ramp-up operations.",
+      "thesis_paradox": "The paradox is this: the very event that validated the thesis (SCADA shut down pumps, reserves absorbed the load, system survived without hitting kill switches) is also the event that created the current vulnerability (depleted reserves, throttled pumps, recovery window). The thesis's validation mechanism — sacrificing active components to protect the whole — necessarily produces a post-event diminished state. The stronger the validation event, the deeper the recovery deficit. A MORE severe event would have MORE dramatically validated the fail-safe architecture AND left the system MORE vulnerable to a follow-on event. The thesis is simultaneously proven AND the system is simultaneously at its weakest point since the event began. This is not a contradiction — it is the designed trade-off. But it must be stated honestly: thesis validation and system vulnerability are correlated outcomes of the same mechanism."
+    },
+    "inference_summary": "Player behavior reveals a system in orderly, conservative recovery where the automation is performing exactly as designed — prioritizing equipment preservation over speed, which is consistent with the thesis architecture. The most important strategic insight is not what any player is doing, but what the system structurally CANNOT do: it cannot monitor or communicate with the demand source, it cannot simultaneously serve current demand and refill reserves at 30% pump load, and it cannot rapidly restore dual-redundancy without knowing the ramp-up protocol speed. Layer 4 should focus on: (1) whether the next data point shows pump load increasing (confirming staged ramp-up) and Sector 4 pressure converging (confirming transient gap), (2) the thesis paradox — that validation and vulnerability are mechanically coupled, meaning the system's strongest proof point is also its weakest operational moment, and (3) the demand source remains the only variable capable of converting orderly recovery into disorderly stress, and it is the one variable the system cannot observe directly."
+  },
+  "_layer2_raw": {
+    "corrections_referenced": [
+      {
+        "correction_id": "CL-001",
+        "signal_ids": [
+          "20260311-0725-SIG-008",
+          "20260311-0725-SIG-011"
+        ],
+        "trigger_matched": "Signals about reserve refill strategy and SCADA ramp-up logic invoke assumptions about SCADA background operations (diagnostics, scheduling, capacity allocation) with no telemetry evidence.",
+        "influence_on_assessment": "Prevented me from assuming SCADA has an automated reserve refill protocol running or that ramp-up logic has been tested. These remain genuine unknowns. Scored the vulnerability signals without crediting unverified mitigating capabilities."
+      },
+      {
+        "correction_id": "CL-002",
+        "signal_ids": [
+          "20260311-0725-SIG-010",
+          "20260311-0725-SIG-012"
+        ],
+        "trigger_matched": "Signals about operator protocol adherence and unknown demand source status invoke inferences about off-log operator actions (coordination with fire department, readiness checks).",
+        "influence_on_assessment": "Prevented me from crediting operators with inter-agency coordination or hidden readiness activities. Operator protocol adherence is scored ONLY on what the log explicitly states. The absence of inter-agency communication data is treated as a genuine gap, not assumed to be happening off-screen."
+      },
+      {
+        "correction_id": "CL-003",
+        "signal_ids": [
+          "20260311-0725-SIG-010"
+        ],
+        "trigger_matched": "Signal about unknown demand source status and lack of inter-agency communication directly matches the 'operators pre-staging isolation actions off-log' pattern.",
+        "influence_on_assessment": "Confirmed that the absence of inter-agency communication references cannot be scored as either positive or negative. It is a blind spot, flagged as such."
+      },
+      {
+        "correction_id": "CL-005",
+        "signal_ids": [
+          "20260311-0725-SIG-010",
+          "20260311-0725-SIG-014"
+        ],
+        "trigger_matched": "Signals about demand source coordination and geopolitical/jurisdictional signals directly match the pattern of assuming operator-fire department coordination without evidence.",
+        "influence_on_assessment": "Stripped any implicit credit for inter-agency coordination. The gap in demand-source communication is scored as a genuine vulnerability, not mitigated by assumed off-log coordination."
+      },
+      {
+        "correction_id": "CL-006",
+        "signal_ids": [
+          "20260311-0725-SIG-005",
+          "20260311-0725-SIG-001"
+        ],
+        "trigger_matched": "Cavitation sensor NORMAL and pump restart could invite speculation about SCADA interlocks or diagnostic routines that enabled the restart.",
+        "influence_on_assessment": "Scored the cavitation sensor and pump restart on the telemetry evidence alone (sensor reads NORMAL, pumps at 30% load). Did not credit any assumed SCADA interlock logic or pre-restart diagnostic sequence."
+      }
+    ],
+    "knowledge_audit": [
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-001"
+        ],
+        "signal": "Primary pumps restarted at reduced load",
+        "knowledge_check": "Thesis defines primary pump stations as the active supply leg. Pump load percentage is a defined key indicator. The thesis states SCADA will 'ruthlessly shut down pumps to save them from cavitation' — restart at 30% is consistent with post-protection recovery. I understand the role of this component in the thesis architecture.",
+        "gap_identified": "I do not know the normal operating load percentage for these pumps. 30% could be deeply conservative or near minimum viable. I do not know the ramp-up rate or protocol.",
+        "gap_type": "THRESHOLD_CALIBRATION_GAP",
+        "pre_audit_assessment": "Would have scored as strong positive (severity 7 acceleration) based on headline alone.",
+        "post_audit_assessment": "Scored as moderate positive (severity 6 acceleration) — restart confirmed but operating capacity is limited and ramp trajectory unknown.",
+        "audit_impact": "Reduced severity slightly due to uncertainty about what 30% load means operationally and whether it represents adequate supply restoration.",
+        "lesson_applied": "CL-006",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-002"
+        ],
+        "signal": "Sector 4 pressure recovering but still depressed",
+        "knowledge_check": "Thesis defines Sector 4 pressure as the primary localized indicator. Kill switch at 20 PSI. Grid average at 48 PSI. Current 38.5 PSI is well above kill switch but 20% below grid average. I understand the threshold hierarchy.",
+        "gap_identified": "I do not know the pre-event baseline pressure for Sector 4 specifically. The grid average is 48 PSI, but Sector 4 may have historically run below that due to infrastructure characteristics. Without pre-event baseline, I cannot distinguish between 'recovering toward normal' and 'recovering but structurally constrained.'",
+        "gap_type": "DATA_AVAILABILITY_GAP",
+        "pre_audit_assessment": "Would have scored as moderate concern (severity 5) based on the gap alone.",
+        "post_audit_assessment": "Scored as moderate concern (severity 5) — the gap is real but not immediately threatening. The uncertainty about structural vs. transient cause limits confidence.",
+        "audit_impact": "Minimal change, but explicitly flagged the pre-event baseline gap as important for trend assessment.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-003"
+        ],
+        "signal": "Gravity reserves significantly depleted",
+        "knowledge_check": "Thesis defines gravity reserves as the passive backup. Kill switch at 10% with pumps offline. Current 65% means 35% consumed. Thesis states these are high-elevation tanks that require pumping to refill. I understand this is the resilience buffer. Loss of 35% materially reduces ability to handle a second event.",
+        "gap_identified": "I do not know the refill rate, the pump capacity allocation required for refill, or the expected time to restore full reserves. I also do not know the historical frequency of consecutive high-draw events.",
+        "gap_type": "THESIS_CAPABILITY_GAP",
+        "pre_audit_assessment": "Would have scored severity 7 — major resilience reduction.",
+        "post_audit_assessment": "Scored severity 7 — unchanged. The gap in refill rate knowledge does not reduce the severity of the depletion itself; it adds uncertainty about recovery timeline.",
+        "audit_impact": "Knowledge gap does not change severity but adds a critical open question about recovery timeline that Layer 3 must track.",
+        "lesson_applied": "CL-001",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-004"
+        ],
+        "signal": "Demand source draw is decreasing",
+        "knowledge_check": "Thesis identifies the demand source (fire department) as an external actor capable of creating asymmetric load. 'Decreasing' is inferred from flow/pressure telemetry per operator log, not from direct communication with the demand source. This is an inference, not a measurement of the demand source's state.",
+        "gap_identified": "The demand source's operational status and intent are not directly monitored. 'Decreasing' could reverse. The confidence in this signal is inherently limited by the indirect measurement method.",
+        "gap_type": "DATA_AVAILABILITY_GAP",
+        "pre_audit_assessment": "Would have scored severity 6 acceleration — good news, draw reducing.",
+        "post_audit_assessment": "Scored severity 5 acceleration — positive but confidence downgraded because the measurement is indirect and the demand source is not monitored.",
+        "audit_impact": "Reduced severity by 1 and confidence from HIGH to MEDIUM due to indirect measurement and corrections ledger preventing credit for assumed inter-agency communication.",
+        "lesson_applied": "CL-002",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-005"
+        ],
+        "signal": "Cavitation sensor normal — no mechanical damage",
+        "knowledge_check": "Thesis defines destructive mechanical failure as a kill switch (pump_cavitation_acoustic_sensor at CRITICAL_DAMAGE). Sensor reads NORMAL. Pumps restarted successfully. This is direct telemetry from a primary sensor, high evidentiary weight.",
+        "gap_identified": "NONE — the sensor reading is a direct measurement from the originating source, and the thesis context clearly defines what NORMAL means in the kill switch framework.",
+        "gap_type": "NONE",
+        "pre_audit_assessment": "Severity 7 acceleration.",
+        "post_audit_assessment": "Severity 7 acceleration — unchanged. This is strong, directly measured evidence that the fail-safe architecture protected the pumps.",
+        "audit_impact": "No change. High confidence in this signal.",
+        "lesson_applied": "CL-006",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-006"
+        ],
+        "signal": "Surge relief valve closed — no water hammer risk",
+        "knowledge_check": "Thesis defines surge relief valve as a mechanical safety bypass for water hammer. CLOSED status during pump restart means no hydraulic transients detected. This is direct sensor telemetry.",
+        "gap_identified": "NONE — direct measurement, clear thesis context for interpretation.",
+        "gap_type": "NONE",
+        "pre_audit_assessment": "Severity 5 acceleration.",
+        "post_audit_assessment": "Severity 5 acceleration — unchanged.",
+        "audit_impact": "No change.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-007"
+        ],
+        "signal": "System total flow elevated at 14,000 GPM",
+        "knowledge_check": "Thesis defines catastrophic leak threshold at 20,000 GPM (with reserve drop and pumps active). 14,000 GPM is below that threshold. However, I do not know the normal baseline flow rate for this grid/sector.",
+        "gap_identified": "No baseline normal flow rate provided. Cannot determine whether 14,000 GPM is near-normal or significantly elevated. This is explicitly identified as a blind spot by Layer 1.",
+        "gap_type": "DATA_AVAILABILITY_GAP",
+        "pre_audit_assessment": "Would have scored severity 4 ambiguous — below kill switch but uncertain.",
+        "post_audit_assessment": "Scored severity 4 ambiguous — unchanged, but flagged the baseline gap explicitly.",
+        "audit_impact": "No change in score, but the gap is material. Without baseline, trend analysis is impossible per LZ-RC-002.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-008"
+        ],
+        "signal": "Reserve refill strategy unstated",
+        "knowledge_check": "Thesis establishes gravity reserves as critical passive backup. Currently at 65%. Refill requires pumping water uphill. Pumps at 30% load — unclear if this includes any refill capacity. No operator log mentions refill.",
+        "gap_identified": "No data on refill operations, refill rate, or capacity allocation. This is a genuine operational unknown — and per CL-001, I must not assume SCADA is running a refill protocol in the background without evidence.",
+        "gap_type": "THESIS_CAPABILITY_GAP",
+        "pre_audit_assessment": "Would have scored severity 5 ambiguous — concerning but perhaps SCADA is handling it.",
+        "post_audit_assessment": "Scored severity 6 ambiguous — upgraded severity because corrections ledger explicitly prevents crediting assumed background operations.",
+        "audit_impact": "Severity increased by 1 due to corrections ledger preventing assumption of hidden mitigating actions.",
+        "lesson_applied": "CL-001",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-009"
+        ],
+        "signal": "No contamination advisory triggered",
+        "knowledge_check": "Thesis defines 20 PSI as contamination risk threshold. Current Sector 4 at 38.5 PSI — nearly double the threshold. This is a direct measurement against a clearly defined kill switch.",
+        "gap_identified": "NONE — direct measurement against defined threshold.",
+        "gap_type": "NONE",
+        "pre_audit_assessment": "Severity 7 acceleration.",
+        "post_audit_assessment": "Severity 7 acceleration — unchanged.",
+        "audit_impact": "No change.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-010"
+        ],
+        "signal": "Unknown demand source status and intent",
+        "knowledge_check": "Thesis identifies demand source as external actor not monitored by SCADA. Corrections ledger (CL-002, CL-003, CL-005) has repeatedly stripped assumed off-log coordination from scoring. The absence of direct demand-source communication is a genuine vulnerability.",
+        "gap_identified": "No direct communication channel to demand source referenced in available data. The system's awareness of the demand trajectory is inferred from its own telemetry, not from the source.",
+        "gap_type": "DATA_AVAILABILITY_GAP",
+        "pre_audit_assessment": "Would have scored severity 6 ambiguous.",
+        "post_audit_assessment": "Scored severity 7 ambiguous — upgraded because corrections ledger confirms this class of gap has been systematically underweighted in prior assessments.",
+        "audit_impact": "Severity increased by 1 due to corrections ledger pattern. This is a genuine blind spot with no mitigation evidence.",
+        "lesson_applied": "CL-002",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-011"
+        ],
+        "signal": "Reduced pump load creates vulnerability to secondary event",
+        "knowledge_check": "Thesis architecture relies on pump + gravity reserve redundancy. With pumps at 30% and reserves at 65%, the system is in a diminished state. The ramp-up speed of SCADA under renewed stress is unknown.",
+        "gap_identified": "SCADA ramp-up logic speed is an untested variable in this recovery phase. No data on how quickly pumps can go from 30% to full load under renewed demand stress. Per CL-001 and CL-004, I cannot assume SCADA has fast ramp-up capability without evidence.",
+        "gap_type": "THESIS_CAPABILITY_GAP",
+        "pre_audit_assessment": "Would have scored severity 5 deterioration.",
+        "post_audit_assessment": "Scored severity 6 deterioration — upgraded because both legs of redundancy (pumps AND reserves) are simultaneously diminished, and corrections ledger prevents crediting assumed SCADA capabilities.",
+        "audit_impact": "Severity increased by 1 due to compound vulnerability assessment and corrections ledger application.",
+        "lesson_applied": "CL-001",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-012"
+        ],
+        "signal": "Operator protocol adherence confirmed",
+        "knowledge_check": "Thesis describes operator protocol: allow automated failovers, verify gravity reserves, prepare isolation if pressure approaches 20 PSI. Operator log is consistent with this protocol. However, per CL-002 and CL-007, I can only score what the log explicitly says — no credit for assumed off-log activities.",
+        "gap_identified": "Operator log is sparse. Protocol adherence is inferred from consistency with described protocol, not from a detailed action log. This is a reasonable inference but not a strong confirmation.",
+        "gap_type": "NONE",
+        "pre_audit_assessment": "Would have scored severity 5 acceleration.",
+        "post_audit_assessment": "Scored severity 4 acceleration — downgraded slightly because the evidence is narrative consistency, not detailed action verification.",
+        "audit_impact": "Reduced severity by 1 due to thin evidentiary basis for protocol adherence claim.",
+        "lesson_applied": "CL-002",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-013"
+        ],
+        "signal": "Sector 4 pressure gap suggests possible infrastructure constraint",
+        "knowledge_check": "The 9.5 PSI gap could be structural or transient. No pre-event baseline for Sector 4 pressure is available. Layer 1 correctly flags this as low confidence.",
+        "gap_identified": "Pre-event Sector 4 pressure baseline is not available. Without it, structural constraint vs. transient recovery lag cannot be distinguished. Per LZ-RC-002, a single data point does not establish a trend.",
+        "gap_type": "DATA_AVAILABILITY_GAP",
+        "pre_audit_assessment": "Would have scored severity 4 ambiguous.",
+        "post_audit_assessment": "Scored severity 3 ambiguous — downgraded because without baseline data, the structural inference is speculative per LZ-EPH-003 (multiple unproven assumptions: that the gap is structural, that it pre-existed, that it represents a constraint).",
+        "audit_impact": "Reduced severity by 1 due to speculative nature per immutable laws.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-014"
+        ],
+        "signal": "No geopolitical or jurisdictional signals detected",
+        "knowledge_check": "Per LZ-RC-003, absence of evidence is not evidence of absence. The lack of inter-agency coordination signals could mean it wasn't needed, or it could mean we can't see it.",
+        "gap_identified": "Cannot distinguish between 'not needed' and 'not visible.' Per CL-005, cannot assume off-log coordination.",
+        "gap_type": "DATA_AVAILABILITY_GAP",
+        "pre_audit_assessment": "Would have scored severity 2 ambiguous.",
+        "post_audit_assessment": "Scored severity 2 ambiguous — unchanged. Low relevance at this time.",
+        "audit_impact": "No change. Correctly treated as low-relevance per LZ-RC-003.",
+        "lesson_applied": "CL-005",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-015"
+        ],
+        "signal": "SCADA automated logic validated under real stress",
+        "knowledge_check": "This is a composite assessment based on multiple data points: cavitation NORMAL, pumps restarted, reserves deployed, no kill switches breached, surge valve CLOSED. Each underlying data point is direct telemetry. The composite conclusion — that the automated architecture worked as designed — is well-supported by the convergence of multiple independent measurements per LZ-EH-001.",
+        "gap_identified": "NONE — this is supported by multiple independent telemetry readings all pointing to the same conclusion.",
+        "gap_type": "NONE",
+        "pre_audit_assessment": "Severity 8 acceleration.",
+        "post_audit_assessment": "Severity 8 acceleration — unchanged. This is the strongest signal in the dataset, supported by multiple converging data points.",
+        "audit_impact": "No change. Multi-source verification per LZ-EH-001 supports high confidence.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      }
+    ],
+    "scored_signals": [
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-001"
+        ],
+        "signal": "Primary pumps restarted at reduced load",
+        "severity": 6,
+        "source_tier": "1",
+        "weighted_severity": 6,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "Direct telemetry confirms pump restart at 30% load. This is a material positive — pumps are online and undamaged. However, 30% load represents limited active capacity, and ramp-up trajectory is unknown. Thesis viability improved but not fully restored.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-002"
+        ],
+        "signal": "Sector 4 pressure recovering but still depressed",
+        "severity": 5,
+        "source_tier": "1",
+        "weighted_severity": 5,
+        "thesis_relevance": "DIRECT",
+        "confidence": "MEDIUM",
+        "reasoning": "38.5 PSI is well above the 20 PSI kill switch but 20% below grid average. The signal is contradictory: recovering (positive trajectory) but still depressed (residual stress). Without pre-event Sector 4 baseline, cannot assess whether this gap is structural or transient. Directly relevant to contamination risk kill switch monitoring.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-003"
+        ],
+        "signal": "Gravity reserves significantly depleted",
+        "severity": 7,
+        "source_tier": "1",
+        "weighted_severity": 7,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "35% reserve consumption is directly measured. This materially reduces system resilience — the passive backup leg is diminished. Kill switch at 10% with pumps offline is not imminent (pumps are online), but the buffer is significantly reduced. Refill rate unknown, creating an open vulnerability window of indeterminate duration. Per CL-001, no credit given for assumed SCADA refill protocols.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-004"
+        ],
+        "signal": "Demand source draw is decreasing",
+        "severity": 5,
+        "source_tier": "1",
+        "weighted_severity": 5,
+        "thesis_relevance": "DIRECT",
+        "confidence": "MEDIUM",
+        "reasoning": "Positive signal — the acute stressor is diminishing. However, 'decreasing' is inferred from system telemetry, not from direct demand-source communication. The demand source could re-intensify. Confidence limited to MEDIUM because the measurement is indirect per LZ-EH-002 (intermediary vs. originating source).",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-005"
+        ],
+        "signal": "Cavitation sensor normal — no mechanical damage",
+        "severity": 7,
+        "source_tier": "1",
+        "weighted_severity": 7,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "Direct sensor telemetry confirms no mechanical damage. This is directly relevant to kill switch #5 (destructive mechanical failure). The protective shutdown worked — pumps survived the event. This preserves long-term system capacity and validates the thesis's fail-safe architecture.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-006"
+        ],
+        "signal": "Surge relief valve closed — no water hammer risk",
+        "severity": 5,
+        "source_tier": "1",
+        "weighted_severity": 5,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "Direct sensor telemetry. CLOSED during pump restart means re-pressurization is controlled and gradual. No hydraulic transient risk. Supports thesis of controlled recovery. Moderate severity because while important, this confirms absence of a secondary failure mode rather than resolving the primary stress.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-007"
+        ],
+        "signal": "System total flow elevated at 14,000 GPM",
+        "severity": 4,
+        "source_tier": "1",
+        "weighted_severity": 4,
+        "thesis_relevance": "DIRECT",
+        "confidence": "MEDIUM",
+        "reasoning": "Below the 20,000 GPM catastrophic leak threshold but without baseline normal flow data, the significance of 14,000 GPM is ambiguous. Could be near-normal or still elevated. This is a blind spot that prevents accurate trend assessment. Directly relevant to kill switch #3 monitoring.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-008"
+        ],
+        "signal": "Reserve refill strategy unstated",
+        "severity": 6,
+        "source_tier": "1",
+        "weighted_severity": 6,
+        "thesis_relevance": "INDIRECT",
+        "confidence": "MEDIUM",
+        "reasoning": "With reserves at 65% and pumps at 30%, the system's ability to replenish its passive backup is uncertain. No refill operations mentioned in operator log. Per CL-001, cannot assume SCADA is managing this in the background. This represents a genuine vulnerability window — if a second event occurs before reserves are restored, the system enters the stress event with 35% less buffer. Severity upgraded from initial assessment per corrections ledger application.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-009"
+        ],
+        "signal": "No contamination advisory triggered",
+        "severity": 7,
+        "source_tier": "1",
+        "weighted_severity": 7,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "38.5 PSI is nearly double the 20 PSI contamination threshold. At no point did available data show approach to this kill switch. This avoids significant public health and regulatory consequences. Directly validates thesis of maintaining contamination-free operations under stress.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-010"
+        ],
+        "signal": "Unknown demand source status and intent",
+        "severity": 7,
+        "source_tier": "1",
+        "weighted_severity": 7,
+        "thesis_relevance": "DIRECT",
+        "confidence": "MEDIUM",
+        "reasoning": "The demand source is the primary external threat to the system, and it is not directly monitored. All inference about demand trajectory comes from the system's own telemetry, not from the source. Per CL-002, CL-003, and CL-005 (applied three times previously), assumed off-log coordination cannot be credited. This is the system's most significant informational blind spot — the primary threat actor's intentions are unknown. Severity upgraded per corrections ledger pattern.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-011"
+        ],
+        "signal": "Reduced pump load creates vulnerability to secondary event",
+        "severity": 6,
+        "source_tier": "1",
+        "weighted_severity": 6,
+        "thesis_relevance": "INDIRECT",
+        "confidence": "MEDIUM",
+        "reasoning": "Both redundancy legs are simultaneously diminished: pumps at 30% (70% headroom but throttled and ramp-up speed unknown) and reserves at 65% (35% consumed, refill timeline unknown). The compound effect is that a secondary event would hit a system with both active and passive capacity reduced. Per CL-001, cannot credit assumed SCADA ramp-up capabilities.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-012"
+        ],
+        "signal": "Operator protocol adherence confirmed",
+        "severity": 4,
+        "source_tier": "1",
+        "weighted_severity": 4,
+        "thesis_relevance": "INDIRECT",
+        "confidence": "MEDIUM",
+        "reasoning": "Operator log narrative is consistent with described protocol. This is a positive signal for human-automation interface function. However, the log is sparse, and protocol adherence is inferred from consistency rather than detailed action records. Per CL-002, no credit for assumed off-log activities. Moderate confidence only.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-013"
+        ],
+        "signal": "Sector 4 pressure gap suggests possible infrastructure constraint",
+        "severity": 3,
+        "source_tier": "1",
+        "weighted_severity": 3,
+        "thesis_relevance": "CONTEXTUAL",
+        "confidence": "LOW",
+        "reasoning": "The 9.5 PSI gap could be structural or transient. Without pre-event Sector 4 baseline, the structural inference rests on multiple unproven assumptions (per LZ-EPH-003, speculative). Per LZ-RC-002, a single data point does not establish a trend. This is worth monitoring as flow normalizes, but cannot be scored with confidence now.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-014"
+        ],
+        "signal": "No geopolitical or jurisdictional signals detected",
+        "severity": 2,
+        "source_tier": "1",
+        "weighted_severity": 2,
+        "thesis_relevance": "CONTEXTUAL",
+        "confidence": "LOW",
+        "reasoning": "Per LZ-RC-003, absence of evidence is not evidence of absence. The lack of inter-agency signals is uninformative — could mean not needed or not visible. Low severity, low relevance at current stage. Per CL-005, no credit for assumed coordination.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0725-SIG-015"
+        ],
+        "signal": "SCADA automated logic validated under real stress",
+        "severity": 8,
+        "source_tier": "1",
+        "weighted_severity": 8,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "This is the strongest signal in the dataset. The thesis's core premise — automated redundancy architecture protects system integrity under asymmetric load — has been empirically validated by converging telemetry: cavitation NORMAL, pumps restarted, reserves deployed and above kill switch, surge valve CLOSED, no contamination risk, operator protocol followed. Multiple independent data points confirm the same conclusion per LZ-EH-001. This is real-world validation, not simulation or prediction, carrying measurement-grade evidentiary weight per LZ-RC-005.",
+        "knowledge_verified": true
+      }
+    ],
+    "unscored_signals": [],
+    "kill_switch_status": [
+      {
+        "criterion": "System-Wide Pressure Collapse (grid_average < 25 PSI consecutive)",
+        "status": "TRACKING",
+        "current_value": "48 PSI",
+        "target": "< 25 PSI",
+        "movement_since_last": "improved"
+      },
+      {
+        "criterion": "Critical Contamination Risk (sector_4_pressure < 20 PSI)",
+        "status": "TRACKING",
+        "current_value": "38.5 PSI",
+        "target": "< 20 PSI",
+        "movement_since_last": "improved"
+      },
+      {
+        "criterion": "Catastrophic Uncontained Leak (flow > 20,000 GPM + reserve drop > 15%/min + pumps active)",
+        "status": "TRACKING",
+        "current_value": "14,000 GPM, reserve at 65%, pumps at 30%",
+        "target": "> 20,000 GPM + reserve drop > 15%/min",
+        "movement_since_last": "improved"
+      },
+      {
+        "criterion": "Reserve Depletion During Outage (reserves < 10% + pumps offline)",
+        "status": "TRACKING",
+        "current_value": "65% reserves, pumps online at 30%",
+        "target": "< 10% + pumps offline",
+        "movement_since_last": "improved"
+      },
+      {
+        "criterion": "Destructive Mechanical Failure (cavitation CRITICAL_DAMAGE or untripped WARNING_ELEVATED)",
+        "status": "TRACKING",
+        "current_value": "NORMAL",
+        "target": "CRITICAL_DAMAGE",
+        "movement_since_last": "improved"
+      }
+    ],
+    "compound_stress": {
+      "level": "MONITORING",
+      "usd_jpy": {
+        "current": null,
+        "threshold_status": "normal",
+        "trajectory": "stable"
+      },
+      "jgb_10y": {
+        "current": null,
+        "threshold_status": "normal",
+        "trajectory": "stable"
+      },
+      "brent": {
+        "current": null,
+        "threshold_status": "normal",
+        "trajectory": "stable"
+      },
+      "pre_loaded": false,
+      "pre_loaded_detail": "Compound stress matrix is not applicable to this thesis context. The thesis monitors a municipal water distribution SCADA system, not a financial instrument subject to macro stress legs (USD/JPY, JGB 10Y, Brent Crude). No compound stress matrix section exists in the thesis context. The analogous compound stress for this system is the simultaneous diminishment of both active (pumps at 30%) and passive (reserves at 65%) redundancy legs, combined with unknown demand source status — this is the system's pre-loaded condition.",
+      "stress_chain_proximity": "Not applicable as defined. The system-specific compound stress state is: both redundancy legs diminished simultaneously while the primary external stressor (demand source) is not directly monitored. This creates a vulnerability window, but all kill switches remain well within safe thresholds."
+    },
+    "bear_pressure": 45,
+    "bear_pressure_reasoning": "Bear pressure has materially decreased from 73 to 45 based on the following evidence-weighted assessment. POSITIVE FACTORS (reducing bear pressure): (1) SCADA automated logic empirically validated under real stress — the strongest signal, supported by multiple converging telemetry readings (severity 8, HIGH confidence). (2) Pumps restarted with no mechanical damage (cavitation NORMAL), preserving long-term capacity. (3) No kill switches approached — Sector 4 pressure at 38.5 PSI is nearly double the contamination threshold, grid average at 48 PSI is well above collapse threshold. (4) Controlled re-pressurization (surge valve CLOSED). (5) Demand draw decreasing. (6) Operator protocol adherence confirmed within log data. NEGATIVE FACTORS (maintaining bear pressure above baseline): (1) Gravity reserves depleted to 65% with no refill strategy stated — this is the most significant residual vulnerability, creating a window of reduced resilience. Per CL-001, no credit for assumed background refill operations. (2) Demand source status unknown — the primary external threat actor is not directly monitored. Per CL-002/003/005 (applied repeatedly), no credit for assumed inter-agency coordination. (3) Both redundancy legs simultaneously diminished — pumps at 30% and reserves at 65% means a secondary event would hit a weakened system. (4) SCADA ramp-up speed under renewed stress is an untested variable. (5) Sector 4 pressure gap of 9.5 PSI below grid average — cause unknown, could be structural. (6) System total flow at 14,000 GPM with no baseline for comparison. NET ASSESSMENT: The system has successfully navigated the acute phase and the thesis's core architecture is validated. However, the system is in a recovery state, not a fully resilient state. The vulnerability window (depleted reserves, throttled pumps, unknown demand trajectory) is real and evidence-based. Bear pressure reduced from 73 to 45 — acknowledging the material improvement while maintaining appropriate concern for the documented residual vulnerabilities. Confidence in this score is MEDIUM due to data gaps on refill rate, baseline flow, and demand source status.",
+    "layer2_summary": "System has transitioned from acute crisis to active recovery. The core thesis — automated redundancy architecture maintains system integrity under asymmetric load — has been empirically validated by converging telemetry. All five kill switches remain well within safe thresholds, and no kill switch was approached during this event. However, the system is NOT fully restored: gravity reserves are at 65% with no stated refill plan, pumps are throttled at 30% with unknown ramp-up speed, and the demand source is not directly monitored. Layer 3 should prioritize: (1) tracking whether the Sector 4 pressure gap closes as flow normalizes (structural vs. transient), (2) any evidence of reserve refill operations commencing, (3) demand source status resolution, and (4) pump load trajectory. The compound vulnerability of simultaneously diminished active and passive capacity, with an unmonitored external stressor, defines the current risk profile."
+  },
+  "_pipeline_version": "4-layer-v1",
+  "_generated_at": "2026-03-11T07:36:14.918Z",
+  "_layer1_raw": [
+    {
+      "signal": "Primary pumps restarted at reduced load",
+      "description": "Primary pump stations have been restarted and are operating at 30% load, down from what was likely a higher or offline state during the acute event. This indicates SCADA and operators have successfully navigated the pump protection phase and are bringing active infrastructure back online incrementally, restoring the active supply leg of the system.",
+      "direction": "ACCELERATION",
+      "severity": "high",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "primary_pump_station_load_pct at 30%, operator_log confirms 'Primary pumps restarted at reduced load'",
+      "blind_spot": false,
+      "category": "agent_capacity",
+      "signal_ids": [
+        "20260311-0725-SIG-001"
+      ]
+    },
+    {
+      "signal": "Sector 4 pressure recovering but still depressed",
+      "description": "Sector 4 pressure at 38.5 PSI is well above the 20 PSI contamination-risk threshold and above the 25 PSI grid-average kill switch, but remains below the 48 PSI grid average. This 9.5 PSI gap indicates Sector 4 is still experiencing residual localized demand stress or flow distribution asymmetry, even as the draw decreases.",
+      "direction": "CONTRADICTORY",
+      "severity": "moderate",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "sector_4_pressure_psi 38.5 vs grid_average_pressure_psi 48; a ~20% localized deficit persists",
+      "blind_spot": false,
+      "category": "structure",
+      "signal_ids": [
+        "20260311-0725-SIG-002"
+      ]
+    },
+    {
+      "signal": "Gravity reserves significantly depleted",
+      "description": "High zone gravity reserve at 65% means 35% of passive backup capacity was consumed during this event. These reserves take considerable time to refill (requires pumping water uphill to elevation tanks). Until reserves are restored, the system has diminished resilience against a second acute draw event. No refill rate data is provided.",
+      "direction": "DETERIORATION",
+      "severity": "high",
+      "proximity": "near-term",
+      "confidence": "high",
+      "evidence": "high_zone_gravity_reserve_level_pct at 65%, implying ~35% consumed; reserves are finite and slow to replenish",
+      "blind_spot": false,
+      "category": "structure",
+      "signal_ids": [
+        "20260311-0725-SIG-003"
+      ]
+    },
+    {
+      "signal": "Demand source draw is decreasing",
+      "description": "The operator log confirms the external demand draw (likely fire department operations) is subsiding. This reduces the acute asymmetric load that stressed the system. However, the draw has not ceased entirely — 'decreasing' is not 'stopped.' Residual demand could plateau or re-intensify if fire operations escalate.",
+      "direction": "ACCELERATION",
+      "severity": "high",
+      "proximity": "immediate",
+      "confidence": "medium",
+      "evidence": "operator_log states 'Draw is decreasing'; system_total_flow_gpm at 14,000 suggests elevated but not crisis-level throughput",
+      "blind_spot": false,
+      "category": "integration",
+      "signal_ids": [
+        "20260311-0725-SIG-004"
+      ]
+    },
+    {
+      "signal": "Cavitation sensor normal — no mechanical damage",
+      "description": "Pump cavitation acoustic sensor reads NORMAL, indicating the SCADA protective shutdown during peak draw successfully prevented destructive cavitation. The pumps appear to have survived the event without damage, preserving long-term mechanical capacity. This is a direct validation of the fail-safe architecture.",
+      "direction": "ACCELERATION",
+      "severity": "high",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "pump_cavitation_acoustic_sensor at 'NORMAL'; pumps restarted successfully at 30% load",
+      "blind_spot": false,
+      "category": "technology",
+      "signal_ids": [
+        "20260311-0725-SIG-005"
+      ]
+    },
+    {
+      "signal": "Surge relief valve closed — no water hammer risk",
+      "description": "The surge relief valve is CLOSED, meaning no hydraulic transients (water hammer) are being detected or mitigated. The pump restart was smooth enough to not trigger the mechanical safety bypass. This indicates controlled, gradual re-pressurization rather than a dangerous sudden surge.",
+      "direction": "ACCELERATION",
+      "severity": "moderate",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "surge_relief_valve_status 'CLOSED' during pump restart phase",
+      "blind_spot": false,
+      "category": "technology",
+      "signal_ids": [
+        "20260311-0725-SIG-006"
+      ]
+    },
+    {
+      "signal": "System total flow elevated at 14,000 GPM",
+      "description": "14,000 GPM is below the 20,000 GPM catastrophic leak threshold but may still be above normal baseline for this grid sector. Without historical baseline flow data, it is unclear whether 14,000 GPM represents near-normal operations or a still-elevated state requiring continued monitoring. This is a gap in the provided data.",
+      "direction": "AMBIGUOUS",
+      "severity": "moderate",
+      "proximity": "immediate",
+      "confidence": "medium",
+      "evidence": "system_total_flow_gpm at 14,000; no baseline normal flow rate provided for comparison",
+      "blind_spot": true,
+      "category": "assumption_decay",
+      "signal_ids": [
+        "20260311-0725-SIG-007"
+      ]
+    },
+    {
+      "signal": "Reserve refill strategy unstated",
+      "description": "With pumps at only 30% load and gravity reserves at 65%, there is no indication of whether or when a reserve refill operation will begin. Pumping water back to the high-elevation tanks requires excess pump capacity. If pumps remain at reduced load to protect equipment, reserve replenishment could be delayed, leaving a vulnerability window.",
+      "direction": "AMBIGUOUS",
+      "severity": "moderate",
+      "proximity": "near-term",
+      "confidence": "medium",
+      "evidence": "No mention of refill operations in operator_log; pump load at 30% may not include refill capacity allocation",
+      "blind_spot": true,
+      "category": "agent_capacity",
+      "signal_ids": [
+        "20260311-0725-SIG-008"
+      ]
+    },
+    {
+      "signal": "No contamination advisory triggered",
+      "description": "Sector 4 pressure at 38.5 PSI is nearly double the 20 PSI contamination threshold. At no point in current data does the system approach groundwater infiltration risk. This means no boil-water advisory or regulatory notification was required, avoiding significant public health and compliance consequences.",
+      "direction": "ACCELERATION",
+      "severity": "high",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "sector_4_pressure_psi at 38.5, well above 20 PSI regulatory minimum",
+      "blind_spot": false,
+      "category": "regulatory",
+      "signal_ids": [
+        "20260311-0725-SIG-009"
+      ]
+    },
+    {
+      "signal": "Unknown demand source status and intent",
+      "description": "The fire department or other external demand source's operational status is not directly monitored by SCADA. 'Draw is decreasing' is inferred from flow/pressure data, not from direct communication. If the fire escalates or a second incident occurs, the grid could face renewed asymmetric load with depleted reserves. No interagency communication channel is referenced.",
+      "direction": "AMBIGUOUS",
+      "severity": "high",
+      "proximity": "near-term",
+      "confidence": "medium",
+      "evidence": "Operator log infers draw status from telemetry; no direct demand-source communication noted",
+      "blind_spot": true,
+      "category": "competitive",
+      "signal_ids": [
+        "20260311-0725-SIG-010"
+      ]
+    },
+    {
+      "signal": "Reduced pump load creates vulnerability to secondary event",
+      "description": "Pumps at 30% load have 70% headroom but are deliberately throttled. If a second major draw occurs before reserves refill and before pumps ramp to full load, the system must rely on 65% reserves plus a ramp-up period. The speed of SCADA's ramp-up logic under renewed stress is an untested variable in this recovery phase.",
+      "direction": "DETERIORATION",
+      "severity": "moderate",
+      "proximity": "near-term",
+      "confidence": "medium",
+      "evidence": "primary_pump_station_load_pct at 30%; gravity reserves at 65%; system in recovery, not full readiness",
+      "blind_spot": true,
+      "category": "macro",
+      "signal_ids": [
+        "20260311-0725-SIG-011"
+      ]
+    },
+    {
+      "signal": "Operator protocol adherence confirmed",
+      "description": "The operator log narrative aligns with stated protocols: automated failovers were allowed to work, gravity reserves deployed, and operators monitored rather than intervened prematurely. No manual overrides or protocol deviations are noted. This suggests the human-automation interface functioned as designed during the stress event.",
+      "direction": "ACCELERATION",
+      "severity": "moderate",
+      "proximity": "immediate",
+      "confidence": "medium",
+      "evidence": "operator_log consistent with described 'allow automated failovers, verify gravity reserves, prepare isolation' protocol",
+      "blind_spot": false,
+      "category": "narrative",
+      "signal_ids": [
+        "20260311-0725-SIG-012"
+      ]
+    },
+    {
+      "signal": "Sector 4 pressure gap suggests possible infrastructure constraint",
+      "description": "The persistent 9.5 PSI gap between Sector 4 (38.5) and grid average (48) could indicate a structural bottleneck — undersized mains, partially closed valves, or distribution imbalance — that existed before the event and was exposed under stress. If this gap persists as flow normalizes, it signals a pre-existing infrastructure weakness.",
+      "direction": "AMBIGUOUS",
+      "severity": "moderate",
+      "proximity": "medium-term",
+      "confidence": "low",
+      "evidence": "Sector 4 pressure 20% below grid average; no pre-event baseline comparison available to confirm structural cause vs. transient recovery lag",
+      "blind_spot": true,
+      "category": "assumption_decay",
+      "signal_ids": [
+        "20260311-0725-SIG-013"
+      ]
+    },
+    {
+      "signal": "No geopolitical or jurisdictional signals detected",
+      "description": "No data indicates cross-jurisdictional water sharing agreements were activated, mutual aid from adjacent water systems, or regulatory agency intervention. This could mean the event was contained within Sector 4's capacity, or it could mean such coordination mechanisms were not needed yet. Absence of signal is not confirmation of irrelevance.",
+      "direction": "AMBIGUOUS",
+      "severity": "low",
+      "proximity": "near-term",
+      "confidence": "low",
+      "evidence": "No references to inter-agency coordination, mutual aid, or external regulatory contact in available data",
+      "blind_spot": true,
+      "category": "geopolitical",
+      "signal_ids": [
+        "20260311-0725-SIG-014"
+      ]
+    },
+    {
+      "signal": "SCADA automated logic validated under real stress",
+      "description": "The system's core design premise — sacrifice pumps to protect infrastructure, deploy gravity reserves, then restart — executed successfully. Pumps protected from cavitation, reserves deployed, pressure maintained above all kill-switch thresholds. This is empirical validation of the automated redundancy architecture under a real asymmetric load event, not just simulation.",
+      "direction": "ACCELERATION",
+      "severity": "high",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "All kill-switch thresholds remain unbreached; cavitation NORMAL; pumps restarted; reserves at 65%; surge valve CLOSED",
+      "blind_spot": false,
+      "category": "technology",
+      "signal_ids": [
+        "20260311-0725-SIG-015"
+      ]
+    }
+  ]
+}

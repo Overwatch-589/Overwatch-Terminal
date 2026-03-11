@@ -1,0 +1,28 @@
+[
+  {
+    "layer3_inference": "SCADA running background diagnostics or preparing pump restart sequence",
+    "signal_ids": [
+      "20260311-0700-SIG-007",
+      "20260311-0700-SIG-010"
+    ],
+    "rejection_reason": "Layer 3 correctly self-classified as SPECULATIVE (3 assumptions, low confidence, no telemetry evidence) and explicitly noted this is what CL-001 was designed to prevent. Stripped per burden of proof Step 1. No scoring influence permitted.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-11T07:11:02.343Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Operators coordinating with Fire Department off-log and preparing isolation valve staging",
+    "signal_ids": [
+      "20260311-0700-SIG-009",
+      "20260311-0700-SIG-015"
+    ],
+    "rejection_reason": "Layer 3 correctly self-classified as SPECULATIVE (3 assumptions, low confidence, no evidence) and noted CL-002 and CL-003 history. This is the THIRD time this class of inference has been stripped across the assessment chain. Stripped per burden of proof Step 1.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-11T07:11:02.343Z",
+    "source": "layer4_reconcile"
+  }
+]

@@ -1,0 +1,1689 @@
+{
+  "commander_summary": "HOLD POSITION. All five kill switches are GREEN with extreme margins — pressure at 3.4x threshold, reserves at 98%, pump at 42% load, no cavitation, no surge events, no leak signature. The system is in its strongest possible posture during a routine post-peak period. Bear pressure at 3/100 reflects not any active threat but three standing monitoring blind spots: we cannot verify from current telemetry whether SCADA failover logic works, whether sensors have redundancy, or whether backup pumps are ready. The thesis paradox is real: the calmer things are, the less we know about whether the resilience mechanisms that constitute the core thesis would actually perform under stress — but that uncertainty is structural, not actionable today.",
+  "bear_pressure_score": 3,
+  "score_delta": 3,
+  "score_reasoning": "Layer 2 scored bear pressure at 2, reflecting three structural visibility gaps (failover testing, sensor redundancy, backup pumps). Layer 4 adjusts to 3 — a +1 increase — because after applying burden of proof, these gaps remain real even though the null hypotheses hold: the gaps are about monitoring confidence, not system health, and the thesis paradox (untested resilience during calm) is a legitimate epistemological concern. However, the increase is modest because all directly measurable indicators are at maximum margin, all null hypotheses held, and no active threat exists. Bear pressure of 3 out of 100 reflects a system in excellent measured health with minor standing blind spots in the monitoring framework.",
+  "tactical_recommendation": "HOLD_POSITION",
+  "recommendation_reasoning": "All five kill switches are GREEN with extreme margins. Every directly measurable Tier 1 indicator confirms robust nominal operations. All Layer 3 null hypotheses held — no behavioral anomalies, no say-do gaps, no strategic signals requiring explanation. The three identified gaps (failover testing, sensor architecture, backup pump status) are standing monitoring framework limitations, not emerging threats. They warrant information requests, not position changes.",
+  "signal_matrix": [
+    {
+      "signal": "System operating well within all safety envelopes",
+      "description": "Null hypothesis holds. No behavioral anomaly detected. All actors consistent with nominal operations.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Primary pump load at 42% — substantial headroom",
+      "description": "No behavioral context changes the reading. Pump is simply at low utilization during post-peak demand.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Gravity reserves near-full at 98%",
+      "description": "No behavioral context changes the reading. Layer 2's score of 2 (vs 1) reflects unknown absolute capacity — this is appropriate caution.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 2,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Reserve tank not at 100% — minor unverified deficit",
+      "description": "Null hypothesis holds: normal float/sensor precision. No actor in the system has responded to this, consistent with it being within normal parameters.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Morning peak demand cycle subsiding",
+      "description": "Operator log corroborated by flow data. Two independent sources agree.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Surge relief valve closed — no transient pressure events",
+      "description": "No behavioral context needed for binary sensor reading.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "No fire department or industrial draw events reported",
+      "description": "Reclassified from absence-of-evidence to TRUE_NEGATIVE based on positive flow/pressure measurements confirming no large draw. Slight improvement.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1.2,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "SCADA automated protection logic untested in this cycle",
+      "description": "Null hypothesis holds: no stress means no trigger expected. This is a standing monitoring framework gap, not an active threat. Reduced slightly.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1.8,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Single-point sensor dependency unexamined",
+      "description": "Null hypothesis holds: cross-indicator coherence across five independent sensor types provides partial validation. Municipal regulatory standards typically require sensor redundancy. Reduced but still the highest-scored concern.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 2.3,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Operator staffing and alertness during low-stress period",
+      "description": "Layer 2 correctly identified this as speculative per LZ-EPH-003 (3+ unproven assumptions). Layer 3 hidden move inference (operators doing checks not visible in log) was stripped for no data support. Net: minimal weight.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 0.4,
+      "severity": "moderate",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "No regulatory or compliance alerts active",
+      "description": "No behavioral context needed. 68.5 PSI vs 20 PSI is a clear, verifiable margin.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Flow rate at 4500 GPM — no leak signature",
+      "description": "Cross-validated by stable pressure. Two independent data streams agree.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Unknown condition of backup/redundant pump systems",
+      "description": "Null hypothesis holds at reduced weight (partial data support only). The gap is real but the null explanation — standby equipment is silent by design — is plausible. Slight reduction.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1.8,
+      "severity": "moderate",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Seasonal and weather context absent",
+      "description": "Standing feed limitation. Current margins are so wide that environmental factors would need to be extreme to matter.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1.4,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "No competing or alternative supply sources referenced",
+      "description": "Long-term resilience concern, not near-term threat. Current margins render this non-urgent.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 1.4,
+      "severity": "moderate",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    }
+  ],
+  "compounding_risks": [
+    {
+      "chain": [
+        "Oil",
+        "USD/JPY",
+        "JGB 10Y",
+        "BOJ",
+        "Carry Trade"
+      ],
+      "outcome": "A major demand event (multi-alarm fire, pipe break) simultaneously THREATENS the system by drawing down reserves and stressing pumps AND VALIDATES the thesis by exercising the automated failover and gravity reserve deployment mechanisms that constitute the thesis's core claim. The healthier the system looks, the less we know about whether its resilience mechanisms actually work.",
+      "severity": "moderate"
+    }
+  ],
+  "blind_spots": [
+    {
+      "signal": "What is the SCADA sensor redundancy architecture? Are there redundant sensors, cross-validation logic, and fail-dangerous detection?",
+      "importance": "high",
+      "suggested_source": "System engineering documentation, SCADA configuration database, or municipal water department engineering records",
+      "x402_opportunity": true,
+      "recommend_permanent_monitoring": false
+    },
+    {
+      "signal": "When was the SCADA automated failover logic last successfully tested or exercised? What were the results?",
+      "importance": "high",
+      "suggested_source": "SCADA maintenance logs, system test records, or operator shift logs from the test date",
+      "x402_opportunity": true,
+      "recommend_permanent_monitoring": false
+    },
+    {
+      "signal": "What is the absolute volume of the gravity reserve tanks, and what is the depletion rate under various demand scenarios (normal, high, fire response)?",
+      "importance": "high",
+      "suggested_source": "System engineering specifications, or historical telemetry data showing reserve depletion during past stress events",
+      "x402_opportunity": true,
+      "recommend_permanent_monitoring": false
+    },
+    {
+      "signal": "What is the backup/redundant pump configuration, maintenance status, and startup time?",
+      "importance": "high",
+      "suggested_source": "System engineering documentation, pump maintenance records, or SCADA standby equipment status register",
+      "x402_opportunity": true,
+      "recommend_permanent_monitoring": false
+    },
+    {
+      "signal": "What is the historical baseline flow rate for this time of day and season? What is the reserve level sensor precision?",
+      "importance": "high",
+      "suggested_source": "Historical SCADA telemetry database, sensor specification sheets",
+      "x402_opportunity": true,
+      "recommend_permanent_monitoring": false
+    }
+  ],
+  "bias_check": {
+    "bull_indicators": 5,
+    "bear_indicators": 7,
+    "ratio": "5:7",
+    "assessment": "Layer 2 scored bear pressure at 2, reflecting three structural visibility gaps (failover testing, sensor redundancy, backup pumps). Layer 4 adjusts to 3 — a +1 increase — because after applying burden of proof, these gaps remain real even though the null hypotheses hold: the gaps are about monitoring confidence, not system health, and the thesis paradox (untested resilience during calm) is a legitimate epistemological concern. However, the increase is modest because all directly measurable indicators are at maximum margin, all null hypotheses held, and no active threat exists. Bear pressure of 3 out of 100 reflects a system in excellent measured health with minor standing blind spots in the monitoring framework.",
+    "recommended_additions": null
+  },
+  "kill_switches": [
+    {
+      "name": "1. System-Wide Pressure Collapse (grid_average < 25.0 PSI consecutive)",
+      "status": "safe",
+      "detail": "65.2 PSI is 2.6x above the 25.0 PSI threshold. Requires a 61% pressure drop to trigger. No mechanism for such decline is present or approaching. Post-peak demand is subsiding, which is favorable."
+    },
+    {
+      "name": "2. Critical Contamination Risk (sector_4 < 20.0 PSI)",
+      "status": "safe",
+      "detail": "68.5 PSI is 3.4x above the 20.0 PSI threshold. Requires a 71% pressure drop to trigger. This is the widest margin of any kill switch."
+    },
+    {
+      "name": "3. Catastrophic Uncontained Leak (flow > 20,000 GPM + reserves dropping >15%/min + pumps active)",
+      "status": "safe",
+      "detail": "This is a compound trigger requiring all three conditions simultaneously. Flow is at 22.5% of the threshold. Reserves are stable (not declining). Even individually, no component is approaching its trigger level. Collectively, this scenario is extremely distant."
+    },
+    {
+      "name": "4. Reserve Depletion During Outage (reserves < 10% + pumps offline)",
+      "status": "safe",
+      "detail": "Reserves at 98% vs 10% threshold. Pumps online vs offline requirement. Both conditions must be met simultaneously. Neither is remotely close. This is the most distant kill switch from activation."
+    },
+    {
+      "name": "5. Destructive Mechanical Failure (cavitation CRITICAL_DAMAGE or untripped WARNING_ELEVATED)",
+      "status": "safe",
+      "detail": "Cavitation sensor reads NORMAL. Pump load at 42% is well below any cavitation risk zone. The sensor would need to progress through WARNING_ELEVATED before reaching CRITICAL_DAMAGE, providing advance warning. No mechanism for sudden cavitation onset is present at this load level."
+    }
+  ],
+  "new_kill_switches_recommended": [],
+  "_layer4_raw": {
+    "burden_of_proof_applied": [
+      {
+        "inference": "System operating well within all safety envelopes — null hypothesis holds",
+        "signal_ids": [
+          "20260311-0637-SIG-001"
+        ],
+        "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+        "data_support": "full",
+        "contradicts_data": false,
+        "final_weight": "full",
+        "reasoning": "Null hypothesis accepted. Five independent Tier 1 SCADA sensors all report nominal with extreme margin from all kill switch thresholds. Multiple independent data points confirm (LZ-EH-001). Zero assumptions required. The system is simply operating normally."
+      },
+      {
+        "inference": "Reserve tank 2% deficit — null hypothesis holds (sensor precision/normal float)",
+        "signal_ids": [
+          "20260311-0637-SIG-004"
+        ],
+        "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+        "data_support": "full",
+        "contradicts_data": false,
+        "final_weight": "full",
+        "reasoning": "Null hypothesis accepted. LZ-EH-004 (measurement artifact before real-world event), LZ-RC-002 (single data point, no trend), and LZ-RC-004 (simplest explanation first) all converge on the same conclusion: 98% is within normal operational float and sensor precision. Zero assumptions required."
+      },
+      {
+        "inference": "SCADA automated protection logic untested — null hypothesis holds (no stress, no trigger expected)",
+        "signal_ids": [
+          "20260311-0637-SIG-008"
+        ],
+        "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+        "data_support": "full",
+        "contradicts_data": false,
+        "final_weight": "full",
+        "reasoning": "Null hypothesis accepted for the observation itself. The absence of failover events during nominal operations is the expected state. Layer 3 correctly identified this as a standing epistemic gap rather than a strategic signal. The underlying concern about failover verification is valid as a monitoring framework gap but does not move bear pressure."
+      },
+      {
+        "inference": "Single-point sensor dependency — null hypothesis holds (cross-indicator coherence provides partial validation)",
+        "signal_ids": [
+          "20260311-0637-SIG-009"
+        ],
+        "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+        "data_support": "full",
+        "contradicts_data": false,
+        "final_weight": "full",
+        "reasoning": "Null hypothesis accepted. Layer 3's reasoning is sound: five independent sensor types all report consistent nominal readings. Municipal water systems are built to regulatory standards that typically include sensor redundancy. The concern is valid as a standing gap to resolve via the information requests, but the null hypothesis — functioning monitoring infrastructure — is the simplest sufficient explanation. Zero assumptions required for the null."
+      },
+      {
+        "inference": "Unknown backup pump condition — null hypothesis holds (standby equipment doesn't generate active telemetry)",
+        "signal_ids": [
+          "20260311-0637-SIG-013"
+        ],
+        "layer3_classification": "NULL_HYPOTHESIS_HOLDS",
+        "data_support": "partial",
+        "contradicts_data": false,
+        "final_weight": "reduced_50",
+        "reasoning": "Null hypothesis accepted but at reduced weight. Only partial data support: the thesis references 'automated redundancy' but the telemetry provides zero backup pump data points. The null is plausible (standby equipment is silent by design) but I have only one indirect data point supporting it — the 42% primary load suggesting oversized capacity. Per LZ-EPH-002, confidence must be proportional to evidence. I accept the null but flag the gap as real."
+      },
+      {
+        "inference": "SCADA running background self-diagnostics (hidden move)",
+        "signal_ids": [
+          "20260311-0637-SIG-008"
+        ],
+        "layer3_classification": "FLAGGED",
+        "data_support": "none",
+        "contradicts_data": false,
+        "final_weight": "stripped",
+        "reasoning": "FLAGGED classification (2 assumptions) would give 50% weight, but data support is NONE — there is zero telemetry data confirming self-diagnostic routines. Per Step 2 of burden of proof, no supporting data means stripped from bear pressure scoring entirely. This is a plausible speculation but has no evidentiary basis in the available data. Logged for audit."
+      },
+      {
+        "inference": "Grid operators performing routine checks not visible in log (hidden move)",
+        "signal_ids": [
+          "20260311-0637-SIG-010"
+        ],
+        "layer3_classification": "FLAGGED",
+        "data_support": "none",
+        "contradicts_data": false,
+        "final_weight": "stripped",
+        "reasoning": "FLAGGED classification (2 assumptions) with NO data support. Layer 3 itself assigned LOW confidence. There is zero data confirming operator activities beyond the terse log entry. Stripped from scoring. Logged for audit."
+      }
+    ],
+    "contradictions_resolved": [
+      {
+        "data_says": "All five kill switch indicators show extreme margin from thresholds. Multiple independent Tier 1 sensors confirm coherent nominal readings across pressure, flow, cavitation, valve, and reserve metrics.",
+        "behavior_suggests": "All actors (SCADA, operators, demand sources) are in routine nominal mode. No protective actions triggered, no escalations, no abnormal demand. Behavior is entirely consistent with the data.",
+        "resolution": "data_wins",
+        "confidence": "high",
+        "reasoning": "There is no contradiction. Data and behavior tell the same story: routine nominal operations during a post-peak low-stress period. Data wins by default because there is nothing for behavior to contradict. This is the strongest possible alignment between measurement and action.",
+        "score_impact": 0
+      },
+      {
+        "data_says": "Reserve level at 98%, not 100%. Single reading during a period when reserves should theoretically be refilling.",
+        "behavior_suggests": "No operator concern noted. No SCADA alarm. The 2% gap has triggered no response from any actor in the system.",
+        "resolution": "data_wins",
+        "confidence": "high",
+        "reasoning": "The absence of any system or human response to the 2% gap is itself informative — it suggests this is within normal operating parameters. However, I resolve as data_wins because the data (98% from Tier 1 sensor) is the hard fact, and LZ-EH-004 plus LZ-RC-002 dictate treating this as measurement artifact until a trend is established. The behavioral non-response is consistent with this interpretation.",
+        "score_impact": 0
+      }
+    ],
+    "data_classifications": [
+      {
+        "data_point": "SCADA failover test history / last exercise date",
+        "layer2_classification": "THESIS_CAPABILITY_GAP — core thesis mechanism unverified in current data",
+        "layer3_context": "Null hypothesis holds: failover logic hasn't fired because no conditions required it. Standing epistemic gap, not emerging threat.",
+        "layer3_inference_valid": "true",
+        "final_classification": "DATA_GAP",
+        "reasoning": "This is a genuine gap in the monitoring feed. The data should exist somewhere (maintenance logs, test records) but is not available in the current telemetry. It is not suspicious — it is simply not part of the real-time SCADA feed design. It would be unreasonable to expect test history in a real-time telemetry stream. Classification: DATA_GAP, not SUSPICIOUS_ABSENCE."
+      },
+      {
+        "data_point": "Sensor redundancy architecture",
+        "layer2_classification": "THESIS_CAPABILITY_GAP — unknown whether sensors have redundancy or fail-dangerous detection",
+        "layer3_context": "Null hypothesis holds: municipal water systems are designed to regulatory standards that typically include sensor redundancy. Cross-indicator coherence provides partial validation.",
+        "layer3_inference_valid": "true",
+        "final_classification": "DATA_GAP",
+        "reasoning": "This is architectural documentation that would not appear in a real-time telemetry feed. The information exists in engineering documentation. Its absence from the monitoring feed is normal, not suspicious. The gap matters for epistemological confidence but is a standing limitation of the data feed, not an anomaly."
+      },
+      {
+        "data_point": "Backup/redundant pump status",
+        "layer2_classification": "THESIS_CAPABILITY_GAP — cannot verify backup pump existence or readiness",
+        "layer3_context": "Null hypothesis holds: standby equipment doesn't generate active telemetry. The thesis explicitly references automated redundancy.",
+        "layer3_inference_valid": "true",
+        "final_classification": "DATA_GAP",
+        "reasoning": "The thesis asserts automated redundancy exists. The telemetry feed shows only primary pump data. This is consistent with standard SCADA design where standby equipment reports status only on activation. Classification: DATA_GAP — the data exists but is not in the monitoring feed. Not suspicious, but worth adding to the feed if possible."
+      },
+      {
+        "data_point": "Fire department / industrial draw events",
+        "layer2_classification": "No abnormal demand signatures detected. LZ-RC-003 applied — absence of evidence is not evidence of absence.",
+        "layer3_context": "External demand actors are currently at baseline. Threat is latent and unpredictable by nature.",
+        "layer3_inference_valid": "true",
+        "final_classification": "TRUE_NEGATIVE",
+        "reasoning": "The flow data (4,500 GPM) and stable pressure directly confirm no large draw event is occurring. This is not merely absence of a report — it is positive measurement of flow and pressure that rules out current large-scale external demand. The absence of fire draw is confirmed by the presence of normal flow data. TRUE_NEGATIVE."
+      },
+      {
+        "data_point": "Weather and seasonal context",
+        "layer2_classification": "DATA_AVAILABILITY_GAP — complete absence of environmental data",
+        "layer3_context": "Not analyzed separately by Layer 3.",
+        "layer3_inference_valid": "n/a",
+        "final_classification": "DATA_GAP",
+        "reasoning": "Environmental data is simply not part of the telemetry feed. This is a feed design limitation, not an anomaly. The gap limits forward-looking demand assessment but does not affect current snapshot analysis."
+      },
+      {
+        "data_point": "Inter-sector connections and mutual aid agreements",
+        "layer2_classification": "COMPETITIVE_KNOWLEDGE_GAP — no data on alternative supply sources",
+        "layer3_context": "Not analyzed separately by Layer 3.",
+        "layer3_inference_valid": "n/a",
+        "final_classification": "DATA_GAP",
+        "reasoning": "This is system architecture documentation that would not appear in real-time telemetry. The name 'Sector 4' implies other sectors exist but no interconnection data is available. Standing gap, not suspicious."
+      }
+    ],
+    "final_signal_matrix": [
+      {
+        "signal": "System operating well within all safety envelopes",
+        "signal_ids": [
+          "20260311-0637-SIG-001"
+        ],
+        "layer2_composite": 1,
+        "layer3_adjustment": "Null hypothesis holds. No behavioral anomaly detected. All actors consistent with nominal operations.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 1,
+        "confidence": "high"
+      },
+      {
+        "signal": "Primary pump load at 42% — substantial headroom",
+        "signal_ids": [
+          "20260311-0637-SIG-002"
+        ],
+        "layer2_composite": 1,
+        "layer3_adjustment": "No behavioral context changes the reading. Pump is simply at low utilization during post-peak demand.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 1,
+        "confidence": "high"
+      },
+      {
+        "signal": "Gravity reserves near-full at 98%",
+        "signal_ids": [
+          "20260311-0637-SIG-003"
+        ],
+        "layer2_composite": 2,
+        "layer3_adjustment": "No behavioral context changes the reading. Layer 2's score of 2 (vs 1) reflects unknown absolute capacity — this is appropriate caution.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 2,
+        "confidence": "high"
+      },
+      {
+        "signal": "Reserve tank not at 100% — minor unverified deficit",
+        "signal_ids": [
+          "20260311-0637-SIG-004"
+        ],
+        "layer2_composite": 1,
+        "layer3_adjustment": "Null hypothesis holds: normal float/sensor precision. No actor in the system has responded to this, consistent with it being within normal parameters.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 1,
+        "confidence": "medium"
+      },
+      {
+        "signal": "Morning peak demand cycle subsiding",
+        "signal_ids": [
+          "20260311-0637-SIG-005"
+        ],
+        "layer2_composite": 1,
+        "layer3_adjustment": "Operator log corroborated by flow data. Two independent sources agree.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 1,
+        "confidence": "high"
+      },
+      {
+        "signal": "Surge relief valve closed — no transient pressure events",
+        "signal_ids": [
+          "20260311-0637-SIG-006"
+        ],
+        "layer2_composite": 1,
+        "layer3_adjustment": "No behavioral context needed for binary sensor reading.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 1,
+        "confidence": "high"
+      },
+      {
+        "signal": "No fire department or industrial draw events reported",
+        "signal_ids": [
+          "20260311-0637-SIG-007"
+        ],
+        "layer2_composite": 1.4,
+        "layer3_adjustment": "Reclassified from absence-of-evidence to TRUE_NEGATIVE based on positive flow/pressure measurements confirming no large draw. Slight improvement.",
+        "adjustment_direction": "down",
+        "final_composite": 1.2,
+        "confidence": "medium"
+      },
+      {
+        "signal": "SCADA automated protection logic untested in this cycle",
+        "signal_ids": [
+          "20260311-0637-SIG-008"
+        ],
+        "layer2_composite": 2.1,
+        "layer3_adjustment": "Null hypothesis holds: no stress means no trigger expected. This is a standing monitoring framework gap, not an active threat. Reduced slightly.",
+        "adjustment_direction": "down",
+        "final_composite": 1.8,
+        "confidence": "medium"
+      },
+      {
+        "signal": "Single-point sensor dependency unexamined",
+        "signal_ids": [
+          "20260311-0637-SIG-009"
+        ],
+        "layer2_composite": 2.8,
+        "layer3_adjustment": "Null hypothesis holds: cross-indicator coherence across five independent sensor types provides partial validation. Municipal regulatory standards typically require sensor redundancy. Reduced but still the highest-scored concern.",
+        "adjustment_direction": "down",
+        "final_composite": 2.3,
+        "confidence": "medium"
+      },
+      {
+        "signal": "Operator staffing and alertness during low-stress period",
+        "signal_ids": [
+          "20260311-0637-SIG-010"
+        ],
+        "layer2_composite": 0.4,
+        "layer3_adjustment": "Layer 2 correctly identified this as speculative per LZ-EPH-003 (3+ unproven assumptions). Layer 3 hidden move inference (operators doing checks not visible in log) was stripped for no data support. Net: minimal weight.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 0.4,
+        "confidence": "low"
+      },
+      {
+        "signal": "No regulatory or compliance alerts active",
+        "signal_ids": [
+          "20260311-0637-SIG-011"
+        ],
+        "layer2_composite": 1,
+        "layer3_adjustment": "No behavioral context needed. 68.5 PSI vs 20 PSI is a clear, verifiable margin.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 1,
+        "confidence": "high"
+      },
+      {
+        "signal": "Flow rate at 4500 GPM — no leak signature",
+        "signal_ids": [
+          "20260311-0637-SIG-012"
+        ],
+        "layer2_composite": 1,
+        "layer3_adjustment": "Cross-validated by stable pressure. Two independent data streams agree.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 1,
+        "confidence": "high"
+      },
+      {
+        "signal": "Unknown condition of backup/redundant pump systems",
+        "signal_ids": [
+          "20260311-0637-SIG-013"
+        ],
+        "layer2_composite": 2.1,
+        "layer3_adjustment": "Null hypothesis holds at reduced weight (partial data support only). The gap is real but the null explanation — standby equipment is silent by design — is plausible. Slight reduction.",
+        "adjustment_direction": "down",
+        "final_composite": 1.8,
+        "confidence": "low"
+      },
+      {
+        "signal": "Seasonal and weather context absent",
+        "signal_ids": [
+          "20260311-0637-SIG-014"
+        ],
+        "layer2_composite": 1.4,
+        "layer3_adjustment": "Standing feed limitation. Current margins are so wide that environmental factors would need to be extreme to matter.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 1.4,
+        "confidence": "medium"
+      },
+      {
+        "signal": "No competing or alternative supply sources referenced",
+        "signal_ids": [
+          "20260311-0637-SIG-015"
+        ],
+        "layer2_composite": 1.4,
+        "layer3_adjustment": "Long-term resilience concern, not near-term threat. Current margins render this non-urgent.",
+        "adjustment_direction": "unchanged",
+        "final_composite": 1.4,
+        "confidence": "low"
+      }
+    ],
+    "compound_stress_final": {
+      "level": "MONITORING",
+      "layer2_level": "MONITORING",
+      "layer3_assessment": "No stress present. All feedback loops dormant. System at maximum resilience posture with full reserves, low pump load, and wide pressure margins.",
+      "override": false,
+      "override_reasoning": "Not applicable. Layer 2 and Layer 3 are in full agreement. No stress indicators are active.",
+      "self_challenge": "SUPPORTS: Every directly measurable indicator confirms wide safety margins — pressure at 3.4x threshold, pump at 42%, reserves at 98%, no cavitation, no surge events, stable flow. Five independent sensor types all agree. CHALLENGES: The compound stress framework is inherently dormant and this thesis has never been tested under stress in the current monitoring window, meaning our assessment of resilience is theoretical, not empirical.",
+      "pre_loaded": false,
+      "pre_loaded_legs": [],
+      "cascade_proximity": "distant",
+      "delta_since_last": "stable",
+      "cycles_at_current_level": 1,
+      "velocity_note": "All indicators are static at nominal levels with no detectable rate of change toward any threshold.",
+      "operator_action_window": "not_applicable",
+      "thesis_paradox": "A major demand event (multi-alarm fire, pipe break) simultaneously THREATENS the system by drawing down reserves and stressing pumps AND VALIDATES the thesis by exercising the automated failover and gravity reserve deployment mechanisms that constitute the thesis's core claim. The healthier the system looks, the less we know about whether its resilience mechanisms actually work."
+    },
+    "kill_switch_review": [
+      {
+        "criterion": "1. System-Wide Pressure Collapse (grid_average < 25.0 PSI consecutive)",
+        "current_status": "TRACKING — 65.2 PSI, 2.6x above threshold",
+        "layer3_context": "No behavioral indicators suggest impending pressure decline. All actors in nominal mode.",
+        "final_status": "GREEN",
+        "action": "maintain",
+        "reasoning": "65.2 PSI is 2.6x above the 25.0 PSI threshold. Requires a 61% pressure drop to trigger. No mechanism for such decline is present or approaching. Post-peak demand is subsiding, which is favorable."
+      },
+      {
+        "criterion": "2. Critical Contamination Risk (sector_4 < 20.0 PSI)",
+        "current_status": "TRACKING — 68.5 PSI, 3.4x above threshold",
+        "layer3_context": "No behavioral indicators suggest impending pressure decline. Sector 4 pressure exceeds grid average, indicating local conditions are favorable.",
+        "final_status": "GREEN",
+        "action": "maintain",
+        "reasoning": "68.5 PSI is 3.4x above the 20.0 PSI threshold. Requires a 71% pressure drop to trigger. This is the widest margin of any kill switch."
+      },
+      {
+        "criterion": "3. Catastrophic Uncontained Leak (flow > 20,000 GPM + reserves dropping >15%/min + pumps active)",
+        "current_status": "TRACKING — flow at 4,500 GPM (22.5% of threshold), reserves stable at 98%, pumps at 42%",
+        "layer3_context": "Flow and pressure cross-validated. No leak signature. TRUE_NEGATIVE confirmed.",
+        "final_status": "GREEN",
+        "action": "maintain",
+        "reasoning": "This is a compound trigger requiring all three conditions simultaneously. Flow is at 22.5% of the threshold. Reserves are stable (not declining). Even individually, no component is approaching its trigger level. Collectively, this scenario is extremely distant."
+      },
+      {
+        "criterion": "4. Reserve Depletion During Outage (reserves < 10% + pumps offline)",
+        "current_status": "TRACKING — reserves at 98%, pumps online at 42%",
+        "layer3_context": "Both conditions are at opposite extremes from their trigger states. Reserves are near-full and pumps are online and lightly loaded.",
+        "final_status": "GREEN",
+        "action": "maintain",
+        "reasoning": "Reserves at 98% vs 10% threshold. Pumps online vs offline requirement. Both conditions must be met simultaneously. Neither is remotely close. This is the most distant kill switch from activation."
+      },
+      {
+        "criterion": "5. Destructive Mechanical Failure (cavitation CRITICAL_DAMAGE or untripped WARNING_ELEVATED)",
+        "current_status": "TRACKING — cavitation sensor NORMAL",
+        "layer3_context": "Pump at 42% load. Cavitation risk is negligible at this utilization level for any reasonable pump design. SCADA is designed to trip pumps before CRITICAL_DAMAGE.",
+        "final_status": "GREEN",
+        "action": "maintain",
+        "reasoning": "Cavitation sensor reads NORMAL. Pump load at 42% is well below any cavitation risk zone. The sensor would need to progress through WARNING_ELEVATED before reaching CRITICAL_DAMAGE, providing advance warning. No mechanism for sudden cavitation onset is present at this load level."
+      }
+    ],
+    "rejection_log": [
+      {
+        "layer3_inference": "SCADA likely running continuous background self-diagnostic routines (hidden move)",
+        "signal_ids": [
+          "20260311-0637-SIG-008"
+        ],
+        "rejection_reason": "Stripped from scoring due to no data support. This is a plausible assumption about industrial SCADA design but has zero evidentiary basis in the available telemetry. Per burden of proof Step 2, no supporting data = stripped from bear pressure scoring. The inference is not rejected as wrong — it is stripped as unverifiable.",
+        "root_cause": "INSUFFICIENT_EVIDENCE",
+        "confidence_in_rejection": "high",
+        "corrections_ledger_action": "auto_commit"
+      },
+      {
+        "layer3_inference": "Grid operators likely performing routine readiness checks not captured in visible log (hidden move)",
+        "signal_ids": [
+          "20260311-0637-SIG-010"
+        ],
+        "rejection_reason": "Stripped from scoring due to no data support and LOW confidence from Layer 3 itself. The inference that operators are doing things we can't see may well be true, but it cannot influence scoring without evidence. Layer 3 correctly assigned low confidence.",
+        "root_cause": "INSUFFICIENT_EVIDENCE",
+        "confidence_in_rejection": "high",
+        "corrections_ledger_action": "auto_commit"
+      }
+    ],
+    "final_bear_pressure": 3,
+    "pressure_vs_layer2": 1,
+    "pressure_reasoning": "Layer 2 scored bear pressure at 2, reflecting three structural visibility gaps (failover testing, sensor redundancy, backup pumps). Layer 4 adjusts to 3 — a +1 increase — because after applying burden of proof, these gaps remain real even though the null hypotheses hold: the gaps are about monitoring confidence, not system health, and the thesis paradox (untested resilience during calm) is a legitimate epistemological concern. However, the increase is modest because all directly measurable indicators are at maximum margin, all null hypotheses held, and no active threat exists. Bear pressure of 3 out of 100 reflects a system in excellent measured health with minor standing blind spots in the monitoring framework.",
+    "tactical_recommendation": "HOLD_POSITION",
+    "recommendation_reasoning": "All five kill switches are GREEN with extreme margins. Every directly measurable Tier 1 indicator confirms robust nominal operations. All Layer 3 null hypotheses held — no behavioral anomalies, no say-do gaps, no strategic signals requiring explanation. The three identified gaps (failover testing, sensor architecture, backup pump status) are standing monitoring framework limitations, not emerging threats. They warrant information requests, not position changes.",
+    "monitoring_triggers": [
+      "Reserve level drops to 96% or below in the next reading (would establish a declining trend per LZ-RC-002 and challenge the null hypothesis of normal float)",
+      "Pump load exceeds 70% (would enter zone where efficiency curve gaps and cavitation risk become material per Layer 2 Signal 002 gap analysis)",
+      "Flow exceeds 8,000 GPM without corresponding operator log explanation (would suggest unplanned demand or possible leak)",
+      "Sector 4 pressure drops below 50 PSI (still 2.5x above kill switch but would represent meaningful decline from current 68.5)",
+      "Cavitation sensor moves to WARNING_ELEVATED (first indication of mechanical stress)",
+      "Surge relief valve opens (would indicate pressure transient event)",
+      "Cross-indicator coherence breaks — e.g., pressure dropping while flow reads stable, or flow spiking while pressure reads normal (would suggest sensor failure per Signal 009 concern)"
+    ],
+    "overall_confidence": "high",
+    "biggest_uncertainty": "Whether the SCADA automated failover logic and gravity reserve deployment mechanisms would actually perform as designed under stress — the core thesis claim is untested in the current monitoring window, and the three visibility gaps (failover testing, sensor redundancy, backup pumps) all relate to components that matter only when things go wrong, which they currently are not.",
+    "what_would_change_assessment": "A sudden large demand event (fire, pipe break) or an unexplained declining trend in any key indicator — particularly reserves declining or pressure dropping without corresponding flow increase — would move the recommendation from HOLD_POSITION to INCREASE_MONITORING. Confirmation that SCADA failover was recently successfully tested and that sensor redundancy exists would reduce bear pressure to 1. Confirmation that backup pumps are offline or nonexistent would escalate bear pressure to 8-10 and trigger INCREASE_MONITORING.",
+    "final_report": "HOLD POSITION. All five kill switches are GREEN with extreme margins — pressure at 3.4x threshold, reserves at 98%, pump at 42% load, no cavitation, no surge events, no leak signature. The system is in its strongest possible posture during a routine post-peak period. Bear pressure at 3/100 reflects not any active threat but three standing monitoring blind spots: we cannot verify from current telemetry whether SCADA failover logic works, whether sensors have redundancy, or whether backup pumps are ready. The thesis paradox is real: the calmer things are, the less we know about whether the resilience mechanisms that constitute the core thesis would actually perform under stress — but that uncertainty is structural, not actionable today."
+  },
+  "_layer3_raw": {
+    "corrections_referenced": [],
+    "player_analysis": [
+      {
+        "player": "SCADA Automated Logic",
+        "stated_position": "Programmed to protect physical infrastructure first — will shut down pumps to prevent cavitation even at cost of temporary pressure loss.",
+        "observed_actions": "All sensors report nominal. Surge relief valve CLOSED. Cavitation sensor NORMAL. Pump load at 42%. No protective actions have been triggered. The system is in passive monitoring mode with no interventions active.",
+        "say_do_gap": "No gap detectable. The system's stated design is to intervene under stress. No stress exists, so no intervention is expected. The absence of protective actions is CONSISTENT with the stated design, not contradictory. However, per Layer 2 Signal 008, the automated failover logic has not been exercised in this monitoring window, so we cannot confirm the system WOULD act as stated. The say-do gap is untestable under current conditions.",
+        "inferred_strategy": "The SCADA system is operating as designed in a low-stress regime. Its actual capability under stress remains unverified but is not currently being tested. The most rational inference is that the system is simply idle because nothing requires action.",
+        "confidence": "high"
+      },
+      {
+        "player": "Grid Operators",
+        "stated_position": "Protocol is to allow automated failovers to work, verify gravity reserve deployment, and prepare sector isolation only if pressure approaches 20 PSI.",
+        "observed_actions": "Operator log is a single terse entry: 'Routine morning peak demand subsiding. System nominal.' This is a minimal human input during a period of no stress.",
+        "say_do_gap": "No meaningful gap detectable. Terse logging during nominal conditions is standard operating practice across virtually all infrastructure monitoring contexts. Per LZ-EH-003, actions carry more weight than statements, but the relevant action here IS the absence of escalation or concern — which is consistent with the data showing nominal operations. Layer 2 correctly flagged (Signal 010) that inferring complacency from log brevity requires 3+ unproven assumptions and is therefore speculative.",
+        "inferred_strategy": "Operators are doing exactly what rational actors would do during routine low-stress operations: minimal intervention, passive monitoring. No evidence of either heightened alertness or concerning inattention.",
+        "confidence": "medium"
+      },
+      {
+        "player": "Demand Source (External Actors, e.g., Fire Department)",
+        "stated_position": "No stated position — external actors with unpredictable, potentially massive draw capability.",
+        "observed_actions": "No abnormal demand signatures. Flow at 4,500 GPM is consistent with routine post-peak municipal consumption. No fire hydrant activation or industrial surge detected.",
+        "say_do_gap": "Not applicable. External demand actors don't 'state' positions — they act. Currently, they are not acting in any way that stresses the system. Per LZ-RC-003, absence of demand events is not evidence that demand events won't occur.",
+        "inferred_strategy": "No strategic inference warranted. External demand is currently at baseline. The threat is latent and unpredictable by nature — this is a known characteristic of the demand environment, not a strategic behavior to analyze.",
+        "confidence": "medium"
+      }
+    ],
+    "feedback_loops": [
+      {
+        "loop": "Pump Load → Cavitation → SCADA Trip → Pressure Drop → Gravity Reserve Deployment → Reserve Depletion",
+        "components": [
+          "primary_pump_station_load_pct",
+          "pump_cavitation_acoustic_sensor",
+          "SCADA automated logic",
+          "sector_4_pressure_psi",
+          "grid_average_pressure_psi",
+          "high_zone_gravity_reserve_level_pct"
+        ],
+        "current_state": "dormant",
+        "trigger_to_next_state": "A sudden massive demand event (e.g., multi-alarm fire drawing >10,000 GPM from hydrants) would increase pump load rapidly. If load exceeds cavitation threshold, SCADA would trip pumps, causing pressure to drop. Gravity reserves would deploy passively. This is the designed cascade — it is the thesis in action, not a failure. It transitions to 'active_orderly' when pump load exceeds ~70% and cavitation risk becomes non-trivial. It would transition to 'active_accelerating' if SCADA fails to trip pumps during cavitation (Kill Switch 5) or if reserves deplete faster than expected (Kill Switch 4).",
+        "thesis_implication": "This IS the thesis mechanism. The entire thesis is that this loop exists and works: sacrifice pumps → deploy reserves → maintain minimum pressure. Current state is dormant with all components at maximum margin. The loop has not been tested in this monitoring window."
+      },
+      {
+        "loop": "Leak → Flow Surge → Pressure Drop → Pump Load Increase → Potential Cavitation (or) Reserve Depletion",
+        "components": [
+          "system_total_flow_gpm",
+          "sector_4_pressure_psi",
+          "primary_pump_station_load_pct",
+          "high_zone_gravity_reserve_level_pct"
+        ],
+        "current_state": "dormant",
+        "trigger_to_next_state": "A major pipe break would simultaneously spike flow and drop pressure. Pumps would increase load to compensate. If the break is large enough, pumps cannot keep up — cavitation risk rises. If pumps trip, reserves deploy but also drain through the break. Kill Switch 3 is specifically designed to detect this scenario (flow > 20,000 GPM + reserves dropping > 15%/min + pumps active). Current flow at 4,500 GPM and stable pressure shows no leak signature. This loop would transition to 'active_orderly' at flow > 8,000-10,000 GPM with unexplained pressure decline.",
+        "thesis_implication": "This is the catastrophic failure mode the thesis is designed to survive. Current data shows no activation. Cross-validation between flow and pressure readings (both nominal and consistent) confirms this loop is dormant."
+      },
+      {
+        "loop": "Sensor Failure → False Nominal Reading → Invisible Degradation → Delayed Response → Cascading Failure",
+        "components": [
+          "All SCADA sensors",
+          "Operator awareness",
+          "SCADA automated logic"
+        ],
+        "current_state": "dormant — but state is inherently uncertain because this loop's activation would be invisible by definition",
+        "trigger_to_next_state": "A sensor failing to a 'normal' state (fail-dangerous mode) would make this loop active but invisible. The first observable signal would be a downstream physical consequence (e.g., water service complaints, visible leak) that contradicts the 'nominal' sensor reading. Cross-indicator coherence (multiple independent sensor types all reading nominal) is currently the only partial defense — if one sensor were failed, others would likely show inconsistency. A systematic SCADA communication failure could defeat this defense.",
+        "thesis_implication": "This is an epistemological threat to the monitoring thesis itself, not to the water system. The water system's physical state is independent of our ability to observe it. If this loop were active, we would not know until physical consequences manifested. This is the most important structural concern identified by Layer 2 (Signal 009)."
+      }
+    ],
+    "behavioral_patterns": [
+      {
+        "pattern": "Universal quiescence — all players in passive/nominal mode simultaneously",
+        "players_involved": [
+          "SCADA Automated Logic",
+          "Grid Operators",
+          "Demand Source"
+        ],
+        "thesis_implication": "supports",
+        "significance": "medium"
+      },
+      {
+        "pattern": "Cross-indicator coherence — all independent sensor types agree on nominal conditions",
+        "players_involved": [
+          "Pressure sensors",
+          "Flow sensors",
+          "Cavitation acoustic sensor",
+          "Valve position sensor",
+          "Reserve level sensor"
+        ],
+        "thesis_implication": "supports",
+        "significance": "high"
+      }
+    ],
+    "strategic_inferences": [
+      {
+        "finding_from_layer2": "System operating well within all safety envelopes",
+        "signal_ids": [
+          "20260311-0637-SIG-001"
+        ],
+        "null_hypothesis": "The system is simply operating normally during a routine low-demand period. No strategic behavior is occurring. The data is what it is.",
+        "null_holds": true,
+        "rational_explanation": "Not applicable — null hypothesis holds.",
+        "alternative_explanation": "Not applicable.",
+        "which_is_more_likely": "null",
+        "assumptions": [],
+        "assumption_count": 0,
+        "classification": "NULL_HYPOTHESIS_HOLDS",
+        "evidence_citations": [
+          "SCADA Tier 1 telemetry: sector_4_pressure_psi = 68.5 (vs 20 PSI threshold)",
+          "SCADA Tier 1 telemetry: grid_average_pressure_psi = 65.2 (vs 25 PSI threshold)",
+          "SCADA Tier 1 telemetry: all five kill switch indicators far from triggers"
+        ],
+        "expected_timeline": "N/A",
+        "materialization_signal": "N/A — null hypothesis holds, no strategic inference to confirm",
+        "reasoning": "All five falsification indicators are at extreme distance from their trigger thresholds. Multiple independent Tier 1 sensors agree. The simplest explanation — the system is working normally during a low-stress period — is entirely sufficient. There is no anomaly requiring a strategic explanation.",
+        "confidence": "high"
+      },
+      {
+        "finding_from_layer2": "Reserve tank not at 100% — minor unverified deficit",
+        "signal_ids": [
+          "20260311-0637-SIG-004"
+        ],
+        "null_hypothesis": "The 2% gap is within normal sensor precision tolerance, normal operational float, or minor evaporation/draw. Reserve tanks rarely sit at exactly 100.0% in real-world operations.",
+        "null_holds": true,
+        "rational_explanation": "Not applicable — null hypothesis holds.",
+        "alternative_explanation": "A slow, undetected drain (minor leak in the reserve system) is causing gradual depletion. However, this requires assumptions about leak existence and sensor inability to detect it, and we have only a single data point (LZ-RC-002).",
+        "which_is_more_likely": "null",
+        "assumptions": [],
+        "assumption_count": 0,
+        "classification": "NULL_HYPOTHESIS_HOLDS",
+        "evidence_citations": [
+          "SCADA Tier 1 telemetry: high_zone_gravity_reserve_level_pct = 98%",
+          "Layer 2 application of LZ-EH-004 (measurement artifact before real-world event) and LZ-RC-002 (single data point, no trend)"
+        ],
+        "expected_timeline": "N/A",
+        "materialization_signal": "If subsequent readings show 97%, 96%, etc. — a declining trend — the null hypothesis would be challenged and a leak or draw investigation would be warranted. A single reading at 98% establishes nothing.",
+        "reasoning": "Per LZ-EH-004, a potential measurement artifact must be tested before being treated as a real-world event. Per LZ-RC-002, a single data point does not establish a trend. Per LZ-RC-004, the simplest explanation (normal sensor float, precision tolerance) should be tested first. The null hypothesis is entirely sufficient.",
+        "confidence": "high"
+      },
+      {
+        "finding_from_layer2": "SCADA automated protection logic untested in this cycle",
+        "signal_ids": [
+          "20260311-0637-SIG-008"
+        ],
+        "null_hypothesis": "The SCADA failover logic has not been triggered because no conditions requiring it have occurred. This is expected behavior during nominal operations. The system is simply idle because nothing has gone wrong.",
+        "null_holds": true,
+        "rational_explanation": "Not applicable — null hypothesis holds for the observation itself. The absence of failover events during nominal operations is not a strategic signal; it is the expected state.",
+        "alternative_explanation": "The failover logic is degraded or misconfigured and would fail if called upon. This would require assuming: (1) degradation has occurred, (2) it is undetected by self-diagnostics, (3) no recent testing has been performed. Three assumptions = SPECULATIVE.",
+        "which_is_more_likely": "null",
+        "assumptions": [],
+        "assumption_count": 0,
+        "classification": "NULL_HYPOTHESIS_HOLDS",
+        "evidence_citations": [
+          "SCADA Tier 1 telemetry: all conditions nominal, no failover trigger conditions present",
+          "Thesis context: SCADA is designed to intervene under stress conditions that do not currently exist"
+        ],
+        "expected_timeline": "N/A",
+        "materialization_signal": "This concern would be resolved by evidence of a recent successful failover test or self-diagnostic log. It would be escalated if a stress event occurs and SCADA fails to respond as designed.",
+        "reasoning": "The null hypothesis fully explains why failover logic hasn't fired: there's nothing to fail over from. The concern about whether the logic WOULD work is legitimate but is a standing epistemic gap, not a strategic inference. It requires no strategic explanation — it is simply a data visibility limitation. Per LZ-RC-003, absence of test data is not evidence of system degradation.",
+        "confidence": "high"
+      },
+      {
+        "finding_from_layer2": "Single-point sensor dependency unexamined",
+        "signal_ids": [
+          "20260311-0637-SIG-009"
+        ],
+        "null_hypothesis": "The SCADA system likely has standard industrial sensor redundancy (common in municipal water infrastructure per regulatory requirements), and the telemetry feed simply aggregates multiple sensors into single reported values. The apparent single-point dependency is a telemetry feed presentation issue, not a system architecture issue.",
+        "null_holds": true,
+        "rational_explanation": "Not applicable — null hypothesis holds as most likely explanation.",
+        "alternative_explanation": "The system genuinely has single-point sensor failures as a risk. This would require assuming: (1) the system lacks standard sensor redundancy, (2) the SCADA system has no fail-dangerous detection. Two assumptions.",
+        "which_is_more_likely": "null",
+        "assumptions": [],
+        "assumption_count": 0,
+        "classification": "NULL_HYPOTHESIS_HOLDS",
+        "evidence_citations": [
+          "Cross-indicator coherence: multiple independent sensor types (pressure, flow, acoustic, valve, level) all report consistent nominal readings (LZ-EH-001)",
+          "Layer 2 Signal 009 analysis: if one sensor had failed to nominal, other independent sensor types would likely show inconsistency"
+        ],
+        "expected_timeline": "N/A",
+        "materialization_signal": "Would be resolved by documentation of sensor redundancy architecture. Would be escalated if cross-indicator coherence breaks (e.g., flow suggests leak but pressure reads normal).",
+        "reasoning": "The strongest evidence AGAINST sensor failure is cross-indicator coherence. Five independent sensor types all report nominal. While not impossible for all to fail simultaneously, this is an extremely low-probability scenario absent a systematic power or communication failure. The null hypothesis — that the monitoring infrastructure is functioning normally because municipal water systems are designed to regulatory standards — is the simplest sufficient explanation. The concern remains valid as a standing gap to resolve, but it does not constitute a strategic finding.",
+        "confidence": "medium"
+      },
+      {
+        "finding_from_layer2": "Unknown condition of backup/redundant pump systems",
+        "signal_ids": [
+          "20260311-0637-SIG-013"
+        ],
+        "null_hypothesis": "The telemetry feed reports primary pump data because that's the active system. Backup pumps exist (the thesis explicitly references 'automated redundancy') but are in standby and therefore not generating telemetry. This is normal SCADA design — standby equipment reports status only on activation or during scheduled tests.",
+        "null_holds": true,
+        "rational_explanation": "Not applicable — null hypothesis holds.",
+        "alternative_explanation": "Backup pumps are offline for maintenance, degraded, or nonexistent despite the thesis claim. This would require assuming: (1) the thesis author mischaracterized system capability, OR (2) maintenance has taken backups offline without notation. Both are unproven.",
+        "which_is_more_likely": "null",
+        "assumptions": [],
+        "assumption_count": 0,
+        "classification": "NULL_HYPOTHESIS_HOLDS",
+        "evidence_citations": [
+          "Thesis context explicitly states 'automated redundancy' as a core system feature",
+          "Primary pump at 42% load — if no backup existed, the system would likely be designed to run the primary at higher utilization"
+        ],
+        "expected_timeline": "N/A",
+        "materialization_signal": "Would be resolved by telemetry showing backup pump standby status. Would be escalated if primary pump load exceeds 70% with no backup activation.",
+        "reasoning": "The thesis was presumably written with knowledge of the actual system architecture. While I cannot verify backup pump readiness from current telemetry, the null hypothesis — that standby equipment doesn't generate active telemetry — is the simplest explanation for the data gap. The 42% primary load itself indirectly supports the existence of backup capacity: if this were the ONLY pump, system designers would likely size demand closer to capacity rather than oversizing by 2.4x. However, this infrastructure sizing inference is weak and I note it without relying on it.",
+        "confidence": "medium"
+      }
+    ],
+    "hidden_moves": [
+      {
+        "player": "SCADA Automated Logic",
+        "signal_ids": [
+          "20260311-0637-SIG-008"
+        ],
+        "likely_action": "Running continuous background self-diagnostic routines that don't appear as operational events in the telemetry feed",
+        "incentive_basis": "Industrial SCADA systems are designed to verify their own logic integrity. It would be irrational and non-compliant for a municipal water system to have no self-test capability. The incentive for the system operator (the municipality) is to avoid catastrophic failure liability.",
+        "evidence_hints": "The system is reporting coherent, multi-sensor nominal data with no anomalies — consistent with a functioning self-diagnostic regime. If diagnostics had detected issues, we would expect to see maintenance logs or operator notes.",
+        "assumption_count": 2,
+        "classification": "FLAGGED",
+        "expected_timeline": "N/A — this is a standing behavior, not a time-bounded action",
+        "materialization_signal": "Access to SCADA diagnostic logs would confirm or deny. A scheduled test event appearing in telemetry would also confirm.",
+        "confidence": "medium"
+      },
+      {
+        "player": "Grid Operators",
+        "signal_ids": [
+          "20260311-0637-SIG-010"
+        ],
+        "likely_action": "Performing routine readiness checks (valve inspections, reserve level verification, communication checks) that are not captured in the operator log field visible to this monitoring feed",
+        "incentive_basis": "Municipal water operators are typically required by regulation to perform periodic checks regardless of system status. Their professional liability and regulatory compliance incentives drive routine verification behaviors.",
+        "evidence_hints": "The operator log field ('Routine morning peak demand subsiding. System nominal.') is a summary status entry, not a comprehensive activity log. Absence of detailed activity in a summary field does not mean absence of activity.",
+        "assumption_count": 2,
+        "classification": "FLAGGED",
+        "expected_timeline": "N/A — standing operational behavior",
+        "materialization_signal": "Access to full operator activity logs (not just the summary field) would confirm.",
+        "confidence": "low"
+      }
+    ],
+    "scenario_probabilities": {
+      "thesis_confirmed": {
+        "probability": "85%",
+        "key_evidence": "All five kill switch indicators are at extreme distance from their thresholds. Multiple independent Tier 1 sensors show coherent nominal readings. No active stress sources. Post-peak demand cycle provides favorable near-term context. 98% gravity reserves provide maximum passive failover capacity. The system is functioning exactly as the thesis predicts it should during normal operations.",
+        "timeline": "Current assessment window. The thesis is confirmed as viable for the current snapshot. Continued confirmation requires successive readings maintaining these margins."
+      },
+      "thesis_modified": {
+        "probability": "12%",
+        "modification": "The thesis may need to be modified to include explicit monitoring of: (1) SCADA failover test dates/results, (2) sensor redundancy architecture verification, (3) backup pump readiness status. These are not changes to the thesis of system viability, but changes to the MONITORING FRAMEWORK needed to verify the thesis. The thesis assumes capabilities that the current telemetry feed does not provide visibility into.",
+        "key_evidence": "Layer 2 identified three structural visibility gaps (Signals 008, 009, 013) where core thesis assumptions cannot be verified from available data. These gaps don't falsify the thesis but they reduce confidence that we would DETECT early falsification."
+      },
+      "thesis_falsified": {
+        "probability": "3%",
+        "key_evidence": "No kill switch is approaching. No emerging threat is detected. The 3% reflects irreducible uncertainty: (1) a sudden massive demand event (fire, industrial accident) is inherently unpredictable, (2) a sensor failure masking degradation is theoretically possible though contradicted by cross-indicator coherence, (3) unknown unknowns. There is no positive evidence of falsification — this probability reflects tail risk only.",
+        "confirming_signal": "Any kill switch indicator moving toward its threshold in the next reading cycle. Specifically: pressure decline below 50 PSI, flow spike above 10,000 GPM, reserve level dropping below 95%, cavitation sensor moving to WARNING_ELEVATED, or surge relief valve opening."
+      }
+    },
+    "x402_paper_trades": [
+      {
+        "question": "What is the SCADA sensor redundancy architecture? Are there redundant sensors, cross-validation logic, and fail-dangerous detection?",
+        "data_source": "System engineering documentation, SCADA configuration database, or municipal water department engineering records",
+        "impact_on_analysis": "HIGH — this would resolve the single most important epistemological concern (Signal 009). If redundant sensors exist with cross-validation, confidence in all readings increases substantially. If single-point sensors are confirmed, monitoring protocol should be modified to include physical verification checks.",
+        "confidence_data_exists": "high",
+        "estimated_value": "Very high — this single piece of information would either resolve or escalate the top-severity concern in the assessment"
+      },
+      {
+        "question": "When was the SCADA automated failover logic last successfully tested or exercised? What were the results?",
+        "data_source": "SCADA maintenance logs, system test records, or operator shift logs from the test date",
+        "impact_on_analysis": "HIGH — the thesis RELIES on automated failover as the core protective mechanism. Knowing it was successfully tested within its maintenance interval would convert Signal 008 from severity 3 to severity 1. Knowing it failed or hasn't been tested in an extended period would escalate it significantly.",
+        "confidence_data_exists": "high",
+        "estimated_value": "High — resolves a core thesis assumption"
+      },
+      {
+        "question": "What is the absolute volume of the gravity reserve tanks, and what is the depletion rate under various demand scenarios (normal, high, fire response)?",
+        "data_source": "System engineering specifications, or historical telemetry data showing reserve depletion during past stress events",
+        "impact_on_analysis": "MEDIUM — 98% is reassuring as a percentage, but without knowing absolute capacity and depletion rates, we cannot calculate how long reserves would last under stress. This directly affects the severity window for Kill Switch 4.",
+        "confidence_data_exists": "high",
+        "estimated_value": "Medium — contextualizes the reserve margin from a percentage to an actionable time duration"
+      },
+      {
+        "question": "What is the backup/redundant pump configuration, maintenance status, and startup time?",
+        "data_source": "System engineering documentation, pump maintenance records, or SCADA standby equipment status register",
+        "impact_on_analysis": "MEDIUM-HIGH — confirms or denies a core thesis assumption about automated redundancy. If backups exist and are ready, confidence in the thesis increases. If they don't exist or are offline, the thesis requires significant modification.",
+        "confidence_data_exists": "high",
+        "estimated_value": "Medium-high — resolves a direct thesis capability assumption"
+      },
+      {
+        "question": "What is the historical baseline flow rate for this time of day and season? What is the reserve level sensor precision?",
+        "data_source": "Historical SCADA telemetry database, sensor specification sheets",
+        "impact_on_analysis": "LOW-MEDIUM — would allow calibration of the 4,500 GPM reading and the 98% reserve reading against historical norms. Would resolve the 2% reserve gap question definitively. Useful for trend detection in future monitoring cycles.",
+        "confidence_data_exists": "high",
+        "estimated_value": "Low-medium — improves baseline calibration but does not change directional assessment"
+      }
+    ],
+    "compound_stress_inference": {
+      "current_chain_state": "dormant",
+      "orderly_vs_disorderly": "No stress present. The system is operating at maximum margin on all indicators. The physical feedback loops (pump load → cavitation → failover → reserve deployment) are entirely dormant. The system is in its most relaxed operational state: post-peak demand, full reserves, low pump load, no transient events. Stress mode assessment: NOT APPLICABLE at this time — there is no stress to characterize as orderly or disorderly.",
+      "catalyst_proximity": "The most plausible near-term catalyst for system stress is a sudden, large unplanned demand event — most likely a multi-alarm structural fire requiring sustained high-flow hydrant operations. This is inherently unpredictable. The current margins are so wide (pressure at 3.4x threshold, reserves at 98%, pump at 42% load) that even a significant demand spike would need to be extreme and sustained to approach any kill switch. A realistic stress scenario: a 4-alarm fire draws 8,000+ GPM from sector hydrants, pump load jumps to 75-85%, pressure drops to 45-50 PSI. This would activate the stress chain into 'active_orderly' but remain far from kill switch thresholds. Only a simultaneous multi-event scenario (fire + pipe break + pump malfunction) would approach 'critical' — and compounding three independent low-probability events pushes this into tail risk territory.",
+      "pre_load_assessment": "No legs are pre-loaded. All stress indicators are at baseline. Reserves are near-full, providing maximum buffer. Pump is at low utilization, providing maximum surge capacity. Pressure is at high margin, providing maximum absorption capacity. The system is in its strongest possible posture to absorb a shock. If anything, the system is 'pre-loaded for resilience' — it has maximum stored capacity across all dimensions.",
+      "thesis_paradox": "This thesis has an interesting structural feature analogous to the financial thesis paradox: the system's GREATEST TEST of viability — a major demand event or equipment failure — is simultaneously the scenario that would produce the most information about whether the thesis is correct AND the scenario most likely to reveal hidden weaknesses. During this calm period, the thesis is 'confirmed' in the weak sense that nothing contradicts it, but 'unverified' in the strong sense that its core claims about automated failover and gravity reserve deployment have not been exercised. The thesis of resilience cannot be fully confirmed without stress, but stress is the thing we hope doesn't arrive. The monitoring paradox: the healthier things look, the less we know about whether the system can handle unhealthy conditions."
+    },
+    "inference_summary": "Player behavior reveals nothing beyond what the data shows directly: all actors (SCADA, operators, demand sources) are in routine nominal mode, and this is entirely consistent with the telemetry showing wide safety margins across all indicators. There are no say-do gaps, no anomalous behaviors, and no strategic signals requiring explanation beyond the null hypothesis. The most important finding is NOT about what players are doing — it's about what we CANNOT SEE: the three structural visibility gaps (failover test status, sensor redundancy architecture, backup pump readiness) represent the thesis monitoring framework's blind spots, not threats to the physical system. Layer 4 should focus on whether the thesis monitoring framework needs to be enhanced to include verification of the three core assumptions currently taken on faith, and should note that the thesis is in a strong but inherently untested state — confirmed by calm-weather data that cannot validate storm-weather claims."
+  },
+  "_layer2_raw": {
+    "corrections_referenced": [],
+    "knowledge_audit": [
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-001"
+        ],
+        "signal": "System operating well within all safety envelopes",
+        "knowledge_check": "Verified: I understand all five falsification criteria and the current readings against them. Sector 4 at 68.5 PSI vs 20 PSI threshold, grid avg at 65.2 vs 25 PSI threshold, reserves at 98% vs 10% threshold, no cavitation, no surge events. These are Tier 1 telemetry readings from the SCADA system itself (originating source per LZ-EH-002). Multiple independent sensors confirm the same picture (LZ-EH-001).",
+        "gap_identified": "NONE — all thresholds are clearly defined in the thesis context and all current values are provided in the telemetry feed.",
+        "gap_type": "NONE",
+        "pre_audit_assessment": "Severity 1, ACCELERATION",
+        "post_audit_assessment": "Severity 1, ACCELERATION — unchanged",
+        "audit_impact": "No change. Knowledge is sufficient and current.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-002"
+        ],
+        "signal": "Primary pump load at 42% — substantial headroom",
+        "knowledge_check": "The 42% load figure is from Tier 1 SCADA telemetry. I understand pump load as a capacity metric. The 2.4x headroom estimate assumes linear scalability of pump capacity, which is a reasonable first-order approximation but not verified — pump efficiency curves are non-linear and cavitation risk increases non-linearly at high loads. However, at 42%, we are far from any danger zone.",
+        "gap_identified": "I do not know the pump's rated capacity, its efficiency curve, or at what load percentage cavitation risk materially increases. The 2.4x headroom claim is an approximation.",
+        "gap_type": "THESIS_CAPABILITY_GAP",
+        "pre_audit_assessment": "Severity 1, high confidence",
+        "post_audit_assessment": "Severity 1, high confidence — the gap is real but immaterial at 42% load. Even with non-linear degradation, 42% is well within safe operating range for any reasonable pump design.",
+        "audit_impact": "Minimal. Gap noted but does not affect scoring at this load level. Would matter if load exceeded ~70%.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-003"
+        ],
+        "signal": "Gravity reserves near-full at 98%",
+        "knowledge_check": "98% reserve is directly from telemetry. Gravity reserves are the passive failover backbone — the thesis explicitly states the system architecture sacrifices primary components to protect the whole, relying on passive reserves to maintain baseline viability. 98% means maximum deployment time available. The falsification threshold is 10% (during pump outage). We are at 98%.",
+        "gap_identified": "I do not know the absolute volume of the gravity tanks (98% of what capacity?), nor the depletion rate under various demand scenarios. Without knowing gallons-per-minute draw rate vs tank volume, I cannot calculate how long reserves would last under stress. This matters for assessing the true depth of the safety margin.",
+        "gap_type": "THESIS_CAPABILITY_GAP",
+        "pre_audit_assessment": "Severity 2 (moderate positive signal)",
+        "post_audit_assessment": "Severity 2 — unchanged. The percentage is reassuring but the absolute capacity gap is noted.",
+        "audit_impact": "The gap is real but doesn't change the directional assessment. 98% is near-maximum regardless of absolute volume.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-004"
+        ],
+        "signal": "Reserve tank not at 100% — minor unverified deficit",
+        "knowledge_check": "This signal correctly flags that during a low-demand period (post-morning-peak), tanks should theoretically be refilling toward 100%. The 2% gap is unexplained. Per LZ-RC-004, simplest explanations first: sensor precision/rounding, normal operational float (tanks rarely sit at exactly 100%), evaporation losses, or minor draw. Per LZ-EH-004, this is a potential measurement artifact before a real-world event until independently verified.",
+        "gap_identified": "I do not know the sensor precision for the reserve level gauge. If precision is ±2-3%, then 98% may be indistinguishable from 100%. I also don't know the refill rate or whether 100% is ever actually achieved in normal operations.",
+        "gap_type": "THRESHOLD_CALIBRATION_GAP",
+        "pre_audit_assessment": "Severity 2, ambiguous concern",
+        "post_audit_assessment": "Severity 1 — downgraded after applying LZ-RC-004 and LZ-EH-004. The simplest explanation (sensor precision, normal float) should be tested before concluding there's a meaningful deficit. This is a single data point (LZ-RC-002) — cannot establish a trend of depletion.",
+        "audit_impact": "Reduced severity. Without a second reading showing decline, this is noise until proven otherwise.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-005"
+        ],
+        "signal": "Morning peak demand cycle subsiding",
+        "knowledge_check": "Operator log is Tier 1 source. The operator's assessment of demand cycle timing is verifiable against flow data — 4,500 GPM is consistent with post-peak subsiding demand. Two independent indicators (operator log + flow data) agree (LZ-EH-001).",
+        "gap_identified": "NONE for current assessment. Historical demand patterns not provided but not needed for immediate scoring.",
+        "gap_type": "NONE",
+        "pre_audit_assessment": "Severity 1",
+        "post_audit_assessment": "Severity 1 — unchanged",
+        "audit_impact": "None",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-006"
+        ],
+        "signal": "Surge relief valve closed — no transient pressure events",
+        "knowledge_check": "Binary sensor reading from SCADA. CLOSED = no pressure transients. This is a structural health indicator. The thesis context explains this valve prevents water hammer from sudden pump stops. CLOSED is the nominal state.",
+        "gap_identified": "NONE",
+        "gap_type": "NONE",
+        "pre_audit_assessment": "Severity 1",
+        "post_audit_assessment": "Severity 1 — unchanged",
+        "audit_impact": "None",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-007"
+        ],
+        "signal": "No fire department or industrial draw events reported",
+        "knowledge_check": "This is an absence-of-evidence signal. Per LZ-RC-003, absence of fire draw data is not evidence of absence of fire risk, nor is it evidence of presence of fire risk. The signal correctly identifies this as a latent, unpredictable demand source. I cannot score the probability of a fire event from this data.",
+        "gap_identified": "No weather data, no event calendar data, no industrial activity data. These would inform probability assessment but are unavailable.",
+        "gap_type": "DATA_AVAILABILITY_GAP",
+        "pre_audit_assessment": "Severity 3 (moderate concern about unpredictable demand)",
+        "post_audit_assessment": "Severity 2 — this is a valid blind spot identification but I must be careful not to assign severity based on what I don't know (LZ-RC-003). The blind spot itself is the finding, not a threat.",
+        "audit_impact": "Reduced severity. The blind spot is real and worth flagging, but I cannot score the probability or impact of an event I have no data on.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-008"
+        ],
+        "signal": "SCADA automated protection logic untested in this cycle",
+        "knowledge_check": "The thesis RELIES on automated redundancy and fail-safe equipment protection as a core mechanism. The Layer 1 observation that this logic has not been exercised in the current monitoring window is valid. However, I do not know the testing schedule, the last successful test date, or whether continuous self-diagnostic routines run in the background. Many SCADA systems perform periodic automated self-tests that wouldn't appear as operational events.",
+        "gap_identified": "I do not know: (1) the SCADA system's self-test schedule, (2) when failover logic was last exercised, (3) whether diagnostic routines run continuously. This is a THESIS_CAPABILITY_GAP — the thesis assumes this mechanism works but we have no verification in current data.",
+        "gap_type": "THESIS_CAPABILITY_GAP",
+        "pre_audit_assessment": "Severity 4 (moderate-high, core thesis assumption unverified)",
+        "post_audit_assessment": "Severity 3 — after reflection, this is a real gap but I must apply LZ-RC-003: absence of test data is not evidence that the system is degraded. It IS a valid unknown. Downgraded slightly because the concern is structural/chronic, not acute.",
+        "audit_impact": "Slight reduction. The gap is legitimate but it's a standing condition, not an emerging threat. Layer 3 should investigate last test date.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-009"
+        ],
+        "signal": "Single-point sensor dependency unexamined",
+        "knowledge_check": "This is a critical epistemological concern. All of our confidence in system health is derived from sensors. If a sensor fails to a 'NORMAL' state (fail-safe vs fail-dangerous), we would have a false picture of reality. The thesis context does not describe sensor redundancy architecture. I genuinely do not know whether the SCADA system has redundant sensors, cross-validation logic, or fail-dangerous detection.",
+        "gap_identified": "Major gap: I do not know the sensor redundancy architecture. A failed sensor reading NORMAL is the single most dangerous failure mode for a monitoring thesis — it makes the monitoring system itself unreliable. This is not about the water system failing; it's about our ABILITY TO DETECT failure being compromised.",
+        "gap_type": "THESIS_CAPABILITY_GAP",
+        "pre_audit_assessment": "Severity 5 (high concern — epistemological threat to monitoring)",
+        "post_audit_assessment": "Severity 4 — this is genuinely important. However, I note that multiple INDEPENDENT sensors (pressure, flow, cavitation acoustic, valve status) are all consistent with each other (LZ-EH-001). If one sensor were failing, the others would likely show inconsistency. Cross-indicator coherence provides partial validation. Still, a systematic failure (e.g., power to sensor rack) could affect all simultaneously.",
+        "audit_impact": "Slight reduction due to cross-indicator coherence, but the core concern stands. Layer 3 should verify sensor redundancy architecture.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-010"
+        ],
+        "signal": "Operator staffing and alertness during low-stress period",
+        "knowledge_check": "This is a human factors signal based on inference from a terse operator log. Per LZ-EH-003, actions carry more weight than statements — but we have very little to go on. A terse log during nominal conditions is standard practice; it doesn't necessarily indicate complacency. Per LZ-RC-001, correlating log brevity with alertness would be correlation-not-causation. The confidence on this signal is correctly tagged as LOW by Layer 1.",
+        "gap_identified": "I do not know operator staffing levels, shift duration, protocol requirements for readiness checks, or whether the brevity of the log is normal or anomalous.",
+        "gap_type": "DATA_AVAILABILITY_GAP",
+        "pre_audit_assessment": "Severity 2",
+        "post_audit_assessment": "Severity 1 — downgraded. The inference chain is too long and speculative: terse log → low alertness → slow response → worse outcome. Per LZ-EPH-003, this is built on multiple unproven assumptions.",
+        "audit_impact": "Significant reduction. Three unproven assumptions in the inference chain makes this speculative per LZ-EPH-003.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-011"
+        ],
+        "signal": "No regulatory or compliance alerts active",
+        "knowledge_check": "68.5 PSI vs 20 PSI minimum is a clear, large margin. The thesis context explicitly defines the 20 PSI threshold. This is straightforward.",
+        "gap_identified": "NONE",
+        "gap_type": "NONE",
+        "pre_audit_assessment": "Severity 1",
+        "post_audit_assessment": "Severity 1 — unchanged",
+        "audit_impact": "None",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-012"
+        ],
+        "signal": "Flow rate at 4500 GPM — no leak signature",
+        "knowledge_check": "4,500 GPM vs 20,000 GPM catastrophic leak threshold. Flow is consistent with post-peak demand. Pressure readings are stable, which cross-validates the flow reading — a major leak would depress pressure. Two independent data streams agree (LZ-EH-001).",
+        "gap_identified": "I do not know normal baseline flow for this time of day. 4,500 GPM is assumed normal based on context but I have no historical comparison.",
+        "gap_type": "DATA_AVAILABILITY_GAP",
+        "pre_audit_assessment": "Severity 1",
+        "post_audit_assessment": "Severity 1 — unchanged. Even without historical baseline, the cross-validation with stable pressure is sufficient.",
+        "audit_impact": "Minimal. Historical data would be nice but isn't needed for this assessment.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-013"
+        ],
+        "signal": "Unknown condition of backup/redundant pump systems",
+        "knowledge_check": "The thesis states the system uses 'automated redundancy' and 'fail-safe equipment protection.' The telemetry only reports 'primary_pump_station_load_pct' with no secondary/backup data. This is a genuine gap — the thesis assumes backup capability exists but the data feed doesn't confirm it.",
+        "gap_identified": "I do not know: (1) whether backup pumps exist, (2) their maintenance status, (3) their startup time, (4) their capacity. The thesis assumes automated redundancy but the data only shows one pump station metric.",
+        "gap_type": "THESIS_CAPABILITY_GAP",
+        "pre_audit_assessment": "Severity 4",
+        "post_audit_assessment": "Severity 3 — this is a legitimate gap in data visibility, not necessarily a gap in system capability. The thesis was presumably written with knowledge of the system architecture. But from MY monitoring position, I cannot verify backup pump readiness. Per LZ-EPH-001, the honest answer is: I don't know.",
+        "audit_impact": "Slight reduction. The gap is about my visibility, not necessarily about the system. But visibility gaps are real risks for monitoring.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-014"
+        ],
+        "signal": "Seasonal and weather context absent",
+        "knowledge_check": "No environmental data in the feed. The thesis context doesn't provide seasonal context either. Weather drives demand (irrigation, cooling, freeze risk) and hazard probability (fire, pipe bursts). This is a genuine data gap.",
+        "gap_identified": "Complete absence of weather, temperature, and seasonal data. Cannot assess whether current calm conditions are normal or whether environmental factors could rapidly change the demand picture.",
+        "gap_type": "DATA_AVAILABILITY_GAP",
+        "pre_audit_assessment": "Severity 3",
+        "post_audit_assessment": "Severity 2 — the gap is real but it's a chronic data feed limitation, not an emerging threat. It doesn't change current readings but limits forward-looking assessment.",
+        "audit_impact": "Slight reduction. This is a standing gap, not a new development.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-015"
+        ],
+        "signal": "No competing or alternative supply sources referenced",
+        "knowledge_check": "This signal asks about mutual aid, inter-sector connections, and emergency alternatives. The thesis context describes the system as 'Regional Water Distribution Grid, Sector 4,' implying other sectors exist. But no data on interconnections is available.",
+        "gap_identified": "I do not know whether inter-sector connections exist, whether mutual aid agreements are in place, or what happens if Sector 4 experiences a failure beyond its own gravity reserves.",
+        "gap_type": "COMPETITIVE_KNOWLEDGE_GAP",
+        "pre_audit_assessment": "Severity 3",
+        "post_audit_assessment": "Severity 2 — this is a long-term resilience concern, not a near-term threat. Current reserves and pressure margins are so wide that the absence of alternative supply information doesn't affect near-term thesis viability. Would matter enormously if reserves were depleting.",
+        "audit_impact": "Reduced from 3 to 2. Proximity is long-term, and current margins render this non-urgent.",
+        "lesson_applied": "NONE",
+        "status": "SCORED"
+      }
+    ],
+    "scored_signals": [
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-001"
+        ],
+        "signal": "System operating well within all safety envelopes",
+        "severity": 1,
+        "source_tier": "1",
+        "weighted_severity": 1,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "All five falsification indicators are far from trigger thresholds. Multiple independent Tier 1 SCADA sensors confirm the same picture of nominal operations. Pressure margins are 3.4x above kill switch thresholds. This is the strongest possible confirmation of current thesis viability.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-002"
+        ],
+        "signal": "Primary pump load at 42% — substantial headroom",
+        "severity": 1,
+        "source_tier": "1",
+        "weighted_severity": 1,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "42% pump load is direct Tier 1 telemetry confirming substantial mechanical headroom. The exact headroom multiple depends on pump curve characteristics I don't have, but 42% is unambiguously low-stress for any reasonable pump design. Cavitation risk is negligible at this load. Supports thesis of system resilience.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-003"
+        ],
+        "signal": "Gravity reserves near-full at 98%",
+        "severity": 2,
+        "source_tier": "1",
+        "weighted_severity": 2,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "Gravity reserves are the passive failover backbone of the thesis. 98% means maximum available deployment time. Kill switch triggers at 10% during outage. The margin is enormous. Scored at 2 rather than 1 because the absolute capacity (hours of supply) is unknown, creating slight uncertainty about the TRUE depth of the margin.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-004"
+        ],
+        "signal": "Reserve tank not at 100% — minor unverified deficit",
+        "severity": 1,
+        "source_tier": "1",
+        "weighted_severity": 1,
+        "thesis_relevance": "CONTEXTUAL",
+        "confidence": "MEDIUM",
+        "reasoning": "Per LZ-EH-004, this should be treated as potential measurement artifact before a real-world event. Per LZ-RC-002, a single reading cannot establish a trend. Per LZ-RC-004, simplest explanations (sensor precision, normal float) should be tested first. The 2% gap is within normal sensor tolerance for most level gauges. Worth noting for trend monitoring but not actionable.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-005"
+        ],
+        "signal": "Morning peak demand cycle subsiding",
+        "severity": 1,
+        "source_tier": "1",
+        "weighted_severity": 1,
+        "thesis_relevance": "INDIRECT",
+        "confidence": "HIGH",
+        "reasoning": "Operator log corroborated by flow data (4,500 GPM consistent with post-peak). Two independent sources agree (LZ-EH-001). Subsiding demand reduces near-term stress probability. This is a favorable demand context for the thesis.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-006"
+        ],
+        "signal": "Surge relief valve closed — no transient pressure events",
+        "severity": 1,
+        "source_tier": "1",
+        "weighted_severity": 1,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "Binary sensor confirming no water hammer or pressure transients. Structural health indicator for pipe network. CLOSED is nominal state. Direct confirmation of structural integrity component of thesis.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-007"
+        ],
+        "signal": "No fire department or industrial draw events reported",
+        "severity": 2,
+        "source_tier": "2",
+        "weighted_severity": 1.4,
+        "thesis_relevance": "CONTEXTUAL",
+        "confidence": "MEDIUM",
+        "reasoning": "Absence of abnormal demand signatures is consistent with nominal operations but per LZ-RC-003, cannot be treated as evidence that no demand event will occur. Scored as Tier 2 because this is inferred from absence rather than directly measured. The blind spot (no forward-looking fire risk data) is legitimate and should be flagged to Layer 3 as a standing data gap.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-008"
+        ],
+        "signal": "SCADA automated protection logic untested in this cycle",
+        "severity": 3,
+        "source_tier": "2",
+        "weighted_severity": 2.1,
+        "thesis_relevance": "DIRECT",
+        "confidence": "MEDIUM",
+        "reasoning": "This is DIRECT because the thesis explicitly relies on automated redundancy and fail-safe equipment protection. The automated failover logic is a core thesis mechanism that has not been verified as operational in current data. Per LZ-RC-003, absence of test data doesn't prove degradation, but per LZ-EPH-002, my confidence in the mechanism should be proportional to evidence of its function. Layer 3 should determine last test/exercise date.",
+        "knowledge_verified": false
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-009"
+        ],
+        "signal": "Single-point sensor dependency unexamined",
+        "severity": 4,
+        "source_tier": "2",
+        "weighted_severity": 2.8,
+        "thesis_relevance": "DIRECT",
+        "confidence": "MEDIUM",
+        "reasoning": "This is the most important structural concern in the assessment. All thesis monitoring depends on sensor reliability. A fail-to-normal sensor failure would be invisible. Cross-indicator coherence (multiple independent sensor types all reading nominal) provides partial mitigation per LZ-EH-001, but a systematic failure (e.g., SCADA communication disruption reporting cached values) could affect all sensors. Layer 3 should investigate sensor redundancy architecture and last calibration dates.",
+        "knowledge_verified": false
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-010"
+        ],
+        "signal": "Operator staffing and alertness during low-stress period",
+        "severity": 1,
+        "source_tier": "3",
+        "weighted_severity": 0.4,
+        "thesis_relevance": "CONTEXTUAL",
+        "confidence": "LOW",
+        "reasoning": "Per LZ-EPH-003, this inference is built on three or more unproven assumptions (terse log = low alertness, low alertness = slow response, slow response = worse outcome) and is therefore speculative. Terse logs during nominal conditions are standard practice. Cannot assign meaningful severity to speculative human factors inference from a single log entry (LZ-RC-002).",
+        "knowledge_verified": false
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-011"
+        ],
+        "signal": "No regulatory or compliance alerts active",
+        "severity": 1,
+        "source_tier": "1",
+        "weighted_severity": 1,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "68.5 PSI is 3.4x above the 20 PSI state minimum. Clear, verifiable margin against the contamination risk kill switch. Full regulatory compliance.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-012"
+        ],
+        "signal": "Flow rate at 4500 GPM — no leak signature",
+        "severity": 1,
+        "source_tier": "1",
+        "weighted_severity": 1,
+        "thesis_relevance": "DIRECT",
+        "confidence": "HIGH",
+        "reasoning": "4,500 GPM is 22.5% of the 20,000 GPM catastrophic leak threshold. Cross-validated by stable pressure readings (LZ-EH-001). No leak signature. Directly addresses kill switch #3.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-013"
+        ],
+        "signal": "Unknown condition of backup/redundant pump systems",
+        "severity": 3,
+        "source_tier": "2",
+        "weighted_severity": 2.1,
+        "thesis_relevance": "DIRECT",
+        "confidence": "LOW",
+        "reasoning": "The thesis assumes automated redundancy exists. The telemetry feed only shows primary pump data. I cannot verify the existence, readiness, or capacity of backup pumps from available data. Per LZ-EPH-001, the honest output is: I don't know. This is a visibility gap in the monitoring system, not necessarily a system capability gap. But for monitoring purposes, what I can't see I can't assess. Layer 3 should verify backup pump architecture and readiness.",
+        "knowledge_verified": false
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-014"
+        ],
+        "signal": "Seasonal and weather context absent",
+        "severity": 2,
+        "source_tier": "2",
+        "weighted_severity": 1.4,
+        "thesis_relevance": "INDIRECT",
+        "confidence": "MEDIUM",
+        "reasoning": "Environmental factors drive demand patterns and hazard probability. Complete absence of this data limits forward-looking assessment. However, this is a standing data feed limitation, not a new development. Current system margins are so wide that weather-driven demand changes would need to be extreme to threaten kill switches. Layer 3 should consider adding weather data to the monitoring feed.",
+        "knowledge_verified": true
+      },
+      {
+        "signal_ids": [
+          "20260311-0637-SIG-015"
+        ],
+        "signal": "No competing or alternative supply sources referenced",
+        "severity": 2,
+        "source_tier": "2",
+        "weighted_severity": 1.4,
+        "thesis_relevance": "CONTEXTUAL",
+        "confidence": "LOW",
+        "reasoning": "Long-term resilience concern. The name 'Regional Grid, Sector 4' implies other sectors exist, but no interconnection data is available. Current margins are so wide that alternative supply is not a near-term concern. Would become critical if reserves were depleting and primary pumps were offline. Per LZ-EPH-002, low confidence because I have almost no data on this topic.",
+        "knowledge_verified": false
+      }
+    ],
+    "unscored_signals": [],
+    "kill_switch_status": [
+      {
+        "criterion": "1. System-Wide Pressure Collapse (grid_average < 25.0 PSI consecutive)",
+        "status": "TRACKING",
+        "current_value": "65.2 PSI",
+        "target": "< 25.0 PSI",
+        "movement_since_last": "unknown"
+      },
+      {
+        "criterion": "2. Critical Contamination Risk (sector_4 < 20.0 PSI)",
+        "status": "TRACKING",
+        "current_value": "68.5 PSI",
+        "target": "< 20.0 PSI",
+        "movement_since_last": "unknown"
+      },
+      {
+        "criterion": "3. Catastrophic Uncontained Leak (flow > 20,000 GPM + reserves dropping >15%/min + pumps active)",
+        "status": "TRACKING",
+        "current_value": "4,500 GPM, reserves stable at 98%, pumps active at 42%",
+        "target": "flow > 20,000 GPM AND reserve drop > 15%/min AND pumps active",
+        "movement_since_last": "unknown"
+      },
+      {
+        "criterion": "4. Reserve Depletion During Outage (reserves < 10% + pumps offline)",
+        "status": "TRACKING",
+        "current_value": "Reserves at 98%, pumps online at 42%",
+        "target": "reserves < 10% AND pumps offline",
+        "movement_since_last": "unknown"
+      },
+      {
+        "criterion": "5. Destructive Mechanical Failure (cavitation CRITICAL_DAMAGE or untripped WARNING_ELEVATED)",
+        "status": "TRACKING",
+        "current_value": "NORMAL",
+        "target": "CRITICAL_DAMAGE or sustained WARNING_ELEVATED without trip",
+        "movement_since_last": "unknown"
+      }
+    ],
+    "compound_stress": {
+      "level": "MONITORING",
+      "usd_jpy": {
+        "current": null,
+        "threshold_status": "normal",
+        "trajectory": "stable"
+      },
+      "jgb_10y": {
+        "current": null,
+        "threshold_status": "normal",
+        "trajectory": "stable"
+      },
+      "brent": {
+        "current": null,
+        "threshold_status": "normal",
+        "trajectory": "stable"
+      },
+      "pre_loaded": false,
+      "pre_loaded_detail": "The compound stress matrix (USD/JPY, JGB 10Y, Brent Crude) is not applicable to this thesis context. This is a municipal water distribution system, not a financial instrument subject to macro currency/commodity stress. The thesis context does not define a Compound Stress Matrix section. Per LZ-EPH-001, reporting this section as not applicable rather than fabricating relevance.",
+      "stress_chain_proximity": "Not applicable — this thesis monitors physical infrastructure, not financial instruments. No compound stress matrix is defined in the thesis context."
+    },
+    "bear_pressure": 2,
+    "bear_pressure_reasoning": "The system is operating in an extremely healthy state with all five falsification indicators far from trigger thresholds. All directly measurable metrics are green. Bear pressure of 2 (not 0) reflects genuine epistemic concerns that are worth monitoring but do not constitute active threat: (1) SCADA automated failover logic is unverified in current data — the core thesis mechanism is assumed operational but not confirmed (severity 3, weighted 2.1); (2) single-point sensor dependency creates an epistemological risk where a failed sensor could mask degradation (severity 4, weighted 2.8); (3) backup pump readiness is invisible in current telemetry (severity 3, weighted 2.1). These are structural visibility gaps, not emerging threats. No kill switches are approaching. Previous bear pressure was 0; the move to 2 reflects identification of standing blind spots that were presumably present before but not articulated. Per LZ-EPH-002, maintaining near-zero bear pressure is appropriate given the evidence, but acknowledging these gaps prevents complacency.",
+    "layer2_summary": "System is in robust nominal condition with all five kill switches far from trigger thresholds. All directly measurable Tier 1 SCADA indicators confirm wide safety margins: pressure at 3.4x above contamination threshold, pump load at 42%, reserves at 98%, no cavitation or surge events, flow well below leak thresholds. However, three structural blind spots warrant Layer 3 attention: (1) the SCADA automated failover logic — the core thesis mechanism — has not been exercised or verified in this monitoring window; (2) sensor redundancy architecture is unknown, creating risk that a fail-to-normal sensor failure would be invisible to monitoring; (3) backup pump existence and readiness cannot be confirmed from available telemetry. These are visibility gaps in the monitoring system, not confirmed system deficiencies. Bear pressure at 2 reflects these epistemic concerns against an otherwise entirely nominal operational picture. Compound stress matrix is not applicable to this physical infrastructure thesis."
+  },
+  "_pipeline_version": "4-layer-v1",
+  "_generated_at": "2026-03-11T06:46:02.869Z",
+  "_layer1_raw": [
+    {
+      "signal": "System operating well within all safety envelopes",
+      "description": "All five falsification indicators are far from trigger thresholds. Sector 4 pressure at 68.5 PSI (threshold: 20 PSI), grid average at 65.2 PSI (threshold: 25 PSI), reserves at 98% (threshold: 10%), no cavitation, no surge events. The system has enormous margin across every monitored dimension.",
+      "direction": "ACCELERATION",
+      "severity": "low",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "sector_4_pressure_psi: 68.5, grid_average_pressure_psi: 65.2, high_zone_gravity_reserve_level_pct: 98, pump_cavitation_acoustic_sensor: NORMAL, surge_relief_valve_status: CLOSED",
+      "blind_spot": false,
+      "category": "structure",
+      "signal_ids": [
+        "20260311-0637-SIG-001"
+      ]
+    },
+    {
+      "signal": "Primary pump load at 42% — substantial headroom",
+      "description": "Pump station operating at 42% capacity during what operators describe as post-morning-peak. This suggests the system can absorb a demand spike of roughly 2.4x current load before reaching mechanical limits. This headroom is the first buffer before gravity reserves would need to engage.",
+      "direction": "ACCELERATION",
+      "severity": "low",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "primary_pump_station_load_pct: 42, operator_log noting morning peak is subsiding",
+      "blind_spot": false,
+      "category": "agent_capacity",
+      "signal_ids": [
+        "20260311-0637-SIG-002"
+      ]
+    },
+    {
+      "signal": "Gravity reserves near-full at 98%",
+      "description": "High-zone gravity reserve tanks are at 98%, indicating they were either recently topped off or have not been called upon. This is the passive failover backbone of the thesis. Near-full reserves mean maximum deployment time if primary pumps trip offline. The 2% deficit from 100% is itself a micro-signal worth noting.",
+      "direction": "ACCELERATION",
+      "severity": "moderate",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "high_zone_gravity_reserve_level_pct: 98",
+      "blind_spot": false,
+      "category": "technology",
+      "signal_ids": [
+        "20260311-0637-SIG-003"
+      ]
+    },
+    {
+      "signal": "Reserve tank not at 100% — minor unverified deficit",
+      "description": "Gravity reserve at 98%, not 100%. During a nominal, low-demand period this gap is unexplained. Possible causes: evaporation, minor leak, sensor calibration drift, or recent micro-draw. Not alarming, but in a system where reserves are the last-resort viability mechanism, understanding why they aren't fully topped off matters.",
+      "direction": "AMBIGUOUS",
+      "severity": "low",
+      "proximity": "near-term",
+      "confidence": "medium",
+      "evidence": "high_zone_gravity_reserve_level_pct: 98 during subsiding demand when tanks should be refilling to capacity",
+      "blind_spot": true,
+      "category": "assumption_decay",
+      "signal_ids": [
+        "20260311-0637-SIG-004"
+      ]
+    },
+    {
+      "signal": "Morning peak demand cycle subsiding",
+      "description": "Operator log confirms the highest-demand routine period (morning residential/commercial) is ending. System is transitioning into a historically lower-demand midday window. This reduces near-term probability of demand-driven stress events, but also means any anomalous demand spike would stand out clearly against low baseline.",
+      "direction": "ACCELERATION",
+      "severity": "low",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "operator_log: 'Routine morning peak demand subsiding. System nominal.'",
+      "blind_spot": false,
+      "category": "integration",
+      "signal_ids": [
+        "20260311-0637-SIG-005"
+      ]
+    },
+    {
+      "signal": "Surge relief valve closed — no transient pressure events",
+      "description": "The surge relief valve being CLOSED confirms no water hammer or pressure transients are occurring. This is a structural health indicator for the pipe network itself. An open or cycling valve would suggest rapid pump start/stop events or demand shocks propagating through the mains.",
+      "direction": "ACCELERATION",
+      "severity": "low",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "surge_relief_valve_status: CLOSED",
+      "blind_spot": false,
+      "category": "structure",
+      "signal_ids": [
+        "20260311-0637-SIG-006"
+      ]
+    },
+    {
+      "signal": "No fire department or industrial draw events reported",
+      "description": "The key external demand threat — multi-alarm fire apparatus pulling massive hydrant flow — is absent from the current data. However, the data provides no forward-looking indicator of fire risk (weather, industrial activity, event calendars). This is a latent, unpredictable demand source that could materialize with zero warning.",
+      "direction": "AMBIGUOUS",
+      "severity": "moderate",
+      "proximity": "near-term",
+      "confidence": "medium",
+      "evidence": "Absence of any abnormal flow or pressure signatures; operator log says 'nominal'",
+      "blind_spot": true,
+      "category": "macro",
+      "signal_ids": [
+        "20260311-0637-SIG-007"
+      ]
+    },
+    {
+      "signal": "SCADA automated protection logic untested in this cycle",
+      "description": "The automated pump protection and failover logic — the core mechanism that the thesis relies on — has not been exercised during this monitoring window. Its operational readiness is assumed, not verified. Last test/activation date is unknown from available data. Dormant safety systems can degrade silently.",
+      "direction": "AMBIGUOUS",
+      "severity": "moderate",
+      "proximity": "medium-term",
+      "confidence": "medium",
+      "evidence": "All systems nominal means no failover events have triggered; no data on last automated test or exercise",
+      "blind_spot": true,
+      "category": "assumption_decay",
+      "signal_ids": [
+        "20260311-0637-SIG-008"
+      ]
+    },
+    {
+      "signal": "Single-point sensor dependency unexamined",
+      "description": "The thesis relies on specific sensors (cavitation acoustic sensor, pressure transducers, flow meters). Current data shows all reading nominal, but there is no cross-validation or redundancy check visible. A failed sensor reading 'NORMAL' when conditions are degrading would be invisible in this data structure.",
+      "direction": "AMBIGUOUS",
+      "severity": "high",
+      "proximity": "medium-term",
+      "confidence": "medium",
+      "evidence": "Only one cavitation sensor value reported; no redundant sensor cross-check or last-calibration timestamp in data",
+      "blind_spot": true,
+      "category": "technology",
+      "signal_ids": [
+        "20260311-0637-SIG-009"
+      ]
+    },
+    {
+      "signal": "Operator staffing and alertness during low-stress period",
+      "description": "Nominal conditions with subsiding demand create complacency risk. Operator log is terse and routine. If a rapid-onset event occurs (main break, fire draw, pump failure), response time depends on operator vigilance during what feels like a quiet shift. Human factors degrade during low-stimulus periods.",
+      "direction": "AMBIGUOUS",
+      "severity": "moderate",
+      "proximity": "near-term",
+      "confidence": "low",
+      "evidence": "operator_log brevity and 'nominal' assessment; no mention of readiness checks or drills",
+      "blind_spot": true,
+      "category": "agent_capacity",
+      "signal_ids": [
+        "20260311-0637-SIG-010"
+      ]
+    },
+    {
+      "signal": "No regulatory or compliance alerts active",
+      "description": "Sector 4 pressure at 68.5 PSI is well above the 20 PSI state minimum safe operating threshold. No boil-water advisories, no groundwater infiltration risk, no regulatory reporting triggers. The system is in full compliance with implied state drinking water standards.",
+      "direction": "ACCELERATION",
+      "severity": "low",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "sector_4_pressure_psi: 68.5, far exceeding 20 PSI state minimum threshold",
+      "blind_spot": false,
+      "category": "regulatory",
+      "signal_ids": [
+        "20260311-0637-SIG-011"
+      ]
+    },
+    {
+      "signal": "Flow rate at 4500 GPM — no leak signature",
+      "description": "System total flow at 4,500 GPM during subsiding demand, well below the 20,000 GPM catastrophic leak threshold. Flow is consistent with normal post-peak residential/commercial use. No unexplained flow surplus that would indicate a main break or unmetered discharge.",
+      "direction": "ACCELERATION",
+      "severity": "low",
+      "proximity": "immediate",
+      "confidence": "high",
+      "evidence": "system_total_flow_gpm: 4500, combined with stable pressure readings and subsiding demand context",
+      "blind_spot": false,
+      "category": "integration",
+      "signal_ids": [
+        "20260311-0637-SIG-012"
+      ]
+    },
+    {
+      "signal": "Unknown condition of backup/redundant pump systems",
+      "description": "Data shows primary pump station load but provides no visibility into whether backup pumps exist, their readiness state, or maintenance status. The thesis assumes automated redundancy, but the data only shows one pump station metric. If primary pumps trip, what specifically comes online?",
+      "direction": "AMBIGUOUS",
+      "severity": "moderate",
+      "proximity": "medium-term",
+      "confidence": "low",
+      "evidence": "Only 'primary_pump_station_load_pct' reported; no secondary/backup pump data in telemetry feed",
+      "blind_spot": true,
+      "category": "assumption_decay",
+      "signal_ids": [
+        "20260311-0637-SIG-013"
+      ]
+    },
+    {
+      "signal": "Seasonal and weather context absent",
+      "description": "No temperature, season, or weather data provided. Extreme heat increases demand (irrigation, cooling) and fire risk simultaneously. Freezing conditions risk pipe bursts. The macro environment shaping demand patterns is invisible in the current data feed, creating a blind spot for anticipating demand surges.",
+      "direction": "AMBIGUOUS",
+      "severity": "moderate",
+      "proximity": "near-term",
+      "confidence": "medium",
+      "evidence": "Complete absence of environmental/weather data in telemetry feed or operator log",
+      "blind_spot": true,
+      "category": "macro",
+      "signal_ids": [
+        "20260311-0637-SIG-014"
+      ]
+    },
+    {
+      "signal": "No competing or alternative supply sources referenced",
+      "description": "The data shows a single distribution grid with no mention of mutual aid agreements, interconnections with adjacent sectors, or emergency water supply alternatives. If Sector 4 experiences a systemic failure beyond gravity reserves, it is unclear whether external supply pathways exist or have been negotiated.",
+      "direction": "AMBIGUOUS",
+      "severity": "moderate",
+      "proximity": "long-term",
+      "confidence": "low",
+      "evidence": "No inter-sector valve status, mutual aid references, or alternative supply data in telemetry or operator log",
+      "blind_spot": true,
+      "category": "competitive",
+      "signal_ids": [
+        "20260311-0637-SIG-015"
+      ]
+    }
+  ]
+}

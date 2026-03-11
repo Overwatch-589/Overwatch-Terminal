@@ -1,0 +1,24 @@
+{
+  "domain_name": "Municipal Water Infrastructure Telemetry",
+  "system_framing": "SCADA Grid Resilience and Structural Integrity Monitoring",
+  "action_recommendations": [
+    {
+      "id": "MAINTAIN_OPERATIONS",
+      "description": "Continue normal operations and telemetry polling. System functioning within standard parameters."
+    },
+    {
+      "id": "INCREASE_MONITORING",
+      "description": "Elevate polling frequency. Note automated safety system activations. Verify reserve deployment."
+    },
+    {
+      "id": "REDUCE_LOAD",
+      "description": "Initiate voluntary conservation protocols. Request demand source to throttle draw. Prepare manual valve overrides."
+    },
+    {
+      "id": "EMERGENCY_SHUTDOWN",
+      "description": "Evidence of uncontained structural failure or critical contamination risk. Immediately isolate affected sectors and initiate boil water protocols."
+    }
+  ],
+  "scoring_label": "Grid Viability Status",
+  "scoring_description": "Assessment of distribution network integrity, pressure maintenance, and failover capacity."
+}

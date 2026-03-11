@@ -1,0 +1,27 @@
+[
+  {
+    "layer3_inference": "Grid Operators hidden moves — off-log contingency coordination",
+    "signal_ids": [
+      "20260311-0737-SIG-006",
+      "20260311-0737-SIG-014"
+    ],
+    "rejection_reason": "Layer 3 correctly self-identified this as SPECULATIVE (3+ assumptions) with no supporting data, and the corrections ledger has rejected this inference class 5 times across the assessment chain (CL-002, CL-003, CL-005, CL-007, CL-008). Stripped from scoring per burden of proof Step 1 (SPECULATIVE = 75% discount) and Step 2 (no data = strip entirely). Layer 4 concurs with Layer 3's self-assessment. This is not an overrule — it is a confirmation that the inference was correctly identified and discarded.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-11T07:47:21.812Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "SCADA Automated Logic hidden moves — background diagnostics or sequence preparation",
+    "signal_ids": [
+      "20260311-0737-SIG-009"
+    ],
+    "rejection_reason": "Layer 3 correctly self-identified as SPECULATIVE (3 assumptions) with no supporting data. CL-001 and CL-004 have previously stripped this inference. Stripped per burden of proof.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-11T07:47:21.812Z",
+    "source": "layer4_reconcile"
+  }
+]

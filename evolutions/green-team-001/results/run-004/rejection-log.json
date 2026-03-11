@@ -1,0 +1,28 @@
+[
+  {
+    "layer3_inference": "SCADA may have pump restart interlock requiring cavitation sensor online",
+    "signal_ids": [
+      "20260311-0712-SIG-005",
+      "20260311-0712-SIG-008"
+    ],
+    "rejection_reason": "Classified SPECULATIVE by Layer 3 itself (3 assumptions, LOW confidence). No supporting data in telemetry, operator log, or thesis documentation. Per burden of proof: SPECULATIVE with no data support = stripped from scoring entirely. This inference cannot influence bear pressure or tactical recommendation.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-11T07:23:12.696Z",
+    "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Operators may be communicating restart plans through channels not visible in SCADA logs",
+    "signal_ids": [
+      "20260311-0712-SIG-009",
+      "20260311-0712-SIG-014"
+    ],
+    "rejection_reason": "Classified SPECULATIVE by Layer 3 itself (3 assumptions, LOW confidence). Directly addressed by corrections CL-002 and CL-003 which have been applied three times in the assessment chain. This is the most thoroughly vetted inference class in the entire analysis — and it has been correctly stripped each time. No data supports it.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-11T07:23:12.696Z",
+    "source": "layer4_reconcile"
+  }
+]

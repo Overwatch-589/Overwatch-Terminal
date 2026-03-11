@@ -1,0 +1,14 @@
+[
+  {
+    "layer3_inference": "Grid operators performing off-log coordination or readiness activities",
+    "signal_ids": [
+      "20260311-0725-SIG-012"
+    ],
+    "rejection_reason": "Layer 3 itself classified this as SPECULATIVE with 3 assumptions and zero evidence. The corrections ledger (CL-002, CL-003, CL-005, CL-007) has stripped this class of inference 4+ times. Layer 3 correctly self-identified this as unsupported. Layer 4 confirms the rejection.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-11T07:35:24.094Z",
+    "source": "layer4_reconcile"
+  }
+]

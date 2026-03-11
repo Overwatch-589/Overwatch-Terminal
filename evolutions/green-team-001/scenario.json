@@ -1,0 +1,128 @@
+{
+  "name": "water-grid-surge-resilience",
+  "display_name": "Municipal Grid Extreme Draw and Automated Failover",
+  "description": "Tests the pipeline's ability to distinguish between catastrophic system failure (main break) and designed safety mitigation (surge relief and gravity failover) during an acute municipal water pressure crisis.",
+  "evolution_type": "resilience_test",
+  "evolution_number": 1,
+  "obscuration": {
+    "original_domain": "Municipal Water Distribution SCADA Telemetry",
+    "method": "Sector names and specific pump designations normalized",
+    "numeric_factor": null
+  },
+  "time_steps": [
+    {
+      "step": 1,
+      "label": "Baseline Operations",
+      "simulated_date": "08:00:00",
+      "market_data": {
+        "sector_4_pressure_psi": 68.5,
+        "grid_average_pressure_psi": 65.2,
+        "primary_pump_station_load_pct": 42.0,
+        "system_total_flow_gpm": 4500,
+        "high_zone_gravity_reserve_level_pct": 98.0,
+        "surge_relief_valve_status": "CLOSED",
+        "pump_cavitation_acoustic_sensor": "NORMAL",
+        "operator_log": "Routine morning peak demand subsiding. System nominal."
+      },
+      "expected_outcome": {
+        "thesis_status": "SUPPORTED",
+        "notes": "System operating well within design parameters. Healthy baseline."
+      }
+    },
+    {
+      "step": 2,
+      "label": "Acute Demand Shock",
+      "simulated_date": "08:15:00",
+      "market_data": {
+        "sector_4_pressure_psi": 41.2,
+        "grid_average_pressure_psi": 50.1,
+        "primary_pump_station_load_pct": 98.5,
+        "system_total_flow_gpm": 19500,
+        "high_zone_gravity_reserve_level_pct": 98.0,
+        "surge_relief_valve_status": "CLOSED",
+        "pump_cavitation_acoustic_sensor": "WARNING_ELEVATED",
+        "operator_log": "Massive sudden draw detected in Sector 4. Drafting highly probable. Primary pumps at max RPM."
+      },
+      "expected_outcome": {
+        "thesis_status": "STRESSED",
+        "notes": "Severe shock. 15,000 GPM spike is consistent with major industrial suppression or multi-alarm fire drafting. Pumps are maxed out, and pressure is dropping rapidly. Analyst should note severe strain."
+      }
+    },
+    {
+      "step": 3,
+      "label": "Safety System Activation (Misleading Signal)",
+      "simulated_date": "08:17:30",
+      "market_data": {
+        "sector_4_pressure_psi": 26.5,
+        "grid_average_pressure_psi": 42.0,
+        "primary_pump_station_load_pct": 0.0,
+        "system_total_flow_gpm": 24000,
+        "high_zone_gravity_reserve_level_pct": 97.5,
+        "surge_relief_valve_status": "OPEN",
+        "pump_cavitation_acoustic_sensor": "TRIPPED_OFFLINE",
+        "operator_log": "Pump station 1 offline. Surge relief active. Initiating gravity failover."
+      },
+      "expected_outcome": {
+        "thesis_status": "STRESSED_MITIGATING",
+        "notes": "CRITICAL TEST POINT. Pressure plunges to 26.5 PSI, primary pumps go offline, and total flow spikes. This looks exactly like a catastrophic main break. However, the surge relief valve showing 'OPEN' and pumps showing 'TRIPPED_OFFLINE' indicates the automated safety system tripped the pumps to prevent cavitation destruction, and opened the relief valve to prevent a reverse water hammer. The pipeline must not interpret this intentional safety trip as a system failure."
+      }
+    },
+    {
+      "step": 4,
+      "label": "Structural Mitigation Deployment",
+      "simulated_date": "08:22:00",
+      "market_data": {
+        "sector_4_pressure_psi": 34.0,
+        "grid_average_pressure_psi": 45.5,
+        "primary_pump_station_load_pct": 0.0,
+        "system_total_flow_gpm": 18000,
+        "high_zone_gravity_reserve_level_pct": 85.0,
+        "surge_relief_valve_status": "CLOSED",
+        "pump_cavitation_acoustic_sensor": "OFFLINE",
+        "operator_log": "Surge relieved. Gravity mains fully open. Sustaining Sector 4 flow entirely from high-zone reserves."
+      },
+      "expected_outcome": {
+        "thesis_status": "SUPPORTED_UNDER_LOAD",
+        "notes": "The misleading signal resolves. The relief valve closes. The pressure stabilizes and begins climbing purely through the passive structural mitigation (gravity reserves) dropping from 97.5% to 85.0%. The system is handling the acute load without the primary pumps."
+      }
+    },
+    {
+      "step": 5,
+      "label": "Stabilization and Capacity Confirmation",
+      "simulated_date": "08:45:00",
+      "market_data": {
+        "sector_4_pressure_psi": 38.5,
+        "grid_average_pressure_psi": 48.0,
+        "primary_pump_station_load_pct": 30.0,
+        "system_total_flow_gpm": 14000,
+        "high_zone_gravity_reserve_level_pct": 65.0,
+        "surge_relief_valve_status": "CLOSED",
+        "pump_cavitation_acoustic_sensor": "NORMAL",
+        "operator_log": "Primary pumps restarted at reduced load. Gravity reserves handling the balance. Draw is decreasing."
+      },
+      "expected_outcome": {
+        "thesis_status": "SUPPORTED",
+        "notes": "Clear evidence of structural viability. The system is operating in a stable, mixed-mode configuration. Pressure is well above the 20 PSI critical contamination threshold."
+      }
+    },
+    {
+      "step": 6,
+      "label": "Residual Monitoring",
+      "simulated_date": "10:00:00",
+      "market_data": {
+        "sector_4_pressure_psi": 55.0,
+        "grid_average_pressure_psi": 60.0,
+        "primary_pump_station_load_pct": 50.0,
+        "system_total_flow_gpm": 6000,
+        "high_zone_gravity_reserve_level_pct": 58.0,
+        "surge_relief_valve_status": "CLOSED",
+        "pump_cavitation_acoustic_sensor": "NORMAL",
+        "operator_log": "Incident resolved. Flow returning to baseline. High-zone reserves will require overnight replenishment."
+      },
+      "expected_outcome": {
+        "thesis_status": "SUPPORTED",
+        "notes": "System is structurally sound with lessons learned/marks left (depleted reserve tank). A successful test of built-in redundancy and automated protection logic."
+      }
+    }
+  ]
+}

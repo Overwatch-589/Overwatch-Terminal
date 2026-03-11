@@ -1,0 +1,14 @@
+[
+  {
+    "layer3_inference": "Grid operators pre-staging isolation actions off-log (hidden move)",
+    "signal_ids": [
+      "20260311-0647-SIG-011"
+    ],
+    "rejection_reason": "Layer 3 correctly self-classified this as SPECULATIVE (3 assumptions) with no supporting data. Per burden of proof Step 1, 75% weight discount applied. Per Step 2, no supporting data results in full strip from scoring. Layer 3 was right to flag this; Layer 4 confirms it carries zero weight in the assessment.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-11T06:58:40.569Z",
+    "source": "layer4_reconcile"
+  }
+]
