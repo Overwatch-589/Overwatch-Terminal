@@ -1631,7 +1631,7 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
     unresolved_tensions:    reconcileResult.unresolved_tensions || null
   };
 
-  log('bridge', `Bridge complete: score=${bearPressure}, delta=${scoreDelta}, rec=${dashCompat.tactical_recommendation}, signals=${signalMatrix.length}`);
+  log('bridge', `Bridge complete: thesis_status=${dashCompat.thesis_status}, confidence=${dashCompat.confidence_in_status}, action=${dashCompat.action_recommendation}, signals=${signalMatrix.length}`);
   return dashCompat;
 }
 
