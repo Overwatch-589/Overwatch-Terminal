@@ -1411,7 +1411,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       });
       const raw = response.content[0].text;
       result = parseClaudeJSON(raw, 'layer4');
-      log('analysis', `Layer 4 complete: bear pressure ${result.final_bear_pressure}, recommendation: ${result.tactical_recommendation}, rejections: ${result.rejection_log?.length || 0}`);
+      log('analysis', `Layer 4 complete: thesis_status=${result.thesis_status}, confidence=${result.confidence_in_status}, action=${result.action_recommendation}, rejections: ${result.rejection_log?.length || 0}`);
       break;
     } catch (e) {
       err('analysis', `Layer 4 attempt ${attempt} failed: ${e.message}`);
