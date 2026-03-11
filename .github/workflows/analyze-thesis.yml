@@ -52,7 +52,7 @@ jobs:
         run: |
           git config user.name "overwatch-bot"
           git config user.email "overwatch-bot@users.noreply.github.com"
+          git pull --rebase
           git add analysis-output.json dashboard-data.json scripts/analysis-history.json scripts/events-history.json data/ index.html
           git diff --staged --quiet || git commit -m "analysis: $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git pull --rebase
           git push
