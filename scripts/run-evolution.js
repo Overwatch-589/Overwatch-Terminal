@@ -359,14 +359,14 @@ async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPa
 
     // Prune to top 15 (same as production)
     const SEVERITY_RANK = { critical: 0, high: 1, moderate: 2, low: 3 };
-    let threatsToAssess = sweepResults;
+    let signalsToAssess = sweepResults;
     if (sweepResults.length > 15) {
       const sorted = sweepResults
         .map((t, i) => ({ t, i }))
         .sort((a, b) => (SEVERITY_RANK[a.t.severity] ?? 9) - (SEVERITY_RANK[b.t.severity] ?? 9) || a.i - b.i);
-      threatsToAssess = sorted.slice(0, 15).sort((a, b) => a.i - b.i).map(({ t }) => t);
+      signalsToAssess = sorted.slice(0, 15).sort((a, b) => a.i - b.i).map(({ t }) => t);
       prunedSignals = sorted.slice(15).map(({ t }) => ({
-        signal_ids: t.signal_ids, threat: t.threat, severity: t.severity,
+        signal_ids: t.signal_ids, signal: t.signal, severity: t.severity,
         direction: t.direction, category: t.category, pruning_reason: 'severity_rank_cutoff'
       }));
       log('pipeline', `Pruned sweep from ${sweepResults.length} to 15 signals (${prunedSignals.length} pruned)`);
@@ -375,7 +375,7 @@ async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPa
     // ── Layer 2: CONTEXTUALIZE ──────────────────────────────────────
     console.log('\n═══ LAYER 2: CONTEXTUALIZE ═══');
     const contextualizeResult = await runContextualize(
-      threatsToAssess, marketData, previousScore, thesisContext, layerOptions
+      signalsToAssess, marketData, previousScore, thesisContext, layerOptions
     );
 
     if (!contextualizeResult) {
