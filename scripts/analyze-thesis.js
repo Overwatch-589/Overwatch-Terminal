@@ -1380,11 +1380,19 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       "corrections_ledger_action": "auto_commit | flag_for_review"
     }
   ],
+  "thesis_status": "STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE",
+  "confidence_in_status": "high | medium | low",
+  "thesis_status_reasoning": "2-3 sentences explaining why this status based on reconciled evidence",
+  "action_recommendation": "HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL",
+  "action_reasoning": "2-3 sentences explaining the action and its consistency with thesis_status",
+  "unresolved_tensions": [
+    {
+      "description": "what remains unresolved",
+      "watch_for": "what observable event would resolve this tension"
+    }
+  ],
   "final_bear_pressure": 0,
-  "pressure_vs_layer2": 0,
-  "pressure_reasoning": "1-2 sentences explaining the final number",
   "tactical_recommendation": "HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL",
-  "recommendation_reasoning": "2-3 sentences. What drives the call.",
   "monitoring_triggers": [],
   "overall_confidence": "high | medium | low",
   "biggest_uncertainty": "the single thing that most affects confidence",
