@@ -271,7 +271,7 @@ function setupResultsDir(scenarioDir, stepNumber) {
  * @param {number} previousScore    — previous bear pressure score (0 for first step)
  * @returns {Promise<object>}       — step result summary
  */
-async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPath, previousScore) {
+async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPath, previousScore, domainConfig) {
   const stepNum = step.step;
   const label = step.label || `Step ${stepNum}`;
   const marketData = step.market_data;
@@ -297,6 +297,7 @@ async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPa
     rejectionLogPath,
     enableTelegram: false,
     enablePromoteRejections: false,  // We handle promotion ourselves between steps
+    domainConfig: domainConfig || null,
   };
 
   const gateOptions = {
