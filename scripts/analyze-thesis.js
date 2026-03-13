@@ -1325,6 +1325,14 @@ Layer 4 has FULL AUTHORITY to overrule Layer 3. The detective proposes. The judg
 
 6. THESIS STATUS — Declare thesis_status as one of: STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE. Then declare confidence_in_status as: high | medium | low. Write thesis_status_reasoning (2-3 sentences explaining why this status, not just describing the data). CONTESTED means evidence is pulling in both directions simultaneously — hold the paradox, do not force resolution. INSUFFICIENT_EVIDENCE means the data does not support a determination — say so.
 
+6b. UNRESOLVED TENSIONS — For each unresolved tension, assign an impact_score (integer 1-5):
+   1 = Informational: Resolution would not change the action recommendation.
+   2 = Minor: Could shift confidence but not the action.
+   3 = Moderate: Resolution could change the action by one level.
+   4 = Significant: Resolution would likely change the action.
+   5 = Critical: This tension alone could flip the entire assessment.
+Score honestly. Do not downplay a critical tension to avoid acting on it. Do not inflate a minor tension to justify holding position. The scores are auditable.
+
 7. ACTION RECOMMENDATION — Select action_recommendation from: ${actionEnumValues}. Write action_reasoning (2-3 sentences). The action must be consistent with thesis_status: STRENGTHENING cannot produce ${actionSevere}. INSUFFICIENT_EVIDENCE cannot produce ${actionSevere}. If thesis_status is CONTESTED, action must be ${actionMonitor} or an intermediate option — never ${actionSevere} on contested evidence alone.
 
 8. REJECTION LOG — If Layer 4 overruled any Layer 3 inference, document it with root cause and corrections ledger trigger.
@@ -1419,7 +1427,8 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
   "unresolved_tensions": [
     {
       "description": "what remains unresolved",
-      "watch_for": "what observable event would resolve this tension"
+      "watch_for": "what observable event would resolve this tension",
+      "impact_score": 3
     }
   ],
   "final_bear_pressure": 0,

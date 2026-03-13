@@ -549,6 +549,25 @@ function validateLayer4(output, inputData) {
     }
   }
 
+  // AD #14: Tension impact_score validation
+  if (Array.isArray(output.unresolved_tensions)) {
+    for (const tension of output.unresolved_tensions) {
+      if (tension.impact_score === undefined || tension.impact_score === null) {
+        flags.push(createFlag(
+          'AD14-TENSION-NO-SCORE',
+          `Tension: ${(tension.description || 'unnamed').substring(0, 80)}`,
+          'unresolved_tension is missing impact_score. Each tension must declare its materiality (1-5).'
+        ));
+      } else if (!Number.isInteger(tension.impact_score) || tension.impact_score < 1 || tension.impact_score > 5) {
+        flags.push(createFlag(
+          'AD14-TENSION-INVALID-SCORE',
+          `Tension: ${(tension.description || 'unnamed').substring(0, 80)}`,
+          `impact_score is ${tension.impact_score} — must be an integer 1-5.`
+        ));
+      }
+    }
+  }
+
   // AD #14: Auditor override consistency check
   if (output.auditor_override === true) {
     if (!output.state_lock_active) {

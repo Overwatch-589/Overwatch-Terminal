@@ -193,6 +193,9 @@ function extractTrajectory(history, lookback) {
     escalation:       ACTION_ESCALATION[entry.action_recommendation] ??
                       ACTION_ESCALATION[entry.tactical_recommendation] ?? null,
     tensions_count:   Array.isArray(entry.unresolved_tensions) ? entry.unresolved_tensions.length : 0,
+    tensions_score_sum: Array.isArray(entry.unresolved_tensions)
+      ? entry.unresolved_tensions.reduce((sum, t) => sum + (Number.isInteger(t.impact_score) ? t.impact_score : 3), 0)
+      : 0,
     bear_pressure:    entry.bear_pressure_score ?? null,
     kill_switches:    entry.kill_switches || [],
     timestamp:        entry.timestamp || entry._generated_at || null,
@@ -265,11 +268,14 @@ function detectSustainedMismatch(trajectory, domainConfig) {
  * @param {Array} trajectory
  * @returns {object|null}
  */
-function detectAccumulatingTensions(trajectory) {
+function detectAccumulatingTensions(trajectory, domainConfig) {
   if (trajectory.length < 3) return null;
 
   const tensionCounts = trajectory.map(t => t.tensions_count);
-  const latest = tensionCounts[tensionCounts.length - 1];
+  const scoreSums = trajectory.map(t => t.tensions_score_sum);
+  const latestCount = tensionCounts[tensionCounts.length - 1];
+  const latestScore = scoreSums[scoreSums.length - 1];
+  const scoreThreshold = (domainConfig && domainConfig.tension_score_threshold) || 8;
 
   // Check if tensions are declining — if so, the system is resolving, not stagnating
   let declining = true;
@@ -281,6 +287,19 @@ function detectAccumulatingTensions(trajectory) {
   }
   if (declining) return null;
 
+  // Score-based detection: a single critical tension (score 5) or cumulative high-impact
+  // tensions can fire the trigger even if count is low
+  if (latestScore >= scoreThreshold) {
+    return {
+      type: 'HIGH_IMPACT_UNRESOLVED_TENSIONS',
+      detail: `Unresolved tension impact scores: ${scoreSums.join(' → ')} (threshold: ${scoreThreshold}). High-materiality questions remain unanswered.`,
+      severity: latestScore >= scoreThreshold + 4 ? 'HIGH' : 'MEDIUM',
+      tension_trajectory: tensionCounts,
+      score_trajectory: scoreSums,
+    };
+  }
+
+  // Count-based fallback: persistent high count even if individual scores are moderate
   const allHigh = tensionCounts.every(c => c >= 3);
   const growing = tensionCounts.length >= 3 &&
     tensionCounts[tensionCounts.length - 1] > tensionCounts[0];
@@ -288,18 +307,20 @@ function detectAccumulatingTensions(trajectory) {
   if (allHigh) {
     return {
       type: 'PERSISTENT_UNRESOLVED_TENSIONS',
-      detail: `Unresolved tensions have been at ${tensionCounts.join(' → ')} across the last ${trajectory.length} entries. Persistent inability to resolve questions is itself evidence for acting.`,
-      severity: latest >= 5 ? 'HIGH' : 'MEDIUM',
+      detail: `Unresolved tensions at ${tensionCounts.join(' → ')} (scores: ${scoreSums.join(' → ')}) across ${trajectory.length} entries. Persistent inability to resolve questions is itself evidence for acting.`,
+      severity: latestCount >= 5 ? 'HIGH' : 'MEDIUM',
       tension_trajectory: tensionCounts,
+      score_trajectory: scoreSums,
     };
   }
 
-  if (growing && latest >= 4) {
+  if (growing && latestCount >= 4) {
     return {
       type: 'GROWING_UNRESOLVED_TENSIONS',
-      detail: `Unresolved tensions growing: ${tensionCounts.join(' → ')}. The system is accumulating questions faster than resolving them.`,
+      detail: `Unresolved tensions growing: ${tensionCounts.join(' → ')} (scores: ${scoreSums.join(' → ')}). Accumulating questions faster than resolving them.`,
       severity: 'MEDIUM',
       tension_trajectory: tensionCounts,
+      score_trajectory: scoreSums,
     };
   }
 
@@ -560,7 +581,7 @@ async function runBlindAuditor(options) {
   const sustained = detectSustainedMismatch(trajectory, domainConfig);
   if (sustained) mismatches.push(sustained);
 
-  const tensions = detectAccumulatingTensions(trajectory);
+  const tensions = detectAccumulatingTensions(trajectory, domainConfig);
   if (tensions) mismatches.push(tensions);
 
   const trend = detectTrajectoryTrend(trajectory);

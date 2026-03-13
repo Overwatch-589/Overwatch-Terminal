@@ -41,6 +41,9 @@
       "trigger": "status_direction != action_direction"
     }
   ],
+  "tension_score_threshold": 8,
+  "tension_score_threshold_description": "Cumulative impact score across unresolved tensions that triggers the Blind Auditor.",
+
   "auditor_model_provider": "gemini",
   "auditor_model_name": "gemini-2.5-pro",
   "auditor_phase1_instructions": "The Blind Auditor has flagged a mismatch between your evidence trajectory and your action trajectory. Address this finding: either commit to acting on your assessment or justify the hold with specific, verifiable evidence that warrants continued restraint. A justification must name what specific new information you are waiting for and what observable outcome would resolve the question.",

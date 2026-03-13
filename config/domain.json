@@ -46,6 +46,9 @@
     }
   ],
 
+  "tension_score_threshold": 8,
+  "tension_score_threshold_description": "Cumulative impact score across unresolved tensions that triggers the Blind Auditor. A single tension at 5 + any other tension at 3 or higher fires the trigger.",
+
   "auditor_model_provider": "gemini",
   "auditor_model_name": "gemini-2.5-pro",
 
