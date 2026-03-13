@@ -879,8 +879,8 @@ async function main() {
           log('auditor', `Step ${step.step}: Phase 1 advisory written. Next step Layer 4 must address.`);
         }
       // Re-write step-result.json with auditor metadata attached
-        const stepRunDir = path.join(resultsBaseDir, 'results', `run-${String(step.step).padStart(3, '0')}`);
-        const stepResultPath = path.join(stepRunDir, 'step-result.json');
+        const stepResultDir = path.join(resultsBaseDir, 'results', `run-${String(step.step).padStart(3, '0')}`);
+        const stepResultPath = path.join(stepResultDir, 'step-result.json');
         if (fs.existsSync(stepResultPath)) {
           fs.writeFileSync(stepResultPath, JSON.stringify(result, null, 2));
           log('auditor', `Step ${step.step}: step-result.json updated with auditor metadata`);
