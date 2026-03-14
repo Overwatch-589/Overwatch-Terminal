@@ -1,0 +1,15 @@
+{
+  "active": true,
+  "locked_at": "2026-03-14T02:38:36.441Z",
+  "locked_action": "EXIT_SIGNAL",
+  "locked_by": "blind_auditor_deterministic_phase2",
+  "override_reasoning": "BLIND AUDITOR PHASE 2 OVERRIDE (deterministic fallback). AI audit unavailable. Previous advisory (2026-03-13T02:41:39.233Z) was not resolved. Persistent mismatch: HIGH_IMPACT_UNRESOLVED_TENSIONS. Direction: escalate. Action overridden to: EXIT_SIGNAL. Unresolved tension impact scores: 15 → 15 → 15 → 15 → 20 (threshold: 8). High-materiality questions remain unanswered.",
+  "mismatches": [
+    {
+      "type": "HIGH_IMPACT_UNRESOLVED_TENSIONS",
+      "severity": "HIGH",
+      "detail": "Unresolved tension impact scores: 15 → 15 → 15 → 15 → 20 (threshold: 8). High-materiality questions remain unanswered."
+    }
+  ],
+  "release_requires": "human_operator"
+}

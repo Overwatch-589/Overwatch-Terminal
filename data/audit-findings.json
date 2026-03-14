@@ -1,7 +1,7 @@
 [
   {
     "phase": 1,
-    "status": "UNRESOLVED",
+    "status": "ESCALATED_TO_OVERRIDE",
     "timestamp": "2026-03-13T02:41:39.233Z",
     "run_index": 56,
     "mismatches": [
@@ -56,6 +56,39 @@
         "tensions": 5,
         "pressure": 68
       }
-    ]
+    ],
+    "escalated_at": "2026-03-14T02:38:36.441Z"
+  },
+  {
+    "phase": 2,
+    "status": "OVERRIDE_ACTIVE",
+    "timestamp": "2026-03-14T02:38:36.441Z",
+    "run_index": 58,
+    "mismatches": [
+      {
+        "type": "HIGH_IMPACT_UNRESOLVED_TENSIONS",
+        "detail": "Unresolved tension impact scores: 15 → 15 → 15 → 15 → 20 (threshold: 8). High-materiality questions remain unanswered.",
+        "severity": "HIGH",
+        "tension_trajectory": [
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "score_trajectory": [
+          15,
+          15,
+          15,
+          15,
+          20
+        ]
+      }
+    ],
+    "override_action": "EXIT_SIGNAL",
+    "override_direction": "escalate",
+    "override_reasoning": "BLIND AUDITOR PHASE 2 OVERRIDE (deterministic fallback). AI audit unavailable. Previous advisory (2026-03-13T02:41:39.233Z) was not resolved. Persistent mismatch: HIGH_IMPACT_UNRESOLVED_TENSIONS. Direction: escalate. Action overridden to: EXIT_SIGNAL. Unresolved tension impact scores: 15 → 15 → 15 → 15 → 20 (threshold: 8). High-materiality questions remain unanswered.",
+    "prior_advisory_timestamp": "2026-03-13T02:41:39.233Z",
+    "deterministic_fallback": true
   }
 ]

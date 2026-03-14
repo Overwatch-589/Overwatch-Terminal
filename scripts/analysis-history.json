@@ -2294,5 +2294,36 @@
     "events_drafted_count": 4,
     "thesis_pulse": "The compound stress matrix has effectively reached CRITICAL status: Brent at $99.14 (above $95 critical threshold), USD/JPY at 158.86 (above 157 elevated, approaching 160 critical), and JGB 10Y at 2.2",
     "counter_thesis_score": 72
+  },
+  {
+    "timestamp": "2026-03-14T02:38:37.050Z",
+    "run_type": "evening",
+    "stress_score": 82,
+    "stress_level": "CRITICAL",
+    "xrp_price": 1.4,
+    "fear_greed": 16,
+    "usd_jpy": 159.33,
+    "jpn_10y": 2.2452,
+    "brent_crude": 103.14,
+    "dxy": 100.4998,
+    "sp500": 0.12,
+    "etf_daily_flow": -6080604,
+    "dex_volume_24h": 2859283,
+    "rlusd_market_cap": 1552712177.2432241,
+    "probability_framework": {
+      "bear": 18,
+      "base": 44,
+      "mid": 28,
+      "bull": 10
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 8,
+    "events_drafted_count": 5,
+    "thesis_pulse": "The compound stress matrix is now firmly CRITICAL with two of three legs breached: Brent at $103.14 (above $95 critical) and USD/JPY at 159.33 (above $157 elevated, approaching $160 critical). JGB 10Y",
+    "counter_thesis_score": 68
   }
 ]
