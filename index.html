@@ -5090,6 +5090,7 @@ function render360Report(r) {
       WEAKENING:             { bg:'rgba(249,115,22,0.12)', border:'#f97316', color:'#f97316' },
       CONTESTED:             { bg:'rgba(168,85,247,0.12)', border:'#a855f7', color:'#a855f7' },
       INSUFFICIENT_EVIDENCE: { bg:'rgba(234,179,8,0.12)',  border:'#eab308', color:'#eab308' },
+      FALSIFIED:             { bg:'rgba(220,38,38,0.15)',  border:'#dc2626', color:'#dc2626' },
     };
     const sc = statusMap[tsStatus] || statusMap.STABLE;
     statusEl.textContent = tsStatus.replace(/_/g, ' ');

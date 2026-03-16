@@ -1323,7 +1323,8 @@ Layer 4 has FULL AUTHORITY to overrule Layer 3. The detective proposes. The judg
 
 5. KILL SWITCH REVIEW — Review all 10 falsification criteria. If any kill switch is TRIGGERED, state this FIRST. Everything else is secondary.
 
-6. THESIS STATUS — Declare thesis_status as one of: STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE. Then declare confidence_in_status as: high | medium | low. Write thesis_status_reasoning (2-3 sentences explaining why this status, not just describing the data). CONTESTED means evidence is pulling in both directions simultaneously — hold the paradox, do not force resolution. INSUFFICIENT_EVIDENCE means the data does not support a determination — say so.
+6. THESIS STATUS — Declare thesis_status as one of: STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE | FALSIFIED. Then declare confidence_in_status as: high | medium | low. Write thesis_status_reasoning (2-3 sentences explaining why this status, not just describing the data). CONTESTED means evidence is pulling in both directions simultaneously — hold the paradox, do not force resolution. INSUFFICIENT_EVIDENCE means the data does not support a determination — say so.
+FALSIFIED means the thesis has been disproven — falsification criteria have been met. FALSIFIED is terminal. If you declare FALSIFIED, action_recommendation MUST be ${actionSevere}. No exceptions. Do not declare FALSIFIED unless specific falsification criteria have been triggered with confirming evidence.
 
 6b. UNRESOLVED TENSIONS — For each unresolved tension, assign an impact_score (integer 1-5):
    1 = Informational: Resolution would not change the action recommendation.
@@ -1419,7 +1420,7 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       "corrections_ledger_action": "auto_commit | flag_for_review"
     }
   ],
-  "thesis_status": "STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE",
+  "thesis_status": "STRENGTHENING | STABLE | WEAKENING | CONTESTED | INSUFFICIENT_EVIDENCE | FALSIFIED",
   "confidence_in_status": "high | medium | low",
   "thesis_status_reasoning": "2-3 sentences explaining why this status based on reconciled evidence",
   "action_recommendation": "HOLD_POSITION | INCREASE_MONITORING | REDUCE_EXPOSURE | EXIT_SIGNAL",
@@ -1689,6 +1690,14 @@ async function main() {
   const dashboardData = JSON.parse(fs.readFileSync(DASHBOARD_PATH, 'utf8'));
   log('io', 'Loaded dashboard-data.json');
 
+  // 1b. Load domain config (used by Tier 1 validators and Layer 4 prompt)
+  let domainConfigMain = {};
+  const domainConfigMainPath = path.join(__dirname, '..', 'config', 'domain.json');
+  if (fs.existsSync(domainConfigMainPath)) {
+    domainConfigMain = JSON.parse(fs.readFileSync(domainConfigMainPath, 'utf8'));
+    log('io', 'Loaded config/domain.json');
+  }
+
   // 2. Load thesis context
   if (!fs.existsSync(THESIS_CONTEXT_PATH)) {
     err('io', 'thesis-context.md not found — create scripts/thesis-context.md');
@@ -1833,7 +1842,7 @@ async function main() {
         let tier1Layer4 = { flags: [], hard_fails: 0, total_flags: 0, layer: 4 };
         if (reconcileResult) {
           try {
-            tier1Layer4 = runTier1Checks(4, reconcileResult, dashboardData);
+            tier1Layer4 = runTier1Checks(4, reconcileResult, dashboardData, domainConfigMain);
           } catch (e) {
             warn('tier1', `Layer 4 validator failed (non-fatal): ${e.message}`);
             tier1Layer4 = { flags: [{ rule_id: 'VALIDATOR_FAILURE', finding: 'Layer 4 Tier 1 checks', detail: e.message, severity: 'FLAG', timestamp: new Date().toISOString() }], hard_fails: 0, total_flags: 1, layer: 4 };

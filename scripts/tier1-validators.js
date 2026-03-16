@@ -525,7 +525,7 @@ function validateLayer3(output, inputData) {
  * @param {object} inputData — dashboard-data.json (passed through for completeness)
  * @returns {Array} flags
  */
-function validateLayer4(output, inputData) {
+function validateLayer4(output, inputData, domainConfig) {
   const flags = [];
 
   // LZ-EH-005: Check contradiction resolution
@@ -568,6 +568,31 @@ function validateLayer4(output, inputData) {
     }
   }
 
+  // Thesis status enum validation
+  const VALID_THESIS_STATUSES = ['STRENGTHENING', 'STABLE', 'WEAKENING', 'CONTESTED', 'INSUFFICIENT_EVIDENCE', 'FALSIFIED'];
+  if (output.thesis_status && !VALID_THESIS_STATUSES.includes(output.thesis_status)) {
+    flags.push(createFlag(
+      'LZ-THESIS-STATUS-INVALID',
+      'Thesis Status',
+      `thesis_status "${output.thesis_status}" is not a valid enum value. Must be one of: ${VALID_THESIS_STATUSES.join(', ')}.`,
+      'HARD_FAIL'
+    ));
+  }
+
+  // FALSIFIED requires action_severe — no exceptions
+  if (output.thesis_status === 'FALSIFIED') {
+    const actionSevere = (domainConfig && domainConfig.action_severe) || 'EXIT_SIGNAL';
+    const action = output.action_recommendation || output.tactical_recommendation;
+    if (action !== actionSevere) {
+      flags.push(createFlag(
+        'LZ-FALSIFIED-ACTION-MISMATCH',
+        'FALSIFIED Status',
+        `thesis_status is FALSIFIED but action_recommendation is "${action}" — must be ${actionSevere}. FALSIFIED is terminal.`,
+        'HARD_FAIL'
+      ));
+    }
+  }
+
   // AD #14: Auditor override consistency check
   if (output.auditor_override === true) {
     if (!output.state_lock_active) {
@@ -602,14 +627,14 @@ function validateLayer4(output, inputData) {
  * @param {object} inputData   — dashboard-data.json (for input quality checks)
  * @returns {object} { flags: Array, hard_fails: number, total_flags: number, layer: number }
  */
-function runTier1Checks(layerNumber, output, inputData) {
+function runTier1Checks(layerNumber, output, inputData, domainConfig) {
   let flags = [];
 
   switch (layerNumber) {
     case 1: flags = validateLayer1(output, inputData); break;
     case 2: flags = validateLayer2(output, inputData); break;
     case 3: flags = validateLayer3(output, inputData); break;
-    case 4: flags = validateLayer4(output, inputData); break;
+    case 4: flags = validateLayer4(output, inputData, domainConfig); break;
     default:
       console.error(`[tier1] Unknown layer number: ${layerNumber}`);
       return { flags: [], hard_fails: 0, total_flags: 0, layer: layerNumber };

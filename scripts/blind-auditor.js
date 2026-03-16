@@ -45,6 +45,7 @@ const STATUS_DIRECTION = {
   'WEAKENING':            -1,
   'CONTESTED':             0,   // Contested is not directional — it holds paradox
   'INSUFFICIENT_EVIDENCE': 0,
+  'FALSIFIED':            -2,  // Terminal — worse than WEAKENING, forces EXIT_SIGNAL
 };
 
 // Action recommendation → escalation level (higher = more escalated)
