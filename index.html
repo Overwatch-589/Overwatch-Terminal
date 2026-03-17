@@ -653,7 +653,6 @@ textarea:focus { border-color:var(--accent-cyan); }
     </div>
     <button class="refresh-btn" onclick="refreshAll()">↻ SYNC</button>
   </div>
-  <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);letter-spacing:1px;margin-top:4px;" id="dataUpdated">Data: --</div>
 </div>
 
 <!-- TICKER -->
@@ -699,7 +698,7 @@ textarea:focus { border-color:var(--accent-cyan); }
     <!-- Hero: What the system just decided -->
     <div class="full-card" style="border-color:rgba(26,138,110,0.3);padding:20px;">
       <div style="text-align:center;margin-bottom:16px;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--accent-green);letter-spacing:3px;margin-bottom:8px;">OVERWATCH TERMINAL</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--text-primary);letter-spacing:4px;margin-bottom:8px;">OVERWATCH TERMINAL</div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);letter-spacing:2px;">POWERED BY THE INTEGRITY PROTOCOL — PATENT PENDING</div>
       </div>
 
@@ -784,7 +783,7 @@ textarea:focus { border-color:var(--accent-cyan); }
         <span class="data-value" id="summaryTxns">--</span>
       </div>
       <div class="data-row">
-        <span class="data-label">XRP DESTROYED</span>
+        <span class="data-label">XRP BURNED</span>
         <span class="data-value amber" id="summaryBurned">--</span>
       </div>
     </div>
@@ -4215,10 +4214,7 @@ function renderEvents() {
   // Update count badge
   const countEl = document.getElementById('eventCount');
   if (countEl) {
-    const total = EVENTS_DATA.length;
-    countEl.textContent = filtered.length < total
-      ? `${filtered.length} / ${total} EVENTS`
-      : `${total} EVENTS`;
+    countEl.textContent = `${filtered.length} EVENTS`;
   }
 
   if (filtered.length === 0) {
