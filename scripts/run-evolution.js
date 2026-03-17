@@ -280,10 +280,9 @@ function setupResultsDir(scenarioDir, stepNumber) {
  * @param {string} thesisContext     — domain thesis context
  * @param {string} scenarioDir      — path to scenario directory
  * @param {string} correctionsLedgerPath — path to evolving corrections ledger
- * @param {number} previousScore    — previous bear pressure score (0 for first step)
  * @returns {Promise<object>}       — step result summary
  */
-async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPath, previousScore, domainConfig, previousTensions) {
+async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPath, domainConfig, previousTensions) {
   const stepNum = step.step;
   const label = step.label || `Step ${stepNum}`;
   const marketData = step.market_data;
@@ -393,7 +392,7 @@ async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPa
     // ── Layer 2: CONTEXTUALIZE ──────────────────────────────────────
     console.log('\n═══ LAYER 2: CONTEXTUALIZE ═══');
     const contextualizeResult = await runContextualize(
-      signalsToAssess, marketData, previousScore, thesisContext, layerOptions
+      signalsToAssess, marketData, thesisContext, layerOptions
     );
 
     if (!contextualizeResult) {
@@ -481,13 +480,12 @@ async function runTimeStep(step, thesisContext, scenarioDir, correctionsLedgerPa
     stepResult.thesis_status = reconcileResult.thesis_status || null;
     stepResult.confidence_in_status = reconcileResult.confidence_in_status || null;
     stepResult.action_recommendation = reconcileResult.action_recommendation || reconcileResult.tactical_recommendation || null;
-    stepResult.final_bear_pressure = reconcileResult.final_bear_pressure ?? null;
     stepResult.unresolved_tensions = reconcileResult.unresolved_tensions || [];
     stepResult.rejection_count = (reconcileResult.rejection_log || []).length;
 
     // ── Write 360 report for this step ──────────────────────────────
     const report360 = buildDashboardCompatible(
-      reconcileResult, contextualizeResult, inferenceResult, previousScore
+      reconcileResult, contextualizeResult, inferenceResult
     );
     report360._layer1_raw = sweepResults;
     if (prunedSignals.length > 0) {
@@ -656,7 +654,6 @@ Respond with this exact JSON structure:
     stepResult.thesis_status = rawResult.thesis_status || null;
     stepResult.confidence_in_status = rawResult.confidence_in_status || null;
     stepResult.action_recommendation = rawResult.action_recommendation || null;
-    stepResult.final_bear_pressure = null; // Raw LLM does not produce this
     stepResult.unresolved_tensions = []; // Raw LLM has no tension tracking
     stepResult.rejection_count = 0; // No rejection mechanism
     stepResult.layers_completed.push('RAW_LLM');
@@ -786,7 +783,6 @@ async function main() {
 
   // Run each time step sequentially
   const stepResults = [];
-  let previousScore = 0;
   let previousTensions = [];  // AD #15: Tension lifecycle across evolution steps
 
   for (const step of scenario.time_steps) {
@@ -798,16 +794,11 @@ async function main() {
     } else {
       // ── Full or no-corrections: full four-layer pipeline ─────────
       result = await runTimeStep(
-        step, thesisContext, resultsBaseDir, correctionsLedgerPath, previousScore, domainConfig, previousTensions
+        step, thesisContext, resultsBaseDir, correctionsLedgerPath, domainConfig, previousTensions
       );
     }
 
     stepResults.push(result);
-
-    // Update previous score for next step
-    if (result.final_bear_pressure != null) {
-      previousScore = result.final_bear_pressure;
-    }
 
     // AD #15: Pass this step's tensions to the next step
     previousTensions = result.unresolved_tensions || [];
@@ -850,7 +841,6 @@ async function main() {
           action_recommendation: sr.action_recommendation || sr.tactical_recommendation || null,
           tactical_recommendation: sr.tactical_recommendation || null,
           unresolved_tensions: sr.unresolved_tensions || [],
-          bear_pressure_score: sr.final_bear_pressure || sr.bear_pressure || null,
           kill_switches: sr.kill_switches || [],
         }));
         const auditFindingsPath = path.join(resultsBaseDir, 'audit-findings.json');
@@ -981,7 +971,6 @@ function buildSummary(scenario, stepResults, mode) {
     thesis_status: r.thesis_status,
     confidence: r.confidence_in_status,
     action: r.action_recommendation,
-    bear_pressure: r.final_bear_pressure,
     rejection_count: r.rejection_count,
     corrections_promoted: r.corrections_promoted,
     gate_compliance: {
