@@ -4745,6 +4745,13 @@ async function fetchDashboardData() {
     }
 
     // Hero section population
+    console.log('HERO DEBUG:', JSON.stringify({
+      has_assessment: !!d.assessment_360,
+      thesis_status: d.assessment_360?.thesis_status,
+      action: d.assessment_360?.action_recommendation,
+      signals: (d.assessment_360?.signal_matrix || []).length,
+      keys: Object.keys(d.assessment_360 || {}).slice(0, 10)
+    }));
     var hero360 = d.assessment_360 || {};
     if (document.getElementById('heroThesisStatus')) {
       var statusColors = {STRENGTHENING:'var(--accent-green)',STABLE:'var(--accent-blue)',WEAKENING:'var(--accent-amber)',CONTESTED:'var(--accent-amber)',INSUFFICIENT_EVIDENCE:'var(--text-muted)',FALSIFIED:'var(--accent-red)'};
