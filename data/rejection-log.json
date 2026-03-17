@@ -709,5 +709,19 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-16T14:02:33.276Z"
+  },
+  {
+    "layer3_inference": "Ripple is likely aware that on-chain metrics don't support the institutional settlement narrative and is focusing resources on off-chain institutional relationships that will generate visible on-chain activity only when institutional clients go live",
+    "signal_ids": [
+      "20260317-0022-SIG-002",
+      "20260317-0022-SIG-004",
+      "20260317-0022-SIG-010"
+    ],
+    "rejection_reason": "Not fully rejected but heavily discounted. The inference is FLAGGED (2 assumptions) with partial data support, yielding 25% effective weight. The specific claim that off-chain relationships WILL generate on-chain activity is an unverified prediction per LZ-RC-005. The Hidden Road investment is real (scored separately) but the causal chain from investment → institutional onboarding → XRPL settlement activity requires two unproven steps. Per LZ-EPH-003, this approaches speculative territory. The inference is retained as context but stripped from bear pressure scoring.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-17T00:38:02.938Z",
+    "source": "layer4_reconcile"
   }
 ]
