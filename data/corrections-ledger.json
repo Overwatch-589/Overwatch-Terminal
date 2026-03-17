@@ -864,5 +864,23 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "ACTIVE"
+  },
+  {
+    "id": "CL-049",
+    "date_of_error": "2026-03-17",
+    "date_identified": "2026-03-17",
+    "identified_by": "layer_4_override",
+    "belief": "BOJ preparing intervention toolkit for USD/JPY 160 defense",
+    "reality": "Zero supporting data from Layer 2. The inference is plausible (BOJ has historically intervened at round numbers) but entirely unverifiable with current data. Per CL-043, JPY holding below 160 is not evidence of intervention. The inference rests on two assumptions (BOJ is preparing, and preparation is for 160 specifically) with no data support.",
+    "root_cause": "Zero supporting data from Layer 2. The inference is plausible (BOJ has historically intervened at round numbers) but entirely unverifiable with current data. Per CL-043, JPY holding below 160 is not evidence of intervention. The inference rests on two assumptions (BOJ is preparing, and preparation is for 160 specifically) with no data support.",
+    "root_cause_type": "INSUFFICIENT_EVIDENCE",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]

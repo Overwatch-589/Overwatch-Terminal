@@ -723,5 +723,20 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-17T00:38:02.938Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "BOJ preparing intervention toolkit for USD/JPY 160 defense",
+    "signal_ids": [
+      "20260317-0146-SIG-002",
+      "20260317-0146-SIG-012"
+    ],
+    "rejection_reason": "Zero supporting data from Layer 2. The inference is plausible (BOJ has historically intervened at round numbers) but entirely unverifiable with current data. Per CL-043, JPY holding below 160 is not evidence of intervention. The inference rests on two assumptions (BOJ is preparing, and preparation is for 160 specifically) with no data support.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-17T02:01:21.740Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-17T02:01:21.743Z"
   }
 ]
