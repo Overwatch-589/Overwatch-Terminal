@@ -766,5 +766,20 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-18T14:01:38.037Z"
+  },
+  {
+    "layer3_inference": "Ripple's hidden actions are genuinely unknown — cannot be determined from available evidence",
+    "signal_ids": [
+      "20260319-0233-SIG-005",
+      "20260319-0233-SIG-012"
+    ],
+    "rejection_reason": "This is not a rejection of a bad inference — Layer 3 was epistemically honest. The item was correctly classified as SPECULATIVE with 3+ assumptions and stripped per burden of proof rules. No corrections ledger action needed. Layer 3 performed correctly by declining to speculate about unobservable Ripple activities.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-19T02:48:52.488Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-19T02:48:52.490Z"
   }
 ]

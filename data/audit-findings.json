@@ -93,7 +93,7 @@
   },
   {
     "phase": 1,
-    "status": "UNRESOLVED",
+    "status": "ESCALATED_TO_OVERRIDE",
     "timestamp": "2026-03-15T13:28:35.444Z",
     "run_index": 60,
     "mismatches": [
@@ -150,6 +150,67 @@
         "pressure": 72
       }
     ],
+    "deterministic_fallback": true,
+    "escalated_at": "2026-03-19T02:49:50.077Z"
+  },
+  {
+    "phase": 2,
+    "status": "OVERRIDE_ACTIVE",
+    "timestamp": "2026-03-19T02:49:50.077Z",
+    "run_index": 60,
+    "mismatches": [
+      {
+        "type": "CRITICAL_TENSION_PERSISTENCE",
+        "detail": "Critical tension(s) persisting 3+ runs without action escalation: T-1 (5 runs), T-2 (5 runs), T-3 (5 runs), T-5 (5 runs), T-4 (5 runs), T-6 (5 runs).",
+        "severity": "HIGH",
+        "persistent_tensions": [
+          {
+            "tension_id": "T-1",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-2",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-3",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-5",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-4",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-6",
+            "runs": 5
+          }
+        ]
+      },
+      {
+        "type": "ZOMBIE_ESCALATION",
+        "detail": "Tension(s) with creeping score escalation over 4+ runs: T-6 (4 → 4 → 4 → 5). Slow-creep trajectory without resolution.",
+        "severity": "HIGH",
+        "zombies": [
+          {
+            "tension_id": "T-6",
+            "scores": [
+              4,
+              4,
+              4,
+              5
+            ]
+          }
+        ]
+      }
+    ],
+    "override_action": "EXIT_SIGNAL",
+    "override_direction": "escalate",
+    "override_reasoning": "BLIND AUDITOR PHASE 2 OVERRIDE (deterministic fallback). AI audit unavailable. Previous advisory (2026-03-15T13:28:35.444Z) was not resolved. Persistent mismatch: CRITICAL_TENSION_PERSISTENCE, ZOMBIE_ESCALATION. Direction: escalate. Action overridden to: EXIT_SIGNAL. Critical tension(s) persisting 3+ runs without action escalation: T-1 (5 runs), T-2 (5 runs), T-3 (5 runs), T-5 (5 runs), T-4 (5 runs), T-6 (5 runs).",
+    "prior_advisory_timestamp": "2026-03-15T13:28:35.444Z",
     "deterministic_fallback": true
   }
 ]
