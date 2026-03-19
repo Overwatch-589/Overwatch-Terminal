@@ -781,5 +781,21 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-19T02:48:52.490Z"
+  },
+  {
+    "layer3_inference": "Ripple hidden moves — likely conducting private institutional engagement, PermDEX demonstrations, RLUSD integration discussions",
+    "signal_ids": [
+      "20260319-1327-SIG-006",
+      "20260319-1327-SIG-010",
+      "20260319-1327-SIG-012"
+    ],
+    "rejection_reason": "Three unproven assumptions with zero observable evidence. Five prior corrections (CL-038/041/042/052) on this exact pattern. Layer 3 correctly self-classified as SPECULATIVE and stripped, but the inference should not have been generated at all given the correction history. Per LZ-EPH-003, an inference built on three or more unproven assumptions is speculative regardless of individual plausibility.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-19T13:42:45.826Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-19T13:42:45.828Z"
   }
 ]
