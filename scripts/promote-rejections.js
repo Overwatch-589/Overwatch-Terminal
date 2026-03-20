@@ -51,7 +51,7 @@ function promoteRejections() {
       confidence_in_lesson: (r.confidence_in_rejection || 'medium').toUpperCase(),
       times_applied: 0,
       times_applicable_but_missed: 0,
-      status: 'ACTIVE'
+      status: 'NEEDS_ENRICHMENT'
     };
     nextId++;
     return entry;

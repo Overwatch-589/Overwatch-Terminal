@@ -175,8 +175,9 @@ function loadCorrectionsLedger(customPath) {
     if (fs.existsSync(ledgerPath)) {
       const data = JSON.parse(fs.readFileSync(ledgerPath, 'utf8'));
       if (Array.isArray(data)) {
-        log('ledger', `Corrections ledger loaded: ${data.length} active entries`);
-        return data;
+        const active = data.filter(e => e.status === 'ACTIVE');
+        log('ledger', `Corrections ledger loaded: ${active.length} active of ${data.length} total entries`);
+        return active;
       }
     }
     log('ledger', 'Corrections ledger not found or empty — proceeding with empty ledger');
