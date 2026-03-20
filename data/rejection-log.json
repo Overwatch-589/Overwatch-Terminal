@@ -809,5 +809,18 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-20T02:41:53.032Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "SEC/US Regulators coordinated regulatory sequencing — next step OCC/FDIC interpretive letter on digital commodity custody",
+    "signal_ids": [
+      "20260320-1320-SIG-001",
+      "20260320-1320-SIG-010"
+    ],
+    "rejection_reason": "FLAGGED classification (2 assumptions) with only partial data support yields 25% effective weight. The inference that the 48-hour timing indicates deliberate coordination rather than coincidence requires an assumption that cannot be verified. The prediction of an OCC/FDIC interpretive letter is forward-looking speculation with no supporting evidence. Per LZ-RC-005, predictions carry fundamentally different weight than measurements. This hidden move does not meet the evidentiary threshold to influence scoring or recommendations.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-20T13:35:48.279Z",
+    "source": "layer4_reconcile"
   }
 ]
