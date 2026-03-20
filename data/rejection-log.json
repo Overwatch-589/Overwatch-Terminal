@@ -797,5 +797,17 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-19T13:42:45.828Z"
+  },
+  {
+    "layer3_inference": "BTC ETF daily outflows indicate systemic institutional capital flight at full severity",
+    "signal_ids": [
+      "20260320-0226-SIG-009"
+    ],
+    "rejection_reason": "The daily outflow (-$51.9M) is contradicted by the weekly net flow (+$363.8M). Per LZ-RC-002, a single data point does not establish a trend. Per LZ-MR-001, a trend confirmed across multiple timeframes is more significant. The weekly data contradicts the daily panic narrative. The signal is FLAGGED not rejected entirely, but its severity is materially reduced.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-20T02:41:53.032Z",
+    "source": "layer4_reconcile"
   }
 ]
