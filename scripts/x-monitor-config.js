@@ -12,13 +12,13 @@ const X_MONITOR_ACCOUNTS = {
       'SECGov',
       'HiddenRoadHQ',
       'SBIGroupJP',
+      'EleanorTerrett',
     ],
   },
   tier2: {
     weight: 2,
     label: 'Domain Monitors',
     accounts: [
-      'EleanorTerrett',
       'JohnEDeaton1',
       'FilanLaw',
       'HesterPeirce',
@@ -30,6 +30,7 @@ const X_MONITOR_ACCOUNTS = {
       'TheBlock__',
       'WatcherGuru',
       'ChairmanSelig',
+      'EvernorthXRP',
     ],
   },
 };
