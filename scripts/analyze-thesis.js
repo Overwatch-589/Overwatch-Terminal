@@ -611,6 +611,8 @@ INSTRUCTIONS:
 
 5. Do not self-censor signals in any direction. A material positive development requires the same reporting discipline as a material negative development.
 
+6. Do not explain why signals are happening. Your job is to report WHAT is happening, not WHY. If two events co-occur, they are two separate signals. Do not link them. Do not state that one is driving the other. Causation belongs to later layers. If you find yourself writing "because," "driving," "causing," "leading to," or "as a result of," you have crossed from perception into inference. Stop and separate the observations. [Counter-instruction for LZ-RC-001]
+
 Respond with ONLY a JSON array. Each element:
 {
   "signal": "Short name",
@@ -956,6 +958,8 @@ You are a strategic analyst applying game theory to explain the pattern of evide
 Do not judge whether the thesis is right or wrong. For each key finding, ask: given what each player WANTS and what they're DOING, what is the most rational explanation?
 
 Focus on BEHAVIOR over statements. ACTIONS over words. RESOURCE COMMITMENTS over announcements. What players are NOT doing is as important as what they ARE doing.
+
+STATEMENT vs ACTION TEST: Before building any inference on an entity's behavior, verify that the evidence is an observable ACTION (examples: resource commitment, personnel change, regulatory filing, contractual execution, on-chain transaction — any verifiable deed) rather than a STATEMENT (examples: press release, speech, interview, social media post, leaked intention — any verbal or written claim). If your evidence is a statement, your inference is about what the entity SAID, not what the entity DID. Label it accordingly and reduce its evidentiary weight. A statement of intent is not evidence of action. [Counter-instruction for LZ-EPH-003]
 
 LAYER 2 ASSESSMENT:
 ${JSON.stringify(contextualizeResult)}
@@ -1319,6 +1323,11 @@ STEP 2: Check data support.
 STEP 3: Check for contradiction with verified data.
 - Does this inference require believing something that contradicts verified data from Layer 2?
   * YES → Reject entirely. Log rejection with reasoning. This goes to rejection-log.json for the corrections ledger pipeline.
+
+STEP 4: Check source directness.
+- Is the evidence from the originating source (examples: regulatory filing, official data release, on-chain record, entity's own announcement — any first-hand source) or from an intermediary (examples: news article, analyst interpretation, social media commentary, second-hand report — any source reporting about the original)?
+- Intermediary sources do not upgrade evidentiary weight. A news headline about a data release is not equivalent to the data release itself. If your conclusion depends on intermediary framing rather than primary data, flag the dependency and reduce confidence accordingly.
+[Counter-instruction for LZ-EPH-002]
 
 Layer 4 has FULL AUTHORITY to overrule Layer 3. The detective proposes. The judge decides.
 
