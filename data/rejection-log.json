@@ -822,5 +822,19 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-20T13:35:48.279Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Ripple hidden moves — any specific private activity inference",
+    "signal_ids": [
+      "20260321-0213-SIG-014"
+    ],
+    "rejection_reason": "Layer 3 correctly self-rejected per CL-034/053. Layer 4 confirms: five prior corrections on this exact pattern. No current-cycle observable indicator exists. SPECULATIVE classification and discard is the correct output.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-21T02:29:33.136Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-21T02:29:33.139Z"
   }
 ]
