@@ -36,6 +36,7 @@ const { runLayerZeroGate } = require('./layer-zero-gate');
 const { runBlindAuditor, applyAuditorToOutput } = require('./blind-auditor');
 const { assembleTrace } = require('./assemble-trace');
 const { logPaperTrades, applyDispositions } = require('./x402-paper-trade-logger');
+const { constrainRequests, recordOutcomes } = require('./x402-constrained-acquisition');
 
 const DASHBOARD_PATH      = path.join(__dirname, '..', 'dashboard-data.json');
 const ANALYSIS_PATH       = path.join(__dirname, '..', 'analysis-output.json');
@@ -2121,6 +2122,20 @@ async function main() {
             }
           } catch (dispErr) {
             warn('x402', `Disposition writeback failed (non-fatal): ${dispErr.message}`);
+          }
+
+          // ── AD #17: Constrained Acquisition Engine (Post-Disposition) ────
+          try {
+            const ptPath = path.join(__dirname, '..', 'data', 'x402-paper-trades.json');
+            if (fs.existsSync(ptPath)) {
+              const ptLog = JSON.parse(fs.readFileSync(ptPath, 'utf8'));
+              const acqResult = constrainRequests(ptLog, domainConfigMain, { runTimestamp: generatedAt });
+              if (acqResult.total_constrained > 0) {
+                log('acq', `Constrained ${acqResult.total_constrained} of ${acqResult.total_approved} approved requests (${acqResult.rejected_by_materiality} below threshold, ${acqResult.rejected_by_cap} over cap)`);
+              }
+            }
+          } catch (acqErr) {
+            warn('acq', `Constrained acquisition failed (non-fatal): ${acqErr.message}`);
           }
         } else {
           // Layer 4 failed — fall back to Layer 2 output via old bridge
