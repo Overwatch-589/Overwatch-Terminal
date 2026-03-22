@@ -1342,6 +1342,17 @@ textarea:focus { border-color:var(--accent-cyan); }
         </div>
       </div>
 
+      <!-- 7b. Compound Index Convergence -->
+      <div class="full-card">
+        <div class="s360-hdr" onclick="toggle360('ci')">
+          <h3 style="margin:0;">📊 COMPOUND INDEX CONVERGENCE</h3>
+          <span class="s360-toggle" id="s360-toggle-ci">▲</span>
+        </div>
+        <div class="s360-body" id="s360-body-ci">
+          <div id="s360-compound-indices" style="display:grid;grid-template-columns:1fr;gap:8px;"></div>
+        </div>
+      </div>
+
       <!-- 8. Kill Switch Status -->
       <div class="full-card">
         <div class="s360-hdr" onclick="toggle360('ks')">
@@ -6284,6 +6295,53 @@ function render360Report(r) {
     </div>
     <p style="font-size:11px;color:var(--text-secondary);line-height:1.55;">${eh(bc.assessment ?? '')}</p>`
   );
+
+  // 7b. Compound Index Convergence
+  const ciStatusColors = {
+    'CONVERGING': '#22c55e',
+    'PATTERN_FORMING': '#3b82f6',
+    'MIXED': '#eab308',
+    'INSUFFICIENT_DATA': '#8a9bba'
+  };
+  const ciDirIcons = {
+    'POSITIVE': '▲',
+    'NEGATIVE': '▼',
+    'CONTESTED': '◆',
+    'UNDETERMINED': '—'
+  };
+  const ciDirColors = {
+    'POSITIVE': '#22c55e',
+    'NEGATIVE': '#ef4444',
+    'CONTESTED': '#eab308',
+    'UNDETERMINED': '#8a9bba'
+  };
+  const ciArr = r.compound_indices ?? [];
+  setHtml('s360-compound-indices', ciArr.map(ci => {
+    const sc = ciStatusColors[ci.convergence_status] ?? '#8a9bba';
+    const di = ciDirIcons[ci.convergence_direction] ?? '—';
+    const dc = ciDirColors[ci.convergence_direction] ?? '#8a9bba';
+    const pct = Math.round((ci.agreement_ratio ?? 0) * 100);
+    const inv = ci.inverse ? ' <span style="font-size:8px;color:#f97316;font-weight:700;letter-spacing:1px;">INVERSE</span>' : '';
+    const obs = (ci.total > 0) ? `${ci.assessable}/${ci.total} visible` : '';
+    const dirLabel = ci.inverse
+      ? (ci.convergence_direction === 'POSITIVE' ? 'COMPETITIVE PRESSURE' : ci.convergence_direction === 'NEGATIVE' ? 'NO DISPLACEMENT' : ci.convergence_direction)
+      : ci.convergence_direction;
+    return `<div style="border:1px solid ${sc}44;border-radius:8px;padding:10px;background:${sc}0a;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--text-primary);">${eh(ci.name ?? '')}${inv}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:${sc};letter-spacing:1px;">${ci.convergence_status ?? 'N/A'}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+        <span style="font-size:12px;color:${dc};">${di}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:${dc};font-weight:600;">${dirLabel}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);margin-left:auto;">${obs}</span>
+      </div>
+      <div style="background:rgba(255,255,255,0.05);border-radius:4px;height:6px;margin-bottom:4px;">
+        <div style="background:${sc};height:100%;border-radius:4px;width:${pct}%;transition:width 0.3s;"></div>
+      </div>
+      <div style="font-size:10px;color:var(--text-secondary);line-height:1.5;">${eh(ci.reasoning ?? '')}</div>
+    </div>`;
+  }).join('') || '<div style="font-size:11px;color:var(--text-muted);padding:8px;">No compound index data yet</div>');
 
   // 8. Kill Switch Status
   const ksColors = { safe:'#22c55e', warning:'#eab308', danger:'#f97316', triggered:'#ef4444', no_data:'#8a9bba' };
