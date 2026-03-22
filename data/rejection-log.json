@@ -848,5 +848,29 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-21T13:25:14.417Z"
+  },
+  {
+    "layer3_inference": "Ripple hidden moves — private institutional engagement activity",
+    "signal_ids": [],
+    "rejection_reason": "Layer 3 correctly classified this as SPECULATIVE/INSUFFICIENT_EVIDENCE. Layer 4 confirms the rejection. CL-034 and CL-053 document five prior failures on this exact inference pattern. Zero current-cycle observable indicators. The inference was properly suppressed by Layer 3 but I confirm and strengthen the rejection: no Ripple private activity inference should enter scoring without at least one current-cycle observable indicator.",
+    "root_cause": "INSUFFICIENT_EVIDENCE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-22T13:28:49.797Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-22T13:28:49.800Z"
+  },
+  {
+    "layer3_inference": "F-35 combat damage claim — Iran hit stealth fighter",
+    "signal_ids": [
+      "20260322-1311-SIG-014"
+    ],
+    "rejection_reason": "Not fully rejected but substantially discounted. Single source (Deaton tweet, Tier 2), non-domain expert, no corroboration from defense sources. Per LZ-EH-004, anomalous claim treated as potential source failure first. Per LZ-EH-001, single-source data is less reliable. Reduced from Layer 2's 2.1 to 1.5. The claim may be true but cannot be weighted in the assessment without independent verification from defense-specific sources.",
+    "root_cause": "SOURCE_CREDIBILITY_ERROR",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-22T13:28:49.797Z",
+    "source": "layer4_reconcile"
   }
 ]
