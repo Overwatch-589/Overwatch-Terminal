@@ -1961,6 +1961,7 @@ async function main() {
   // ── Signal ID assignment (deterministic, code-assigned — AD #8)
   let prunedSignals = [];
   const runTs = new Date().toISOString().replace(/[-:]/g, '').slice(0, 13).replace('T', '-');
+    const generatedAt = new Date().toISOString();
   if (Array.isArray(sweepResults)) {
     for (let i = 0; i < sweepResults.length; i++) {
       sweepResults[i].signal_ids = [`${runTs}-SIG-${String(i + 1).padStart(3, '0')}`];
