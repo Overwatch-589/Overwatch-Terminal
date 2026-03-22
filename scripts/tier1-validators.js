@@ -471,6 +471,23 @@ function validateLayer2(output, inputData) {
     }
   }
 
+  // Compound Index structural checks (Layer 2)
+  if (Array.isArray(output.compound_index_evaluation)) {
+    const validStatuses = ['CONVERGING', 'PATTERN_FORMING', 'MIXED', 'INSUFFICIENT_DATA'];
+    const validDirections = ['POSITIVE', 'NEGATIVE', 'CONTESTED', 'UNDETERMINED'];
+    for (const ci of output.compound_index_evaluation) {
+      if (!ci.index_id) {
+        flags.push(createFlag('CI-MISSING-ID', 'Compound Index', 'compound_index_evaluation entry missing index_id.', 'HARD_FAIL'));
+      }
+      if (ci.convergence_status && !validStatuses.includes(ci.convergence_status)) {
+        flags.push(createFlag('CI-INVALID-STATUS', `Index ${ci.index_id || 'unknown'}`, `convergence_status "${ci.convergence_status}" is invalid. Must be: ${validStatuses.join(', ')}.`, 'HARD_FAIL'));
+      }
+      if (ci.convergence_direction && !validDirections.includes(ci.convergence_direction)) {
+        flags.push(createFlag('CI-INVALID-DIRECTION', `Index ${ci.index_id || 'unknown'}`, `convergence_direction "${ci.convergence_direction}" is invalid. Must be: ${validDirections.join(', ')}.`, 'HARD_FAIL'));
+      }
+    }
+  }
+
   return flags;
 }
 
@@ -750,6 +767,34 @@ function validateLayer4(output, inputData, domainConfig, previousTensions) {
         'auditor_override is true but auditor_override_reasoning is empty. Every override must include the Auditor reasoning.',
         'HARD_FAIL'
       ));
+    }
+  }
+
+  // Compound Index structural checks (Layer 4)
+  if (Array.isArray(output.compound_index_review)) {
+    const validStatuses = ['CONVERGING', 'PATTERN_FORMING', 'MIXED', 'INSUFFICIENT_DATA'];
+    const validDirections = ['POSITIVE', 'NEGATIVE', 'CONTESTED', 'UNDETERMINED'];
+    for (const ci of output.compound_index_review) {
+      if (!ci.index_id) {
+        flags.push(createFlag('CI-L4-MISSING-ID', 'Compound Index Review', 'compound_index_review entry missing index_id.', 'HARD_FAIL'));
+      }
+      if (ci.final_convergence_status && !validStatuses.includes(ci.final_convergence_status)) {
+        flags.push(createFlag('CI-L4-INVALID-STATUS', `Index ${ci.index_id || 'unknown'}`, `final_convergence_status "${ci.final_convergence_status}" is invalid. Must be: ${validStatuses.join(', ')}.`, 'HARD_FAIL'));
+      }
+      if (ci.final_convergence_direction && !validDirections.includes(ci.final_convergence_direction)) {
+        flags.push(createFlag('CI-L4-INVALID-DIRECTION', `Index ${ci.index_id || 'unknown'}`, `final_convergence_direction "${ci.final_convergence_direction}" is invalid. Must be: ${validDirections.join(', ')}.`, 'HARD_FAIL'));
+      }
+      if (ci.override === true && (!ci.override_reasoning || ci.override_reasoning.trim() === '')) {
+        flags.push(createFlag('CI-L4-OVERRIDE-NO-REASONING', `Index ${ci.index_id || 'unknown'}`, 'Override is true but override_reasoning is empty. Every override must be justified.', 'HARD_FAIL'));
+      }
+    }
+  }
+
+  // Falsification review structural check
+  if (output.falsification_review) {
+    const fr = output.falsification_review;
+    if (fr.falsification_review_triggered === true && fr.falsification_review_result !== 'FALSIFIED' && (!fr.survival_justification || fr.survival_justification.trim() === '')) {
+      flags.push(createFlag('CI-FALSIFICATION-NO-JUSTIFICATION', 'Falsification Review', 'Falsification review triggered but not FALSIFIED and no survival_justification provided. Layer 4 must justify why the thesis survives.', 'HARD_FAIL'));
     }
   }
 
