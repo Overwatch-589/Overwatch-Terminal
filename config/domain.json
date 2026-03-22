@@ -217,5 +217,15 @@
     "geopolitical_analysis",
     "technical_infrastructure",
     "competitive_intelligence"
-  ]
+  ],
+
+  "acquisition_constraints_description": "AD #17: Constrained Knowledge Acquisition. Cognitive bandwidth limits on acquisition processing. Economic cost (x402) and cognitive cost (AD #17) are separate constraints with separate learning loops. Domain-specific values — replace when deploying on a new domain.",
+
+  "acquisition_token_cap_per_request": 2000,
+  "acquisition_max_requests_per_cycle": 5,
+  "structural_gap_probe_cadence": "sunday_audit",
+  "acquisition_materiality_threshold": 3,
+  "acquisition_outcome_retention": 200,
+  "acquisition_dormancy_threshold": 4,
+  "question_recycling_threshold": 3
 }
