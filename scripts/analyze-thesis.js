@@ -1800,7 +1800,7 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
   // 5b. compound_indices[] — reshape from Layer 4's compound_index_review[]
   // Enrich with Layer 2 observability data and config inverse flag
   const l2Indices = contextualizeResult.compound_index_evaluation || [];
-  const compoundIndices = (reconcileResult.compound_index_review || []).map(ci => {
+  let compoundIndices = (reconcileResult.compound_index_review || []).map(ci => {
     const l2Match = l2Indices.find(l2 => l2.index_id === ci.index_id);
     return {
       id:                    ci.index_id,
@@ -1815,6 +1815,24 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
       override:              ci.override || false
     };
   });
+
+  // Backfill: indices Layer 2 evaluated but Layer 4 skipped (e.g. INSUFFICIENT_DATA indices)
+  for (const l2ci of l2Indices) {
+    if (!compoundIndices.find(ci => ci.id === l2ci.index_id)) {
+      compoundIndices.push({
+        id:                    l2ci.index_id,
+        name:                  l2ci.index_name,
+        convergence_status:    l2ci.convergence_status || 'INSUFFICIENT_DATA',
+        convergence_direction: l2ci.convergence_direction || 'UNDETERMINED',
+        agreement_ratio:       l2ci.agreement_ratio || 0,
+        assessable:            l2ci.assessable_components || 0,
+        total:                 l2ci.total_components || 0,
+        reasoning:             'Layer 4 did not review this index. Layer 2 assessment carried forward.',
+        inverse:               l2ci.inverse || false,
+        override:              false
+      });
+    }
+  }
 
   // 6. Top-level scalar fields
 
