@@ -886,5 +886,17 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-22T22:25:05.679Z"
+  },
+  {
+    "layer3_inference": "Hidden move: Ripple preparing to bridge RLUSD liquidity from Ethereum to XRPL",
+    "signal_ids": [
+      "20260323-1329-SIG-009"
+    ],
+    "rejection_reason": "Three assumptions required (Ripple intends migration, PermDEX readiness triggers it, demand follows infrastructure). Per burden of proof Step 1, SPECULATIVE inferences receive 75% weight discount and do NOT influence bear pressure score or tactical recommendation. This inference is noted as context only. The null hypothesis (Ripple deployed where demand exists, no planned migration) holds without requiring this alternative.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-23T13:47:17.942Z",
+    "source": "layer4_reconcile"
   }
 ]
