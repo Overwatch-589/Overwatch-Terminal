@@ -368,5 +368,94 @@
     "override_reasoning": "BLIND AUDITOR PHASE 2 OVERRIDE (deterministic fallback). AI audit unavailable. Previous advisory (2026-03-22T22:26:14.739Z) was not resolved. Persistent mismatch: CRITICAL_TENSION_PERSISTENCE, X402_STALE_PURCHASE_REPETITION, X402_NEGLIGENT_HOARDING. Direction: escalate. Action overridden to: EXIT_SIGNAL. Critical tension(s) persisting 3+ runs without action escalation: T-3 (5 runs), T-10 (5 runs), T-5 (5 runs), T-4 (5 runs), T-8 (5 runs), T-7 (5 runs), T-6 (5 runs), T-9 (5 runs).",
     "prior_advisory_timestamp": "2026-03-22T22:26:14.739Z",
     "deterministic_fallback": true
+  },
+  {
+    "phase": 1,
+    "status": "UNRESOLVED",
+    "timestamp": "2026-03-23T02:53:41.507Z",
+    "run_index": 60,
+    "mismatches": [
+      {
+        "type": "X402_STALE_PURCHASE_REPETITION",
+        "detail": "Repeated purchases in same category: on_chain_analytics (6x), market_data (4x). Check corrections ledger for whether this category consistently fails to move the assessment.",
+        "severity": "MEDIUM",
+        "stale_categories": [
+          {
+            "category": "on_chain_analytics",
+            "count": 6
+          },
+          {
+            "category": "market_data",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "type": "X402_NEGLIGENT_HOARDING",
+        "detail": "100% of cycle budget unspent while 8 critical tension(s) with observable resolution paths remain unresolved: T-3, T-10, T-7, T-5, T-4, T-8, T-6, T-9. Capital exists to be deployed against risk, not conserved for a clean spending record.",
+        "severity": "HIGH",
+        "unspent_pct": 1,
+        "critical_with_paths": [
+          "T-3",
+          "T-10",
+          "T-7",
+          "T-5",
+          "T-4",
+          "T-8",
+          "T-6",
+          "T-9"
+        ]
+      },
+      {
+        "type": "INQUIRY_SCOPE_CREEP",
+        "severity": "MEDIUM",
+        "detail": "Token budget averaging 100% of cap (2000/2000) while 60% of outcomes are NO_CHANGE. System may be formulating overly complex questions without analytical value.",
+        "source": "AD17_COGNITIVE_DETECTOR",
+        "timestamp": "2026-03-23T02:53:41.501Z"
+      },
+      {
+        "type": "STRUCTURAL_GAP_NEGLECT",
+        "severity": "LOW",
+        "detail": "5 structural gap(s) have promotable_if conditions but zero probing records exist after 60 runs. System may be ignoring opportunities to resolve observability limitations.",
+        "source": "AD17_COGNITIVE_DETECTOR",
+        "timestamp": "2026-03-23T02:53:41.501Z"
+      },
+      {
+        "type": "QUESTION_RECYCLING",
+        "severity": "MEDIUM",
+        "detail": "Acquisition requests targeting the same ID across 3+ cycles without status change: T-9 (4x). System may be stuck in an acquisition loop — escalate to a new angle or close the tension.",
+        "source": "AD17_COGNITIVE_DETECTOR",
+        "timestamp": "2026-03-23T02:53:41.501Z"
+      }
+    ],
+    "advisory_text": "The Blind Auditor has flagged a mismatch between your evidence trajectory and your action trajectory. Address this finding: either commit to acting on your assessment or justify the hold with specific, verifiable evidence that warrants continued restraint. A justification must name what specific new information you are waiting for and what observable outcome would resolve the question.",
+    "trajectory_summary": [
+      {
+        "status": "CONTESTED",
+        "action": "EXIT_SIGNAL",
+        "tensions": 8
+      },
+      {
+        "status": "CONTESTED",
+        "action": "EXIT_SIGNAL",
+        "tensions": 8
+      },
+      {
+        "status": "CONTESTED",
+        "action": "EXIT_SIGNAL",
+        "tensions": 8
+      },
+      {
+        "status": "CONTESTED",
+        "action": "REDUCE_EXPOSURE",
+        "tensions": 8
+      },
+      {
+        "status": "WEAKENING",
+        "action": "EXIT_SIGNAL",
+        "tensions": 8
+      }
+    ],
+    "deterministic_fallback": true
   }
 ]
