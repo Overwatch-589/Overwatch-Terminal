@@ -992,5 +992,23 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "NEEDS_ENRICHMENT"
+  },
+  {
+    "id": "CL-055",
+    "date_of_error": "2026-03-22",
+    "date_identified": "2026-03-22",
+    "identified_by": "human_review",
+    "belief": "Tensions persisting for 3 consecutive runs (1.5 days) without action escalation indicate system failure requiring emergency override",
+    "reality": "Macro-thesis tensions (regulatory frameworks, institutional adoption, geopolitical corridor development) resolve on weeks-to-months timescales. A 1.5-day persistence window is shorter than the minimum resolution period for the domain. The override fired on 8 tensions simultaneously — all macro signals that had not yet had time to play out.",
+    "root_cause": "critical_persistence_threshold set to 3 runs (1.5 days) without calibration to domain-specific signal resolution timescales. Threshold was a reasonable default but was never adjusted after observing actual tension lifecycle durations.",
+    "root_cause_type": "MISCALIBRATION",
+    "prevention": "Calibrate critical_persistence_threshold to domain signal timescales. For macro-thesis monitoring, minimum threshold should exceed one full weekly audit cycle. AD #16 calibration candidate: system should learn optimal persistence thresholds from observed tension resolution patterns.",
+    "lesson": "Persistence thresholds must be calibrated to the timescale of the domain's signals, not to pipeline run frequency. A threshold denominated in runs is implicitly denominated in time — ensure the implied time window exceeds the minimum expected resolution period for the domain.",
+    "trigger": "Blind Auditor Phase 2 override fires on tensions that have not yet reached their expected resolution window",
+    "lesson_type": "CALIBRATION",
+    "confidence_in_lesson": "high",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]

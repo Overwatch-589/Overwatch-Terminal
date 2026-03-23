@@ -58,7 +58,7 @@
   "active_tension_cap": 8,
   "active_tension_cap_description": "Maximum active tensions Layer 4 can carry. Forces prioritization. When at cap, new tensions must displace lowest-ranked existing tension with justification.",
 
-  "critical_persistence_threshold": 3,
+  "critical_persistence_threshold": 10,
   "zombie_escalation_threshold": 4,
   "critical_persistence_threshold_description": "Number of consecutive runs a score 4-5 tension can persist without action escalation before the Blind Auditor flags it.",
 
