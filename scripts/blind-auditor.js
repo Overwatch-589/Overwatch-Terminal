@@ -32,6 +32,7 @@ const fs   = require('fs');
 const { runAIAudit } = require('./ai-auditor');
 const { loadLayerZeroRules, formatRulesForPrompt } = require('./layer-zero-gate');
 const { detectSpendingBehavior } = require('./x402-spending-detectors');
+const { detectCognitiveBehavior } = require('./x402-cognitive-detectors');
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 
@@ -832,6 +833,12 @@ async function runBlindAuditor(options) {
     const currentStatus = trajectory.length > 0 ? trajectory[trajectory.length - 1].thesis_status : null;
     const spendingFindings = detectSpendingBehavior(paperTradeLog, latestTrace, currentTensions, currentStatus, domainConfig);
     mismatches.push(...spendingFindings);
+  }
+
+  // AD #17: Cognitive bandwidth pattern detection
+  if (paperTradeLog || history.length > 0) {
+    const cognitiveFindings = detectCognitiveBehavior(paperTradeLog, currentOutput, domainConfig, history.length);
+    mismatches.push(...cognitiveFindings);
   }
 
   if (mismatches.length === 0) {
