@@ -215,7 +215,7 @@
   },
   {
     "phase": 1,
-    "status": "UNRESOLVED",
+    "status": "ESCALATED_TO_OVERRIDE",
     "timestamp": "2026-03-22T22:26:14.739Z",
     "run_index": 60,
     "mismatches": [
@@ -287,6 +287,86 @@
         "tensions": 8
       }
     ],
+    "deterministic_fallback": true,
+    "escalated_at": "2026-03-23T01:28:08.029Z"
+  },
+  {
+    "phase": 2,
+    "status": "OVERRIDE_ACTIVE",
+    "timestamp": "2026-03-23T01:28:08.029Z",
+    "run_index": 60,
+    "mismatches": [
+      {
+        "type": "CRITICAL_TENSION_PERSISTENCE",
+        "detail": "Critical tension(s) persisting 3+ runs without action escalation: T-3 (5 runs), T-10 (5 runs), T-5 (5 runs), T-4 (5 runs), T-8 (5 runs), T-7 (5 runs), T-6 (5 runs), T-9 (5 runs).",
+        "severity": "HIGH",
+        "persistent_tensions": [
+          {
+            "tension_id": "T-3",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-10",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-5",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-4",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-8",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-7",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-6",
+            "runs": 5
+          },
+          {
+            "tension_id": "T-9",
+            "runs": 5
+          }
+        ]
+      },
+      {
+        "type": "X402_STALE_PURCHASE_REPETITION",
+        "detail": "Repeated purchases in same category: market_data (3x). Check corrections ledger for whether this category consistently fails to move the assessment.",
+        "severity": "MEDIUM",
+        "stale_categories": [
+          {
+            "category": "market_data",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "type": "X402_NEGLIGENT_HOARDING",
+        "detail": "100% of cycle budget unspent while 8 critical tension(s) with observable resolution paths remain unresolved: T-3, T-7, T-10, T-4, T-5, T-8, T-6, T-9. Capital exists to be deployed against risk, not conserved for a clean spending record.",
+        "severity": "HIGH",
+        "unspent_pct": 1,
+        "critical_with_paths": [
+          "T-3",
+          "T-7",
+          "T-10",
+          "T-4",
+          "T-5",
+          "T-8",
+          "T-6",
+          "T-9"
+        ]
+      }
+    ],
+    "override_action": "EXIT_SIGNAL",
+    "override_direction": "escalate",
+    "override_reasoning": "BLIND AUDITOR PHASE 2 OVERRIDE (deterministic fallback). AI audit unavailable. Previous advisory (2026-03-22T22:26:14.739Z) was not resolved. Persistent mismatch: CRITICAL_TENSION_PERSISTENCE, X402_STALE_PURCHASE_REPETITION, X402_NEGLIGENT_HOARDING. Direction: escalate. Action overridden to: EXIT_SIGNAL. Critical tension(s) persisting 3+ runs without action escalation: T-3 (5 runs), T-10 (5 runs), T-5 (5 runs), T-4 (5 runs), T-8 (5 runs), T-7 (5 runs), T-6 (5 runs), T-9 (5 runs).",
+    "prior_advisory_timestamp": "2026-03-22T22:26:14.739Z",
     "deterministic_fallback": true
   }
 ]

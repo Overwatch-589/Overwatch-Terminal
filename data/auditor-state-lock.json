@@ -1,0 +1,25 @@
+{
+  "active": true,
+  "locked_at": "2026-03-23T01:28:08.029Z",
+  "locked_action": "EXIT_SIGNAL",
+  "locked_by": "blind_auditor_deterministic_phase2",
+  "override_reasoning": "BLIND AUDITOR PHASE 2 OVERRIDE (deterministic fallback). AI audit unavailable. Previous advisory (2026-03-22T22:26:14.739Z) was not resolved. Persistent mismatch: CRITICAL_TENSION_PERSISTENCE, X402_STALE_PURCHASE_REPETITION, X402_NEGLIGENT_HOARDING. Direction: escalate. Action overridden to: EXIT_SIGNAL. Critical tension(s) persisting 3+ runs without action escalation: T-3 (5 runs), T-10 (5 runs), T-5 (5 runs), T-4 (5 runs), T-8 (5 runs), T-7 (5 runs), T-6 (5 runs), T-9 (5 runs).",
+  "mismatches": [
+    {
+      "type": "CRITICAL_TENSION_PERSISTENCE",
+      "severity": "HIGH",
+      "detail": "Critical tension(s) persisting 3+ runs without action escalation: T-3 (5 runs), T-10 (5 runs), T-5 (5 runs), T-4 (5 runs), T-8 (5 runs), T-7 (5 runs), T-6 (5 runs), T-9 (5 runs)."
+    },
+    {
+      "type": "X402_STALE_PURCHASE_REPETITION",
+      "severity": "MEDIUM",
+      "detail": "Repeated purchases in same category: market_data (3x). Check corrections ledger for whether this category consistently fails to move the assessment."
+    },
+    {
+      "type": "X402_NEGLIGENT_HOARDING",
+      "severity": "HIGH",
+      "detail": "100% of cycle budget unspent while 8 critical tension(s) with observable resolution paths remain unresolved: T-3, T-7, T-10, T-4, T-5, T-8, T-6, T-9. Capital exists to be deployed against risk, not conserved for a clean spending record."
+    }
+  ],
+  "release_requires": "human_operator"
+}
