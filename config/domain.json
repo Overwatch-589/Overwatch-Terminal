@@ -227,5 +227,21 @@
   "acquisition_materiality_threshold": 3,
   "acquisition_outcome_retention": 200,
   "acquisition_dormancy_threshold": 4,
-  "question_recycling_threshold": 3
+  "question_recycling_threshold": 3,
+
+  "calibration_measurement_window_default": 25,
+  "calibration_measurement_window_description": "Default number of runs in a measurement window for calibration entries. At 2 runs/day, 25 runs is approximately 2 weeks. Individual entries can override.",
+  "calibration_max_active_entries": 5,
+  "calibration_max_active_description": "Maximum active calibration entries injected per layer per run. Gemini recommendation: cap at 5 to prevent attention dilution. Entries ranked by confidence (HIGH > MEDIUM > LOW) then by frequency. When top entries decay, next batch promotes.",
+  "calibration_decay_high_to_medium": 0.4,
+  "calibration_decay_medium_to_retire": 0.2,
+  "calibration_decay_description": "Frequency ratio thresholds for automatic confidence decay. If frequency drops below 40% of measurement window, HIGH becomes MEDIUM. Below 20%, flag for retirement review at Sunday audit.",
+  "calibration_suppression_spike_threshold": 0.3,
+  "calibration_suppression_description": "Global default: if the overcorrection metric for any calibration entry increases by more than this ratio after the entry is applied, the Blind Auditor flags calibration-induced suppression. Individual entries can override via overcorrection_threshold_override.",
+  "calibration_overcorrection_metrics": ["VIOLATION_FREQUENCY", "SIGNAL_REJECTION_RATE", "SIGNAL_STRIPPED_RATE", "SIGNAL_FLAGGED_RATE", "INSUFFICIENT_EVIDENCE_RATE"],
+  "calibration_overcorrection_metrics_description": "Computable metrics the Blind Auditor monitors for overcorrection detection. VIOLATION_FREQUENCY: the source rule's violation count drops but analysis quality degrades (stat gaming). SIGNAL_REJECTION_RATE: signals in the target category rejected more often post-calibration. SIGNAL_STRIPPED_RATE: signals stripped by Layer 4 more often. SIGNAL_FLAGGED_RATE: signals flagged more often. INSUFFICIENT_EVIDENCE_RATE: INSUFFICIENT_EVIDENCE classifications spike (confidence collapse).",
+  "calibration_status_lifecycle": ["CANDIDATE", "ACTIVE", "SUSPENDED", "RETIRED"],
+  "calibration_status_lifecycle_description": "CANDIDATE: derived from trace patterns, awaiting human review at Sunday audit. ACTIVE: approved, injected into layer prompts. SUSPENDED: overcorrection detected or guidance caused operational failure — injection paused, human must rewrite guidance before reactivation. RETIRED: tendency corrected or entry no longer applicable.",
+  "calibration_update_cadence": "sunday_audit",
+  "calibration_update_cadence_description": "When calibration entries are reviewed, updated, and new candidates are promoted. Aligns with existing Sunday Blind Spot Audit cycle. Entries are NOT updated after every run."
 }
