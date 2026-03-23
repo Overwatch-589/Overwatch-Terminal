@@ -32,6 +32,7 @@ const fs   = require('fs');
 const { runAIAudit } = require('./ai-auditor');
 const { loadLayerZeroRules, formatRulesForPrompt } = require('./layer-zero-gate');
 const { detectSpendingBehavior } = require('./x402-spending-detectors');
+const { detectCalibrationSuppression } = require('./calibration-suppression-detectors');
 const { detectCognitiveBehavior } = require('./x402-cognitive-detectors');
 
 // ─── Constants ──────────────────────────────────────────────────────────────
@@ -833,6 +834,21 @@ async function runBlindAuditor(options) {
     const currentStatus = trajectory.length > 0 ? trajectory[trajectory.length - 1].thesis_status : null;
     const spendingFindings = detectSpendingBehavior(paperTradeLog, latestTrace, currentTensions, currentStatus, domainConfig);
     mismatches.push(...spendingFindings);
+  }
+
+  // AD #16: Calibration suppression detection
+  try {
+    const calPath = path.join(__dirname, '..', 'data', 'behavioral-calibration.json');
+    if (fs.existsSync(calPath)) {
+      const calEntries = JSON.parse(fs.readFileSync(calPath, 'utf8'))
+        .filter(e => e.status === 'ACTIVE');
+      if (calEntries.length > 0 && latestTrace) {
+        const suppressionFindings = detectCalibrationSuppression(calEntries, latestTrace, domainConfig);
+        mismatches.push(...suppressionFindings);
+      }
+    }
+  } catch (calErr) {
+    // Non-fatal — Blind Auditor runs without suppression detection
   }
 
   // AD #17: Cognitive bandwidth pattern detection
