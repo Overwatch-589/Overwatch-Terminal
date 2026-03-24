@@ -71,7 +71,7 @@ function appendChangelog(entries) {
  */
 function replaceParaById(html, elementId, newText) {
   if (!newText || typeof newText !== 'string') return { html, changed: false };
-  const re = new RegExp(`(<p\\s[^>]*id="${elementId}"[^>]*>)([^<]*)(</p>)`, 's');
+  const re = new RegExp(`(<p\\s[^>]*id="${elementId}"[^>]*>)([\\s\\S]*?)(</p>)`, 's');
   const match = html.match(re);
   if (!match) {
     warn('html', `Element id="${elementId}" not found in index.html`);
