@@ -1349,7 +1349,8 @@ textarea:focus { border-color:var(--accent-cyan); }
           <span class="s360-toggle" id="s360-toggle-ci">▲</span>
         </div>
         <div class="s360-body" id="s360-body-ci">
-          <div id="s360-compound-indices" style="display:grid;grid-template-columns:1fr;gap:8px;"></div>
+          <div id="s360-falsification-bar"></div>
+          <div id="s360-compound-indices" style="display:grid;grid-template-columns:1fr;gap:10px;"></div>
         </div>
       </div>
 
@@ -6601,31 +6602,77 @@ function render360Report(r) {
     'CONTESTED': '#eab308',
     'UNDETERMINED': '#8a9bba'
   };
+
+  // Falsification proximity bar
+  const fr = r.falsification_review ?? r._layer4_raw?.falsification_review ?? null;
+  if (fr) {
+    const negCount = (fr.indices_at_converging_negative ?? 0) + (fr.inverse_index_at_converging_positive ? 1 : 0);
+    const threshold = 3;
+    const consec = fr.consecutive_runs_negative ?? 0;
+    const frTriggered = fr.falsification_review_triggered ?? false;
+    const frResult = fr.falsification_review_result ?? 'NOT_TRIGGERED';
+    const barColor = frTriggered ? '#ef4444' : negCount >= 2 ? '#f97316' : negCount >= 1 ? '#eab308' : '#22c55e';
+    const barLabel = frTriggered
+      ? (frResult === 'FALSIFIED' ? '⚠ THESIS FALSIFIED' : `⚠ FALSIFICATION REVIEW — ${frResult}`)
+      : `${negCount}/${threshold} indices negative`;
+    const consecLabel = consec > 0 ? ` · ${consec} consecutive run${consec > 1 ? 's' : ''}` : '';
+    const segments = Array.from({length: 5}, (_, i) => {
+      const filled = i < negCount;
+      const c = filled ? barColor : 'rgba(255,255,255,0.08)';
+      const border = i < threshold ? '' : 'border-left:2px solid rgba(255,255,255,0.15);';
+      return `<div style="flex:1;height:8px;background:${c};${border}${i===0?'border-radius:4px 0 0 4px;':''}${i===4?'border-radius:0 4px 4px 0;':''}"></div>`;
+    }).join('');
+    setHtml('s360-falsification-bar', `<div style="margin-bottom:12px;padding:10px;border:1px solid ${barColor}33;border-radius:8px;background:${barColor}08;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:${barColor};letter-spacing:1.5px;">FALSIFICATION PROXIMITY</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);">${barLabel}${consecLabel}</span>
+      </div>
+      <div style="display:flex;gap:2px;">${segments}</div>
+      <div style="display:flex;justify-content:space-between;margin-top:4px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);">0</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);position:relative;left:10%;">THRESHOLD ↑</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--text-muted);">5</span>
+      </div>
+    </div>`);
+  } else {
+    setHtml('s360-falsification-bar', '');
+  }
+
+  // Compound index cards
   const ciArr = r.compound_indices ?? [];
   setHtml('s360-compound-indices', ciArr.map(ci => {
     const sc = ciStatusColors[ci.convergence_status] ?? '#8a9bba';
     const di = ciDirIcons[ci.convergence_direction] ?? '—';
     const dc = ciDirColors[ci.convergence_direction] ?? '#8a9bba';
     const pct = Math.round((ci.agreement_ratio ?? 0) * 100);
-    const inv = ci.inverse ? ' <span style="font-size:8px;color:#f97316;font-weight:700;letter-spacing:1px;">INVERSE</span>' : '';
+    const inv = ci.inverse ? ' <span style="font-size:8px;color:#f97316;font-weight:700;letter-spacing:1px;vertical-align:middle;">⚡ INVERSE</span>' : '';
     const obs = (ci.total > 0) ? `${ci.assessable}/${ci.total} visible` : '';
+    const overrideBadge = ci.override ? '<span style="font-family:\'JetBrains Mono\',monospace;font-size:8px;color:#a78bfa;font-weight:700;letter-spacing:1px;margin-left:6px;">L4 OVERRIDE</span>' : '';
     const dirLabel = ci.inverse
-      ? (ci.convergence_direction === 'POSITIVE' ? 'COMPETITIVE PRESSURE' : ci.convergence_direction === 'NEGATIVE' ? 'NO DISPLACEMENT' : ci.convergence_direction)
-      : ci.convergence_direction;
-    return `<div style="border:1px solid ${sc}44;border-radius:8px;padding:10px;background:${sc}0a;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--text-primary);">${eh(ci.name ?? '')}${inv}</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:${sc};letter-spacing:1px;">${ci.convergence_status ?? 'N/A'}</span>
+      ? (ci.convergence_direction === 'POSITIVE' ? 'COMPETITIVE PRESSURE' : ci.convergence_direction === 'NEGATIVE' ? 'NO DISPLACEMENT' : (ci.convergence_direction ?? ''))
+      : (ci.convergence_direction ?? '');
+    // For inverse index, flip the color semantics for thesis interpretation
+    const thesisColor = ci.inverse
+      ? (ci.convergence_direction === 'POSITIVE' ? '#ef4444' : ci.convergence_direction === 'NEGATIVE' ? '#22c55e' : dc)
+      : dc;
+    const ciId = (ci.id ?? '').replace(/[^a-zA-Z0-9]/g, '');
+    const reasoning = ci.reasoning ?? '';
+    const truncated = reasoning.length > 120;
+    const preview = truncated ? eh(reasoning.substring(0, 120)) + '…' : eh(reasoning);
+    return `<div style="border:1px solid ${sc}44;border-radius:8px;padding:12px;background:${sc}08;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--text-primary);">${eh(ci.name ?? '')}${inv}${overrideBadge}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:${sc};letter-spacing:1px;white-space:nowrap;margin-left:8px;">${(ci.convergence_status ?? 'N/A').replace('_',' ')}</span>
       </div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-        <span style="font-size:12px;color:${dc};">${di}</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:${dc};font-weight:600;">${dirLabel}</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);margin-left:auto;">${obs}</span>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="font-size:13px;color:${thesisColor};">${di}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:${thesisColor};font-weight:600;">${dirLabel}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-muted);margin-left:auto;">${pct}% · ${obs}</span>
       </div>
-      <div style="background:rgba(255,255,255,0.05);border-radius:4px;height:6px;margin-bottom:4px;">
+      <div style="background:rgba(255,255,255,0.05);border-radius:4px;height:6px;margin-bottom:8px;">
         <div style="background:${sc};height:100%;border-radius:4px;width:${pct}%;transition:width 0.3s;"></div>
       </div>
-      <div style="font-size:10px;color:var(--text-secondary);line-height:1.5;">${eh(ci.reasoning ?? '')}</div>
+      <div style="font-size:10px;color:var(--text-secondary);line-height:1.5;cursor:${truncated ? 'pointer' : 'default'};" ${truncated ? `onclick="var el=this;el.dataset.expanded=el.dataset.expanded==='1'?'0':'1';el.innerHTML=el.dataset.expanded==='1'?el.dataset.full:el.dataset.preview;" data-expanded="0" data-preview="${preview}" data-full="${eh(reasoning)}"` : ''}>${preview}</div>
     </div>`;
   }).join('') || '<div style="font-size:11px;color:var(--text-muted);padding:8px;">No compound index data yet</div>');
 

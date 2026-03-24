@@ -1928,6 +1928,7 @@ function buildDashboardCompatible(reconcileResult, contextualizeResult, inferenc
     kill_switches:              killSwitches,
     new_kill_switches_recommended: [],
     compound_indices:           compoundIndices,
+    falsification_review:       reconcileResult?.falsification_review ?? null,
 
     // Preserve the raw four-layer output for audit/debugging
     // The dashboard ignores these fields, but they're available for inspection
