@@ -576,6 +576,97 @@ function detectTrajectoryTrend(trajectory) {
   return null;
 }
 
+// ─── AD #18: Action Pressure Behavioral Detectors ──────────────────────────
+
+/**
+ * Pressure dismissal: Layer 4 acknowledges pressure but doesn't change action
+ * and cites no specific counter-evidence. 3+ consecutive runs at HIGH or CRITICAL.
+ */
+function detectPressureDismissal(history, actionPressureTelemetry) {
+  if (!actionPressureTelemetry || !actionPressureTelemetry.pressure_telemetry) return null;
+  const tier = actionPressureTelemetry.pressure_telemetry.tier;
+  if (tier !== 'HIGH_PRESSURE' && tier !== 'CRITICAL_PRESSURE') return null;
+  if (!Array.isArray(history) || history.length < 3) return null;
+
+  let consecutiveDismissals = 0;
+  for (let i = history.length - 1; i >= Math.max(0, history.length - 5); i--) {
+    const entry = history[i];
+    const reasoning = (entry.action_reasoning || '').toLowerCase();
+    const mentionsPressure = reasoning.includes('pressure') || reasoning.includes('burden of proof');
+    const action = entry.action_recommendation || entry.tactical_recommendation;
+    const prevAction = i > 0 ? (history[i - 1].action_recommendation || history[i - 1].tactical_recommendation) : null;
+
+    if (mentionsPressure && action === prevAction) {
+      consecutiveDismissals++;
+    } else {
+      break;
+    }
+  }
+
+  if (consecutiveDismissals >= 3) {
+    return {
+      type: 'PRESSURE_DISMISSAL',
+      detail: `Action unchanged for ${consecutiveDismissals} consecutive runs at ${tier} despite acknowledging pressure in action_reasoning. Layer 4 is hearing the air alarm but not pulling out.`,
+      severity: 'HIGH',
+      direction: 'stagnant',
+    };
+  }
+  return null;
+}
+
+/**
+ * Premature action: Action changes then reverses within 3 runs.
+ * Overcorrection watch — acting on projected pressure rather than actual.
+ */
+function detectPrematureAction(history) {
+  if (!Array.isArray(history) || history.length < 4) return null;
+
+  const recent = history.slice(-4);
+  const actions = recent.map(e => e.action_recommendation || e.tactical_recommendation);
+
+  for (let i = 0; i < actions.length - 2; i++) {
+    if (actions[i] === actions[i + 2] && actions[i] !== actions[i + 1]) {
+      return {
+        type: 'PREMATURE_ACTION',
+        detail: `Action oscillated: ${actions[i]} → ${actions[i + 1]} → ${actions[i + 2]} within ${actions.length} runs. Possible overcorrection — acting on projected pressure rather than actual pressure.`,
+        severity: 'MEDIUM',
+        direction: 'oscillating',
+      };
+    }
+  }
+  return null;
+}
+
+/**
+ * Pressure gaming: Action oscillates between two values with 3+ changes
+ * in 6 runs. Systematic boundary manipulation to reset divergence clock.
+ */
+function detectPressureGaming(history) {
+  if (!Array.isArray(history) || history.length < 6) return null;
+
+  const recent = history.slice(-6);
+  const actions = recent.map(e => e.action_recommendation || e.tactical_recommendation);
+
+  let changes = 0;
+  for (let i = 1; i < actions.length; i++) {
+    if (actions[i] !== actions[i - 1]) changes++;
+  }
+
+  if (changes >= 3) {
+    const unique = new Set(actions);
+    if (unique.size === 2) {
+      const vals = [...unique];
+      return {
+        type: 'PRESSURE_GAMING',
+        detail: `Action oscillated between ${vals[0]} and ${vals[1]} with ${changes} changes in ${recent.length} runs. Possible pressure gaming — jiggling action to reset divergence clock without genuine commitment.`,
+        severity: 'HIGH',
+        direction: 'gaming',
+      };
+    }
+  }
+  return null;
+}
+
 /**
  * Check anomaly triggers for immediate off-cycle audit.
  *
@@ -712,6 +803,7 @@ async function runBlindAuditor(options) {
     findingsPath,
     lockPath,
     cognitiveTracePath,
+    actionPressureTelemetry,
   } = options;
 
   log(`=== BLIND AUDITOR — AD #14 Trajectory Review ===`);
@@ -856,6 +948,16 @@ async function runBlindAuditor(options) {
     const cognitiveFindings = detectCognitiveBehavior(paperTradeLog, currentOutput, domainConfig, history.length);
     mismatches.push(...cognitiveFindings);
   }
+
+  // AD #18: Action pressure behavioral pattern detection
+  const dismissal = detectPressureDismissal(history, actionPressureTelemetry);
+  if (dismissal) mismatches.push(dismissal);
+
+  const premature = detectPrematureAction(history);
+  if (premature) mismatches.push(premature);
+
+  const gaming = detectPressureGaming(history);
+  if (gaming) mismatches.push(gaming);
 
   if (mismatches.length === 0) {
     log('No trajectory mismatch detected. Evidence trend and action trend are aligned.');

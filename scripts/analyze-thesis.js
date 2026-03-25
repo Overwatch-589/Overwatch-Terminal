@@ -2358,6 +2358,7 @@ async function main() {
         domainConfig,
         runIndex: auditHistory.length,
         cognitiveTracePath: productionTracePath,
+        actionPressureTelemetry: actionPressureResult.telemetry,
       });
       applyAuditorToOutput(assessment360, auditorResult);
       if (auditorResult.override) {
