@@ -898,5 +898,20 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-23T13:47:17.942Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "BOJ policy signals scored as DECLINING Japan adoption component in CI-4",
+    "signal_ids": [
+      "20260325-1344-SIG-002",
+      "20260325-1344-SIG-012"
+    ],
+    "rejection_reason": "Layer 2 scored macro stress on Japan (USD/JPY, JGB) as a DECLINING component of the Japan/Asia Adoption Index (CI-4-C). Per CL-050, macro stress on Japan is environmental pressure, not evidence of declining adoption of XRPL by Japanese institutions. The macro data is about what is happening TO Japan, not about what Japanese institutions are DOING regarding XRPL adoption. These are fundamentally different evidentiary categories.",
+    "root_cause": "APOPHENIA",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-25T14:01:19.011Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-25T14:01:19.014Z"
   }
 ]

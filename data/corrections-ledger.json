@@ -1021,5 +1021,23 @@
     "prevention": "Before tagging any signal to a competitive displacement index, check whether the entity has a known partnership, integration, or collaborative relationship with the thesis asset's ecosystem. If the relationship is unknown, classify as UNVERIFIED and reduce confidence.",
     "status": "ACTIVE",
     "created_date": "2026-03-24"
+  },
+  {
+    "id": "CL-057",
+    "date_of_error": "2026-03-25",
+    "date_identified": "2026-03-25",
+    "identified_by": "layer_4_override",
+    "belief": "BOJ policy signals scored as DECLINING Japan adoption component in CI-4",
+    "reality": "Layer 2 scored macro stress on Japan (USD/JPY, JGB) as a DECLINING component of the Japan/Asia Adoption Index (CI-4-C). Per CL-050, macro stress on Japan is environmental pressure, not evidence of declining adoption of XRPL by Japanese institutions. The macro data is about what is happening TO Japan, not about what Japanese institutions are DOING regarding XRPL adoption. These are fundamentally different evidentiary categories.",
+    "root_cause": "Layer 2 scored macro stress on Japan (USD/JPY, JGB) as a DECLINING component of the Japan/Asia Adoption Index (CI-4-C). Per CL-050, macro stress on Japan is environmental pressure, not evidence of declining adoption of XRPL by Japanese institutions. The macro data is about what is happening TO Japan, not about what Japanese institutions are DOING regarding XRPL adoption. These are fundamentally different evidentiary categories.",
+    "root_cause_type": "APOPHENIA",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "NEEDS_ENRICHMENT"
   }
 ]
