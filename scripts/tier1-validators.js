@@ -542,7 +542,7 @@ function validateLayer3(output, inputData) {
  * @param {object} inputData — dashboard-data.json (passed through for completeness)
  * @returns {Array} flags
  */
-function validateLayer4(output, inputData, domainConfig, previousTensions) {
+function validateLayer4(output, inputData, domainConfig, previousTensions, actionPressureTelemetry) {
   const flags = [];
 
   // LZ-EH-005: Check contradiction resolution
@@ -798,6 +798,46 @@ function validateLayer4(output, inputData, domainConfig, previousTensions) {
     }
   }
 
+  // AD #18: Action pressure structural checks
+  if (actionPressureTelemetry && actionPressureTelemetry.pressure_telemetry) {
+    const pt = actionPressureTelemetry.pressure_telemetry;
+    const validTiers = ['LOW_PRESSURE', 'MODERATE_PRESSURE', 'HIGH_PRESSURE', 'CRITICAL_PRESSURE'];
+
+    // Tier must be valid enum
+    if (pt.tier && !validTiers.includes(pt.tier)) {
+      flags.push(createFlag(
+        'AD18-INVALID-PRESSURE-TIER',
+        'Action Pressure',
+        `pressure_tier "${pt.tier}" is not a valid enum value. Must be one of: ${validTiers.join(', ')}.`,
+        'HARD_FAIL'
+      ));
+    }
+
+    // Raw index must be in range
+    if (typeof pt.raw_index === 'number' && (pt.raw_index < 0 || pt.raw_index > 1)) {
+      flags.push(createFlag(
+        'AD18-INDEX-OUT-OF-RANGE',
+        'Action Pressure',
+        `raw_index ${pt.raw_index} is outside valid range [0.0-1.0].`,
+        'HARD_FAIL'
+      ));
+    }
+
+    // At HIGH or CRITICAL, action_reasoning must reference pressure
+    if ((pt.tier === 'HIGH_PRESSURE' || pt.tier === 'CRITICAL_PRESSURE') && output.action_reasoning) {
+      const reasoning = (output.action_reasoning || '').toLowerCase();
+      const mentionsPressure = reasoning.includes('pressure') || reasoning.includes('burden of proof') || reasoning.includes('persistence') || reasoning.includes('trajectory');
+      if (!mentionsPressure) {
+        flags.push(createFlag(
+          'AD18-PRESSURE-NOT-ADDRESSED',
+          'Action Pressure',
+          `Pressure tier is ${pt.tier} but action_reasoning does not reference pressure context. At HIGH or CRITICAL, action reasoning must address the pressure signals.`,
+          'HARD_FAIL'
+        ));
+      }
+    }
+  }
+
   return flags;
 }
 
@@ -812,14 +852,14 @@ function validateLayer4(output, inputData, domainConfig, previousTensions) {
  * @param {object} inputData   — dashboard-data.json (for input quality checks)
  * @returns {object} { flags: Array, hard_fails: number, total_flags: number, layer: number }
  */
-function runTier1Checks(layerNumber, output, inputData, domainConfig, previousTensions) {
+function runTier1Checks(layerNumber, output, inputData, domainConfig, previousTensions, actionPressureTelemetry) {
   let flags = [];
 
   switch (layerNumber) {
     case 1: flags = validateLayer1(output, inputData); break;
     case 2: flags = validateLayer2(output, inputData); break;
     case 3: flags = validateLayer3(output, inputData); break;
-    case 4: flags = validateLayer4(output, inputData, domainConfig, previousTensions); break;
+    case 4: flags = validateLayer4(output, inputData, domainConfig, previousTensions, actionPressureTelemetry); break;
     default:
       console.error(`[tier1] Unknown layer number: ${layerNumber}`);
       return { flags: [], hard_fails: 0, total_flags: 0, layer: layerNumber };

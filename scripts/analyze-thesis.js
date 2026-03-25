@@ -2192,7 +2192,7 @@ async function main() {
         let tier1Layer4 = { flags: [], hard_fails: 0, total_flags: 0, layer: 4 };
         if (reconcileResult) {
           try {
-            tier1Layer4 = runTier1Checks(4, reconcileResult, dashboardData, domainConfigMain, previousTensions);
+            tier1Layer4 = runTier1Checks(4, reconcileResult, dashboardData, domainConfigMain, previousTensions, actionPressureResult.telemetry);
           } catch (e) {
             warn('tier1', `Layer 4 validator failed (non-fatal): ${e.message}`);
             tier1Layer4 = { flags: [{ rule_id: 'VALIDATOR_FAILURE', finding: 'Layer 4 Tier 1 checks', detail: e.message, severity: 'FLAG', timestamp: new Date().toISOString() }], hard_fails: 0, total_flags: 1, layer: 4 };
