@@ -1093,5 +1093,23 @@
     "times_applied": 0,
     "times_applicable_but_missed": 0,
     "status": "NEEDS_ENRICHMENT"
+  },
+  {
+    "id": "CL-061",
+    "date_of_error": "2026-03-25",
+    "date_identified": "2026-03-27",
+    "identified_by": "human_review",
+    "belief": "BlackRock digital assets head Mitchnick statement that 'most non-BTC/ETH tokens are nonsense' absorbed as bearish signal for thesis asset without conflict-of-interest decomposition.",
+    "reality": "Mitchnick is a former Ripple executive who co-authored the Athey-Mitchnick XRP valuation framework. He now leads digital assets at BlackRock, which has approved BTC and ETH products but no XRP product. His public dismissal of non-BTC/ETH tokens serves BlackRock's existing product lineup. Layer 3 should have decomposed rhetoric vs. action: the statement is marketing for existing products, not independent analytical judgment.",
+    "root_cause": "Layer 3 accepted a public statement at face value without evaluating the speaker's institutional incentive structure. A source with direct financial interest in dismissing competing assets requires conflict-of-interest decomposition before the signal is scored.",
+    "root_cause_type": "SOURCE_CREDIBILITY_FAILURE",
+    "prevention": "When a public figure makes directional claims about asset classes, Layer 3 must evaluate: (1) does the speaker's institution hold competing products, (2) does the speaker have prior professional ties to the thesis asset, (3) does the statement serve the speaker's current institutional position. If any apply, the signal must be flagged as CONFLICTED and weight-discounted.",
+    "lesson": "Public statements from executives at institutions with competing products are marketing signals, not analytical signals. Rhetoric must be decomposed from action. A former Ripple exec dismissing non-BTC/ETH tokens while heading digital assets at a BTC/ETH-only fund manager is a conflict of interest, not a bearish data point.",
+    "trigger": "Any signal where the source institution has active competing products in the same asset class as the thesis, or where the source has prior professional ties to the thesis asset's ecosystem.",
+    "lesson_type": "ANALYTICAL_DISCIPLINE",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "ACTIVE"
   }
 ]
