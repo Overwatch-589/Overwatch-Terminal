@@ -870,6 +870,9 @@ For each signal from Layer 1:
 4. KILL SWITCH STATUS CHECK
    For each of the 10 falsification criteria, report current status based on available data. Flag any that have moved since last assessment. Flag any where data is unavailable (this is distinct from data showing negative results).
 
+IMPORTANT — SIGNAL-TO-COMPONENT MAPPING:
+   A single Layer 1 signal can inform component assessments across MULTIPLE compound indices. Do not treat each component as requiring a dedicated data feed. For every scored signal, scan ALL compound index components across ALL indices and assess whether the signal provides directional evidence. A component's data_availability should be CURRENT if ANY scored signal provides directional evidence for it, even if there is no dedicated data source for that specific component. Failing to map a signal to a relevant component is an observability failure — the data exists but the system failed to route it.
+
 5b. COMPOUND INDEX EVALUATION
    For each compound index defined in the thesis context, evaluate convergence across component signals:
    - Assess each component's data_availability: CURRENT | STALE | NO_DATA | UNKNOWN_AVAILABILITY | NOT_OBSERVABLE
@@ -900,7 +903,7 @@ Your JSON output MUST include the "corrections_referenced" array. This is not op
 - Omitting this field is a structural compliance failure.
 
 COMPOUND INDEX REQUIREMENT:
-Your JSON output MUST include the "compound_index_evaluation" array with ALL 5 compound indices from the thesis context. Every index must appear — CI-1 through CI-5. Missing indices are a structural compliance failure. Keep component evidence_summary to one sentence each. If a component has no data, set direction to null and move on — do not elaborate on why data is missing. Set inverse to true for any index marked as inverse in the thesis context. Set assessable_components and total_components counts.
+Your JSON output MUST include the "compound_index_evaluation" array with ALL 5 compound indices from the thesis context. Every index must appear — CI-1 through CI-5. Missing indices are a structural compliance failure. Keep component evidence_summary to one sentence each. If a component has no data, set direction to null and move on — do not elaborate on why data is missing. Set inverse to true for any index marked as inverse in the thesis context. Set assessable_components and total_components counts. CRITICAL: Use scored signals from Layer 1 to inform component assessments — a component has CURRENT data availability if ANY signal provides directional evidence for it. Do not mark components as NO_DATA when relevant signals exist in your scored set.
 
 Respond with ONLY valid JSON — no markdown, no code fences, no commentary outside the JSON:
 {

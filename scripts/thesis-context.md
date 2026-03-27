@@ -15,7 +15,7 @@ Five convergence-based indices replace single-threshold kill switches. Each inde
 
 ### CI-1: Settlement Activity Index
 Thesis question: Is the thesis asset actually being used for institutional settlement?
-Components: On-chain institutional payment volume, RLUSD circulation and velocity, corridor exchange activity, RippleNet partner transaction patterns, institutional wallet growth, x402-acquired settlement intelligence.
+Components: RLUSD circulation and velocity, XRPL on-chain activity metrics, x402-acquired settlement intelligence.
 Inverse: No. Convergence strengthens the thesis.
 
 ### CI-2: Institutional Adoption Index
@@ -30,7 +30,7 @@ Inverse: No. Convergence strengthens the thesis.
 
 ### CI-4: Japan/Asia Adoption Index
 Thesis question: Is the critical Japan/Asia corridor developing?
-Components: SBI integration depth, new Asian corridor partners, BOJ policy signals, Japan regulatory environment.
+Components: SBI integration depth, BOJ policy signals, Japan regulatory environment.
 Inverse: No. Convergence strengthens the thesis.
 
 ### CI-5: Competitive Displacement Index (INVERSE)

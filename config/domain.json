@@ -85,12 +85,9 @@
       "inverse": false,
       "replaces_kill_switches": [1, 8, 10],
       "components": [
-        { "id": "CI-1-C1", "name": "On-chain institutional payment volume", "data_availability_default": "UNKNOWN_AVAILABILITY" },
-        { "id": "CI-1-C2", "name": "RLUSD circulation and velocity", "data_availability_default": "CURRENT" },
-        { "id": "CI-1-C3", "name": "Corridor exchange activity", "data_availability_default": "NO_DATA" },
-        { "id": "CI-1-C4", "name": "RippleNet partner transaction patterns", "data_availability_default": "UNKNOWN_AVAILABILITY" },
-        { "id": "CI-1-C5", "name": "Institutional wallet growth", "data_availability_default": "NO_DATA" },
-        { "id": "CI-1-C6", "name": "x402-acquired settlement intelligence", "data_availability_default": "NOT_OBSERVABLE" }
+        { "id": "CI-1-C1", "name": "RLUSD circulation and velocity", "data_availability_default": "CURRENT" },
+        { "id": "CI-1-C2", "name": "XRPL on-chain activity metrics", "data_availability_default": "CURRENT" },
+        { "id": "CI-1-C3", "name": "x402-acquired settlement intelligence", "data_availability_default": "UNKNOWN_AVAILABILITY" }
       ],
       "convergence_thresholds": {
         "converging_pct": 85,
@@ -141,9 +138,8 @@
       "replaces_kill_switches": [7],
       "components": [
         { "id": "CI-4-C1", "name": "SBI integration depth", "data_availability_default": "CURRENT" },
-        { "id": "CI-4-C2", "name": "New Asian corridor partners", "data_availability_default": "UNKNOWN_AVAILABILITY" },
-        { "id": "CI-4-C3", "name": "BOJ policy signals", "data_availability_default": "CURRENT" },
-        { "id": "CI-4-C4", "name": "Japan regulatory environment", "data_availability_default": "CURRENT" }
+        { "id": "CI-4-C2", "name": "BOJ policy signals", "data_availability_default": "CURRENT" },
+        { "id": "CI-4-C3", "name": "Japan regulatory environment", "data_availability_default": "CURRENT" }
       ],
       "convergence_thresholds": {
         "converging_pct": 85,
