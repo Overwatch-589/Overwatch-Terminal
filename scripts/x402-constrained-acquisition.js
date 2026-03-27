@@ -121,6 +121,51 @@ function computePriorityScore(request) {
  * @param {string} [opts.runTimestamp] — Pipeline run timestamp
  * @returns {object} { constrained_requests: [...], total_approved: N, total_constrained: N, rejected_by_materiality: N, rejected_by_cap: N }
  */
+
+/**
+ * Route an acquisition request to the best matching channel.
+ * Matches request source_category against channel capabilities.
+ * Returns the channel with the most specific capability match,
+ * or null if no channel can serve the request.
+ *
+ * @param {object} request       — Paper trade request with source_category
+ * @param {Array}  channels      — acquisition_channels from domain config
+ * @returns {object|null} matched channel, or null
+ */
+function routeToChannel(request, channels) {
+  if (!channels || channels.length === 0) return null;
+
+  const category = (request.source_category || '').toLowerCase();
+  if (!category || category === 'unknown') return null;
+
+  // Filter to enabled channels only
+  const enabled = channels.filter(c => c.enabled !== false);
+  if (enabled.length === 0) return null;
+
+  // Score each channel: count how many of its capabilities match the request category
+  let bestChannel = null;
+  let bestScore = 0;
+
+  for (const ch of enabled) {
+    const caps = (ch.capabilities || []).map(c => c.toLowerCase());
+    // Direct match: category appears in capabilities
+    if (caps.includes(category)) {
+      // Prefer direct match with highest specificity
+      const score = 2;
+      if (score > bestScore) { bestScore = score; bestChannel = ch; }
+    }
+    // Partial match: category contains a capability keyword or vice versa
+    for (const cap of caps) {
+      if (category.includes(cap) || cap.includes(category)) {
+        const score = 1;
+        if (score > bestScore) { bestScore = score; bestChannel = ch; }
+      }
+    }
+  }
+
+  return bestChannel;
+}
+
 function constrainRequests(paperTradeLog, domainConfig, opts = {}) {
   const result = {
     constrained_requests: [],
@@ -204,11 +249,24 @@ function constrainRequests(paperTradeLog, domainConfig, opts = {}) {
       token_budget_allocated: tokenCap,
       priority_rank: i + 1,
       economic_cost_approved: req.approved_cost_drops || 0,
+      // AD #19: Multi-chain routing
+      channel_id: null,
+      settlement_network: null,
+      cost_usd: 0,
       signal_ids: req.signal_ids || [],
       outcome: null,
       outcome_evidence: null,
       _constrained_at: opts.runTimestamp || new Date().toISOString()
     };
+
+    // AD #19: Route to acquisition channel
+    const channels = (domainConfig.acquisition_channels) || [];
+    const matchedChannel = routeToChannel(req, channels);
+    if (matchedChannel) {
+      constrainedRequest.channel_id = matchedChannel.id;
+      constrainedRequest.settlement_network = matchedChannel.network;
+      constrainedRequest.cost_usd = matchedChannel.cost_per_request_usd || 0;
+    }
 
     result.constrained_requests.push(constrainedRequest);
   }
@@ -328,6 +386,8 @@ function recordOutcomes(constrainedRequests, traceOutput, layer4Output, domainCo
       token_budget_allocated: req.token_budget_allocated,
       priority_rank: req.priority_rank,
       economic_cost_approved: req.economic_cost_approved,
+      channel_id: req.channel_id || null,
+      settlement_network: req.settlement_network || null,
       outcome: outcomeClass,
       outcome_evidence: outcomeClass === 'TENSION_RESOLVED'
         ? `Tension ${req.target_id} received RESOLVE disposition`

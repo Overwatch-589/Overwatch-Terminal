@@ -185,6 +185,51 @@
     "budget_reset_cadence": "cycle"
   },
 
+  "acquisition_channels_description": "AD #19: Multi-chain acquisition channels. Each channel declares capabilities the routing engine uses to match requests. The architecture reads the structure; the config provides the content. Replace channels entirely when deploying on a new domain.",
+
+  "acquisition_channels": [
+    {
+      "id": "t54ai-xrpl",
+      "name": "T54 Labs XRPL",
+      "network": "xrpl",
+      "settlement_asset": "XRP",
+      "facilitator": "https://xrpl-x402.t54.ai",
+      "capabilities": ["settlement_intelligence", "on_chain_analytics"],
+      "query_format": "structured_api",
+      "cost_per_request_usd": 0.001,
+      "enabled": true,
+      "paper_trade_only": true
+    },
+    {
+      "id": "firecrawl-base",
+      "name": "Firecrawl x402 Search",
+      "network": "base",
+      "settlement_asset": "USDC",
+      "facilitator": "https://api.firecrawl.dev/v1/x402/search",
+      "capabilities": ["news_search", "web_scraping", "regulatory_intelligence", "competitive_intelligence", "geopolitical_analysis"],
+      "query_format": "natural_language",
+      "cost_per_request_usd": 0.03,
+      "enabled": true,
+      "paper_trade_only": true
+    }
+  ],
+
+  "acquisition_budget_description": "AD #19: USD-normalized multi-chain budget. Combined spending across all chains cannot exceed weekly_cap_usd. Chain sub-caps prevent one chain from consuming the entire budget. Static exchange rates for paper trading — wire live price feed before autonomous spending.",
+
+  "acquisition_budget": {
+    "per_cycle_usd": 0.50,
+    "weekly_cap_usd": 5.00,
+    "exchange_rates": {
+      "XRP_USD": 2.30,
+      "USDC_USD": 1.00
+    },
+    "exchange_rate_source": "static_conservative",
+    "chain_budgets": {
+      "xrpl": { "max_per_cycle_usd": 0.50 },
+      "base": { "max_per_cycle_usd": 0.50 }
+    }
+  },
+
   "x402_paper_trade_retention": 200,
 
   "x402_spending_thresholds": {

@@ -117,6 +117,8 @@ function extractLayer2Requests(layer2Output, runTimestamp) {
       dispositioned_at: null,
       purchase_executed: false,
       purchase_result: null,
+      channel_id: null,
+      settlement_network: null,
     });
   }
 
@@ -162,6 +164,8 @@ function extractLayer3Requests(layer3Output, runTimestamp) {
       dispositioned_at: null,
       purchase_executed: false,
       purchase_result: null,
+      channel_id: null,
+      settlement_network: null,
     });
   }
 
