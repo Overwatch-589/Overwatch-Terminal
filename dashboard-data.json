@@ -1,23 +1,23 @@
 {
-  "updated": "2026-03-26T13:48:55.705Z",
+  "updated": "2026-03-27T02:38:56.914Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.38,
-    "change_24h": -3.2846818482170645,
-    "volume_24h": 1907414401.070974,
-    "market_cap": 84374239240.95491,
-    "data_date": "2026-03-26",
+    "price": 1.37,
+    "change_24h": -2.225498993762711,
+    "volume_24h": 2648540740.854253,
+    "market_cap": 83990110993.98561,
+    "data_date": "2026-03-27",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1437386773.1081073,
-    "data_date": "2026-03-26",
+    "market_cap": 1411348581.003734,
+    "data_date": "2026-03-27",
     "source": "coingecko"
   },
   "macro": {
     "usd_jpy": {
-      "value": 158.96,
-      "data_date": "2026-03-25",
+      "value": 159.62,
+      "data_date": "2026-03-26",
       "source": "frankfurter"
     },
     "jpn_10y": {
@@ -26,14 +26,14 @@
       "source": "financeflow"
     },
     "us_10y_yield": {
-      "value": 4.39,
-      "data_date": "2026-03-24",
+      "value": 4.33,
+      "data_date": "2026-03-25",
       "source": "fred"
     },
     "brent_crude": {
-      "value": 106.468,
-      "data_date": "2026-03-26",
-      "source": "financeflow"
+      "value": 103.79,
+      "data_date": "2026-03-23",
+      "source": "fred"
     },
     "dxy": {
       "value": 99.7381,
@@ -41,54 +41,198 @@
       "source": "financeflow"
     },
     "sp500": {
-      "value": 6564.35,
+      "value": 6477.16,
       "data_date": "2026-03-26",
       "source": "stooq"
     },
     "fear_greed": {
-      "value": 10,
+      "value": 13,
       "label": "Extreme Fear",
-      "data_date": "2026-03-26",
+      "data_date": "2026-03-27",
       "source": "alternative.me"
     }
   },
   "xrpl_metrics": {
-    "ledger_index": 103132178,
-    "rlusd_supply": 305762206.3516941,
-    "data_date": "2026-03-26",
+    "ledger_index": 103144030,
+    "rlusd_supply": 308862206.3517155,
+    "data_date": "2026-03-27",
     "source": "xrpl",
-    "current_ledger": 103132178,
-    "last_ledger_txns": null,
+    "current_ledger": 103144030,
+    "last_ledger_txns": 65,
     "avg_tx_per_ledger": null,
-    "fee_burn_per_ledger_xrp": null,
-    "dex_volume_24h_usd": 4717963,
-    "dex_volume_24h_xrp": 3418814,
+    "fee_burn_per_ledger_xrp": 0.00065,
+    "dex_volume_24h_usd": 3878661,
+    "dex_volume_24h_xrp": 2831139,
     "dex_exchanges_24h": null,
     "dex_takers_24h": null,
     "book_depth_xrp_usd": {
       "pair": "XRP/USD",
       "bids": 10,
       "asks": 10,
-      "total_bid_xrp": 179760.630616,
-      "total_ask_xrp": 1001204.731025,
-      "best_bid": 1.379016,
-      "best_ask": 1.371653
+      "total_bid_xrp": 369852.347291,
+      "total_ask_xrp": 1524.422051,
+      "best_bid": 1.366489,
+      "best_ask": 1.3616
     }
   },
   "x_intelligence": {
     "tier1_posts": [
       {
         "username": "EleanorTerrett",
+        "text": "🚨NEW: With @DavidSacks’ time as a Special Government Employee now expired, it’s unclear whether there will be a replacement crypto czar as key policy initiatives like the Clarity Act and Strategic Bitcoin Reserve remain in the works, or whether he will continue to play a role https://t.co/TbvVWaQC9V",
+        "created_at": "2026-03-27T02:34:20.000Z",
+        "tweet_id": "2037357522030403621",
+        "metrics": {
+          "retweet_count": 11,
+          "reply_count": 6,
+          "like_count": 30,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 1735
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "EleanorTerrett",
+        "text": "RT @CryptoAmerica_: Last month at @EthereumDenver, we asked White House Crypto Council Executive Director @patrickjwitt about @DavidSacks w…",
+        "created_at": "2026-03-27T02:03:55.000Z",
+        "tweet_id": "2037349868079907319",
+        "metrics": {
+          "retweet_count": 8,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "SECPaulSAtkins",
+        "text": "RT @EleanorTerrett: 🚨NEW: SEC Chair @SECPaulSAtkins tells @CryptoAmerica_ the SEC’s long-awaited tokenization innovation exemption could ar…",
+        "created_at": "2026-03-26T18:25:37.000Z",
+        "tweet_id": "2037234532026290316",
+        "metrics": {
+          "retweet_count": 342,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "EleanorTerrett",
+        "text": "Watching my girl @LydiaMoynihan crush it moderating the payments panel with @bgarlinghouse, @maja0G and @ZachWitkoff today 👏🏼 https://t.co/DBKcBIZ42a",
+        "created_at": "2026-03-26T18:20:44.000Z",
+        "tweet_id": "2037233303208481234",
+        "metrics": {
+          "retweet_count": 106,
+          "reply_count": 13,
+          "like_count": 579,
+          "quote_count": 2,
+          "bookmark_count": 37,
+          "impression_count": 36749
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "EleanorTerrett",
+        "text": "RT @BitGo: Our next High Roller Summit speaker has been covering this industry longer than most have been paying attention to it.\n\n@Eleanor…",
+        "created_at": "2026-03-26T18:03:49.000Z",
+        "tweet_id": "2037229047025893415",
+        "metrics": {
+          "retweet_count": 9,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "Ripple",
+        "text": "Stablecoins are moving from trading tools to core financial infrastructure. North America leads, with 45% of total crypto transaction value in transfers over $10M — signaling institutional-scale flows driving demand for regulated, compliance-first assets. RLUSD is designed for",
+        "created_at": "2026-03-26T16:39:01.000Z",
+        "tweet_id": "2037207709066350863",
+        "metrics": {
+          "retweet_count": 636,
+          "reply_count": 113,
+          "like_count": 2883,
+          "quote_count": 36,
+          "bookmark_count": 122,
+          "impression_count": 106146
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "EleanorTerrett",
+        "text": "🚨NEW: Securities lawyers say the @SECGov’s interpretive guidance on how federal securities laws apply to crypto assets leaves it largely subjective when a token’s investment contract ends, with key questions still unresolved. That matters because securities law violations are https://t.co/pNnN22WTxP",
+        "created_at": "2026-03-26T16:28:20.000Z",
+        "tweet_id": "2037205017925497089",
+        "metrics": {
+          "retweet_count": 89,
+          "reply_count": 24,
+          "like_count": 486,
+          "quote_count": 4,
+          "bookmark_count": 22,
+          "impression_count": 38950
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "EleanorTerrett",
+        "text": "RT @Kansas1111: @EleanorTerrett Eleanor &amp; Theo 😢🫶🏻 https://t.co/GYvSILD6hC",
+        "created_at": "2026-03-26T15:13:35.000Z",
+        "tweet_id": "2037186205737947387",
+        "metrics": {
+          "retweet_count": 1,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "EleanorTerrett",
+        "text": "@nipomo357 Not me!",
+        "created_at": "2026-03-26T14:48:48.000Z",
+        "tweet_id": "2037179970728927279",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 96
+        },
+        "tier": 1,
+        "weight": 3
+      },
+      {
+        "username": "EleanorTerrett",
         "text": "@EmmaJoNYC I thought that was a parody account at first. Disgusting.",
         "created_at": "2026-03-26T13:28:21.000Z",
         "tweet_id": "2037159725209444786",
         "metrics": {
-          "retweet_count": 0,
-          "reply_count": 6,
-          "like_count": 21,
+          "retweet_count": 2,
+          "reply_count": 17,
+          "like_count": 133,
           "quote_count": 0,
-          "bookmark_count": 1,
-          "impression_count": 1984
+          "bookmark_count": 2,
+          "impression_count": 10620
         },
         "tier": 1,
         "weight": 3
@@ -99,7 +243,7 @@
         "created_at": "2026-03-26T13:17:39.000Z",
         "tweet_id": "2037157031623233880",
         "metrics": {
-          "retweet_count": 21,
+          "retweet_count": 54,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -115,12 +259,12 @@
         "created_at": "2026-03-26T02:51:39.000Z",
         "tweet_id": "2036999491719410161",
         "metrics": {
-          "retweet_count": 18,
-          "reply_count": 154,
-          "like_count": 1541,
+          "retweet_count": 22,
+          "reply_count": 187,
+          "like_count": 1827,
           "quote_count": 1,
-          "bookmark_count": 5,
-          "impression_count": 25480
+          "bookmark_count": 4,
+          "impression_count": 32535
         },
         "tier": 1,
         "weight": 3
@@ -147,12 +291,12 @@
         "created_at": "2026-03-25T23:43:08.000Z",
         "tweet_id": "2036952050026570226",
         "metrics": {
-          "retweet_count": 312,
-          "reply_count": 54,
-          "like_count": 1602,
-          "quote_count": 54,
-          "bookmark_count": 108,
-          "impression_count": 208871
+          "retweet_count": 342,
+          "reply_count": 59,
+          "like_count": 1781,
+          "quote_count": 56,
+          "bookmark_count": 116,
+          "impression_count": 243265
         },
         "tier": 1,
         "weight": 3
@@ -163,7 +307,7 @@
         "created_at": "2026-03-25T22:57:10.000Z",
         "tweet_id": "2036940485420270008",
         "metrics": {
-          "retweet_count": 27,
+          "retweet_count": 28,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
@@ -179,12 +323,12 @@
         "created_at": "2026-03-25T22:36:55.000Z",
         "tweet_id": "2036935386308518215",
         "metrics": {
-          "retweet_count": 263,
+          "retweet_count": 289,
           "reply_count": 34,
-          "like_count": 1692,
-          "quote_count": 3,
-          "bookmark_count": 65,
-          "impression_count": 90989
+          "like_count": 1821,
+          "quote_count": 4,
+          "bookmark_count": 70,
+          "impression_count": 101259
         },
         "tier": 1,
         "weight": 3
@@ -195,12 +339,12 @@
         "created_at": "2026-03-25T21:15:12.000Z",
         "tweet_id": "2036914820990009346",
         "metrics": {
-          "retweet_count": 4,
-          "reply_count": 12,
+          "retweet_count": 5,
+          "reply_count": 16,
           "like_count": 21,
           "quote_count": 5,
-          "bookmark_count": 4,
-          "impression_count": 10013
+          "bookmark_count": 6,
+          "impression_count": 11138
         },
         "tier": 1,
         "weight": 3
@@ -216,7 +360,7 @@
           "like_count": 1,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 403
+          "impression_count": 423
         },
         "tier": 1,
         "weight": 3
@@ -243,156 +387,12 @@
         "created_at": "2026-03-25T15:49:11.000Z",
         "tweet_id": "2036832780168904751",
         "metrics": {
-          "retweet_count": 21,
+          "retweet_count": 20,
           "reply_count": 5,
-          "like_count": 233,
+          "like_count": 241,
           "quote_count": 0,
           "bookmark_count": 3,
-          "impression_count": 27274
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "SECPaulSAtkins",
-        "text": "RT @SECGov: Chairman @SECPaulSAtkins at the Digital Asset Summit 2026:\n\n\"The interpretative release is not a panacea.\n\nWe need to be ready,…",
-        "created_at": "2026-03-25T14:52:30.000Z",
-        "tweet_id": "2036818511364780282",
-        "metrics": {
-          "retweet_count": 85,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 0
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "RT @FinancialCmte: HAPPENING NOW: Chairman @RepFrenchHill convenes the Full Committee hearing entitled: \"Tokenization and the Future of Sec…",
-        "created_at": "2026-03-25T14:35:02.000Z",
-        "tweet_id": "2036814116694696131",
-        "metrics": {
-          "retweet_count": 277,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 2
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "RT @CryptoAmerica_: 🚨NEW: In this week’s episode, we celebrate our 1-year anniversary with SEC Chairman @SECPaulSAtkins! \n\nChair Atkins dis…",
-        "created_at": "2026-03-25T14:24:33.000Z",
-        "tweet_id": "2036811478750118102",
-        "metrics": {
-          "retweet_count": 18,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 0
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "🚨NEW: President Trump’s newly formed council of advisors on science and technology (PCAST) includes some prominent crypto figures: AI and Crypto Czar @DavidSacks (co-chair), @a16z co-founder @pmarca, and @coinbase/@paradigm co-founder @FEhrsam.\n\nThe council will help shape https://t.co/K7HjK3qkDs",
-        "created_at": "2026-03-25T14:07:26.000Z",
-        "tweet_id": "2036807172034613638",
-        "metrics": {
-          "retweet_count": 165,
-          "reply_count": 30,
-          "like_count": 931,
-          "quote_count": 14,
-          "bookmark_count": 56,
-          "impression_count": 46121
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "🚨🗞️NEW: Crypto Leaders Split Over Stablecoin Yield Deal as Industry Backlash Builds\n\nPlus, @FinancialCmte holds a hearing on tokenization at 10AM ET; and SEC Chairman @SECPaulSAtkins joins @CryptoAmerica_ for our one-year anniversary episode. ⬇️ \n\nhttps://t.co/Zerg0BJ7bn",
-        "created_at": "2026-03-25T13:29:53.000Z",
-        "tweet_id": "2036797721802072375",
-        "metrics": {
-          "retweet_count": 187,
-          "reply_count": 91,
-          "like_count": 1077,
-          "quote_count": 23,
-          "bookmark_count": 56,
-          "impression_count": 80940
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "SECGov",
-        "text": "A health savings account (HSA) is a tax-advantaged savings account you can use to pay for qualified medical expenses. Some HSAs allow you to invest some or all of your HSA money.\n\nLearn more in our Investor Bulletin: https://t.co/NpYpy09kNo https://t.co/GNq0FR386E",
-        "created_at": "2026-03-25T13:10:13.000Z",
-        "tweet_id": "2036792771634205079",
-        "metrics": {
-          "retweet_count": 7,
-          "reply_count": 17,
-          "like_count": 40,
-          "quote_count": 2,
-          "bookmark_count": 2,
-          "impression_count": 10395
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "RT @CryptoAmerica_: 🚨NEW: Our one-year anniversary episode featuring @SECGov Chairman @SECPaulSAtkins is live now on all platforms! \n\nWe al…",
-        "created_at": "2026-03-25T11:39:06.000Z",
-        "tweet_id": "2036769841407811921",
-        "metrics": {
-          "retweet_count": 16,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 3
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "🇺🇸 Our one-year @CryptoAmerica_ anniversary episode drops tomorrow at 7AM EST with a special guest! \n\nWe’re excited to share this one.\n\nCatch it on Spotify, Apple, YouTube, X, and Rumble. https://t.co/UmYqXtpCLG",
-        "created_at": "2026-03-25T01:23:16.000Z",
-        "tweet_id": "2036614862189559825",
-        "metrics": {
-          "retweet_count": 44,
-          "reply_count": 15,
-          "like_count": 368,
-          "quote_count": 1,
-          "bookmark_count": 6,
-          "impression_count": 36186
-        },
-        "tier": 1,
-        "weight": 3
-      },
-      {
-        "username": "EleanorTerrett",
-        "text": "RT @CryptoAmerica_: “Working together with the Tether teams, strategizing for the years to come.”\n\n@chrispavlovski, founder and CEO of @rum…",
-        "created_at": "2026-03-24T22:53:14.000Z",
-        "tweet_id": "2036577107766099992",
-        "metrics": {
-          "retweet_count": 4,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 0
+          "impression_count": 28664
         },
         "tier": 1,
         "weight": 3
@@ -400,327 +400,327 @@
     ],
     "tier2_posts": [
       {
-        "username": "CoinDesk",
-        "text": "RT @CoinDeskMarkets: The CoinDesk 20 is currently trading at 1985.11, down 3.2% (-65.39) since 4 p.m. ET on Wednesday.\n\nNone of the 20 asse…",
-        "created_at": "2026-03-26T13:48:50.000Z",
-        "tweet_id": "2037164880894030042",
-        "metrics": {
-          "retweet_count": 1,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 0
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "LATEST: MARA Holdings has sold 15,133 $BTC this month to fund a $1B debt repurchase. https://t.co/nRgmrnOHqi",
-        "created_at": "2026-03-26T13:33:06.000Z",
-        "tweet_id": "2037160918199488594",
-        "metrics": {
-          "retweet_count": 2,
-          "reply_count": 12,
-          "like_count": 15,
-          "quote_count": 1,
-          "bookmark_count": 0,
-          "impression_count": 4068
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "@IanAllison123 reports.\nhttps://t.co/LgHzzkcTHB",
-        "created_at": "2026-03-26T13:01:05.000Z",
-        "tweet_id": "2037152862250094979",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 1,
-          "bookmark_count": 0,
-          "impression_count": 4502
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "ChairmanSelig",
-        "text": "As a result of widespread debanking and misreporting in the news, we’re seeing trust in centralized gatekeepers being replaced with trust in decentralization and market systems. It’s essential that we create a regulatory framework that does not quash this trust revolution. https://t.co/nNpUiH3smS",
-        "created_at": "2026-03-26T12:48:15.000Z",
-        "tweet_id": "2037149631168037018",
-        "metrics": {
-          "retweet_count": 16,
-          "reply_count": 12,
-          "like_count": 103,
-          "quote_count": 1,
-          "bookmark_count": 7,
-          "impression_count": 2878
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "JUST IN: @Coinbase and mortgage firm Better launch Fannie Mae-backed mortgage letting crypto holders use $BTC or $USDC as down payment collateral without selling their assets. https://t.co/ln3Xtk3ko3",
-        "created_at": "2026-03-26T12:37:02.000Z",
-        "tweet_id": "2037146810108592424",
-        "metrics": {
-          "retweet_count": 25,
-          "reply_count": 29,
-          "like_count": 132,
-          "quote_count": 6,
-          "bookmark_count": 8,
-          "impression_count": 13551
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: Bitcoin miner Marathon Digital $MARA sells 15,133 BTC worth over $1 billion. https://t.co/D9ZgZQza0C",
-        "created_at": "2026-03-26T12:25:52.000Z",
-        "tweet_id": "2037144001191514431",
-        "metrics": {
-          "retweet_count": 326,
-          "reply_count": 417,
-          "like_count": 2252,
-          "quote_count": 90,
-          "bookmark_count": 88,
-          "impression_count": 198313
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "NEW: The Hashdex Nasdaq CME Crypto Index ETF $NCIQ has expanded to seven assets, adding $ADA and $LINK to its existing $BTC, $ETH, $XRP, $SOL and $XLM holdings, per its first annual SEC 10-K filing. https://t.co/lQmQYZaSgS",
-        "created_at": "2026-03-26T12:16:34.000Z",
-        "tweet_id": "2037141660681769252",
-        "metrics": {
-          "retweet_count": 40,
-          "reply_count": 15,
-          "like_count": 187,
-          "quote_count": 10,
-          "bookmark_count": 20,
-          "impression_count": 12544
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇺🇸 $4.3 trillion mortgage provider Fannie Mae to accept crypto-backed mortgages, WSJ reports.",
-        "created_at": "2026-03-26T11:47:57.000Z",
-        "tweet_id": "2037134458919215158",
-        "metrics": {
-          "retweet_count": 917,
-          "reply_count": 434,
-          "like_count": 5744,
-          "quote_count": 200,
-          "bookmark_count": 338,
-          "impression_count": 351109
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "@saylor @Strategy Read the full article by @thesamreynolds on CoinDesk.",
-        "created_at": "2026-03-26T11:28:43.000Z",
-        "tweet_id": "2037129618319171940",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 2,
-          "like_count": 4,
-          "quote_count": 1,
-          "bookmark_count": 0,
-          "impression_count": 6450
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "MARKETS: @saylor's @Strategy accounted for 98% of all corporate $BTC purchases in the past month, buying 45,000 $BTC while every other treasury company combined bought just 1,000. https://t.co/xg1bqLaZnt",
-        "created_at": "2026-03-26T10:15:39.000Z",
-        "tweet_id": "2037111230691754265",
-        "metrics": {
-          "retweet_count": 16,
-          "reply_count": 34,
-          "like_count": 84,
-          "quote_count": 2,
-          "bookmark_count": 0,
-          "impression_count": 15048
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "INSIGHT: CEO of the world's largest custodian bank @BNYglobal Robin Vince says large banks will drive the next phase of crypto adoption, positioning traditional financial institutions as the bridge between digital assets and mainstream finance. https://t.co/A8mthgCGBY",
-        "created_at": "2026-03-26T09:12:44.000Z",
-        "tweet_id": "2037095394836939012",
-        "metrics": {
-          "retweet_count": 33,
-          "reply_count": 31,
-          "like_count": 132,
-          "quote_count": 2,
-          "bookmark_count": 8,
-          "impression_count": 14465
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "Having fun at the St Paddy’s Day Brunch.\n\n⁦@massgop⁩\n#LogCabinRepublicans https://t.co/OfYQNS96mq",
-        "created_at": "2026-03-26T01:01:37.000Z",
-        "tweet_id": "2036971804346941781",
-        "metrics": {
-          "retweet_count": 3,
-          "reply_count": 4,
-          "like_count": 30,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 4442
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "Source https://t.co/SCxwzAXXkW",
-        "created_at": "2026-03-25T23:56:21.000Z",
-        "tweet_id": "2036955376470417830",
-        "metrics": {
-          "retweet_count": 50,
-          "reply_count": 9,
-          "like_count": 367,
-          "quote_count": 0,
-          "bookmark_count": 17,
-          "impression_count": 109881
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇺🇸 SEC Chair Paul Atkins says tokenization innovation exemption for crypto firms could arrive within weeks.",
-        "created_at": "2026-03-25T23:54:25.000Z",
-        "tweet_id": "2036954890270834956",
-        "metrics": {
-          "retweet_count": 599,
-          "reply_count": 260,
-          "like_count": 4823,
-          "quote_count": 62,
-          "bookmark_count": 165,
-          "impression_count": 313034
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
         "username": "evernorthxrp",
-        "text": "Consumer crypto products need strong, liquid on and off ramps, a strong, regulated stablecoin and access to 24/7 FX markets.\n\n@GirinLabs is building the right product on the right ledger. The institutional capital layer that makes it sustainable is the other half of that https://t.co/Q7PfDaliw1",
-        "created_at": "2026-03-25T23:43:45.000Z",
-        "tweet_id": "2036952208219021567",
+        "text": "XRP’s native lending protocol is on the way! Single asset vaults. Term lending with automated repayments. Confidential transfers using zero-knowledge proofs. On-chain institutional infrastructure built at the protocol level. Get the 3 minute breakdown from @sagarCBO.\n\nLearn more: https://t.co/QIQV1bmSIk",
+        "created_at": "2026-03-27T02:24:36.000Z",
+        "tweet_id": "2037355071978221937",
         "metrics": {
-          "retweet_count": 108,
-          "reply_count": 13,
-          "like_count": 642,
+          "retweet_count": 21,
+          "reply_count": 4,
+          "like_count": 62,
           "quote_count": 2,
-          "bookmark_count": 43,
-          "impression_count": 30063
+          "bookmark_count": 5,
+          "impression_count": 645
         },
         "tier": 2,
         "weight": 2
       },
       {
         "username": "JohnEDeaton1",
-        "text": "Wall Street Banks are the enemy of the American people. I said it. I mean it. https://t.co/ro48q4TAmZ",
-        "created_at": "2026-03-25T23:39:09.000Z",
-        "tweet_id": "2036951051111215153",
+        "text": "If Members of Congress leave Washington for yet another extended vacation during a government shutdown while regular Americans aren’t being paid - they will have sunken to a new all-time low.",
+        "created_at": "2026-03-26T23:57:29.000Z",
+        "tweet_id": "2037318051842887797",
         "metrics": {
-          "retweet_count": 144,
-          "reply_count": 41,
-          "like_count": 840,
-          "quote_count": 6,
-          "bookmark_count": 8,
-          "impression_count": 28614
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "Disgusting. 🤮 https://t.co/O1ci6XVi3I",
-        "created_at": "2026-03-25T23:05:06.000Z",
-        "tweet_id": "2036942479266566232",
-        "metrics": {
-          "retweet_count": 61,
-          "reply_count": 11,
-          "like_count": 380,
-          "quote_count": 0,
-          "bookmark_count": 2,
-          "impression_count": 14492
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "MASSACHUSETTS IS BROKE. WE NEED NEW LEADERSHIP AT BOTH THE STATE AND FEDERAL LEVELS.\n\nAcross Massachusetts, towns are asking for record property tax hikes to meet rising costs https://t.co/qimWfQ8oF2",
-        "created_at": "2026-03-25T23:04:41.000Z",
-        "tweet_id": "2036942376649056439",
-        "metrics": {
-          "retweet_count": 51,
-          "reply_count": 15,
-          "like_count": 197,
+          "retweet_count": 28,
+          "reply_count": 17,
+          "like_count": 195,
           "quote_count": 4,
           "bookmark_count": 2,
-          "impression_count": 5815
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "MARKETS: @Bittensor ($TAO) is up 104% in March and 58% YTD. https://t.co/FEsugh0thw",
-        "created_at": "2026-03-25T23:00:25.000Z",
-        "tweet_id": "2036941300780462412",
-        "metrics": {
-          "retweet_count": 119,
-          "reply_count": 48,
-          "like_count": 698,
-          "quote_count": 6,
-          "bookmark_count": 21,
-          "impression_count": 38620
+          "impression_count": 4758
         },
         "tier": 2,
         "weight": 2
       },
       {
         "username": "JohnEDeaton1",
-        "text": "RT @DeatonforSenate: Standing in front of USS Constitution, a ship built to withstand cannon fire, you’re reminded what real leadership loo…",
-        "created_at": "2026-03-25T22:45:41.000Z",
-        "tweet_id": "2036937595825864880",
+        "text": "RT @DeatonforSenate: Growth means taking the loss, learning from it, and still having a laugh. That’s how you keep moving forward. Always t…",
+        "created_at": "2026-03-26T23:48:40.000Z",
+        "tweet_id": "2037315833974636862",
         "metrics": {
-          "retweet_count": 34,
+          "retweet_count": 10,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 0
+          "impression_count": 1
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "Here’s another clearly biased fool - @benshapiro who, like the blood-thirsty, war-mongering @LindseyGrahamSC, talks about seizing Kharg Island as if it’s a walk in the park. \n\nOf course, it is for them. They push for a ground invasion from their perch of safety 7,000 miles away. https://t.co/0OMdVjG7cV",
+        "created_at": "2026-03-26T23:43:07.000Z",
+        "tweet_id": "2037314435690152312",
+        "metrics": {
+          "retweet_count": 16,
+          "reply_count": 14,
+          "like_count": 81,
+          "quote_count": 3,
+          "bookmark_count": 4,
+          "impression_count": 5855
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "@The_Old_Taylor They are in fact removing the Treasurer's signature from US dollar bills.\n\nPreviously, both the Treasury Secretary and the Treasurer signed banknotes.\n\nUnder the new announcement, President Trump and Treasury Secretary's signatures will appear on bills, replacing the Treasurer.",
+        "created_at": "2026-03-26T23:40:04.000Z",
+        "tweet_id": "2037313665687294361",
+        "metrics": {
+          "retweet_count": 15,
+          "reply_count": 7,
+          "like_count": 263,
+          "quote_count": 0,
+          "bookmark_count": 10,
+          "impression_count": 20094
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "RT @consensus2026: We counted. AI came up a few times. 🤖\n\nSafe to say it's on the agenda. Miami, May 5–7. https://t.co/OhFOnOH2st",
+        "created_at": "2026-03-26T22:57:00.000Z",
+        "tweet_id": "2037302831401582657",
+        "metrics": {
+          "retweet_count": 4,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: 🇺🇸 David Sacks' term as President Trump's crypto and AI czar ends.",
+        "created_at": "2026-03-26T22:03:43.000Z",
+        "tweet_id": "2037289420324225210",
+        "metrics": {
+          "retweet_count": 374,
+          "reply_count": 591,
+          "like_count": 4536,
+          "quote_count": 166,
+          "bookmark_count": 245,
+          "impression_count": 735170
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "BREAKING: U.S. Treasury announces PresidentTrump’s signature will appear on future U.S. paper currency, marking the first time a sitting president’s signature has been featured on U.S. bills. https://t.co/o3hCowT7sO",
+        "created_at": "2026-03-26T21:55:08.000Z",
+        "tweet_id": "2037287262002507948",
+        "metrics": {
+          "retweet_count": 31,
+          "reply_count": 47,
+          "like_count": 176,
+          "quote_count": 6,
+          "bookmark_count": 15,
+          "impression_count": 41147
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "LATEST: GameStop disclosed that nearly all of its 4,710 bitcoin were pledged to Coinbase as collateral for a covered-call options strategy, rather than being sold. https://t.co/Hd6uNta4If",
+        "created_at": "2026-03-26T21:50:09.000Z",
+        "tweet_id": "2037286004818625022",
+        "metrics": {
+          "retweet_count": 23,
+          "reply_count": 27,
+          "like_count": 185,
+          "quote_count": 3,
+          "bookmark_count": 17,
+          "impression_count": 21630
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: 🇺🇸 US dollar bills to be printed with President Trump's signature, removing Treasurer signature for the first time. https://t.co/yvsHN7CPzc",
+        "created_at": "2026-03-26T21:44:15.000Z",
+        "tweet_id": "2037284521813385295",
+        "metrics": {
+          "retweet_count": 1723,
+          "reply_count": 1560,
+          "like_count": 11034,
+          "quote_count": 643,
+          "bookmark_count": 879,
+          "impression_count": 959409
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "LATEST: Federal Reserve legal official Brett Guynn says there are no active plans to develop a central bank digital currency (CBDC) https://t.co/fZ4vUlHKfC",
+        "created_at": "2026-03-26T21:34:49.000Z",
+        "tweet_id": "2037282145513673175",
+        "metrics": {
+          "retweet_count": 8,
+          "reply_count": 20,
+          "like_count": 52,
+          "quote_count": 2,
+          "bookmark_count": 2,
+          "impression_count": 17749
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "RT @CoinDeskPodcast: .@bittensor's $TAO is up more than 100% this month as decentralized AI demand surges and @nvidia CEO Jensen Huang take…",
+        "created_at": "2026-03-26T21:31:55.000Z",
+        "tweet_id": "2037281419244745134",
+        "metrics": {
+          "retweet_count": 13,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "BlackRock",
+        "text": "We polled BlackRock portfolio managers and strategists: 👇 https://t.co/fU8kaZijrB",
+        "created_at": "2026-03-26T21:28:48.000Z",
+        "tweet_id": "2037280634813469170",
+        "metrics": {
+          "retweet_count": 3,
+          "reply_count": 6,
+          "like_count": 16,
+          "quote_count": 0,
+          "bookmark_count": 3,
+          "impression_count": 5235
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: 🇺🇸 Federal Reserve says it has no plans to create a central bank digital currency (CBDC). https://t.co/M0POJQTOPh",
+        "created_at": "2026-03-26T21:24:43.000Z",
+        "tweet_id": "2037279606622056568",
+        "metrics": {
+          "retweet_count": 340,
+          "reply_count": 317,
+          "like_count": 2304,
+          "quote_count": 62,
+          "bookmark_count": 127,
+          "impression_count": 193979
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "BREAKING: Stocks fall as Iran war tensions escalate and ceasefire hopes fade.\n\nThe S&amp;P 500 drops ~1.7%, adding to trillions wiped from U.S. equities since the conflict began. https://t.co/PulPtQRON0",
+        "created_at": "2026-03-26T20:37:11.000Z",
+        "tweet_id": "2037267643250434509",
+        "metrics": {
+          "retweet_count": 11,
+          "reply_count": 26,
+          "like_count": 72,
+          "quote_count": 4,
+          "bookmark_count": 3,
+          "impression_count": 10599
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "@realDannyNelson It's simply an honor to be recognized...",
+        "created_at": "2026-03-26T20:34:41.000Z",
+        "tweet_id": "2037267012934578544",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 3,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 633
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "🎥 @will__mcevoy tells @jennsanasie his case for $4000 Zcash: https://t.co/JizmISA4mp",
+        "created_at": "2026-03-26T20:21:55.000Z",
+        "tweet_id": "2037263802895356121",
+        "metrics": {
+          "retweet_count": 3,
+          "reply_count": 15,
+          "like_count": 18,
+          "quote_count": 1,
+          "bookmark_count": 2,
+          "impression_count": 11486
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: 🇺🇸 Over $1,000,000,000,000 wiped out from the US stock market today. https://t.co/OJiO22bW6F",
+        "created_at": "2026-03-26T20:11:08.000Z",
+        "tweet_id": "2037261089709105288",
+        "metrics": {
+          "retweet_count": 1323,
+          "reply_count": 746,
+          "like_count": 7121,
+          "quote_count": 309,
+          "bookmark_count": 310,
+          "impression_count": 619143
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "OndoFinance",
+        "text": "https://t.co/ZXRJRQuEbE",
+        "created_at": "2026-03-26T20:09:46.000Z",
+        "tweet_id": "2037260743549034693",
+        "metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 20,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3362
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "OndoFinance",
+        "text": "Full story 👇\n\nhttps://t.co/N8FjKSpmSk",
+        "created_at": "2026-03-26T20:09:45.000Z",
+        "tweet_id": "2037260741607117005",
+        "metrics": {
+          "retweet_count": 3,
+          "reply_count": 3,
+          "like_count": 38,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6056
         },
         "tier": 2,
         "weight": 2
       }
     ],
-    "fetched_at": "2026-03-26T13:48:53.726Z",
+    "fetched_at": "2026-03-27T02:38:55.219Z",
     "post_count": 40,
     "errors": []
   },
@@ -897,20 +897,20 @@
       "timestamp": "2026-03-07T03:24:01.000Z"
     },
     "x402_flow": "13 mainnet payments • 13,000 drops lifetime (0.013 XRP)",
-    "last_updated": "2026-03-26T13:48:54.597Z"
+    "last_updated": "2026-03-27T02:38:55.667Z"
   },
   "etf": {
     "total_aum": 1120608974,
-    "daily_net_flow": 1263980,
-    "daily_inflow": 1263980,
+    "daily_net_flow": 0,
+    "daily_inflow": 0,
     "daily_outflow": 0,
     "weekly_net_flow": 4642101,
     "weekly_inflow": 4642101,
     "weekly_outflow": 0,
-    "cum_net_flow": -41386626,
+    "cum_net_flow": -24767489,
     "cum_inflow": 9278993,
-    "flow_date": "2026-03-25",
-    "as_of_date": "2026-03-25",
+    "flow_date": "2026-03-26",
+    "as_of_date": "2026-03-26",
     "num_funds": 4,
     "total_xrp_locked": null,
     "pct_supply": null,
@@ -918,6 +918,13 @@
       {
         "ticker": "TOXR",
         "issuer": "TOXR",
+        "aum": null,
+        "xrp_locked": null,
+        "daily_flow": 0
+      },
+      {
+        "ticker": "XRPZ",
+        "issuer": "XRPZ",
         "aum": null,
         "xrp_locked": null,
         "daily_flow": 0
@@ -935,31 +942,24 @@
         "aum": null,
         "xrp_locked": null,
         "daily_flow": 0
-      },
-      {
-        "ticker": "XRPZ",
-        "issuer": "XRPZ",
-        "aum": null,
-        "xrp_locked": null,
-        "daily_flow": 0
       }
     ],
     "source": "coinglass",
     "_cumulative_aum_note": "Approximation from sum of historical flows — does not reflect NAV changes"
   },
   "btc_etf": {
-    "total_aum": 56696100000,
-    "daily_net_flow": 7800000,
-    "daily_inflow": 83300000,
-    "daily_outflow": 75500000,
-    "weekly_net_flow": -33800000,
-    "weekly_inflow": 300800000,
-    "weekly_outflow": 334600000,
-    "cum_net_flow": 616000000,
+    "total_aum": 56566700000,
+    "daily_net_flow": -129400000,
+    "daily_inflow": 0,
+    "daily_outflow": 129400000,
+    "weekly_net_flow": -73000000,
+    "weekly_inflow": 288800000,
+    "weekly_outflow": 361800000,
+    "cum_net_flow": 835500000,
     "cum_inflow": 1519800000,
-    "flow_date": "2026-03-25",
-    "as_of_date": "2026-03-25",
-    "num_funds": 10,
+    "flow_date": "2026-03-26",
+    "as_of_date": "2026-03-26",
+    "num_funds": 9,
     "total_xrp_locked": null,
     "pct_supply": null,
     "funds": [
@@ -968,28 +968,28 @@
         "issuer": "IBIT",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": -70700000
+        "daily_flow": null
       },
       {
         "ticker": "FBTC",
         "issuer": "FBTC",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": 83300000
+        "daily_flow": -32800000
       },
       {
         "ticker": "BITB",
         "issuer": "BITB",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": 0
+        "daily_flow": -33100000
       },
       {
         "ticker": "ARKB",
         "issuer": "ARKB",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": -4800000
+        "daily_flow": -30500000
       },
       {
         "ticker": "BTCO",
@@ -1017,7 +1017,7 @@
         "issuer": "HODL",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": 0
+        "daily_flow": -2400000
       },
       {
         "ticker": "BTCW",
@@ -1031,25 +1031,25 @@
         "issuer": "GBTC",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": 0
+        "daily_flow": -25100000
       }
     ],
     "source": "coinglass",
     "_cumulative_aum_note": "Approximation from sum of historical flows — does not reflect NAV changes"
   },
   "eth_etf": {
-    "total_aum": 11662600000,
-    "daily_net_flow": -8500000,
-    "daily_inflow": 24900000,
-    "daily_outflow": 33400000,
-    "weekly_net_flow": -243800000,
-    "weekly_inflow": 42500000,
-    "weekly_outflow": 286300000,
-    "cum_net_flow": -90900000,
+    "total_aum": 11613500000,
+    "daily_net_flow": -49100000,
+    "daily_inflow": 0,
+    "daily_outflow": 49100000,
+    "weekly_net_flow": -156500000,
+    "weekly_inflow": 34800000,
+    "weekly_outflow": 191300000,
+    "cum_net_flow": -57100000,
     "cum_inflow": 478400000,
-    "flow_date": "2026-03-25",
-    "as_of_date": "2026-03-25",
-    "num_funds": 9,
+    "flow_date": "2026-03-26",
+    "as_of_date": "2026-03-26",
+    "num_funds": 7,
     "total_xrp_locked": null,
     "pct_supply": null,
     "funds": [
@@ -1058,28 +1058,28 @@
         "issuer": "ETHA",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": -33400000
+        "daily_flow": null
       },
       {
         "ticker": "ETHB",
         "issuer": "ETHB",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": 1100000
+        "daily_flow": null
       },
       {
         "ticker": "FETH",
         "issuer": "FETH",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": 23800000
+        "daily_flow": -24000000
       },
       {
         "ticker": "ETHW",
         "issuer": "ETHW",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": 0
+        "daily_flow": -5100000
       },
       {
         "ticker": "TETH",
@@ -1114,7 +1114,7 @@
         "issuer": "ETHE",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": 0
+        "daily_flow": -13800000
       }
     ],
     "source": "coinglass",
@@ -1138,10 +1138,10 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1437386773.1081073,
+      "current": 1411348581.003734,
       "deadline": "2026-12-31",
       "status": "TRACKING",
-      "pct_complete": 29
+      "pct_complete": 28
     },
     "xrp_etf_aum": {
       "target": 5000000000,
@@ -1199,18 +1199,18 @@
   },
   "probability": {
     "bear": 18,
-    "base": 40,
-    "mid": 30,
-    "bull": 12,
-    "last_updated": "2026-03-26T14:07:53.382Z",
-    "last_reasoning": "Bear probability increased from 14% to 18% due to: compound stress matrix at CRITICAL with Brent in emergency territory, Fear & Greed at 10, RLUSD contracting to new low ($1.437B), DXY collapse below 100. Base reduced from 42% to 40%. Mid increased from 32% to 30% reflecting that the same macro stress validates institutional settlement demand. Bull held at 12% — SEC tokenization exemption within weeks and regulatory acceleration offset some macro headwind but not enough to justify increase under current stress. The key question: does the stress break the position before the thesis plays out?"
+    "base": 44,
+    "mid": 28,
+    "bull": 10,
+    "last_updated": "2026-03-27T02:57:38.155Z",
+    "last_reasoning": "Bear probability increased from 14% to 18% reflecting compound stress matrix at CRITICAL, RLUSD apparent contraction, Sacks departure creating policy vacuum, and Fear & Greed at 13. Base case compressed from 42% to 44% as core institutional infrastructure continues building (SEC tokenization exemption, XRP ETF resilience). Mid case reduced slightly from 32% to 28% — the regulatory catalysts (tokenization exemption, no CBDC competition) support upside but macro headwinds are severe. Bull reduced from 12% to 10% as the macro environment makes $20+ by EOY increasingly unlikely without rapid de-escalation of both Hormuz and JPY stress."
   },
   "last_analysis": {
-    "timestamp": "2026-03-26T14:07:53.382Z",
-    "run_type": "morning",
+    "timestamp": "2026-03-27T02:57:38.155Z",
+    "run_type": "evening",
     "stress_level": "CRITICAL",
-    "stress_score": 82,
-    "applied_at": "2026-03-26T14:09:29.737Z",
+    "stress_score": 87,
+    "applied_at": "2026-03-27T02:59:08.438Z",
     "changes_applied": 1
   }
 }
