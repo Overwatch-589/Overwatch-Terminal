@@ -3294,5 +3294,35 @@
     "alerts_count": 7,
     "events_drafted_count": 6,
     "thesis_pulse": "The compound stress chain is firing on all cylinders: Brent >$100, USD/JPY 159.62 (2 ticks from the 160 critical threshold), JGB 10Y at 2.274% (just below 2.3% elevated trigger). Two of three CRITICAL"
+  },
+  {
+    "timestamp": "2026-03-27T03:53:41.198Z",
+    "run_type": "evening",
+    "stress_score": 87,
+    "stress_level": "CRITICAL",
+    "xrp_price": 1.37,
+    "fear_greed": 13,
+    "usd_jpy": 159.62,
+    "jpn_10y": 2.274,
+    "brent_crude": 103.79,
+    "dxy": 99.7381,
+    "sp500": 6477.16,
+    "etf_daily_flow": 0,
+    "dex_volume_24h": 3878661,
+    "rlusd_market_cap": 1411311905.0991893,
+    "probability_framework": {
+      "bear": 18,
+      "base": 42,
+      "mid": 30,
+      "bull": 10
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 7,
+    "events_drafted_count": 6,
+    "thesis_pulse": "The thesis operates under maximum macro stress: Brent crude at $103.79, USD/JPY at 159.62, and JGB 10Y at 2.274% place all three compound stress legs at or near critical thresholds simultaneously. RLU"
   }
 ]
