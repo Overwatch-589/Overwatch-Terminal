@@ -158,15 +158,18 @@ async function executeBaseAcquisition(channel, query, opts = {}) {
   log(`  Limit: ${limit} | Scrape: ${opts.scrapeContent !== false}`);
 
   try {
-    const response = await fetchWithPayment(endpoint, {
+    const x402Promise = fetchWithPayment(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         ...(process.env.FIRECRAWL_API_KEY ? { 'Authorization': `Bearer ${process.env.FIRECRAWL_API_KEY}` } : {})
       },
-      body: JSON.stringify(body),
-      signal: AbortSignal.timeout(30000)
+      body: JSON.stringify(body)
     });
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('x402 payment flow timed out (15s)')), 15000)
+    );
+    const response = await Promise.race([x402Promise, timeoutPromise]);
 
     if (!response.ok) {
       const errorText = await response.text().catch(() => '');
@@ -193,6 +196,65 @@ async function executeBaseAcquisition(channel, query, opts = {}) {
     return result;
 
   } catch (e) {
+    // ── VENDOR FAILOVER: x402 infrastructure failure → fiat credit reserve ──
+    const firecrawlKey = process.env.FIRECRAWL_API_KEY;
+    if (firecrawlKey) {
+      warn(`x402 VENDOR_INFRASTRUCTURE_FAILURE: ${e.message}`);
+      warn('Executing FIAT_CREDIT_RESERVE_FAILOVER — direct API with subscription credits');
+      warn(`  Original channel: ${channel.id} (${channel.network}/${channel.settlement_asset})`);
+      warn('  Failover: Firecrawl standard API (Bearer token, subscription credits)');
+      warn('  Cost still deducted from acquisition budget as USD equivalent');
+
+      try {
+        const fallbackEndpoint = 'https://api.firecrawl.dev/v1/search';
+        log(`FAILOVER: POST ${fallbackEndpoint}`);
+
+        const fallbackResponse = await fetch(fallbackEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${firecrawlKey}`
+          },
+          body: JSON.stringify(body),
+          signal: AbortSignal.timeout(30000)
+        });
+
+        if (!fallbackResponse.ok) {
+          const errorText = await fallbackResponse.text().catch(() => '');
+          throw new Error(`Failover HTTP ${fallbackResponse.status}: ${errorText.slice(0, 200)}`);
+        }
+
+        const data = await fallbackResponse.json();
+        const resultCount = Array.isArray(data.data) ? data.data.length : 0;
+
+        log(`FAILOVER SUCCESS: ${resultCount} result(s) via fiat credit reserve`);
+
+        result.status = 'VENDOR_FAILOVER';
+        result.data = {
+          result_count: resultCount,
+          failover_reason: e.message,
+          settlement_method: 'FIAT_CREDIT_RESERVE',
+          original_channel: channel.id,
+          results: (data.data || []).map(item => ({
+            title: item.title || null,
+            description: item.description || null,
+            url: item.url || null,
+            has_markdown: !!(item.markdown && item.markdown.length > 0),
+            markdown_length: item.markdown ? item.markdown.length : 0
+          }))
+        };
+        result.duration_ms = Date.now() - startTime;
+        return result;
+
+      } catch (fallbackErr) {
+        err(`FAILOVER ALSO FAILED: ${fallbackErr.message}`);
+        result.status = 'ERROR';
+        result.error = `x402: ${e.message} | Failover: ${fallbackErr.message}`;
+        result.duration_ms = Date.now() - startTime;
+        return result;
+      }
+    }
+
     err(`Firecrawl search failed: ${e.message}`);
     result.status = 'ERROR';
     result.error = e.message;
