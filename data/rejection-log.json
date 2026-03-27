@@ -971,5 +971,19 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-27T16:31:06.135Z"
+  },
+  {
+    "layer3_inference": "Ripple private pipeline for PermDEX deployment (hidden move)",
+    "signal_ids": [
+      "20260327-1758-SIG-003",
+      "20260327-1758-SIG-013",
+      "20260327-1758-SIG-014"
+    ],
+    "rejection_reason": "Inference carries 75% discount after FLAGGED classification (50%) and partial data support (additional 50%). At 25% effective weight, this does not meet the threshold to influence any scoring or tactical recommendation. The inference is built on the assumption that infrastructure investment implies customer pipeline — per LZ-CC-001, a coherent narrative without real-world anchoring is not evidence. Companies build infrastructure that never finds customers. Retained as context only.",
+    "root_cause": "NARRATIVE_WEIGHT_BIAS",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-27T18:14:30.024Z",
+    "source": "layer4_reconcile"
   }
 ]

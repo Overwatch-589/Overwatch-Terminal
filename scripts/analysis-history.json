@@ -3414,5 +3414,35 @@
     "alerts_count": 8,
     "events_drafted_count": 7,
     "thesis_pulse": "All three compound stress legs are now firing simultaneously: Brent $103.79 (well above $95 critical), USD/JPY 159.9 (0.1 from $160 critical trigger), JGB 10Y 2.274% (just below 2.3% elevated but acce"
+  },
+  {
+    "timestamp": "2026-03-27T18:15:23.954Z",
+    "run_type": "morning",
+    "stress_score": 88,
+    "stress_level": "CRITICAL",
+    "xrp_price": 1.32,
+    "fear_greed": 13,
+    "usd_jpy": 159.9,
+    "jpn_10y": 2.274,
+    "brent_crude": 103.79,
+    "dxy": 99.7381,
+    "sp500": 6387.2,
+    "etf_daily_flow": 0,
+    "dex_volume_24h": 3878661,
+    "rlusd_market_cap": 1406357809.6507015,
+    "probability_framework": {
+      "bear": 18,
+      "base": 46,
+      "mid": 26,
+      "bull": 10
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 7,
+    "events_drafted_count": 7,
+    "thesis_pulse": "The thesis is under maximum macro stress with all three compound stress legs at or above elevated thresholds simultaneously — Brent at $103.79 triggers EMERGENCY conditions independently. RLUSD circul"
   }
 ]
