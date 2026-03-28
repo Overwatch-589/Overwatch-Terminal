@@ -142,23 +142,40 @@ function routeToChannel(request, channels) {
   const enabled = channels.filter(c => c.enabled !== false);
   if (enabled.length === 0) return null;
 
-  // Score each channel: count how many of its capabilities match the request category
+  // Score each channel: direct match > partial match, then prefer fewer capabilities (more specialized), then cheaper
   let bestChannel = null;
   let bestScore = 0;
+  let bestCapCount = Infinity;
+  let lowestCost = Infinity;
 
   for (const ch of enabled) {
     const caps = (ch.capabilities || []).map(c => c.toLowerCase());
+    const capCount = caps.length;
+    const cost = ch.cost_per_request_usd || 0;
+
+    let score = 0;
     // Direct match: category appears in capabilities
     if (caps.includes(category)) {
-      // Prefer direct match with highest specificity
-      const score = 2;
-      if (score > bestScore) { bestScore = score; bestChannel = ch; }
+      score = 2;
+    } else {
+      // Partial match: category contains a capability keyword or vice versa
+      for (const cap of caps) {
+        if (category.includes(cap) || cap.includes(category)) {
+          score = 1;
+          break;
+        }
+      }
     }
-    // Partial match: category contains a capability keyword or vice versa
-    for (const cap of caps) {
-      if (category.includes(cap) || cap.includes(category)) {
-        const score = 1;
-        if (score > bestScore) { bestScore = score; bestChannel = ch; }
+
+    if (score > 0) {
+      const isBetterScore = score > bestScore;
+      const isTieButMoreSpecialized = (score === bestScore && capCount < bestCapCount);
+      const isAbsoluteTieButCheaper = (score === bestScore && capCount === bestCapCount && cost < lowestCost);
+      if (isBetterScore || isTieButMoreSpecialized || isAbsoluteTieButCheaper) {
+        bestChannel = ch;
+        bestScore = score;
+        bestCapCount = capCount;
+        lowestCost = cost;
       }
     }
   }
