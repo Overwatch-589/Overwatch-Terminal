@@ -933,6 +933,11 @@ async function main() {
   if (brent.value === null) {
     warn('BRENT', 'FinanceFlow failed, trying FRED fallback');
     brent = await fetchFRED('BRENT', ENDPOINTS.fred.brent, existing?.macro?.brent_crude);
+    const cached = existing?.macro?.brent_crude;
+    if (brent.value !== null && cached?.data_date && brent.data_date && brent.data_date < cached.data_date) {
+      warn('BRENT', `FRED data (${brent.data_date}) older than cache (${cached.data_date}), keeping cache`);
+      brent = cached;
+    }
   }
   const us10y  = await fetchFRED('US_10Y',  ENDPOINTS.fred.us_10y,  existing?.macro?.us_10y_yield);
 
@@ -940,12 +945,17 @@ async function main() {
   if (jpn10y.value === null) {
     warn('JPN_10Y', 'FinanceFlow failed, trying FRED fallback');
     jpn10y = await fetchFRED('JPN_10Y', ENDPOINTS.fred.jpn_10y, existing?.macro?.jpn_10y);
+    const cached = existing?.macro?.jpn_10y;
+    if (jpn10y.value !== null && cached?.data_date && jpn10y.data_date && jpn10y.data_date < cached.data_date) {
+      warn('JPN_10Y', `FRED data (${jpn10y.data_date}) older than cache (${cached.data_date}), keeping cache`);
+      jpn10y = cached;
+    }
   }
 
   let dxy = await fetchFinanceFlowCurrency('DXY', ENDPOINTS.financeflow.dxy, null);
   if (dxy.value === null) {
-    warn('DXY', 'FinanceFlow failed, trying FRED fallback');
-    dxy = await fetchFRED('DXY', ENDPOINTS.fred.dxy, existing?.macro?.dxy);
+    warn('DXY', 'FinanceFlow failed, using cached value (FRED DTWEXBGS is wrong index)');
+    dxy = existing?.macro?.dxy ?? { value: null, data_date: null, source: 'cache' };
   }
 
   let sp500 = await fetchStooq('SP500', ENDPOINTS.stooq.sp500, null);
