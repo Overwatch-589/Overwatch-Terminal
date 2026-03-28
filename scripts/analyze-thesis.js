@@ -2349,7 +2349,7 @@ async function main() {
             // ── AD #17 Phase 4: Record Acquisition Outcomes ────────────────
             try {
               if (constrainedRequestsForOutcomes.length > 0 && traceResultForOutcomes) {
-                const outcomeResult = recordOutcomes(constrainedRequestsForOutcomes, traceResultForOutcomes, reconcileResult, domainConfigMain);
+                const outcomeResult = recordOutcomes(constrainedRequestsForOutcomes, traceResultForOutcomes, reconcileResult, domainConfigMain, { runTimestamp: generatedAt });
                 if (outcomeResult.outcomes_recorded > 0) {
                   log('acq', `Recorded ${outcomeResult.outcomes_recorded} acquisition outcomes: ${JSON.stringify(outcomeResult.outcome_summary)}`);
                 }

@@ -397,6 +397,7 @@ function recordOutcomes(constrainedRequests, traceOutput, layer4Output, domainCo
     // Build outcome record
     const outcomeRecord = {
       request_id: req.request_id,
+      run_trace_id: opts.runTimestamp || new Date().toISOString(),
       source_channel: req.source_channel,
       target_id: req.target_id,
       intended_epistemic_vector: req.intended_epistemic_vector,
