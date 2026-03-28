@@ -211,6 +211,18 @@
       "cost_per_request_usd": 0.03,
       "enabled": true,
       "paper_trade_only": false
+    },
+    {
+      "id": "messari-base",
+      "name": "Messari x402 Crypto Intelligence",
+      "network": "base",
+      "settlement_asset": "USDC",
+      "facilitator": "https://api.messari.io/ai/v2/chat/completions",
+      "capabilities": ["market_data", "on_chain_analytics", "institutional_flow_data", "competitive_intelligence", "settlement_intelligence"],
+      "query_format": "natural_language",
+      "cost_per_request_usd": 0.25,
+      "enabled": true,
+      "paper_trade_only": true
     }
   ],
 
