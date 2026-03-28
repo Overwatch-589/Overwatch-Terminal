@@ -2278,6 +2278,33 @@ async function main() {
                   }
                 }
               }
+
+              // Persist acquired intelligence for next pipeline run (AD #19 feedback loop)
+              try {
+                const acquiredData = constrainedRequestsForOutcomes
+                  .filter(r => r.execution_result && (r.execution_result.status === 'SUCCESS' || r.execution_result.status === 'VENDOR_FAILOVER') && r.execution_result.data)
+                  .map(r => ({
+                    request_id: r.request_id,
+                    tension_id: r.tension_id || r.target_id || null,
+                    query: r.description || r.query || '',
+                    content: typeof r.execution_result.data === 'string' ? r.execution_result.data : JSON.stringify(r.execution_result.data),
+                    acquired_at: new Date().toISOString(),
+                    consumed: false
+                  }));
+                if (acquiredData.length > 0) {
+                  const aiPath = path.join(__dirname, '..', 'data', 'acquired-intelligence.json');
+                  let existing = { pending: [] };
+                  try { existing = JSON.parse(fs.readFileSync(aiPath, 'utf8')); } catch {}
+                  existing.pending.push(...acquiredData);
+                  if (existing.pending.length > 50) {
+                    existing.pending = existing.pending.slice(-50);
+                  }
+                  fs.writeFileSync(aiPath, JSON.stringify(existing, null, 2));
+                  log('x402', 'Persisted ' + acquiredData.length + ' acquired intelligence entries to disk.');
+                }
+              } catch (persistErr) {
+                warn('x402', 'Failed to persist acquired intelligence (non-fatal): ' + persistErr.message);
+              }
             }
           } catch (acqErr) {
             warn('acq', `Constrained acquisition failed (non-fatal): ${acqErr.message}`);
