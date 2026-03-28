@@ -326,13 +326,17 @@ function recordOutcomes(constrainedRequests, traceOutput, layer4Output, domainCo
     }
   }
 
-  // Build lookup: tension_id → disposition from Layer 4
+  // Build lookups: tension_id → disposition and score from Layer 4
   const tensionDispositions = new Map();
+  const tensionScores = new Map();
   if (layer4Output) {
     const prevDispositions = layer4Output.previous_tension_dispositions || [];
     for (const d of prevDispositions) {
       if (d.tension_id && d.disposition) {
         tensionDispositions.set(d.tension_id, d.disposition);
+      }
+      if (d.tension_id && d.new_impact_score !== undefined) {
+        tensionScores.set(d.tension_id, d.new_impact_score);
       }
     }
   }
@@ -364,12 +368,25 @@ function recordOutcomes(constrainedRequests, traceOutput, layer4Output, domainCo
       }
     }
 
-    // Check for TENSION_RESOLVED: if this request targeted a tension that
-    // received RESOLVE disposition this cycle
+    // Tension-targeted outcome classification (deterministic)
+    // Uses Layer 4 disposition data instead of stale cross-run signal_id matching
     if (req.source_channel === 'TENSION_WATCH_FOR' && req.target_id) {
       const disposition = tensionDispositions.get(req.target_id);
+      const currentScore = tensionScores.get(req.target_id);
+
       if (disposition === 'RESOLVE') {
         outcomeClass = 'TENSION_RESOLVED';
+      } else if (disposition === 'ESCALATE') {
+        outcomeClass = 'SURVIVED';
+      } else if (disposition === 'MAINTAIN') {
+        if (currentScore !== undefined && req.previous_impact_score !== undefined
+            && currentScore !== req.previous_impact_score) {
+          outcomeClass = 'SURVIVED';
+        } else {
+          outcomeClass = 'CONFIRMED';
+        }
+      } else if (!disposition) {
+        outcomeClass = 'GENERATED';
       }
     }
 
@@ -391,9 +408,15 @@ function recordOutcomes(constrainedRequests, traceOutput, layer4Output, domainCo
       outcome: outcomeClass,
       outcome_evidence: outcomeClass === 'TENSION_RESOLVED'
         ? `Tension ${req.target_id} received RESOLVE disposition`
-        : outcomeClass === 'NO_CHANGE'
-          ? 'No measurable impact on assessment'
-          : `Signal pipeline outcome: ${outcomeClass}`,
+        : outcomeClass === 'SURVIVED'
+          ? `Tension ${req.target_id} disposition: ${tensionDispositions.get(req.target_id) || 'SCORE_DELTA'}`
+          : outcomeClass === 'CONFIRMED'
+            ? `Tension ${req.target_id} maintained — baseline verified by acquisition`
+            : outcomeClass === 'GENERATED'
+              ? `Tension ${req.target_id} not in current cycle — new analytical output may have been generated`
+              : outcomeClass === 'NO_CHANGE'
+                ? 'No measurable impact on assessment'
+                : `Signal pipeline outcome: ${outcomeClass}`,
       _recorded_at: new Date().toISOString()
     };
 
