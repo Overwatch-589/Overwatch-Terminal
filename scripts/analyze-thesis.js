@@ -773,6 +773,29 @@ These are patterns in YOUR reasoning detected across multiple pipeline runs. The
     ? `${((rlusdTarget - rlusdCurrent) / daysRemaining / 1e6).toFixed(2)}M/day`
     : 'unknown';
 
+  // AD #19: Load acquired intelligence from previous runs
+  let acquiredIntelSection = '';
+  const aiPath = path.join(__dirname, '..', 'data', 'acquired-intelligence.json');
+  try {
+    if (fs.existsSync(aiPath)) {
+      const aiData = JSON.parse(fs.readFileSync(aiPath, 'utf8'));
+      const pending = (aiData.pending || []).filter(e => !e.consumed);
+      if (pending.length > 0) {
+        const entries = pending.slice(0, 5).map(e => {
+          const truncated = (e.content || '').slice(0, 2000);
+          return `[Request: ${e.request_id}] [Tension: ${e.tension_id || 'none'}]\nQuery: ${e.query}\nIntelligence:\n${truncated}`;
+        });
+        acquiredIntelSection = '\n=== SUPPLEMENTARY INTELLIGENCE (new data since last assessment) ===\nThe following data has become available since the last assessment cycle. Evaluate with standard epistemological rigor.\n\n' + entries.join('\n\n---\n\n') + '\n\n';
+        // Mark consumed
+        for (const e of pending.slice(0, 5)) { e.consumed = true; }
+        fs.writeFileSync(aiPath, JSON.stringify(aiData, null, 2));
+        log('L2', 'Injected ' + pending.slice(0, 5).length + ' acquired intelligence entries into Layer 2 prompt.');
+      }
+    }
+  } catch (aiErr) {
+    warn('L2', 'Failed to load acquired intelligence (non-fatal): ' + aiErr.message);
+  }
+
   const prompt = `${LAYER_ZERO_RULES}
 
 You are a senior analyst performing the CONTEXTUALIZE step of a four-layer investment thesis monitoring system. You receive raw observations from Layer 1 (SWEEP) and your job is to produce contextually scored signals — but ONLY after verifying that your understanding is sufficient to score them accurately.
@@ -794,6 +817,7 @@ CORRECTIONS LEDGER (active lessons from past errors):
 ${JSON.stringify(correctionsLedger)}
 
 ${calibrationSectionL2}
+${acquiredIntelSection}
 === PHASE 1: KNOWLEDGE AUDIT ===
 
 For each significant signal from Layer 1, perform the following check BEFORE scoring:
