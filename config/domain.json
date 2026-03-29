@@ -137,9 +137,9 @@
       "inverse": false,
       "replaces_kill_switches": [7],
       "components": [
-        { "id": "CI-4-C1", "name": "SBI integration depth", "data_availability_default": "CURRENT" },
-        { "id": "CI-4-C2", "name": "BOJ policy signals", "data_availability_default": "CURRENT" },
-        { "id": "CI-4-C3", "name": "Japan regulatory environment", "data_availability_default": "CURRENT" }
+        { "id": "CI-4-C1", "name": "SBI integration depth", "data_availability_default": "CURRENT", "acquisition_candidate": true, "data_gaps": ["SBI Holdings XRPL integration status updates", "SBI Remit cross-border settlement volume on XRPL", "SBI VC Trade institutional custody developments"] },
+        { "id": "CI-4-C2", "name": "BOJ policy signals", "data_availability_default": "CURRENT", "acquisition_candidate": false, "data_gaps": ["BOJ CBDC pilot status with private settlement networks"] },
+        { "id": "CI-4-C3", "name": "Japan regulatory environment", "data_availability_default": "CURRENT", "acquisition_candidate": true, "data_gaps": ["Japan FSA stablecoin framework enforcement actions", "Japan crypto exchange licensing updates", "Japan institutional custody regulation developments"] }
       ],
       "convergence_thresholds": {
         "converging_pct": 85,
