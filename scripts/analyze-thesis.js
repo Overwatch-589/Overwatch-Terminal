@@ -2756,7 +2756,7 @@ IMPORTANT: Keep all text fields concise. Ensure your response is valid, complete
     }
     if (fs.existsSync(ledgerPath)) {
       const ledger = JSON.parse(fs.readFileSync(ledgerPath, 'utf8'));
-      ledgerCount = ledger.length;
+      ledgerCount = ledger.filter(e => e.status === 'ACTIVE').length;
     }
     overledgerLine = `\n📋 Overledger: ${ledgerCount} active lessons | ${pendingReview} pending review`;
     if (pendingReview >= 5) {
