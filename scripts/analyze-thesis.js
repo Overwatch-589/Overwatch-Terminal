@@ -2055,6 +2055,7 @@ async function main() {
   // ═══════════════════════════════════════════════════════════════════════════
 
   let assessment360 = null;
+  let acquisitionOutcomeSummary = null;
 
 
   // ── Layer 1: SWEEP ──────────────────────────────────────────────────────
@@ -2253,7 +2254,6 @@ async function main() {
 
             let traceResultForOutcomes = null;
             let constrainedRequestsForOutcomes = [];
-            let acquisitionOutcomeSummary = null;
 
           // ── Assemble Cognitive Trace ──────────────────────────────────
           try {
