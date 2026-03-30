@@ -19900,5 +19900,311 @@
     "violations_count": 13,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-30T22:47:45.599Z",
+    "layer": 1,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Brent crude at $103.79 — EMERGENCY threshold breached",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence rated 'high' despite evidence being 7 days stale and explicit acknowledgment that 'the current price could be higher or lower.' The finding acknowledges temporal uncertainty but does not reduce confidence accordingly. High confidence with acknowledged staleness is disproportionate.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Ripple Prime extends Hyperliquid integration to HIP-3",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence rated 'medium' for a finding that relies solely on a retweet of an announcement. Evidence chain is: Ripple official account → retweet → Mike Higgins announcement. No primary source verification, no independent confirmation. This is single-source, intermediary-mediated evidence (violations of LZ-EH-001 and LZ-EH-002) that should warrant 'low' confidence or explicit flag of unverified claim. Medium confidence overstates evidentiary weight.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "US DOL proposes opening $10T 401k plans to crypto",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence rated 'medium' based solely on WatcherGuru reporting with no primary source verification. The finding correctly notes 'currently a proposal, not a rule — timeline and final form uncertain' but does not extend that uncertainty to confidence level. Single-source, unverified, intermediary-reported regulatory proposal should warrant low confidence or explicit 'unverified' flag.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Ondo Finance advancing institutional RWA narrative",
+          "rule_violated": "LZ-EH-003",
+          "violation": "The finding treats Ondo Finance's public claim ('90% institutional stablecoin adoption') as evidence without distinguishing between the verifiable fact (that Ondo presented alongside major banks) and the unverified claim (the 90% adoption figure). Entity statements are lower evidentiary weight than entity actions. The presentation is verifiable behavior; the adoption claim is rhetoric. These should be separated, but the finding blends them.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "SEC tokenization innovation exemption timeline",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence rated 'medium' for a finding based on an SEC Chair retweet of a reporter's characterization ('could arrive soon') with no specific timeline, no official SEC announcement, and explicit acknowledgment that timeline is 'not specified but implied near-term.' Implied timeline from a retweet is extremely weak evidence. Medium confidence is disproportionate.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Securitize + NYSE tokenized equities moving to reality",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence rated 'medium' based solely on CoinDesk reporting with no primary source verification from Securitize or NYSE. Single intermediary source for a competitive positioning claim. Medium confidence overstates evidentiary weight.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "DXY at 99.74 — dollar weakness",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The finding states 'the dollar is weakening simultaneously with yen weakness (USD/JPY 159.46), implying yen is weakening against everything, not just a strong dollar.' This is causal inference from correlation. The simultaneous movement is observed, but the causal explanation ('yen is weakening against everything') is asserted without independent verification. The finding presents correlation and then immediately resolves it with a causal explanation without testing the null hypothesis or simpler alternatives.",
+          "severity": "MODERATE"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 16,
+      "clean_findings": 9,
+      "reviewer_notes": "The output shows systematic overconfidence when relying on single-source, intermediary-mediated evidence (particularly social media and financial news reporting). Multiple findings rated 'medium' or 'high' confidence despite relying on unverified secondary sources. The distinction between verifiable events and unverified claims within those events is occasionally blurred (see Ondo finding). One instance of correlation-to-causation inference (DXY/JPY). However, the majority of findings (9/16) demonstrate sound epistemological discipline, particularly in the high-confidence findings backed by direct data (Fear & Greed, XRPL on-chain, ETF AUM, RLUSD market cap). The violations cluster around medium-confidence regulatory/competitive signals derived from news reporting — suggesting a calibration issue in how social/news evidence is weighted."
+    },
+    "violations_count": 7,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-30T22:52:51.471Z",
+    "layer": 2,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "CI-1 Settlement Activity Index convergence_status='CONVERGING' with convergence_direction='NEGATIVE' when 2 of 3 components are DECLINING and 1 is stale",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The index labels the pattern as 'CONVERGING' based on 2 declining components in a single observation cycle. Convergence implies a trend confirmed across multiple measurements. Two components declining simultaneously in one cycle is co-occurrence, not a confirmed converging trend. The system has data for 'third consecutive cycle' on CI-1-B but does not verify CI-1-A declined across multiple cycles.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "CI-5 Competitive Displacement Index convergence_status='PATTERN_FORMING' with convergence_direction='NEGATIVE' based on 2 components both showing GROWING in a single cycle",
+          "rule_violated": "LZ-RC-002",
+          "violation": "A pattern requires multiple observations across time. Two components both showing GROWING in one measurement cycle is co-occurrence, not a forming pattern. The system does not demonstrate that these components have been GROWING across multiple consecutive cycles.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Compound stress assessment states 'The violent unwind scenario (BOJ forced intervention + oil-driven inflation + JGB spike) is closer than at any prior point in this monitoring cycle' as part of stress_chain_proximity reasoning",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The proximity of three metrics to their thresholds (co-occurrence) is presented as evidence that a causal chain (violent unwind scenario) is imminent. Correlation/co-occurrence does not establish causation. The metrics being near thresholds does not prove they will trigger the specific causal sequence described. The assessment should state the metrics are near thresholds without inferring the causal chain.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Layer2_summary states 'CI-1 (Settlement Activity) has converged NEGATIVE — both RLUSD circulation and XRPL on-chain activity are declining simultaneously with no countervailing component. This is the strongest falsification-relevant pattern in the dataset.'",
+          "rule_violated": "LZ-RC-002",
+          "violation": "Two components declining simultaneously in one observation is co-occurrence, not convergence. The summary treats simultaneous decline as a confirmed converging trend without demonstrating the pattern holds across multiple independent timeframes. CI-1-B is noted as 'third consecutive cycle' but CI-1-A is not verified across cycles.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Knowledge audit for SIG-005 USD/JPY states scoring at '7/10 with medium confidence, weighted toward Frankfurter per LZ-EH-002 (direct rate source vs intermediary)' when LZ-EH-005 requires the contradiction itself to be the finding",
+          "rule_violated": "LZ-EH-005",
+          "violation": "The rule states: 'the contradiction must be flagged rather than arbitrarily resolved.' The system correctly flags the contradiction but then resolves it by weighting toward Frankfurter and producing a severity score of 7. Producing a single weighted score is a resolution, not flagging. The output should present the contradiction as unresolved with separate conditional assessments (if A is correct: X; if B is correct: Y) rather than a weighted middle score.",
+          "severity": "SERIOUS"
+        },
+        {
+          "finding": "Compound stress pre_loaded_detail states 'The Fed policy data from supplementary intelligence (zero cuts, 2.7% inflation, stagflation narrative) removes the relief valve' as part of stress assessment reasoning",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The assessment treats Fed policy stance (zero cuts priced) as causing the removal of a 'relief valve' for the compound stress scenario. This is inferring a causal mechanism (Fed policy prevents stress relief) from co-occurrence (Fed at restrictive stance while stress metrics elevated). The system should note Fed policy stance as an environmental condition without asserting it causally prevents specific outcomes.",
+          "severity": "MODERATE"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 41,
+      "reviewer_notes": "The output demonstrates sophisticated application of CL corrections and generally strong epistemic discipline. The primary issues are: (1) treating simultaneous co-occurrence as converging trends without multi-timeframe confirmation (violates LZ-RC-002), (2) one serious violation of LZ-EH-005 where a flagged contradiction is then resolved via weighting rather than left unresolved, and (3) several instances of inferring causal mechanisms from co-occurrence (violates LZ-RC-001). The system correctly applies LZ-EPH-001 ('I don't know') extensively in knowledge gaps, correctly distinguishes predictions from measurements per LZ-RC-005, and demonstrates proper application of LZ-EPH-002 (confidence proportional to evidence) throughout most findings. The LZ-EH-005 violation on USD/JPY is the most significant — the contradiction should remain unresolved with conditional branches, not weighted to a single score."
+    },
+    "violations_count": 6,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-30T22:58:25.852Z",
+    "layer": 3,
+    "model_used": "claude-opus-4-6",
+    "tier1_flags_count": 1,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [
+      {
+        "rule_id": "LZ-EPH-003",
+        "finding": "RLUSD market cap contraction from $1.583B to $1.407B",
+        "detail": "assumption_count is 1 but assumptions array has 2 entries. Miscount detected.",
+        "severity": "FLAG",
+        "timestamp": "2026-03-30T22:57:46.039Z"
+      }
+    ],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "RLUSD market cap contraction from $1.583B to $1.407B — strategic inference",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The assumption_count is listed as 1, but the assumptions array contains 2 entries: (1) 'If primary explanation: RLUSD users are choosing competitors over RLUSD for identifiable structural reasons' and (2) 'If alternative: Ripple has advance knowledge of legislation content and is pre-positioning product accordingly.' The count does not match the enumerated assumptions. This is a structural miscount flagged by Tier 1 code checks.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Hidden Move — Ripple RLUSD product restructuring ahead of stablecoin yield legislation",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "Correctly classified as SPECULATIVE with 3 assumptions and low confidence. However, the assumptions themselves are not explicitly enumerated in the finding — the assumption_count says 3 but the text does not list what those three assumptions are. While the classification is correct, the lack of enumeration prevents verification of whether the count is accurate. This is a transparency issue.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Hidden Move — Institutional Asset Managers preparing XRP ETF filings",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "Same issue as the Ripple hidden move: assumption_count says 3 but the three assumptions are not explicitly enumerated. The evidence_hints listed are all observable facts (Morgan Stanley BTC ETF, SEC exemption signal, current fund count), but the actual unproven assumptions connecting these observables to the inferred hidden action are not articulated. Without listing the assumptions, the count cannot be verified.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound stress inference — catalyst_proximity assessment",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The assessment states regarding Brent: 'the $103.79 reading and mid-March $115-$119 reference suggest this may have already occurred' (referring to Brent sustaining above $110). The mid-March $115-$119 reference is acknowledged elsewhere as temporally ambiguous secondary data (Messari intermediary). Using a temporally ambiguous intermediary data point to suggest a threshold 'may have already' been breached blurs the line between measurement and prediction. The honest output per LZ-EPH-001 would be 'I don't know whether Brent has sustained above $110' rather than 'suggest this may have already occurred.'",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Brent crude at $103.79 — EMERGENCY threshold breached (strategic inference)",
+          "rule_violated": "LZ-EH-002",
+          "violation": "The reasoning cites 'Messari mid-March reference to $115-$119 (secondary/intermediary data, temporally ambiguous)' as supporting evidence for why the null hypothesis (temporary spike) does not hold. While the analysis correctly labels this as secondary/intermediary data, it still uses it as a supporting pillar in the reasoning chain. Per LZ-EH-002, intermediary data is lower weight. The finding correctly labels it but then leans on it substantively to dismiss the null hypothesis, creating a tension between the label and its functional evidentiary role. This is minor because the primary evidence (FRED $103.79, Fed rate hold, Fed inflation revision) is independently sufficient.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Player analysis — Central Banks / Macro Actors — inferred_strategy for Fed",
+          "rule_violated": "LZ-CC-001",
+          "violation": "The assessment states: 'This trap is not an inference — it is the observable mathematical consequence of their stated dual mandate operating against contradictory data.' While the dual mandate and the contradictory data are real-world anchored, characterizing the Fed's strategic bind as a 'mathematical consequence' rather than an inference overstates the deductive certainty. The Fed has many tools beyond rate cuts (forward guidance, balance sheet operations, regulatory changes, emergency facilities). The conclusion that the Fed is 'trapped' is a coherent narrative consistent with the data, but presenting it as mathematical fact rather than as a high-probability inference with real-world anchoring subtly violates the spirit of LZ-CC-001. The finding does cite verifiable anchors, so this is minor.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "XRP ETF positive weekly inflow — strategic inference",
+          "rule_violated": "LZ-RC-002",
+          "violation": "The reasoning states 'The directional divergence (XRP positive vs BTC/ETH negative) is a real data pattern, not a single data point' and then argues that one week of flow data across 4 funds has 'more evidentiary weight than a single transaction.' While technically accurate that 4 funds over 1 week is more than a single transaction, one week of aggregate flow data is still a single observation period. The finding correctly flags this for LZ-RC-002 and classifies as FLAGGED rather than VALID, which is the appropriate handling. However, the primary explanation is then rated as 'more likely' than the null despite the acknowledged single-period limitation, which creates tension. The FLAGGED classification mitigates this.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Behavioral pattern — 'Ripple's multi-venue expansion coincides with XRPL on-chain stagnation'",
+          "rule_violated": "LZ-RC-001",
+          "violation": "This behavioral pattern identifies a coincidence (multi-venue expansion + on-chain stagnation) and labels the thesis_implication as 'challenges.' While not explicitly claiming causation, the pattern framing implies a meaningful connection between Ripple's expansion to non-XRPL venues and XRPL stagnation. These could be entirely independent phenomena (XRPL stagnation could be market-driven, while multi-venue expansion is demand-driven). The pattern is presented as though the co-occurrence itself is meaningful without testing whether the two are causally or even correlatively linked. However, in the player_analysis section for Ripple, this is handled more carefully. The behavioral_patterns section oversimplifies.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MINOR_ISSUES",
+      "model_used": "claude-opus-4-6",
+      "gate_failed": false,
+      "findings_reviewed": 42,
+      "clean_findings": 34,
+      "reviewer_notes": "This is an exceptionally well-disciplined analytical output. The Tier 1 code flag on the RLUSD assumption miscount is confirmed as a genuine MODERATE violation — the assumptions array has 2 entries but assumption_count says 1. All other violations are MINOR and reflect edge cases rather than systematic reasoning failures. The handling of the USD/JPY contradiction (LZ-EH-005) is exemplary — it is flagged rather than resolved, carried through every dependent analysis, and identified as the highest-priority intelligence gap. The Japanese institutions assessment correctly returns 'INSUFFICIENT_DATA' per LZ-EPH-001. The corrections framework (CL-series) demonstrates active learning and prevents several common inference errors. The hidden moves are appropriately classified as SPECULATIVE with low confidence. The scenario probabilities are well-anchored to cited evidence. Overall, this output demonstrates strong epistemological discipline with only minor procedural imperfections."
+    },
+    "violations_count": 8,
+    "compliance": "MINOR_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-03-30T23:04:36.104Z",
+    "layer": 4,
+    "model_used": "claude-opus-4-6",
+    "tier1_flags_count": 3,
+    "tier1_hard_fails": 3,
+    "tier1_flags": [
+      {
+        "rule_id": "AD15-EXTENSION-FRICTION",
+        "finding": "Tension T-1",
+        "detail": "Second consecutive window extension without score escalation (5 → 5). First extension is free. Second extension requires impact_score increase.",
+        "severity": "HARD_FAIL",
+        "timestamp": "2026-03-30T23:03:38.923Z"
+      },
+      {
+        "rule_id": "AD15-EXTENSION-FRICTION",
+        "finding": "Tension T-2",
+        "detail": "Second consecutive window extension without score escalation (5 → 5). First extension is free. Second extension requires impact_score increase.",
+        "severity": "HARD_FAIL",
+        "timestamp": "2026-03-30T23:03:38.923Z"
+      },
+      {
+        "rule_id": "AD15-EXTENSION-FRICTION",
+        "finding": "Tension T-4",
+        "detail": "Second consecutive window extension without score escalation (5 → 5). First extension is free. Second extension requires impact_score increase.",
+        "severity": "HARD_FAIL",
+        "timestamp": "2026-03-30T23:03:38.923Z"
+      }
+    ],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Tension T-1 second consecutive window extension at impact_score 5 → 5",
+          "rule_violated": "AD15-EXTENSION-FRICTION",
+          "violation": "The system's own friction rule requires impact_score increase on second consecutive window extension. The output acknowledges this is a second consecutive extension but states 'impact_score maintained at 5 (already at maximum)' as justification. However, if the scoring system has a hard ceiling at 5 that prevents compliance with the friction rule, the correct epistemological response is to flag the structural impossibility rather than silently absorb the violation. The reasoning treats 'already at maximum' as a valid exemption from a mandatory escalation rule, but no such exemption is documented. This is a process violation — the friction rule exists to force action when tensions persist unresolved, and capping at 5 defeats that purpose.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Tension T-2 second consecutive window extension at impact_score 5 → 5",
+          "rule_violated": "AD15-EXTENSION-FRICTION",
+          "violation": "Same structural violation as T-1. Second consecutive extension requires score escalation per friction rule. Output acknowledges second extension but claims maximum score exempts it. No documented exemption exists for ceiling-capped scores.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Tension T-4 second consecutive window extension at impact_score 5 → 5",
+          "rule_violated": "AD15-EXTENSION-FRICTION",
+          "violation": "Same structural violation as T-1 and T-2. Second consecutive extension without escalation. The output explicitly notes 'Second consecutive extension with worsening data — score maintained at 5 (maximum)' which acknowledges both the rule and the non-compliance simultaneously.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Tension T-7 disposition states 'increasing impact_score from 5 to 5 (already at maximum)'",
+          "rule_violated": "AD15-EXTENSION-FRICTION",
+          "violation": "Same pattern as T-1/T-2/T-4. The output explicitly describes an increase that does not actually occur. Stating 'increasing from 5 to 5' is self-contradictory — this is not an increase. If the friction rule requires escalation and escalation is impossible due to a ceiling, the output should flag this as a structural constraint rather than describe a non-change as an increase.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Brent crude EMERGENCY classification — 'VALID with 1 assumption (price hasn't corrected in 7 days)'",
+          "rule_violated": "LZ-MR-002",
+          "violation": "The reasoning uses 7-day-old data (FRED primary data from Mar 23) and treats it as current without adequately discounting for staleness. While the output notes '7-day staleness maintained as concern,' it still classifies the signal as VALID at full weight with high implied confidence. LZ-MR-002 states recency affects relevance but not accuracy — the data point's accuracy is not in question, but the reasoning does not sufficiently account for the fact that a 7-day-old commodity price may no longer be relevant to current conditions, especially in a volatile supply disruption scenario. The Fed's policy response corroborates the price level existed, but does not confirm it persists. The assumption count should arguably be 2 (price hasn't corrected AND current conditions still reflect the measured state).",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "ODL Volume kill switch escalation reasoning — 'If the data were positive, Ripple would have incentive to publish it'",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The reasoning states 'If the data were positive, Ripple would have incentive to publish it. The suppression, while not proof of poor performance per LZ-RC-003, is an observable action that carries evidentiary weight per LZ-EH-003.' The output correctly cites LZ-RC-003 as a caveat, but then immediately uses the absence of publication as directional evidence via LZ-EH-003. The action of suppression is indeed observable, but the inference that suppression implies negative data is treating absence of evidence (positive data publication) as evidence of absence (positive performance). While the reasoning tries to split this by distinguishing 'action' from 'inference,' the net effect is that suppression is being used as a negative signal, which is exactly what LZ-RC-003 prohibits. The escalation from NEEDS_DATA to WARNING is partly built on this inference.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "USD/JPY data conflict resolution — weighting toward Frankfurter per LZ-EH-002",
+          "rule_violated": "LZ-EH-005",
+          "violation": "The output correctly identifies the contradiction as the finding per LZ-EH-005 and states 'I will not arbitrarily resolve it.' However, it then states 'but will weight analysis toward Frankfurter per LZ-EH-002.' LZ-EH-005 requires that equal-weight contradictions be flagged rather than resolved. The output applies LZ-EH-002 to break the tie (direct source > intermediary), which is a legitimate evidentiary hierarchy argument. However, the output itself classified these as sources of sufficiently comparable weight that the contradiction is the finding — then partially resolved it anyway by weighting toward one. The reasoning is internally inconsistent: either the sources are equal weight (flag per LZ-EH-005) or they are unequal weight (resolve per LZ-EH-002). The compound stress section correctly downgrades from CRITICAL to ELEVATED based on the unresolved conflict, which demonstrates the system did ultimately treat it as unresolved. The burden_of_proof section's partial resolution is the violation.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound stress thesis_paradox — 'A position can be correct about structural need while being wrong about surviving the transition'",
+          "rule_violated": "LZ-CC-001",
+          "violation": "The thesis paradox construct — that compound stress simultaneously threatens AND validates the thesis — is an internally coherent narrative that lacks verifiable real-world anchoring for the validation leg. The claim that cascading cross-system stress creates 'urgent demand for alternative settlement rails' is not anchored to any observable evidence that institutions respond to systemic stress by adopting new settlement infrastructure. Historical precedent (2008 crisis, 2020 COVID) suggests institutions retreat to existing infrastructure under stress, not adopt new alternatives. The threatening leg is well-anchored (NAV destruction, ETF AUM decline). The validating leg is a plausible narrative without empirical support. This is not scored into any metric, so the practical impact is limited, but the reasoning process presents an unanchored narrative as a finding.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Ondo Finance RWA narrative advancement — '90% adoption claim is unverified marketing from corporate presenter'",
+          "rule_violated": "LZ-EH-002",
+          "violation": "The output correctly flags Ondo's 90% claim as unverified marketing but then assigns it a composite score (3.5) and confidence (low), treating it as a real signal. If the data point is unverified marketing from a corporate presenter (intermediary with incentive to distort), LZ-EH-002 suggests this should carry minimal evidentiary weight. The low confidence partially addresses this, but the signal still appears in the final matrix and contributes to the competitive displacement index assessment. The reasoning process should have been more explicit about why this signal merits inclusion at all given its sourcing quality.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Tension T-8 disposition — 'Impact score increase from 5 to 5 (already at maximum)'",
+          "rule_violated": "AD15-EXTENSION-FRICTION",
+          "violation": "Same pattern as T-1/T-2/T-4/T-7. The output describes an increase that is not an increase. If the output labels the disposition as ESCALATE but the impact_score does not change, the escalation is nominal, not real.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "CI-5 override from PATTERN_FORMING/NEGATIVE to MIXED/CONTESTED",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The override reasoning cites that Securitize is a Ripple partner (CL-056) as a reason to downgrade the competitive signal. This is a valid correction. However, the reasoning also states 'Ondo is chain-agnostic and could deploy on XRPL' — the possibility that Ondo could deploy on XRPL is a forward-looking speculation, not evidence. Per LZ-RC-005, this prediction should not carry the same weight as the observable measurement that Ondo is currently deploying elsewhere. The override may be directionally correct but one of its supporting arguments relies on a prediction treated as equivalent to a measurement.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-opus-4-6",
+      "gate_failed": false,
+      "findings_reviewed": 58,
+      "clean_findings": 47,
+      "reviewer_notes": "The dominant issue is the AD15-EXTENSION-FRICTION pattern affecting 5 tensions (T-1, T-2, T-4, T-7, T-8). This appears to be a systemic design problem rather than an analytical reasoning failure — the friction rule requires escalation but the scoring system has a ceiling at 5 that makes compliance impossible for tensions already at maximum. The system needs either (a) a higher ceiling, (b) a documented exemption for max-score tensions, or (c) an alternative escalation mechanism (e.g., mandatory action trigger instead of score increase) when the ceiling is hit. The epistemological violations (LZ-RC-003 on ODL suppression inference, LZ-EH-005/LZ-EH-002 tension on USD/JPY) are relatively contained and the system generally demonstrates strong rule awareness — it frequently cites the correct rules and attempts to comply. The overall analytical process is notably disciplined in null hypothesis testing, assumption counting, and evidence-confidence calibration."
+    },
+    "violations_count": 11,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
   }
 ]

@@ -1082,5 +1082,35 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-30T14:13:00.616Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Ripple hidden move: RLUSD product restructuring ahead of legislation",
+    "signal_ids": [
+      "20260330-2247-SIG-001",
+      "20260330-2247-SIG-015"
+    ],
+    "rejection_reason": "SPECULATIVE classification (3+ assumptions) with no supporting data. Stripped from scoring per burden of proof. The inference invents a strategic rationale for observable contraction without evidence that such restructuring is planned.",
+    "root_cause": "NARRATIVE_WEIGHT_BIAS",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-30T23:03:38.918Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-30T23:03:38.921Z"
+  },
+  {
+    "layer3_inference": "Institutional asset managers preparing XRP ETF filings",
+    "signal_ids": [
+      "20260330-2247-SIG-002",
+      "20260330-2247-SIG-009"
+    ],
+    "rejection_reason": "SPECULATIVE classification (3+ assumptions) with no supporting data. Inferring XRP-specific filing preparation from Morgan Stanley's BTC ETF launch requires multiple unproven assumptions. Stripped from scoring.",
+    "root_cause": "NARRATIVE_WEIGHT_BIAS",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-30T23:03:38.918Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-30T23:03:38.921Z"
   }
 ]
