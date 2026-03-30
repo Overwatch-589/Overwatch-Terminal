@@ -628,6 +628,14 @@ async function runSweep(marketData, thesisContext) {
     return [];
   }
 
+  const calibrationEntriesL1 = loadBehavioralCalibration('L1');
+  const calibrationSectionL1 = calibrationEntriesL1.length > 0
+    ? `BEHAVIORAL CALIBRATION (documented reasoning tendencies — read before analysis):
+${JSON.stringify(calibrationEntriesL1.map(e => ({ id: e.id, source_rule: e.source_rule, documented_tendency: e.documented_tendency, directional_guidance: e.directional_guidance })))}
+
+These are patterns in YOUR reasoning detected across multiple pipeline runs. They are not rules (Layer Zero) and not specific past mistakes (Corrections Ledger). They are tendencies — recurring ways you process information that produce epistemological violations. Read each entry and actively counteract the documented tendency during this analysis.`
+    : '';
+
   const sweepPrompt = `You are a senior analyst performing the SWEEP step of a four-layer analytical monitoring system. Your job is perception — surface every material signal in the environment the thesis operates in.
 
 Positive, negative, ambiguous, contradictory. Apply equal rigor in all directions. A positive signal requires the same standard of evidence as a negative one — specific developments, named entities, verifiable actions. No direction is preferred.
@@ -636,6 +644,8 @@ You are not evaluating these signals. You are not determining their impact on th
 
 THESIS CONTEXT (includes thesis statement, falsification criteria, key players, and graduated lessons):
 ${thesisContext}
+
+${calibrationSectionL1}
 
 CURRENT DATA:
 ${JSON.stringify(marketData)}
