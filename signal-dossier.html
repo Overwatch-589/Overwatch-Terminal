@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal Dossier — The Integrity Protocol</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #060a11;
+  --bg-secondary: #0c1220;
+  --bg-card: #101826;
+  --bg-inspector: #0a0f1a;
+  --border: #1a2740;
+  --border-active: #2a3f60;
+  --text-primary: #dfe6f0;
+  --text-secondary: #8a9bba;
+  --text-muted: #44556e;
+  --accent: #0077b6;
+  --accent-dim: rgba(0,119,182,0.08);
+  --accent-green: #00e599;
+  --accent-green-dim: rgba(0,229,153,0.08);
+  --accent-red: #ff4757;
+  --accent-red-dim: rgba(255,71,87,0.08);
+  --accent-amber: #ffb347;
+  --accent-amber-dim: rgba(255,179,71,0.08);
+  --accent-purple: #a78bfa;
+  --accent-purple-dim: rgba(167,139,250,0.08);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: var(--sans); background: var(--bg-primary); color: var(--text-primary); height: 100vh; overflow: hidden; }
+
+.header {
+  height: 52px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.header-brand { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; color: var(--accent); }
+.header-title { font-size: 16px; font-weight: 600; }
+.header-nav { display: flex; gap: 3px; }
+.header-nav a {
+  font-family: var(--mono); font-size: 10px; color: var(--text-muted);
+  text-decoration: none; padding: 5px 12px; border-radius: var(--radius-sm);
+}
+.header-nav a:hover { color: var(--text-secondary); background: rgba(255,255,255,0.03); }
+.header-nav a.active { color: var(--accent); background: var(--accent-dim); }
+
+.main { display: flex; height: calc(100vh - 52px); }
+
+/* ── Left: Signal Timeline ── */
+.timeline-pane {
+  width: 400px; min-width: 400px; border-right: 1px solid var(--border);
+  overflow-y: auto; background: var(--bg-secondary);
+}
+.signal-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+}
+.signal-header-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+.signal-header-name { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.signal-header-meta { font-family: var(--mono); font-size: 10px; color: var(--text-muted); }
+.signal-header-meta span { color: var(--text-secondary); }
+
+/* Sparkline */
+.sparkline-bar {
+  padding: 12px 20px; border-bottom: 1px solid var(--border);
+}
+.sparkline-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
+.sparkline-row { display: flex; align-items: flex-end; gap: 3px; height: 32px; }
+.spark-bar {
+  flex: 1; border-radius: 2px 2px 0 0; min-width: 0; cursor: pointer;
+  transition: opacity 0.15s;
+  position: relative;
+}
+.spark-bar:hover { opacity: 0.8; }
+.spark-bar.selected { box-shadow: 0 0 0 1px var(--text-primary); }
+.sparkline-range { display: flex; justify-content: space-between; margin-top: 4px; font-family: var(--mono); font-size: 8px; color: var(--text-muted); }
+
+/* Timeline */
+.timeline { padding: 16px 20px 40px; position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 30px; top: 16px; bottom: 40px;
+  width: 1px; background: var(--border);
+}
+.tl-node {
+  position: relative; padding-left: 44px; margin-bottom: 4px;
+  cursor: pointer;
+}
+.tl-dot {
+  position: absolute; left: 23px; top: 10px;
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid var(--border); background: var(--bg-secondary);
+  z-index: 2; transition: all 0.2s;
+}
+.tl-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 12px;
+  transition: all 0.15s;
+}
+.tl-node:hover .tl-card { border-color: var(--border-active); }
+.tl-node.selected .tl-card { border-color: var(--accent); }
+.tl-node.selected .tl-dot { border-color: var(--accent); box-shadow: 0 0 8px rgba(0,119,182,0.3); }
+.tl-status {
+  font-family: var(--mono); font-size: 8px; font-weight: 600;
+  letter-spacing: 0.06em; display: inline-block;
+  padding: 2px 6px; border-radius: 2px; margin-bottom: 4px;
+}
+.st-detected { background: var(--accent-dim); color: var(--accent); }
+.st-scored { background: var(--accent-dim); color: var(--accent); }
+.st-corrected { background: var(--accent-purple-dim); color: var(--accent-purple); }
+.st-escalated { background: var(--accent-red-dim); color: var(--accent-red); }
+.st-stripped { background: var(--accent-red-dim); color: var(--accent-red); }
+.st-maintained { background: rgba(255,255,255,0.04); color: var(--text-secondary); }
+.st-restored { background: var(--accent-green-dim); color: var(--accent-green); }
+.st-resolved { background: var(--accent-green-dim); color: var(--accent-green); }
+.tl-title { font-size: 11px; color: var(--text-primary); line-height: 1.3; }
+.tl-meta { font-family: var(--mono); font-size: 9px; color: var(--text-muted); margin-top: 3px; }
+.tl-score-change {
+  font-family: var(--mono); font-size: 9px; margin-top: 2px;
+}
+.score-up { color: var(--accent-red); }
+.score-down { color: var(--accent-green); }
+.score-same { color: var(--text-muted); }
+
+/* ── Right: Inspector ── */
+.inspector-pane { flex: 1; overflow-y: auto; background: var(--bg-inspector); }
+.inspector-sticky {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg-inspector); border-bottom: 1px solid var(--border);
+  padding: 10px 20px; font-family: var(--mono); font-size: 10px; color: var(--text-muted);
+  display: none;
+}
+.inspector-sticky span { color: var(--text-secondary); margin-left: 6px; }
+.inspector-empty {
+  display: flex; align-items: center; justify-content: center; height: 100%;
+  font-family: var(--mono); font-size: 12px; color: var(--text-muted);
+}
+.inspector-content { padding: 20px; display: none; }
+
+@keyframes fadeIn { 0% { opacity:0; transform:translateY(4px); } 100% { opacity:1; transform:translateY(0); } }
+.inspector-content.show { display: block; animation: fadeIn 0.18s ease-out; }
+
+.insp-section { margin-bottom: 20px; }
+.insp-section-title {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+  color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px;
+  padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.kv { display: grid; grid-template-columns: 130px 1fr; gap: 5px 12px; }
+.kv-k { font-family: var(--mono); font-size: 10px; color: var(--text-muted); }
+.kv-v { font-family: var(--mono); font-size: 10px; color: var(--text-secondary); word-break: break-word; }
+.kv-v.hi { color: var(--accent); }
+.kv-v.red { color: var(--accent-red); }
+.kv-v.green { color: var(--accent-green); }
+.kv-v.amber { color: var(--accent-amber); }
+.kv-v.purple { color: var(--accent-purple); }
+
+/* Diff view */
+.diff-block {
+  background: rgba(0,0,0,0.25); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 14px;
+  font-size: 12px; line-height: 1.7; color: var(--text-secondary);
+}
+.diff-del {
+  background: rgba(255,71,87,0.1); color: var(--accent-red);
+  text-decoration: line-through; padding: 1px 3px; border-radius: 2px;
+}
+.diff-add {
+  background: rgba(0,229,153,0.1); color: var(--accent-green);
+  padding: 1px 3px; border-radius: 2px;
+}
+.diff-same { color: var(--text-muted); }
+
+/* Layer journey */
+.layer-journey { display: flex; gap: 0; margin-bottom: 16px; }
+.layer-step {
+  flex: 1; text-align: center; padding: 8px 4px;
+  border-bottom: 2px solid var(--border);
+  font-family: var(--mono); font-size: 9px; color: var(--text-muted);
+  position: relative;
+}
+.layer-step.active { border-bottom-color: var(--accent); color: var(--accent); }
+.layer-step.flagged { border-bottom-color: var(--accent-amber); color: var(--accent-amber); }
+.layer-step.stripped { border-bottom-color: var(--accent-red); color: var(--accent-red); }
+.layer-step .step-score {
+  font-size: 14px; font-weight: 600; color: var(--text-primary);
+  display: block; margin-top: 2px;
+}
+.layer-step.stripped .step-score { color: var(--accent-red); text-decoration: line-through; }
+
+/* Corrections applied */
+.correction-item {
+  background: rgba(167,139,250,0.04); border: 1px solid rgba(167,139,250,0.12);
+  border-radius: var(--radius-sm); padding: 8px 10px; margin-bottom: 6px;
+}
+.correction-id { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--accent-purple); }
+.correction-effect { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+/* Gate violations */
+.violation-item {
+  border-left: 2px solid var(--accent-amber);
+  padding: 6px 10px; margin-bottom: 6px;
+  background: rgba(255,179,71,0.03);
+}
+.violation-rule { font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--accent-amber); }
+.violation-text { font-size: 11px; color: var(--text-secondary); margin-top: 2px; line-height: 1.5; }
+.violation-severity { font-family: var(--mono); font-size: 8px; color: var(--text-muted); float: right; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-brand">THE INTEGRITY PROTOCOL</div>
+    <div class="header-title">Signal Dossier</div>
+  </div>
+  <div class="header-nav">
+    <a href="index.html">DASHBOARD</a>
+    <a href="trace.html">TRACE</a>
+    <a href="flight-recorder.html">FLIGHT RECORDER</a>
+    <a href="signal-dossier.html" class="active">DOSSIER</a>
+  </div>
+</div>
+
+<div class="main">
+  <div class="timeline-pane">
+    <div class="signal-header">
+      <div class="signal-header-label">SIGNAL DOSSIER</div>
+      <div class="signal-header-name" id="sigName">Brent crude breaches $100 emergency threshold</div>
+      <div class="signal-header-meta">
+        category: <span>macro</span> · direction: <span>DETERIORATION</span> · <span id="runCount">8</span> appearances
+      </div>
+    </div>
+    <div class="sparkline-bar">
+      <div class="sparkline-label">WEIGHTED SEVERITY ACROSS RUNS</div>
+      <div class="sparkline-row" id="sparkline"></div>
+      <div class="sparkline-range"><span id="sparkFirst"></span><span id="sparkLast"></span></div>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+
+  <div class="inspector-pane">
+    <div class="inspector-sticky" id="inspSticky">INSPECTOR //<span id="stickyLabel"></span></div>
+    <div class="inspector-empty" id="inspEmpty">Select a run to inspect</div>
+    <div class="inspector-content" id="inspContent"></div>
+  </div>
+</div>
+
+<script>
+// ─── Mock: Brent crude signal across 8 runs ─────────────────────────
+// Modeled on real production trace structure
+const SIGNAL = {
+  name: "Brent crude breaches $100 emergency threshold",
+  category: "macro",
+  direction: "DETERIORATION",
+  runs: [
+    {
+      id: "run-1",
+      trace_id: "2026-03-22T22:26:14.698Z",
+      date: "Mar 22 22:26",
+      signal_id: "20260322-2208-SIG-001",
+      status: "DETECTED",
+      statusClass: "st-detected",
+      title: "First detected — Hormuz escalation drives Brent above $112",
+      raw_severity: 9,
+      weighted_severity: 6.3,
+      confidence: "HIGH",
+      outcome: "FLAGGED",
+      l1_description: "President Trump threatens to 'obliterate' Iran's power plants if Strait of Hormuz is not opened within 48 hours. Iran responds warning it will 'completely close' the Strait. Brent crude at $112.19, well above $95 critical threshold and above $100 emergency threshold.",
+      l2_reasoning: "Escalation from operational disruption to explicit state-level closure threats. Corroborated by BTC crash, $240M liquidations, and Brent >$112. Per compound stress matrix, any Hormuz disruption event is automatic CRITICAL trigger.",
+      l3_inferences: ["Oil cascade with crypto contagion", "Japan oil feedback loop via trade deficit"],
+      l4_judgment: "Burden of proof: full weight. Compound stress CRITICAL triggered. Signal contributes to 7 active kill switches.",
+      corrections: [{ id: "CL-035", effect: "Applied source tier weighting — Tier 2 source reduced raw from 10 to 9" }],
+      violations: [
+        { rule: "LZ-RC-001", severity: "MODERATE", text: "Co-occurrence of Hormuz threat and JGB/JPY levels treated as causal without mechanism" },
+        { rule: "LZ-RC-005", severity: "MINOR", text: "Forward-looking 'would cascade' prediction given same weight as measured data" }
+      ],
+      diff: null
+    },
+    {
+      id: "run-2",
+      trace_id: "2026-03-23T02:22:00.000Z",
+      date: "Mar 23 02:22",
+      signal_id: "20260323-0208-SIG-001",
+      status: "ESCALATED",
+      statusClass: "st-escalated",
+      title: "Escalated — Brent hits $115, Hormuz closure confirmed by satellite",
+      raw_severity: 10,
+      weighted_severity: 8.0,
+      confidence: "HIGH",
+      outcome: "FLAGGED",
+      l1_description: "Satellite imagery confirms Iranian naval vessels positioning to block Strait of Hormuz. Brent crude surges to $115.40. Oil tanker insurance rates spike 340%. CMA CGM and Maersk announce full suspension of Hormuz transits.",
+      l2_reasoning: "Escalation from threat to observable action. Satellite imagery provides Tier 1 independent corroboration. Insurance market reaction confirms commercial assessment of closure risk. Compound stress matrix: CRITICAL confirmed with satellite evidence.",
+      l3_inferences: ["Oil cascade with crypto contagion — upgraded from FLAGGED to VALID", "Japan energy import crisis — BOJ intervention timeline compressed"],
+      l4_judgment: "Burden of proof: full weight. Raw severity upgraded to 10 on satellite confirmation. This is the most severe signal in the monitoring period.",
+      corrections: [],
+      violations: [
+        { rule: "LZ-RC-001", severity: "MODERATE", text: "Oil-JPY correlation still presented as causal chain without verified transmission mechanism" }
+      ],
+      diff: {
+        removed: "President Trump threatens to 'obliterate' Iran's power plants if Strait of Hormuz is not opened within 48 hours. Iran responds warning it will 'completely close' the Strait. Brent crude at $112.19",
+        added: "Satellite imagery confirms Iranian naval vessels positioning to block Strait of Hormuz. Brent crude surges to $115.40. Oil tanker insurance rates spike 340%.",
+        context: "Signal escalated from diplomatic threat to observable military action. Source tier upgraded from Tier 2 (social media) to Tier 1 (satellite imagery)."
+      }
+    },
+    {
+      id: "run-3",
+      trace_id: "2026-03-24T02:22:00.000Z",
+      date: "Mar 24 02:22",
+      signal_id: "20260324-0208-SIG-001",
+      status: "CORRECTED",
+      statusClass: "st-corrected",
+      title: "Corrected — CL-008 fires on single-session severity spike",
+      raw_severity: 10,
+      weighted_severity: 6.5,
+      confidence: "MEDIUM",
+      outcome: "FLAGGED",
+      l1_description: "Hormuz situation persists. Brent at $108.50 (down from $115 peak). No new satellite imagery. Iranian statements mixed — foreign minister signals willingness to negotiate while IRGC maintains closure posture.",
+      l2_reasoning: "CL-008 applied: single-session severity spike from $112 to $115 does not establish sustained trajectory. The $115 peak was a single-session reaction. Current price $108.50 suggests partial reversion. Confidence reduced from HIGH to MEDIUM pending additional data points.",
+      l3_inferences: ["Oil cascade — downgraded from VALID to FLAGGED on reversion signal", "Japan feedback loop maintained at FLAGGED"],
+      l4_judgment: "Burden of proof: reduced_50. The reversion from $115 to $108 within one cycle introduces uncertainty about whether the peak represents sustained escalation or panic spike.",
+      corrections: [
+        { id: "CL-008", effect: "Single-session severity spike treated as potential outlier — weighted severity reduced from 8.0 to 6.5" },
+        { id: "CL-035", effect: "Mixed Iranian statements: foreign minister vs IRGC contradiction flagged, confidence reduced" }
+      ],
+      violations: [
+        { rule: "LZ-RC-001", severity: "MODERATE", text: "Oil-JPY transmission still asserted without mechanism" },
+        { rule: "LZ-RC-002", severity: "MINOR", text: "Single reversion data point treated as trend evidence" }
+      ],
+      diff: {
+        removed: "Satellite imagery confirms Iranian naval vessels positioning to block Strait of Hormuz. Brent crude surges to $115.40. Oil tanker insurance rates spike 340%.",
+        added: "Hormuz situation persists. Brent at $108.50 (down from $115 peak). No new satellite imagery. Iranian statements mixed — foreign minister signals willingness to negotiate while IRGC maintains closure posture.",
+        context: "CL-008 fired: single-session spike → reversion pattern. Confidence downgraded. The system correctly identified the $115 peak as potentially transient."
+      }
+    },
+    {
+      id: "run-4",
+      trace_id: "2026-03-25T02:22:00.000Z",
+      date: "Mar 25 02:22",
+      signal_id: "20260325-0208-SIG-001",
+      status: "MAINTAINED",
+      statusClass: "st-maintained",
+      title: "Maintained — Brent stabilizes at $105, compound stress holds CRITICAL",
+      raw_severity: 8,
+      weighted_severity: 6.0,
+      confidence: "MEDIUM",
+      outcome: "FLAGGED",
+      l1_description: "Brent stabilizes around $105. Hormuz remains partially restricted. Saudi Arabia increases East-West pipeline output to compensate. No new military escalation. Insurance rates remain elevated but off peak.",
+      l2_reasoning: "Stabilization pattern emerging. The initial crisis spike has reverted to a sustained elevated level. Compound stress matrix remains CRITICAL — Brent still above $100 emergency threshold. Saudi pipeline compensation reduces cascade risk but does not resolve underlying disruption.",
+      l3_inferences: ["Oil cascade — maintained at FLAGGED, cascade probability reduced on Saudi compensation"],
+      l4_judgment: "Burden of proof: full weight at reduced severity. The sustained $105 level above emergency threshold justifies continued monitoring without the crisis urgency of the $115 spike.",
+      corrections: [],
+      violations: [],
+      diff: {
+        removed: "Brent at $108.50 (down from $115 peak). No new satellite imagery. Iranian statements mixed.",
+        added: "Brent stabilizes around $105. Saudi Arabia increases East-West pipeline output to compensate. No new military escalation.",
+        context: "Signal evolving from acute crisis to sustained elevated state. Severity reduced but threshold breach persists."
+      }
+    },
+    {
+      id: "run-5",
+      trace_id: "2026-03-26T02:22:00.000Z",
+      date: "Mar 26 02:22",
+      signal_id: "20260326-0208-SIG-001",
+      status: "MAINTAINED",
+      statusClass: "st-maintained",
+      title: "Maintained — $103.79, emergency threshold still breached",
+      raw_severity: 8,
+      weighted_severity: 6.0,
+      confidence: "MEDIUM",
+      outcome: "FLAGGED",
+      l1_description: "Brent at $103.79, continuing gradual descent from crisis peak but remaining above $100 emergency threshold. Saudi pipeline at full 7M bpd capacity. Hormuz partially operational with military escort.",
+      l2_reasoning: "Gradual normalization trajectory but emergency threshold ($100) still breached. Three consecutive runs above $100 confirms this is sustained, not transient. Compound stress matrix remains CRITICAL.",
+      l3_inferences: ["Oil cascade risk reducing but not eliminated — Saudi compensation creating buffer"],
+      l4_judgment: "Burden of proof: full weight. Sustained above emergency threshold. The slow descent trajectory suggests resolution is possible but not imminent.",
+      corrections: [],
+      violations: [],
+      diff: {
+        removed: "Brent stabilizes around $105. Saudi Arabia increases East-West pipeline output.",
+        added: "Brent at $103.79, continuing gradual descent. Saudi pipeline at full 7M bpd capacity. Hormuz partially operational with military escort.",
+        context: "Slow normalization. Each run the price drops ~$2-3 but remains above the $100 emergency line. The question is whether it crosses below."
+      }
+    },
+    {
+      id: "run-6",
+      trace_id: "2026-03-27T02:22:00.000Z",
+      date: "Mar 27 02:22",
+      signal_id: "20260327-0208-SIG-001",
+      status: "CORRECTED",
+      statusClass: "st-corrected",
+      title: "Corrected — stale T-1 data flagged, Messari acquisition triggered",
+      raw_severity: 8,
+      weighted_severity: 5.5,
+      confidence: "LOW",
+      outcome: "FLAGGED",
+      l1_description: "Brent crude data stale — last update T-1. No fresh pricing available. Previous reading $103.79 from March 26. The data staleness itself becomes a tension: the system cannot assess whether the emergency threshold is still breached.",
+      l2_reasoning: "Data staleness reduces confidence. Per CL-046 (absence of data is not evidence of absence), the system cannot assume Brent has dropped below $100 simply because fresh data is unavailable. Weighted severity reduced on staleness penalty.",
+      l3_inferences: ["Oil cascade assessment frozen — data gap blocks deterministic evaluation"],
+      l4_judgment: "Burden of proof: reduced_50. Stale data cannot sustain full weight. Layer 3 flagged data gap → acquisition request generated → Messari selected via routing.",
+      corrections: [
+        { id: "CL-046", effect: "Absence of fresh data flagged — cannot assume resolution. Confidence dropped to LOW." }
+      ],
+      violations: [],
+      diff: {
+        removed: "Brent at $103.79, continuing gradual descent. Saudi pipeline at full 7M bpd capacity.",
+        added: "Brent crude data stale — last update T-1. No fresh pricing available. The data staleness itself becomes a tension.",
+        context: "x402 acquisition triggered. The system identified its own blindness and attempted to buy current data. Messari selected but returned 'data unavailable' for commodity pricing."
+      }
+    },
+    {
+      id: "run-7",
+      trace_id: "2026-03-28T02:22:00.000Z",
+      date: "Mar 28 02:48",
+      signal_id: "20260328-0234-SIG-001",
+      status: "ESCALATED",
+      statusClass: "st-escalated",
+      title: "Escalated — CONTESTED assessment triggered by Blind Auditor",
+      raw_severity: 9,
+      weighted_severity: 6.3,
+      confidence: "HIGH",
+      outcome: "FLAGGED",
+      l1_description: "Brent crude at $103.79 (6 days stale but confirmed via alternative source). Compound stress CRITICAL for fourth consecutive cycle. Blind Auditor flagged X402_NEGLIGENT_HOARDING — system has budget to acquire fresh oil data but hasn't spent it effectively.",
+      l2_reasoning: "Fresh confirmation restores confidence. Six days stale was a data quality issue, not a resolution signal. The $103.79 level confirmed above emergency threshold. Combined with compound stress CRITICAL persistence, this is the run that triggered the CONTESTED thesis assessment.",
+      l3_inferences: ["Oil cascade — restored to VALID on fresh confirmation", "Compound stress persistence pattern — four cycles CRITICAL represents structural, not transient, stress"],
+      l4_judgment: "Burden of proof: full weight. This signal combined with 8 other active tensions drove the one-cycle CONTESTED assessment before reverting to WEAKENING.",
+      corrections: [],
+      violations: [
+        { rule: "LZ-EPH-002", severity: "MODERATE", text: "Confidence restored to HIGH on confirmation but staleness period uncertainty not fully discounted" }
+      ],
+      diff: {
+        removed: "Brent crude data stale — last update T-1. No fresh pricing available.",
+        added: "Brent crude at $103.79 (6 days stale but confirmed via alternative source). Compound stress CRITICAL for fourth consecutive cycle.",
+        context: "The CONTESTED blip. Blind Auditor pressure + fresh data confirmation + four-cycle CRITICAL persistence pushed the thesis assessment across the WEAKENING/CONTESTED boundary for one cycle."
+      }
+    },
+    {
+      id: "run-8",
+      trace_id: "2026-03-29T03:03:51.912Z",
+      date: "Mar 29 03:03",
+      signal_id: "20260329-0249-SIG-001",
+      status: "MAINTAINED",
+      statusClass: "st-maintained",
+      title: "Maintained — $103.79 (stale), emergency threshold still breached",
+      raw_severity: 8,
+      weighted_severity: 6.0,
+      confidence: "MEDIUM",
+      outcome: "FLAGGED",
+      l1_description: "Brent crude at $103.79 — data now confirmed stale from March 23. Emergency threshold ($100) still breached based on last known price. Saudi East-West pipeline at full 7M bpd capacity providing partial supply compensation.",
+      l2_reasoning: "Staleness penalty applied but last confirmed price still above emergency threshold. The system correctly identifies data freshness as a separate concern from threshold breach status. Per CL-046, stale data above threshold cannot be assumed to have resolved below threshold.",
+      l3_inferences: ["Oil cascade — maintained at FLAGGED with staleness caveat"],
+      l4_judgment: "Burden of proof: full weight at reduced severity. Assessment reverts from CONTESTED back to WEAKENING. The one-cycle CONTESTED was an acknowledgment, not a sustained shift.",
+      corrections: [
+        { id: "CL-046", effect: "Absence of fresh data is not evidence of resolution. Stale price above threshold → threshold presumed breached." }
+      ],
+      violations: [],
+      diff: {
+        removed: "Brent crude at $103.79 (6 days stale but confirmed via alternative source). Compound stress CRITICAL for fourth consecutive cycle.",
+        added: "Brent crude at $103.79 — data now confirmed stale from March 23. Emergency threshold ($100) still breached based on last known price.",
+        context: "System reverts to steady-state assessment. The CONTESTED blip resolved. Signal persists at elevated but stable severity."
+      }
+    }
+  ]
+};
+
+// ─── Render ─────────────────────────────────────────────────────────
+
+let selectedRun = null;
+
+function renderSparkline() {
+  const el = document.getElementById('sparkline');
+  const maxSev = 10;
+  el.innerHTML = SIGNAL.runs.map((r, i) => {
+    const h = Math.max(4, (r.weighted_severity / maxSev) * 32);
+    const color = r.status === 'ESCALATED' ? 'var(--accent-red)' :
+                  r.status === 'CORRECTED' ? 'var(--accent-purple)' :
+                  r.status === 'DETECTED' ? 'var(--accent)' :
+                  'var(--text-muted)';
+    return `<div class="spark-bar" data-run="${i}" onclick="selectRun(${i})" style="height:${h}px;background:${color};" title="${r.date}: ${r.weighted_severity}"></div>`;
+  }).join('');
+  document.getElementById('sparkFirst').textContent = SIGNAL.runs[0].date;
+  document.getElementById('sparkLast').textContent = SIGNAL.runs[SIGNAL.runs.length - 1].date;
+  document.getElementById('runCount').textContent = SIGNAL.runs.length;
+}
+
+function renderTimeline() {
+  const el = document.getElementById('timeline');
+  el.innerHTML = SIGNAL.runs.map((r, i) => {
+    const prev = i > 0 ? SIGNAL.runs[i - 1] : null;
+    let scoreChange = '';
+    if (prev) {
+      const delta = r.weighted_severity - prev.weighted_severity;
+      if (delta > 0) scoreChange = `<div class="tl-score-change score-up">▲ ${r.weighted_severity} (+${delta.toFixed(1)})</div>`;
+      else if (delta < 0) scoreChange = `<div class="tl-score-change score-down">▼ ${r.weighted_severity} (${delta.toFixed(1)})</div>`;
+      else scoreChange = `<div class="tl-score-change score-same">— ${r.weighted_severity}</div>`;
+    } else {
+      scoreChange = `<div class="tl-score-change" style="color:var(--text-secondary);">● ${r.weighted_severity}</div>`;
+    }
+    return `<div class="tl-node" data-run="${i}" onclick="selectRun(${i})">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <span class="tl-status ${r.statusClass}">${r.status}</span>
+        ${scoreChange}
+        <div class="tl-title">${r.title}</div>
+        <div class="tl-meta">${r.date} · ${r.outcome}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function selectRun(idx) {
+  selectedRun = idx;
+  const r = SIGNAL.runs[idx];
+
+  document.querySelectorAll('.tl-node').forEach(n => n.classList.remove('selected'));
+  document.querySelector(`[data-run="${idx}"]`).classList.add('selected');
+  document.querySelectorAll('.spark-bar').forEach(b => b.classList.remove('selected'));
+  document.querySelector(`.spark-bar[data-run="${idx}"]`).classList.add('selected');
+
+  const sticky = document.getElementById('inspSticky');
+  sticky.style.display = 'block';
+  document.getElementById('stickyLabel').textContent = `${r.date} — ${r.status}`;
+
+  document.getElementById('inspEmpty').style.display = 'none';
+  const content = document.getElementById('inspContent');
+  content.className = 'inspector-content show';
+
+  let html = '';
+
+  // Layer journey bar
+  const layers = [
+    { label: 'SWEEP', score: r.raw_severity, state: 'active' },
+    { label: 'CONTEXT', score: r.weighted_severity, state: r.corrections.length > 0 ? 'flagged' : 'active' },
+    { label: 'INFER', score: null, state: r.l3_inferences.length > 0 ? 'active' : 'active' },
+    { label: 'RECONCILE', score: r.weighted_severity, state: r.outcome === 'STRIPPED' ? 'stripped' : 'active' }
+  ];
+  html += '<div class="layer-journey">';
+  layers.forEach(l => {
+    html += `<div class="layer-step ${l.state}">
+      ${l.label}
+      ${l.score !== null ? `<span class="step-score">${l.score}</span>` : '<span class="step-score" style="font-size:10px;">—</span>'}
+    </div>`;
+  });
+  html += '</div>';
+
+  // Diff (if not first run)
+  if (r.diff) {
+    html += `<div class="insp-section">
+      <div class="insp-section-title">WHAT CHANGED FROM PREVIOUS RUN</div>
+      <div class="diff-block">
+        <span class="diff-del">${r.diff.removed}</span><br><br>
+        <span class="diff-add">${r.diff.added}</span>
+      </div>
+      <div style="font-size:11px;color:var(--text-secondary);margin-top:8px;line-height:1.5;">${r.diff.context}</div>
+    </div>`;
+  }
+
+  // KV details
+  html += `<div class="insp-section">
+    <div class="insp-section-title">RUN DETAILS</div>
+    <div class="kv">
+      <div class="kv-k">trace_id</div><div class="kv-v hi">${r.trace_id}</div>
+      <div class="kv-k">signal_id</div><div class="kv-v hi">${r.signal_id}</div>
+      <div class="kv-k">raw_severity</div><div class="kv-v">${r.raw_severity} / 10</div>
+      <div class="kv-k">weighted_severity</div><div class="kv-v">${r.weighted_severity}</div>
+      <div class="kv-k">confidence</div><div class="kv-v ${r.confidence === 'HIGH' ? '' : r.confidence === 'LOW' ? 'amber' : ''}">${r.confidence}</div>
+      <div class="kv-k">outcome</div><div class="kv-v">${r.outcome}</div>
+    </div>
+  </div>`;
+
+  // L1 Perception
+  html += `<div class="insp-section">
+    <div class="insp-section-title">LAYER 1 — SWEEP</div>
+    <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;">${r.l1_description}</div>
+  </div>`;
+
+  // L2 Contextualize
+  html += `<div class="insp-section">
+    <div class="insp-section-title">LAYER 2 — CONTEXTUALIZE</div>
+    <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;">${r.l2_reasoning}</div>
+  </div>`;
+
+  // L3 Inferences
+  if (r.l3_inferences.length > 0) {
+    html += `<div class="insp-section">
+      <div class="insp-section-title">LAYER 3 — INFER</div>
+      ${r.l3_inferences.map(inf => `<div style="font-size:12px;color:var(--text-secondary);padding:4px 0;">→ ${inf}</div>`).join('')}
+    </div>`;
+  }
+
+  // L4 Judgment
+  html += `<div class="insp-section">
+    <div class="insp-section-title">LAYER 4 — RECONCILE</div>
+    <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;">${r.l4_judgment}</div>
+  </div>`;
+
+  // Corrections
+  if (r.corrections.length > 0) {
+    html += `<div class="insp-section">
+      <div class="insp-section-title">CORRECTIONS APPLIED</div>
+      ${r.corrections.map(c => `<div class="correction-item">
+        <div class="correction-id">${c.id}</div>
+        <div class="correction-effect">${c.effect}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+
+  // Gate violations
+  if (r.violations.length > 0) {
+    html += `<div class="insp-section">
+      <div class="insp-section-title">GATE VIOLATIONS (${r.violations.length})</div>
+      ${r.violations.map(v => `<div class="violation-item">
+        <div class="violation-rule">${v.rule} <span class="violation-severity">${v.severity}</span></div>
+        <div class="violation-text">${v.text}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+
+  content.innerHTML = html;
+  document.getElementById('inspectorPane').scrollTop = 0;
+}
+
+// ─── Init ───────────────────────────────────────────────────────────
+renderSparkline();
+renderTimeline();
+</script>
+</body>
+</html>
