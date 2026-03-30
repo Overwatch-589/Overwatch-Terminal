@@ -424,6 +424,9 @@ function recordOutcomes(constrainedRequests, traceOutput, layer4Output, domainCo
       cost_usd: req.cost_usd || 0,
       channel_id: req.channel_id || null,
       settlement_network: req.settlement_network || null,
+      tx_hash: (req.execution_result && req.execution_result.tx_hash) || null,
+      cost_usd_actual: (req.execution_result && req.execution_result.cost_usd) || req.cost_usd || 0,
+      payment_method: (req.execution_result && req.execution_result.payment_method) || null,
       outcome: outcomeClass,
       outcome_evidence: outcomeClass === 'TENSION_RESOLVED'
         ? `Tension ${req.target_id} received RESOLVE disposition`
