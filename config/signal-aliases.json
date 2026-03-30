@@ -1,0 +1,171 @@
+{
+  "_comment": "Signal alias dictionary for the Signal Dossier Aggregator. Maps lowercase substrings to canonical lineage IDs. Keys are checked longest-first to prevent substring collisions. Human-maintained — add aliases to merge fractured lineages.",
+
+  "xrp etf": { "lineage_id": "STRUCTURE-XRP-ETF", "canonical_name": "XRP ETF AUM & Flows" },
+  "spot xrp": { "lineage_id": "STRUCTURE-XRP-ETF", "canonical_name": "XRP ETF AUM & Flows" },
+  "etf aum": { "lineage_id": "STRUCTURE-XRP-ETF", "canonical_name": "XRP ETF AUM & Flows" },
+
+  "xrpl dex": { "lineage_id": "INTEGRATION-XRPL-DEX", "canonical_name": "XRPL DEX Volume & Activity" },
+
+  "rlusd": { "lineage_id": "INTEGRATION-RLUSD", "canonical_name": "RLUSD Market Cap & Supply" },
+
+  "brent crude": { "lineage_id": "MACRO-OIL-BRENT", "canonical_name": "Brent Crude Price Threshold" },
+  "oil shock": { "lineage_id": "MACRO-OIL-BRENT", "canonical_name": "Brent Crude Price Threshold" },
+  "port arthur": { "lineage_id": "MACRO-OIL-BRENT", "canonical_name": "Brent Crude Price Threshold" },
+
+  "fear & greed": { "lineage_id": "NARRATIVE-FEAR-GREED", "canonical_name": "Fear & Greed Index" },
+  "fear and greed": { "lineage_id": "NARRATIVE-FEAR-GREED", "canonical_name": "Fear & Greed Index" },
+
+  "usd/jpy": { "lineage_id": "MACRO-USDJPY", "canonical_name": "USD/JPY Exchange Rate" },
+  "usdjpy": { "lineage_id": "MACRO-USDJPY", "canonical_name": "USD/JPY Exchange Rate" },
+  "yen stress": { "lineage_id": "MACRO-USDJPY", "canonical_name": "USD/JPY Exchange Rate" },
+  "yen weakness": { "lineage_id": "MACRO-USDJPY", "canonical_name": "USD/JPY Exchange Rate" },
+
+  "dxy": { "lineage_id": "MACRO-DXY", "canonical_name": "DXY Dollar Index" },
+  "dollar weakness": { "lineage_id": "MACRO-DXY", "canonical_name": "DXY Dollar Index" },
+  "dollar weakening": { "lineage_id": "MACRO-DXY", "canonical_name": "DXY Dollar Index" },
+  "dollar strength": { "lineage_id": "MACRO-DXY", "canonical_name": "DXY Dollar Index" },
+
+  "clarity act": { "lineage_id": "REGULATORY-STABLECOIN-LEGISLATION", "canonical_name": "Stablecoin Legislation (Clarity Act)" },
+  "stablecoin legislation": { "lineage_id": "REGULATORY-STABLECOIN-LEGISLATION", "canonical_name": "Stablecoin Legislation (Clarity Act)" },
+  "stablecoin yield": { "lineage_id": "REGULATORY-STABLECOIN-LEGISLATION", "canonical_name": "Stablecoin Legislation (Clarity Act)" },
+  "stablecoin reward": { "lineage_id": "REGULATORY-STABLECOIN-LEGISLATION", "canonical_name": "Stablecoin Legislation (Clarity Act)" },
+  "tillis stablecoin": { "lineage_id": "REGULATORY-STABLECOIN-LEGISLATION", "canonical_name": "Stablecoin Legislation (Clarity Act)" },
+
+  "hormuz": { "lineage_id": "GEO-HORMUZ-IRAN", "canonical_name": "Strait of Hormuz / Iran Conflict" },
+  "iran strike": { "lineage_id": "GEO-HORMUZ-KINETIC", "canonical_name": "Iran Kinetic Military Action" },
+  "iran f-35": { "lineage_id": "GEO-HORMUZ-KINETIC", "canonical_name": "Iran Kinetic Military Action" },
+  "iran war": { "lineage_id": "GEO-HORMUZ-KINETIC", "canonical_name": "Iran Kinetic Military Action" },
+  "iran sanctions": { "lineage_id": "GEO-IRAN-SANCTIONS", "canonical_name": "Iran Sanctions / Diplomatic Status" },
+  "iran oil": { "lineage_id": "GEO-IRAN-SANCTIONS", "canonical_name": "Iran Sanctions / Diplomatic Status" },
+  "iran": { "lineage_id": "GEO-HORMUZ-IRAN", "canonical_name": "Strait of Hormuz / Iran Conflict" },
+
+  "sec tokeniz": { "lineage_id": "REGULATORY-SEC-TOKENIZATION", "canonical_name": "SEC Tokenization Exemption" },
+  "nasdaq tokeniz": { "lineage_id": "REGULATORY-SEC-TOKENIZATION", "canonical_name": "SEC Tokenization Exemption" },
+
+  "x402 agent": { "lineage_id": "AGENT-X402-DORMANCY", "canonical_name": "x402 Agent Operational Status" },
+  "x402 payment agent": { "lineage_id": "AGENT-X402-DORMANCY", "canonical_name": "x402 Agent Operational Status" },
+  "x402 dormant": { "lineage_id": "AGENT-X402-DORMANCY", "canonical_name": "x402 Agent Operational Status" },
+  "x402 protocol": { "lineage_id": "AGENT-X402-DORMANCY", "canonical_name": "x402 Agent Operational Status" },
+
+  "ondo": { "lineage_id": "COMPETITIVE-ONDO-RWA", "canonical_name": "Ondo Finance / RWA Tokenization Competition" },
+  "rwa tokeniz": { "lineage_id": "COMPETITIVE-ONDO-RWA", "canonical_name": "Ondo Finance / RWA Tokenization Competition" },
+  "tokenized stocks": { "lineage_id": "COMPETITIVE-ONDO-RWA", "canonical_name": "Ondo Finance / RWA Tokenization Competition" },
+  "tokenized securities": { "lineage_id": "COMPETITIVE-ONDO-RWA", "canonical_name": "Ondo Finance / RWA Tokenization Competition" },
+
+  "joelkatz": { "lineage_id": "AGENT-SCHWARTZ", "canonical_name": "David Schwartz / JoelKatz Activity" },
+  "joel katz": { "lineage_id": "AGENT-SCHWARTZ", "canonical_name": "David Schwartz / JoelKatz Activity" },
+  "david schwartz": { "lineage_id": "AGENT-SCHWARTZ", "canonical_name": "David Schwartz / JoelKatz Activity" },
+
+  "david sacks": { "lineage_id": "REGULATORY-CRYPTO-CZAR", "canonical_name": "David Sacks Crypto Czar Status" },
+  "crypto czar": { "lineage_id": "REGULATORY-CRYPTO-CZAR", "canonical_name": "David Sacks Crypto Czar Status" },
+
+  "house financial committee": { "lineage_id": "REGULATORY-HOUSE-HEARING", "canonical_name": "House Financial Committee Tokenization Hearing" },
+  "house tokeniz": { "lineage_id": "REGULATORY-HOUSE-HEARING", "canonical_name": "House Financial Committee Tokenization Hearing" },
+
+  "compound stress": { "lineage_id": "MACRO-COMPOUND-STRESS", "canonical_name": "Compound Stress Matrix Level" },
+
+  "ripple positions rlusd": { "lineage_id": "INTEGRATION-RLUSD-POSITIONING", "canonical_name": "Ripple RLUSD Institutional Positioning" },
+  "ripple positioning rlusd": { "lineage_id": "INTEGRATION-RLUSD-POSITIONING", "canonical_name": "Ripple RLUSD Institutional Positioning" },
+
+  "sec-cftc": { "lineage_id": "REGULATORY-SEC-CFTC-JOINT", "canonical_name": "SEC-CFTC Joint Guidance" },
+  "sec/cftc": { "lineage_id": "REGULATORY-SEC-CFTC-JOINT", "canonical_name": "SEC-CFTC Joint Guidance" },
+  "sec and cftc": { "lineage_id": "REGULATORY-SEC-CFTC-JOINT", "canonical_name": "SEC-CFTC Joint Guidance" },
+
+  "cftc chair": { "lineage_id": "REGULATORY-CFTC", "canonical_name": "CFTC Regulatory Signals" },
+
+  "blackrock staked": { "lineage_id": "COMPETITIVE-BLACKROCK-ETF", "canonical_name": "BlackRock Crypto ETF Products" },
+  "blackrock etf": { "lineage_id": "COMPETITIVE-BLACKROCK-ETF", "canonical_name": "BlackRock Crypto ETF Products" },
+  "blackrock digital asset": { "lineage_id": "COMPETITIVE-BLACKROCK-CRYPTO", "canonical_name": "BlackRock Digital Assets Strategy" },
+  "blackrock token": { "lineage_id": "COMPETITIVE-BLACKROCK-CRYPTO", "canonical_name": "BlackRock Digital Assets Strategy" },
+  "blackrock": { "lineage_id": "MACRO-BLACKROCK-POSITIONING", "canonical_name": "BlackRock Macro Positioning Signals" },
+
+  "xrpl ai": { "lineage_id": "TECH-XRPL-AI-SECURITY", "canonical_name": "XRPL AI Security & Maintenance" },
+  "xrpl software patch": { "lineage_id": "TECH-XRPL-AI-SECURITY", "canonical_name": "XRPL AI Security & Maintenance" },
+
+  "jgb 10y": { "lineage_id": "MACRO-JAPAN-STRESS", "canonical_name": "Japan Stress / BOJ / JGB Yields" },
+  "boj": { "lineage_id": "MACRO-JAPAN-STRESS", "canonical_name": "Japan Stress / BOJ / JGB Yields" },
+  "bank of japan": { "lineage_id": "MACRO-JAPAN-STRESS", "canonical_name": "Japan Stress / BOJ / JGB Yields" },
+  "japan stress": { "lineage_id": "MACRO-JAPAN-STRESS", "canonical_name": "Japan Stress / BOJ / JGB Yields" },
+  "nikkei": { "lineage_id": "MACRO-JAPAN-STRESS", "canonical_name": "Japan Stress / BOJ / JGB Yields" },
+
+  "section 122": { "lineage_id": "REGULATORY-SECTION-122", "canonical_name": "Section 122 Tariff Expiry Clock" },
+
+  "dtcc": { "lineage_id": "STRUCTURE-DTCC", "canonical_name": "DTCC Digital Assets Activity" },
+  "hidden road": { "lineage_id": "STRUCTURE-DTCC", "canonical_name": "DTCC Digital Assets Activity" },
+
+  "sec chair atkins": { "lineage_id": "REGULATORY-SEC-ATKINS", "canonical_name": "SEC Chairman Atkins Regulatory Direction" },
+  "sec chairman atkins": { "lineage_id": "REGULATORY-SEC-ATKINS", "canonical_name": "SEC Chairman Atkins Regulatory Direction" },
+
+  "ripple payments": { "lineage_id": "INTEGRATION-RIPPLE-PAYMENTS", "canonical_name": "Ripple Payments Deployments" },
+  "i-payout": { "lineage_id": "INTEGRATION-RIPPLE-PAYMENTS", "canonical_name": "Ripple Payments Deployments" },
+
+  "ripplexdev": { "lineage_id": "TECH-RIPPLEXDEV", "canonical_name": "RippleXDev Initiatives" },
+
+  "garlinghouse": { "lineage_id": "AGENT-GARLINGHOUSE", "canonical_name": "Brad Garlinghouse Activity" },
+
+  "ecb digital euro": { "lineage_id": "COMPETITIVE-ECB-CBDC", "canonical_name": "ECB Digital Euro" },
+  "digital euro": { "lineage_id": "COMPETITIVE-ECB-CBDC", "canonical_name": "ECB Digital Euro" },
+
+  "btc etf": { "lineage_id": "COMPETITIVE-BTC-ETH-ETF", "canonical_name": "BTC/ETH ETF Institutional Flows" },
+  "eth etf": { "lineage_id": "COMPETITIVE-BTC-ETH-ETF", "canonical_name": "BTC/ETH ETF Institutional Flows" },
+  "morgan stanley": { "lineage_id": "COMPETITIVE-BTC-ETH-ETF", "canonical_name": "BTC/ETH ETF Institutional Flows" },
+
+  "odl volume": { "lineage_id": "ASSUMPTION-ODL", "canonical_name": "ODL Volume Transparency" },
+  "odl transparency": { "lineage_id": "ASSUMPTION-ODL", "canonical_name": "ODL Volume Transparency" },
+
+  "permissioned dex": { "lineage_id": "STRUCTURE-PERMDEX", "canonical_name": "Permissioned DEX Institutional Activity" },
+
+  "deaton": { "lineage_id": "REGULATORY-DEATON", "canonical_name": "John Deaton Political Campaign" },
+
+  "anthropic": { "lineage_id": "MACRO-TECH-DISRUPTION", "canonical_name": "Tech Sector Disruption Events" },
+  "claude mythos": { "lineage_id": "MACRO-TECH-DISRUPTION", "canonical_name": "Tech Sector Disruption Events" },
+
+  "circle": { "lineage_id": "COMPETITIVE-CIRCLE", "canonical_name": "Circle / USDC Competition" },
+  "usdc": { "lineage_id": "COMPETITIVE-CIRCLE", "canonical_name": "Circle / USDC Competition" },
+  "pyusd": { "lineage_id": "COMPETITIVE-PAYPAL", "canonical_name": "PayPal PYUSD Competition" },
+  "paypal": { "lineage_id": "COMPETITIVE-PAYPAL", "canonical_name": "PayPal PYUSD Competition" },
+
+  "tether": { "lineage_id": "COMPETITIVE-TETHER", "canonical_name": "Tether Competitive Activity" },
+
+  "mastercard": { "lineage_id": "INTEGRATION-MASTERCARD", "canonical_name": "Mastercard Crypto Integration" },
+
+  "saudi east-west": { "lineage_id": "GEO-SAUDI-PIPELINE", "canonical_name": "Saudi East-West Pipeline / Hormuz Bypass" },
+  "saudi pipeline": { "lineage_id": "GEO-SAUDI-PIPELINE", "canonical_name": "Saudi East-West Pipeline / Hormuz Bypass" },
+  "saudi": { "lineage_id": "GEO-SAUDI-GENERAL", "canonical_name": "Saudi Arabia General Activity" },
+
+  "trump tariff": { "lineage_id": "GEO-US-TRADE-WAR", "canonical_name": "US Trade War / Tariff Actions" },
+  "trump trade": { "lineage_id": "GEO-US-TRADE-WAR", "canonical_name": "US Trade War / Tariff Actions" },
+  "trump iran": { "lineage_id": "GEO-HORMUZ-IRAN", "canonical_name": "Strait of Hormuz / Iran Conflict" },
+  "trump hormuz": { "lineage_id": "GEO-HORMUZ-IRAN", "canonical_name": "Strait of Hormuz / Iran Conflict" },
+  "trump strike": { "lineage_id": "GEO-HORMUZ-IRAN", "canonical_name": "Strait of Hormuz / Iran Conflict" },
+  "trump": { "lineage_id": "GEO-US-POLICY", "canonical_name": "US Executive Policy Actions" },
+
+  "s&p 500": { "lineage_id": "MACRO-EQUITY-STRESS", "canonical_name": "S&P 500 / Equity Market Stress" },
+  "s&p losses": { "lineage_id": "MACRO-EQUITY-STRESS", "canonical_name": "S&P 500 / Equity Market Stress" },
+
+  "gold": { "lineage_id": "MACRO-GOLD", "canonical_name": "Gold / Safe Haven Flows" },
+
+  "bitcoin": { "lineage_id": "MACRO-BTC-PRICE", "canonical_name": "Bitcoin Price Action" },
+  "btc reclaims": { "lineage_id": "MACRO-BTC-PRICE", "canonical_name": "Bitcoin Price Action" },
+
+  "crypto short squeeze": { "lineage_id": "NARRATIVE-CRYPTO-SENTIMENT", "canonical_name": "Crypto Market Sentiment Events" },
+  "broad crypto": { "lineage_id": "NARRATIVE-CRYPTO-SENTIMENT", "canonical_name": "Crypto Market Sentiment Events" },
+  "crypto rally": { "lineage_id": "NARRATIVE-CRYPTO-SENTIMENT", "canonical_name": "Crypto Market Sentiment Events" },
+  "crypto risk-off": { "lineage_id": "NARRATIVE-CRYPTO-SENTIMENT", "canonical_name": "Crypto Market Sentiment Events" },
+
+  "fed rate": { "lineage_id": "MACRO-FED-POLICY", "canonical_name": "Federal Reserve Rate Policy" },
+  "federal reserve": { "lineage_id": "MACRO-FED-POLICY", "canonical_name": "Federal Reserve Rate Policy" },
+
+  "sec declares": { "lineage_id": "REGULATORY-SEC-XRP-STATUS", "canonical_name": "SEC XRP Classification" },
+  "xrp a digital commodity": { "lineage_id": "REGULATORY-SEC-XRP-STATUS", "canonical_name": "SEC XRP Classification" },
+
+  "hong kong stablecoin": { "lineage_id": "REGULATORY-INTL-STABLECOIN", "canonical_name": "International Stablecoin Regulation" },
+  "australian senate": { "lineage_id": "REGULATORY-INTL-CRYPTO", "canonical_name": "International Crypto Regulation" },
+  "south korea": { "lineage_id": "REGULATORY-INTL-CRYPTO", "canonical_name": "International Crypto Regulation" },
+
+  "x money": { "lineage_id": "COMPETITIVE-X-MONEY", "canonical_name": "X Money / Twitter Payments" },
+
+  "coinbase": { "lineage_id": "COMPETITIVE-COINBASE", "canonical_name": "Coinbase Competitive Activity" },
+  "coindesk": { "lineage_id": "NARRATIVE-COINDESK", "canonical_name": "CoinDesk Media Coverage" }
+}
