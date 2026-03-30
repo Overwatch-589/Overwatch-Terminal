@@ -3744,5 +3744,35 @@
     "alerts_count": 8,
     "events_drafted_count": 7,
     "thesis_pulse": "The macro stress compound is now at CRITICAL thresholds with Brent at $103.79, USD/JPY at 159.90 (10bps from the 160 critical trigger), and JGB 10Y at 2.274% (26bps from critical 2.5%). Saudi Arabia's"
+  },
+  {
+    "timestamp": "2026-03-30T03:06:05.431Z",
+    "run_type": "evening",
+    "stress_score": 82,
+    "stress_level": "CRITICAL",
+    "xrp_price": 1.34,
+    "fear_greed": 8,
+    "usd_jpy": 159.9,
+    "jpn_10y": 2.274,
+    "brent_crude": 103.79,
+    "dxy": 99.7381,
+    "sp500": 6368.85,
+    "etf_daily_flow": 0,
+    "dex_volume_24h": 2717617,
+    "rlusd_market_cap": 1410191503.8193448,
+    "probability_framework": {
+      "bear": 18,
+      "base": 46,
+      "mid": 26,
+      "bull": 10
+    },
+    "kill_switch_summary": {
+      "NEEDS_DATA": 2,
+      "TRACKING": 2,
+      "PENDING": 1
+    },
+    "alerts_count": 7,
+    "events_drafted_count": 9,
+    "thesis_pulse": "Compound stress matrix is now firmly in CRITICAL territory: Brent $103.79, USD/JPY 159.90, JGB 2.274% — all three legs are at or above elevated thresholds simultaneously, with JPY 10 bps from the 160 "
   }
 ]

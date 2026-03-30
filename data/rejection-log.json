@@ -1055,5 +1055,20 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-28T20:34:37.034Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "XRP ETF positive flows represent differentiated institutional demand",
+    "signal_ids": [
+      "20260330-0246-SIG-008",
+      "20260330-0246-SIG-009"
+    ],
+    "rejection_reason": "Layer 3 correctly identified the null hypothesis (scale artifact) as more likely, but presented the alternative (differentiated demand) with enough framing to suggest it might be meaningful. Layer 4 rejects the differentiated demand interpretation entirely for this cycle. Per LZ-RC-002, a single data point does not establish a trend. Per LZ-RC-004, the simpler explanation (2% fund size = structurally incomparable outflows) is sufficient. This will not move the bear pressure score or influence the tactical recommendation. If positive flows persist for 2+ weeks, reassessment is warranted per LZ-MR-001.",
+    "root_cause": "NARRATIVE_WEIGHT_BIAS",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-03-30T03:04:35.867Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-03-30T03:04:35.869Z"
   }
 ]

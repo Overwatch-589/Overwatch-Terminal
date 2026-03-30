@@ -1182,5 +1182,23 @@
     "prevention": "Add a paper_trade boolean to outcome records derived from channel config at recording time. Acquisition summaries must separate paper trade outcomes from live outcomes. ROI calculations must exclude paper trade channels.",
     "status": "ACTIVE",
     "created_date": "2026-03-29"
+  },
+  {
+    "id": "CL-066",
+    "date_of_error": "2026-03-30",
+    "date_identified": "2026-03-30",
+    "identified_by": "layer_4_override",
+    "belief": "XRP ETF positive flows represent differentiated institutional demand",
+    "reality": "Layer 3 correctly identified the null hypothesis (scale artifact) as more likely, but presented the alternative (differentiated demand) with enough framing to suggest it might be meaningful. Layer 4 rejects the differentiated demand interpretation entirely for this cycle. Per LZ-RC-002, a single data point does not establish a trend. Per LZ-RC-004, the simpler explanation (2% fund size = structurally incomparable outflows) is sufficient. This will not move the bear pressure score or influence the tactical recommendation. If positive flows persist for 2+ weeks, reassessment is warranted per LZ-MR-001.",
+    "root_cause": "Layer 3 correctly identified the null hypothesis (scale artifact) as more likely, but presented the alternative (differentiated demand) with enough framing to suggest it might be meaningful. Layer 4 rejects the differentiated demand interpretation entirely for this cycle. Per LZ-RC-002, a single data point does not establish a trend. Per LZ-RC-004, the simpler explanation (2% fund size = structurally incomparable outflows) is sufficient. This will not move the bear pressure score or influence the tactical recommendation. If positive flows persist for 2+ weeks, reassessment is warranted per LZ-MR-001.",
+    "root_cause_type": "NARRATIVE_WEIGHT_BIAS",
+    "prevention": "NEEDS_ENRICHMENT",
+    "lesson": "NEEDS_ENRICHMENT",
+    "trigger": "NEEDS_ENRICHMENT",
+    "lesson_type": "NEEDS_ENRICHMENT",
+    "confidence_in_lesson": "HIGH",
+    "times_applied": 0,
+    "times_applicable_but_missed": 0,
+    "status": "NEEDS_ENRICHMENT"
   }
 ]
