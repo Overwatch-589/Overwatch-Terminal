@@ -11,12 +11,13 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@x402/core": "^2.8.0",
+    "@x402/evm": "^2.8.0",
+    "@x402/fetch": "^2.8.0",
+    "diff": "^8.0.4",
     "dotenv": "^16.4.5",
     "simple-git": "^3.27.0",
-    "@anthropic-ai/sdk": "^0.39.0",
-    "@x402/fetch": "^2.8.0",
-    "@x402/evm": "^2.8.0",
-    "@x402/core": "^2.8.0",
     "viem": "^2.47.0"
   },
   "license": "MIT"
