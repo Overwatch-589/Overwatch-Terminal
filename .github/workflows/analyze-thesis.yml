@@ -53,6 +53,9 @@ jobs:
       - name: Assemble signal dossiers
         run: node scripts/assemble-signal-dossiers.js
 
+      - name: Detect reasoning drift
+        run: node scripts/detect-drift.js
+
       - name: Assemble flight records
         run: node scripts/assemble-flight-records.js
 
