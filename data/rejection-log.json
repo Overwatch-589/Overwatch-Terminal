@@ -1112,5 +1112,17 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-03-30T23:03:38.921Z"
+  },
+  {
+    "layer3_inference": "Layer 3 scored Ripple Prime HIP-3 as 'positive infrastructure signal' without noting that HIP-3 is on Hyperliquid, not XRPL",
+    "signal_ids": [
+      "20260331-0240-SIG-008"
+    ],
+    "rejection_reason": "Layer 3 correctly identified this as infrastructure deepening per CL-007 but did not fully weight the significance of Ripple building institutional products on a competing chain. Ripple Prime expanding on Hyperliquid is an observable action (per LZ-EH-003) that tells us Ripple's institutional product strategy is multi-chain, not XRPL-exclusive. This has implications for the thesis that XRPL is THE institutional settlement layer. I am not rejecting the infrastructure inference — I am rejecting the framing as 'positive for thesis' without noting the multi-chain product strategy as a neutral-to-negative signal for XRPL exclusivity.",
+    "root_cause": "NARRATIVE_WEIGHT_BIAS",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-03-31T02:58:38.820Z",
+    "source": "layer4_reconcile"
   }
 ]
