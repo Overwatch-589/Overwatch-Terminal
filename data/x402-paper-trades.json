@@ -1,6 +1,6 @@
 {
   "_version": "1.0",
-  "_last_updated": "2026-03-31T02:59:29.695Z",
+  "_last_updated": "2026-03-31T14:13:39.536Z",
   "budget": {
     "cycle_limit_drops": 5000,
     "weekly_limit_drops": 25000,
@@ -79,8 +79,8 @@
       "disposition_reasoning": "Nasdaq's infrastructure choice directly informs T-7 (competitive displacement) and CI-5. If Nasdaq is building on Ethereum or proprietary infrastructure, the competitive displacement assessment strengthens materially. If chain-agnostic or XRPL-compatible, the assessment changes. This is one of the highest-impact unknowns in the competitive landscape.",
       "dispositioned_by": "layer_4",
       "dispositioned_at": "2026-03-23T01:28:08.005Z",
-      "purchase_executed": false,
-      "purchase_result": null
+      "purchase_executed": true,
+      "purchase_result": "CONFIRMED"
     },
     {
       "request_id": "ACQ-L3-2026-03-23T01-09-45-945Z-001",
@@ -160,8 +160,8 @@
       "disposition_reasoning": "ETF fund closure vs. reporting gap directly informs T-5 (ETF kill switch). Fund closures would indicate structural product failure; reporting gaps would be a data artifact. This clarification is available through SEC EDGAR and changes the kill switch severity assessment.",
       "dispositioned_by": "layer_4",
       "dispositioned_at": "2026-03-23T01:28:08.005Z",
-      "purchase_executed": false,
-      "purchase_result": null
+      "purchase_executed": true,
+      "purchase_result": "CONFIRMED"
     },
     {
       "request_id": "ACQ-L3-2026-03-23T01-09-45-945Z-004",
@@ -771,8 +771,8 @@
       "disposition_reasoning": "Invesco/USTB blockchain infrastructure confirmation is achievable (Superstate's contracts are likely verifiable on-chain) and would either confirm or weaken the CI-5 convergence pattern. If it's on XRPL, that would be a significant counter-signal to competitive displacement. Expected cost is low relative to impact. Addresses T-6.",
       "dispositioned_by": "layer_4",
       "dispositioned_at": "2026-03-24T14:02:52.385Z",
-      "purchase_executed": false,
-      "purchase_result": null
+      "purchase_executed": true,
+      "purchase_result": "GENERATED"
     },
     {
       "request_id": "ACQ-L3-2026-03-24T13-44-32-715Z-004",
@@ -4445,6 +4445,149 @@
       "dispositioned_at": "2026-03-31T02:59:29.695Z",
       "purchase_executed": true,
       "purchase_result": "CONFIRMED",
+      "channel_id": null,
+      "settlement_network": null
+    },
+    {
+      "request_id": "ACQ-L2-2026-03-31T13-55-23-982Z-001",
+      "requesting_layer": 2,
+      "request_type": "KNOWLEDGE_GAP",
+      "signal_ids": [
+        "20260331-1355-SIG-012"
+      ],
+      "tension_id": null,
+      "structural_gap_id": null,
+      "description": "Independent on-chain verification of XRPL RWA tokenization value as of March 30, 2026. Specific breakdown by asset type and issuer.",
+      "intended_epistemic_vector": "INFORM",
+      "expected_impact_score": 4,
+      "urgency": "NEXT_CYCLE",
+      "source_category": "on_chain_analytics",
+      "preferred_vendor": null,
+      "estimated_cost_drops": 0,
+      "timestamp": "2026-03-31T13:55:23.982Z",
+      "disposition": "DEFERRED",
+      "disposition_reasoning": "RWA verification is a NEXT_CYCLE request with expected impact 4. The unverified claim is scored at low confidence (2.8 final composite) and excluded from strategic inference. Verification would be useful but does not change the current assessment given CI-1's sustained negative convergence. Defer to conserve budget for higher-impact acquisitions.",
+      "dispositioned_by": "layer_4",
+      "dispositioned_at": "2026-03-31T14:13:39.536Z",
+      "purchase_executed": false,
+      "purchase_result": null,
+      "channel_id": null,
+      "settlement_network": null
+    },
+    {
+      "request_id": "ACQ-L3-2026-03-31T13-55-23-982Z-001",
+      "requesting_layer": 3,
+      "request_type": "INTELLIGENCE_GAP",
+      "signal_ids": [
+        "20260331-1355-SIG-002",
+        "20260331-1355-SIG-015"
+      ],
+      "tension_id": "T-4",
+      "structural_gap_id": "SG-5",
+      "description": "What is the RLUSD distribution by chain — specifically, what percentage of total RLUSD supply is on XRPL vs Ethereum vs other chains, and what is the velocity (transaction count, average transaction size) on each chain?",
+      "intended_epistemic_vector": "INFORM",
+      "expected_impact_score": 5,
+      "urgency": "IMMEDIATE",
+      "source_category": "on_chain_analytics",
+      "preferred_vendor": "On-chain analytics platforms (Nansen, Dune, or similar) that track multi-chain stablecoin distribution. Alternatively, Ripple's own dashboard if one exists.",
+      "estimated_cost_drops": 0,
+      "timestamp": "2026-03-31T13:55:23.982Z",
+      "_l3_impact_on_analysis": "This would resolve whether RLUSD is functioning as an XRPL settlement instrument (thesis-aligned) or as a general-purpose Ethereum stablecoin (thesis-modification indicator). The current $317.8M XRPL vs $1.416B total market cap suggests 78% off-XRPL but this needs verification. If confirmed, it fundamentally modifies the thesis.",
+      "_l3_confidence_data_exists": "high",
+      "_l3_estimated_value": "High — this is the single most important data gap for the modified thesis scenario",
+      "disposition": "APPROVED",
+      "disposition_reasoning": "This is the highest-impact acquisition candidate this cycle. The RLUSD chain distribution finding (78% off-XRPL) is potentially the most important data point for the modified thesis scenario. Verified chain distribution data would either confirm RLUSD as primarily an Ethereum stablecoin (thesis modification) or reveal significant XRPL deployment not captured by current metrics (thesis support). Directly addresses T-4 and SG-5. Per Blind Auditor advisory, the system has been hoarding budget while critical tensions remain unresolved — this acquisition directly targets a resolution path.",
+      "dispositioned_by": "layer_4",
+      "dispositioned_at": "2026-03-31T14:13:39.536Z",
+      "purchase_executed": true,
+      "purchase_result": "SURVIVED",
+      "channel_id": null,
+      "settlement_network": null
+    },
+    {
+      "request_id": "ACQ-L3-2026-03-31T13-55-23-982Z-002",
+      "requesting_layer": 3,
+      "request_type": "INTELLIGENCE_GAP",
+      "signal_ids": [
+        "20260331-1355-SIG-012"
+      ],
+      "tension_id": null,
+      "structural_gap_id": null,
+      "description": "What is the independently verified value of RWA tokenization on XRPL as of March 2026? The community claim of $1B → $2B+ needs primary source verification.",
+      "intended_epistemic_vector": "INFORM",
+      "expected_impact_score": 4,
+      "urgency": "NEXT_CYCLE",
+      "source_category": "on_chain_analytics",
+      "preferred_vendor": "XRPL on-chain explorer or RWA-specific analytics (e.g., rwa.xyz, DeFi Llama RWA dashboard, or direct XRPL trust line analysis for known RWA issuers).",
+      "estimated_cost_drops": 0,
+      "timestamp": "2026-03-31T13:55:23.982Z",
+      "_l3_impact_on_analysis": "If verified at $2B+, this would be the strongest on-chain utilization signal for XRPL infrastructure and would partially counterbalance the low DEX volume finding. If falsified or significantly lower, it removes a potential bullish data point.",
+      "_l3_confidence_data_exists": "medium",
+      "_l3_estimated_value": "Medium-High — could upgrade CI-1 and CI-2 assessments significantly",
+      "disposition": "DEFERRED",
+      "disposition_reasoning": "Overlaps significantly with ACQ-L2-001. If ACQ-L3-001 (RLUSD chain distribution) is approved, the XRPL-specific RWA data can be incorporated into a broader on-chain analytics query next cycle rather than as a separate purchase.",
+      "dispositioned_by": "layer_4",
+      "dispositioned_at": "2026-03-31T14:13:39.536Z",
+      "purchase_executed": false,
+      "purchase_result": null,
+      "channel_id": null,
+      "settlement_network": null
+    },
+    {
+      "request_id": "ACQ-L3-2026-03-31T13-55-23-982Z-003",
+      "requesting_layer": 3,
+      "request_type": "INTELLIGENCE_GAP",
+      "signal_ids": [
+        "20260331-1355-SIG-004"
+      ],
+      "tension_id": "T-1",
+      "structural_gap_id": null,
+      "description": "What is the current real-time Brent crude price as of March 31, 2026? The 8-day stale reading of $103.79 needs updating for compound stress assessment accuracy.",
+      "intended_epistemic_vector": "INFORM",
+      "expected_impact_score": 4,
+      "urgency": "IMMEDIATE",
+      "source_category": "market_data",
+      "preferred_vendor": "Any real-time commodity data feed (Bloomberg, Reuters, CME, ICE).",
+      "estimated_cost_drops": 0,
+      "timestamp": "2026-03-31T13:55:23.982Z",
+      "_l3_impact_on_analysis": "Resolves whether Brent remains above $100 emergency threshold. If fallen below $100, the compound stress assessment downgrades from CRITICAL. If risen above $110, the cascade risk assessment escalates significantly.",
+      "_l3_confidence_data_exists": "high",
+      "_l3_estimated_value": "High — directly affects compound stress level classification",
+      "disposition": "APPROVED",
+      "disposition_reasoning": "Brent crude price is 8 days stale and directly determines whether compound stress is at EMERGENCY or has de-escalated. This is a binary-outcome acquisition: Brent >$100 confirms emergency, Brent <$100 potentially downgrades compound stress. High impact on T-1 compound stress assessment. Per Blind Auditor, market_data category has 4x repeat acquisitions — but Brent staleness is a new data gap each cycle, not a recycled question.",
+      "dispositioned_by": "layer_4",
+      "dispositioned_at": "2026-03-31T14:13:39.536Z",
+      "purchase_executed": true,
+      "purchase_result": "CONFIRMED",
+      "channel_id": null,
+      "settlement_network": null
+    },
+    {
+      "request_id": "ACQ-L3-2026-03-31T13-55-23-982Z-004",
+      "requesting_layer": 3,
+      "request_type": "INTELLIGENCE_GAP",
+      "signal_ids": [
+        "20260331-1355-SIG-001"
+      ],
+      "tension_id": "T-8",
+      "structural_gap_id": null,
+      "description": "Has Convera made any public statements, job postings, or technical documentation related to Ripple/RLUSD/XRPL integration? Is there evidence of engineering commitment beyond the announcement?",
+      "intended_epistemic_vector": "INFORM",
+      "expected_impact_score": 3,
+      "urgency": "NEXT_CYCLE",
+      "source_category": "regulatory_intelligence",
+      "preferred_vendor": "Convera corporate website, LinkedIn job postings, technical blog or documentation, SEC/regulatory filings.",
+      "estimated_cost_drops": 0,
+      "timestamp": "2026-03-31T13:55:23.982Z",
+      "_l3_impact_on_analysis": "Would distinguish between announcement and deployment commitment for the most important partnership signal this cycle. Evidence of engineering commitment would upgrade Convera from announcement-level to deployment-pipeline-level signal.",
+      "_l3_confidence_data_exists": "medium",
+      "_l3_estimated_value": "Medium — upgrades or downgrades the strongest positive signal this cycle",
+      "disposition": "APPROVED",
+      "disposition_reasoning": "Convera engineering commitment evidence would resolve the announcement-vs-deployment question for the strongest positive signal this cycle. Evidence of engineering commitment (job postings, documentation, technical integration) would upgrade Convera from announcement-level to deployment-pipeline, which directly affects T-8 (announcement-to-deployment) and CI-2 assessment. Per Blind Auditor advisory on negligent hoarding: this acquisition targets an observable resolution path for a critical tension.",
+      "dispositioned_by": "layer_4",
+      "dispositioned_at": "2026-03-31T14:13:39.536Z",
+      "purchase_executed": false,
+      "purchase_result": null,
       "channel_id": null,
       "settlement_network": null
     }

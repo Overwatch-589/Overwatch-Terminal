@@ -155,7 +155,7 @@
       "query": "What is the current Brent crude price as of March 31? The FRED data is 8 days stale at $103.79.",
       "content": "{\"result_count\":1,\"results\":[{\"title\":\"Messari Intelligence Response\",\"description\":\"# Brent Crude Oil Price Status\\n\\nInformation regarding the current price of Brent crude oil as of March 31 is currently unavailable. While the previously recorded price from FRED was $103.79, updated d\",\"url\":null,\"has_markdown\":true,\"markdown_length\":264,\"content\":\"# Brent Crude Oil Price Status\\n\\nInformation regarding the current price of Brent crude oil as of March 31 is currently unavailable. While the previously recorded price from FRED was $103.79, updated data to bridge the 8-day gap could not be retrieved at this time.\"}]}",
       "acquired_at": "2026-03-31T03:00:03.201Z",
-      "consumed": false
+      "consumed": true
     },
     {
       "request_id": "ACQ-L3-2026-03-31T02-40-39-674Z-004",
@@ -167,7 +167,7 @@
       "query": "What is the current JGB 10Y yield as of March 31? The financeflow data is 5 days stale at 2.274%.",
       "content": "{\"result_count\":1,\"results\":[{\"title\":\"Messari Intelligence Response\",\"description\":\"# JGB 10Y Yield Status\\n\\nInformation regarding the specific **JGB 10Y yield** as of March 31, 2026, is not available in the provided data. \\n\\nThe available records focus on the following yield benchmark\",\"url\":null,\"has_markdown\":true,\"markdown_length\":882,\"content\":\"# JGB 10Y Yield Status\\n\\nInformation regarding the specific **JGB 10Y yield** as of March 31, 2026, is not available in the provided data. \\n\\nThe available records focus on the following yield benchmarks and financial data as of late March 2026:\\n\\n*   **U.S. Treasury Yields**: As of March 26, 2026, the **3-month U.S. Treasury yield** was **3.73%**.\\n*   **Tokenized Treasury Products**: These assets offered a 7-day APY of **3.15%** as of March 30, 2026.\\n*   **Corporate Yield Strategies**: \\n    *   **Strategy (STRC)**: Offered approximately a **12%** annual dividend.\\n    *   **Strive (SATA)**: Increased its dividend rate to **13%** by March 2026.\\n*   **Stablecoin Backing**: USDf reported a backing ratio of **107.93%** as of March 27, 2026.\\n\\nNo specific updates or corrections to the 2.274% figure for the Japanese Government Bond 10-year yield were found in the current dataset.\"}]}",
       "acquired_at": "2026-03-31T03:00:03.201Z",
-      "consumed": false
+      "consumed": true
     },
     {
       "request_id": "ACQ-L3-2026-03-30T22-47-45-627Z-002",
@@ -179,7 +179,7 @@
       "query": "What are USDT and USDC market cap trajectories for Feb-Mar 2026? Are competing stablecoins also contracting, or is RLUSD losing share specifically?",
       "content": "{\"result_count\":1,\"results\":[{\"title\":\"Messari Intelligence Response\",\"description\":\"# Stablecoin Market Cap Analysis: Feb-Mar 2026\\n\\nDuring the February to March 2026 period, the stablecoin market exhibited divergent trajectories between the two largest assets, while Ripple USD (RLUSD\",\"url\":null,\"has_markdown\":true,\"markdown_length\":2064,\"content\":\"# Stablecoin Market Cap Analysis: Feb-Mar 2026\\n\\nDuring the February to March 2026 period, the stablecoin market exhibited divergent trajectories between the two largest assets, while Ripple USD (RLUSD) showed consistent growth rather than contraction.\\n\\n## USDT and USDC Trajectories\\n\\n**USDT (Tether)** experienced a period of relative stability with a slight downward trend in early February before recovering.\\n*   **February:** Started at approximately **$185.4 billion**, dipping to a low of roughly **$183.2 billion** by late February.\\n*   **March:** Showed a steady recovery, climbing back to **$184.1 billion** by the end of the month.\\n\\n**USDC** demonstrated a strong upward trajectory for the majority of the period before a late-March correction.\\n*   **Growth Phase:** Rose significantly from **$70.28 billion** on February 1 to a peak of **$79.62 billion** on March 18.\\n*   **Correction:** Following its peak, it contracted to end March at **$77.37 billion**.\\n\\n## RLUSD Performance and Market Share\\n\\nContrary to the suggestion of contraction, **Ripple USD (RLUSD)** maintained a steady growth profile throughout the observed period, indicating it is not losing share to the larger incumbents but rather expanding its own footprint.\\n\\n| Date | Ripple USD (RLUSD) Market Cap |\\n| :--- | ---: |\\n| Feb 1, 2026 | **$1,095,849,133** |\\n| Feb 15, 2026 | **$1,174,134,241** |\\n| Mar 1, 2026 | **$1,238,432,745** |\\n| Mar 6, 2026 | **$1,233,518,775** |\\n\\n### Key Insights\\n*   **RLUSD Growth:** RLUSD grew by approximately **12.5%** between February 1 and early March, moving from $1.09 billion to over $1.23 billion.\\n*   **Market Dynamics:** While USDT remained largely flat and USDC saw a net increase despite a late-month dip, RLUSD's consistent climb suggests it is successfully capturing liquidity within the XRP Ledger ecosystem.\\n*   **No Broad Contraction:** There is no evidence of a general contraction among these competing stablecoins; instead, the data shows a shifting distribution of capital with both USDC and RLUSD ending the period higher than they began.\"}]}",
       "acquired_at": "2026-03-31T03:00:03.201Z",
-      "consumed": false
+      "consumed": true
     },
     {
       "request_id": "ACQ-L3-2026-03-30T22-47-45-627Z-003",
@@ -191,6 +191,42 @@
       "query": "What is the current real-time Brent crude price as of March 30, 2026?",
       "content": "{\"result_count\":1,\"results\":[{\"title\":\"Messari Intelligence Response\",\"description\":\"# Brent Crude Price Information\\n\\nInformation regarding the real-time price of Brent crude for March 30, 2026, is currently unavailable. Specific pricing data for this asset and date could not be retri\",\"url\":null,\"has_markdown\":true,\"markdown_length\":205,\"content\":\"# Brent Crude Price Information\\n\\nInformation regarding the real-time price of Brent crude for March 30, 2026, is currently unavailable. Specific pricing data for this asset and date could not be retrieved.\"}]}",
       "acquired_at": "2026-03-31T03:00:03.201Z",
+      "consumed": true
+    },
+    {
+      "request_id": "ACQ-L3-2026-03-31T13-55-23-982Z-003",
+      "originating_trace_id": "2026-03-31T13:55:23.982Z",
+      "originating_signal_ids": [
+        "20260331-1355-SIG-004"
+      ],
+      "tension_id": "T-1",
+      "query": "What is the current real-time Brent crude price as of March 31, 2026? The 8-day stale reading of $103.79 needs updating for compound stress assessment accuracy.",
+      "content": "{\"result_count\":1,\"results\":[{\"title\":\"Messari Intelligence Response\",\"description\":\"# Brent Crude Price Update\\n\\nInformation regarding the real-time price of Brent crude for **March 31, 2026**, is currently unavailable. The requested data could not be retrieved to update the previous \",\"url\":null,\"has_markdown\":true,\"markdown_length\":223,\"content\":\"# Brent Crude Price Update\\n\\nInformation regarding the real-time price of Brent crude for **March 31, 2026**, is currently unavailable. The requested data could not be retrieved to update the previous reading of **$103.79**.\"}]}",
+      "acquired_at": "2026-03-31T14:14:04.365Z",
+      "consumed": false
+    },
+    {
+      "request_id": "ACQ-L2-2026-03-23T01-09-45-945Z-003",
+      "originating_trace_id": "2026-03-31T13:55:23.982Z",
+      "originating_signal_ids": [
+        "20260323-0109-SIG-006"
+      ],
+      "tension_id": "T-7",
+      "query": "Technical infrastructure details for Nasdaq's tokenized securities trading system.",
+      "content": "{\"result_count\":1,\"results\":[{\"title\":\"Messari Intelligence Response\",\"description\":\"# Nasdaq Tokenized Securities Infrastructure\\n\\nNasdaq has filed a proposal with the U.S. Securities and Exchange Commission (SEC) to integrate tokenized securities trading directly into its existing na\",\"url\":null,\"has_markdown\":true,\"markdown_length\":2129,\"content\":\"# Nasdaq Tokenized Securities Infrastructure\\n\\nNasdaq has filed a proposal with the U.S. Securities and Exchange Commission (SEC) to integrate tokenized securities trading directly into its existing national market system. The technical approach focuses on interoperability between traditional and blockchain-based settlement.\\n\\n### Core Trading Architecture\\n*   **Unified Order Book:** Tokenized securities will trade on the same order book as traditional securities. They will follow the same execution priority rules to ensure market parity.\\n*   **Dual Representation:** The system is designed to support securities in \\\"either traditional digital or tokenized form.\\\" Customers can choose to trade via traditional digital representation of ownership with or without blockchain backing.\\n*   **Order Flagging:** Participants wishing to clear and settle in tokenized form must select a specific \\\"tokenization flag\\\" upon order entry. This notation serves as the primary instruction to the system for alternative settlement.\\n\\n### Settlement and Connectivity\\n*   **DTC Integration:** When a tokenization flag is selected, Nasdaq’s system communicates the specific clearance and settlement instructions to **The Depository Trust Company (DTC)**.\\n*   **Blockchain Agnostic Potential:** While the filing emphasizes maintaining the protections of the national market system, it acknowledges the ability for these securities to be settled on a blockchain.\\n*   **Material Rights:** The infrastructure is built to ensure tokenized assets carry the \\\"same material rights and privileges\\\" as traditional securities of an equivalent class, preventing the fragmented ownership models seen in some international markets.\\n\\n### Strategic Partnerships and Timeline\\n*   **Gemini Investment:** Nasdaq has reportedly planned a **$50 million investment** in the crypto exchange Gemini, signaling a deepening of technical and institutional ties in the digital asset space.\\n*   **Target Launch:** If regulatory approval is granted and the necessary infrastructure is finalized, Nasdaq aims to support token-settled security trades by the **end of Q3 2026**.\"}]}",
+      "acquired_at": "2026-03-31T14:14:04.366Z",
+      "consumed": false
+    },
+    {
+      "request_id": "ACQ-L3-2026-03-23T01-09-45-945Z-003",
+      "originating_trace_id": "2026-03-31T13:55:23.982Z",
+      "originating_signal_ids": [
+        "20260323-0109-SIG-004"
+      ],
+      "tension_id": "T-5",
+      "query": "Have the 3 non-reporting XRP ETF funds formally closed, or are they still operational but not reporting to Coinglass?",
+      "content": "{\"result_count\":1,\"results\":[{\"title\":\"Messari Intelligence Response\",\"description\":\"# XRP ETF Operational Status\\n\\nBased on current market data and reporting, XRP exchange-traded funds (ETFs) remain operational, though there is a significant gap between total assets under management a\",\"url\":null,\"has_markdown\":true,\"markdown_length\":2100,\"content\":\"# XRP ETF Operational Status\\n\\nBased on current market data and reporting, XRP exchange-traded funds (ETFs) remain operational, though there is a significant gap between total assets under management and the data visible through specific institutional reporting platforms.\\n\\n## Operational Status and Reporting\\nThe XRP ETF market is active and has seen significant growth through 2025. As of December 31, 2025, XRP ETFs held approximately **$1.2 billion** in total assets. However, a large portion of these funds does not appear in standard institutional disclosures:\\n\\n*   **Institutional Visibility:** Only about **$211 million** of the total $1.2 billion in XRP ETF assets was directly linked to institutions required to file 13F disclosures.\\n*   **Non-Reporting Capital:** The majority of the capital—roughly **$1 billion**—comes from participants who fall outside the mandatory reporting thresholds. This group includes retail brokerage clients, family offices, and smaller advisory firms.\\n*   **Market Impact:** Because these non-reporting investors represent the bulk of the capital, their activity is the primary driver of fund flows, even if their specific identities are not captured in institutional reporting tools.\\n\\n## Major Active Funds\\nSeveral XRP-related investment products are currently active on major exchanges:\\n\\n| Fund Provider | Ticker | Exchange | Notes |\\n| :--- | :--- | :--- | :--- |\\n| **Grayscale** | GXRP | NYSE Arca | Launched in late 2025 with a 0% expense ratio incentive. |\\n| **REX-Osprey** | XRPR | CBOE | Uses a creative structure combining spot exposure and derivatives. |\\n| **Canary Capital** | N/A | N/A | Recorded over $58 million in first-day trading volume in late 2025. |\\n\\nWhile some platforms may show \\\"non-reporting\\\" status for certain funds, this typically reflects the regulatory reporting requirements of the underlying investors rather than the operational closure of the funds themselves. Major institutions like **Goldman Sachs** have been identified as significant holders, disclosing over **$150 million** in XRP ETF investments across various products.\"}]}",
+      "acquired_at": "2026-03-31T14:14:04.366Z",
       "consumed": false
     }
   ]

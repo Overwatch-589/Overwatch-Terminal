@@ -1,16 +1,16 @@
 {
-  "updated": "2026-03-31T02:39:03.690Z",
+  "updated": "2026-03-31T13:53:52.062Z",
   "auto_fetched": true,
   "xrp": {
-    "price": 1.34,
-    "change_24h": -0.3554278157876852,
-    "volume_24h": 1975768075.920421,
-    "market_cap": 81963860059.26216,
+    "price": 1.32,
+    "change_24h": -1.9753895914665789,
+    "volume_24h": 2017547310.9015162,
+    "market_cap": 81105674175.54724,
     "data_date": "2026-03-31",
     "source": "coingecko"
   },
   "rlusd": {
-    "market_cap": 1416364985.9340272,
+    "market_cap": 1416130266.53661,
     "data_date": "2026-03-31",
     "source": "coingecko"
   },
@@ -41,8 +41,8 @@
       "source": "financeflow"
     },
     "sp500": {
-      "value": 6343.72,
-      "data_date": "2026-03-30",
+      "value": 6439.96,
+      "data_date": "2026-03-31",
       "source": "stooq"
     },
     "fear_greed": {
@@ -53,42 +53,58 @@
     }
   },
   "xrpl_metrics": {
-    "ledger_index": 103232932,
-    "rlusd_supply": 317862206.3517016,
+    "ledger_index": 103243448,
+    "rlusd_supply": 317862206.3517009,
     "data_date": "2026-03-31",
     "source": "xrpl",
-    "current_ledger": 103232932,
-    "last_ledger_txns": 126,
+    "current_ledger": 103243448,
+    "last_ledger_txns": 79,
     "avg_tx_per_ledger": null,
-    "fee_burn_per_ledger_xrp": 0.00126,
+    "fee_burn_per_ledger_xrp": 0.00079,
     "dex_volume_24h_usd": 3455566,
-    "dex_volume_24h_xrp": 2578781,
+    "dex_volume_24h_xrp": 2617853,
     "dex_exchanges_24h": null,
     "dex_takers_24h": null,
     "book_depth_xrp_usd": {
       "pair": "XRP/USD",
       "bids": 10,
       "asks": 10,
-      "total_bid_xrp": 366534.036035,
-      "total_ask_xrp": 1000020.239959,
-      "best_bid": 1.344065,
-      "best_ask": 1.3303
+      "total_bid_xrp": 366606.466375,
+      "total_ask_xrp": 1000017.430609,
+      "best_bid": 1.33539,
+      "best_ask": 1.3225
     }
   },
   "x_intelligence": {
     "tier1_posts": [
+      {
+        "username": "Ripple",
+        "text": "We’re partnering with Convera to expand enterprise cross-border payments.\n\nTogether, we’re combining global payment rails with stablecoin-enabled settlement to improve speed, liquidity, and reliability.\n\nhttps://t.co/OTa8apYIZa",
+        "created_at": "2026-03-31T13:21:01.000Z",
+        "tweet_id": "2038969816187285516",
+        "metrics": {
+          "retweet_count": 259,
+          "reply_count": 76,
+          "like_count": 1065,
+          "quote_count": 44,
+          "bookmark_count": 54,
+          "impression_count": 29509
+        },
+        "tier": 1,
+        "weight": 3
+      },
       {
         "username": "EleanorTerrett",
         "text": "@JSeyff @NJTRANSIT I was just about to respond to this but you beat me to it. Didn’t they just spend millions/weeks rerouting trains to fix the bridge which is supposedly the root of today’s issue. Literally the dumbest waste of taxpayer money in this state = @NJTRANSIT",
         "created_at": "2026-03-30T22:31:02.000Z",
         "tweet_id": "2038745844711584223",
         "metrics": {
-          "retweet_count": 3,
-          "reply_count": 2,
-          "like_count": 32,
+          "retweet_count": 5,
+          "reply_count": 3,
+          "like_count": 51,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 4646
+          "impression_count": 7031
         },
         "tier": 1,
         "weight": 3
@@ -99,12 +115,12 @@
         "created_at": "2026-03-30T19:57:41.000Z",
         "tweet_id": "2038707252769771819",
         "metrics": {
-          "retweet_count": 264,
+          "retweet_count": 328,
           "reply_count": 0,
           "like_count": 0,
           "quote_count": 0,
           "bookmark_count": 0,
-          "impression_count": 6
+          "impression_count": 7
         },
         "tier": 1,
         "weight": 3
@@ -115,12 +131,12 @@
         "created_at": "2026-03-30T17:43:05.000Z",
         "tweet_id": "2038673380002414818",
         "metrics": {
-          "retweet_count": 6,
-          "reply_count": 9,
-          "like_count": 11,
+          "retweet_count": 7,
+          "reply_count": 11,
+          "like_count": 14,
           "quote_count": 0,
-          "bookmark_count": 4,
-          "impression_count": 8926
+          "bookmark_count": 5,
+          "impression_count": 10441
         },
         "tier": 1,
         "weight": 3
@@ -131,12 +147,12 @@
         "created_at": "2026-03-30T17:43:04.000Z",
         "tweet_id": "2038673378630922468",
         "metrics": {
-          "retweet_count": 27,
-          "reply_count": 108,
-          "like_count": 142,
-          "quote_count": 14,
-          "bookmark_count": 32,
-          "impression_count": 71452
+          "retweet_count": 32,
+          "reply_count": 128,
+          "like_count": 156,
+          "quote_count": 20,
+          "bookmark_count": 36,
+          "impression_count": 85435
         },
         "tier": 1,
         "weight": 3
@@ -147,12 +163,12 @@
         "created_at": "2026-03-30T15:12:07.000Z",
         "tweet_id": "2038635389729079528",
         "metrics": {
-          "retweet_count": 57,
-          "reply_count": 8,
-          "like_count": 392,
+          "retweet_count": 60,
+          "reply_count": 9,
+          "like_count": 421,
           "quote_count": 1,
-          "bookmark_count": 18,
-          "impression_count": 31597
+          "bookmark_count": 20,
+          "impression_count": 34635
         },
         "tier": 1,
         "weight": 3
@@ -163,12 +179,12 @@
         "created_at": "2026-03-30T14:43:29.000Z",
         "tweet_id": "2038628184044802186",
         "metrics": {
-          "retweet_count": 297,
-          "reply_count": 52,
-          "like_count": 1431,
-          "quote_count": 21,
-          "bookmark_count": 90,
-          "impression_count": 71170
+          "retweet_count": 315,
+          "reply_count": 55,
+          "like_count": 1517,
+          "quote_count": 23,
+          "bookmark_count": 92,
+          "impression_count": 82988
         },
         "tier": 1,
         "weight": 3
@@ -195,12 +211,12 @@
         "created_at": "2026-03-29T23:30:40.000Z",
         "tweet_id": "2038398467341533201",
         "metrics": {
-          "retweet_count": 1026,
-          "reply_count": 240,
-          "like_count": 4959,
+          "retweet_count": 1045,
+          "reply_count": 247,
+          "like_count": 5047,
           "quote_count": 62,
-          "bookmark_count": 210,
-          "impression_count": 262789
+          "bookmark_count": 215,
+          "impression_count": 272123
         },
         "tier": 1,
         "weight": 3
@@ -248,7 +264,7 @@
           "like_count": 319,
           "quote_count": 1,
           "bookmark_count": 13,
-          "impression_count": 29498
+          "impression_count": 29682
         },
         "tier": 1,
         "weight": 3
@@ -309,10 +325,10 @@
         "metrics": {
           "retweet_count": 243,
           "reply_count": 101,
-          "like_count": 1331,
+          "like_count": 1330,
           "quote_count": 29,
-          "bookmark_count": 95,
-          "impression_count": 140317
+          "bookmark_count": 94,
+          "impression_count": 140813
         },
         "tier": 1,
         "weight": 3
@@ -323,12 +339,12 @@
         "created_at": "2026-03-27T16:30:06.000Z",
         "tweet_id": "2037567850505027597",
         "metrics": {
-          "retweet_count": 37,
-          "reply_count": 11,
-          "like_count": 207,
+          "retweet_count": 38,
+          "reply_count": 12,
+          "like_count": 210,
           "quote_count": 1,
           "bookmark_count": 12,
-          "impression_count": 39615
+          "impression_count": 40652
         },
         "tier": 1,
         "weight": 3
@@ -360,7 +376,7 @@
           "like_count": 657,
           "quote_count": 2,
           "bookmark_count": 29,
-          "impression_count": 63322
+          "impression_count": 63412
         },
         "tier": 1,
         "weight": 3
@@ -380,37 +396,229 @@
         },
         "tier": 1,
         "weight": 3
-      },
-      {
-        "username": "SECPaulSAtkins",
-        "text": "RT @EleanorTerrett: 🚨NEW: SEC Chair @SECPaulSAtkins tells @CryptoAmerica_ the SEC’s long-awaited tokenization innovation exemption could ar…",
-        "created_at": "2026-03-26T18:25:37.000Z",
-        "tweet_id": "2037234532026290316",
-        "metrics": {
-          "retweet_count": 357,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 1
-        },
-        "tier": 1,
-        "weight": 3
       }
     ],
     "tier2_posts": [
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: Jim Cramer says \"how can oil be up and the war be over.\" \n\n\"Can't have both.\" https://t.co/wqS8LxPvil",
+        "created_at": "2026-03-31T13:52:58.000Z",
+        "tweet_id": "2038977858282947024",
+        "metrics": {
+          "retweet_count": 10,
+          "reply_count": 43,
+          "like_count": 63,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 1114
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "DATA: @Google warns quantum computers could target $ETH wallets, smart contracts, staking, Layer 2s and its data verification layer, with combined exposure exceeding $100 billion.\n\nA quantum computer cracking one wallet key every 9 minutes could drain the top 1,000 $ETH wallets https://t.co/uyL4Q3Wq4Y",
+        "created_at": "2026-03-31T13:33:52.000Z",
+        "tweet_id": "2038973051111415902",
+        "metrics": {
+          "retweet_count": 9,
+          "reply_count": 27,
+          "like_count": 50,
+          "quote_count": 1,
+          "bookmark_count": 3,
+          "impression_count": 5817
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: Warren Buffett says he sold Apple $AAPL \"too soon.\" https://t.co/E5voWoQt4F",
+        "created_at": "2026-03-31T13:17:01.000Z",
+        "tweet_id": "2038968812599472403",
+        "metrics": {
+          "retweet_count": 85,
+          "reply_count": 241,
+          "like_count": 918,
+          "quote_count": 19,
+          "bookmark_count": 17,
+          "impression_count": 52198
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "evernorthxrp",
+        "text": "Just three months into 2026 and RWA tokenization on XRP is off to a roaring start.\n\nAs of January 1, 2026 - total value was at about $1B.\n\nAs of March 30, 2026 - total value was $2B+.\n\nSlow clap. 👏\n\nLearn more: https://t.co/seHMpTIwIJ https://t.co/RImc4uHjmf",
+        "created_at": "2026-03-31T13:03:00.000Z",
+        "tweet_id": "2038965283403059407",
+        "metrics": {
+          "retweet_count": 88,
+          "reply_count": 31,
+          "like_count": 416,
+          "quote_count": 13,
+          "bookmark_count": 17,
+          "impression_count": 8044
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "INSIGHT: Accounting firm @Deloitte verifies @Ripple's $RLUSD stablecoin is fully backed by $1.57B in liquid reserves against 1.49B units as of Feb 27. https://t.co/e8apQsco1P",
+        "created_at": "2026-03-31T12:30:52.000Z",
+        "tweet_id": "2038957197820932100",
+        "metrics": {
+          "retweet_count": 97,
+          "reply_count": 32,
+          "like_count": 439,
+          "quote_count": 15,
+          "bookmark_count": 22,
+          "impression_count": 23016
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "WatcherGuru",
+        "text": "JUST IN: Warren Buffett says he sold Apple $APPL \"too soon.\" https://t.co/KnGA03tFAG",
+        "created_at": "2026-03-31T12:27:23.000Z",
+        "tweet_id": "2038956321664290972",
+        "metrics": {
+          "retweet_count": 119,
+          "reply_count": 301,
+          "like_count": 1695,
+          "quote_count": 21,
+          "bookmark_count": 28,
+          "impression_count": 117490
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "NEW: Options on @Hashdex's diversified crypto ETF $NCIQ are now live on Nasdaq, giving institutions the ability to hedge, generate income and manage risk across $BTC, $ETH, $XRP, $SOL, $ADA, $LINK and $XLM for the first time. https://t.co/7t6MC5KbnT",
+        "created_at": "2026-03-31T11:38:06.000Z",
+        "tweet_id": "2038943917333168561",
+        "metrics": {
+          "retweet_count": 30,
+          "reply_count": 29,
+          "like_count": 135,
+          "quote_count": 5,
+          "bookmark_count": 15,
+          "impression_count": 12955
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "JUST IN: Digital asset market maker @Keyrock hits a $1.1B valuation in a Series C led by Standard Chartered's venture arm SC Ventures, with @Ripple among the backers. https://t.co/jNYhG7HdqQ",
+        "created_at": "2026-03-31T11:08:54.000Z",
+        "tweet_id": "2038936571836088325",
+        "metrics": {
+          "retweet_count": 59,
+          "reply_count": 36,
+          "like_count": 265,
+          "quote_count": 5,
+          "bookmark_count": 12,
+          "impression_count": 17685
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "INSIGHT: @Google says breaking Bitcoin's cryptography may require far fewer qubits than previously thought, with 6.9 million $BTC already sitting in wallets where public keys have been exposed and vulnerable to attack. https://t.co/KHRtZ7jLl0",
+        "created_at": "2026-03-31T10:06:52.000Z",
+        "tweet_id": "2038920960351363352",
+        "metrics": {
+          "retweet_count": 32,
+          "reply_count": 58,
+          "like_count": 151,
+          "quote_count": 8,
+          "bookmark_count": 19,
+          "impression_count": 26096
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "They’ve become Prima Donna’s who think they’re special. Vote ALL the bums out - regardless of party. https://t.co/bLKaQtuGxe",
+        "created_at": "2026-03-31T09:35:35.000Z",
+        "tweet_id": "2038913084115267691",
+        "metrics": {
+          "retweet_count": 15,
+          "reply_count": 2,
+          "like_count": 69,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5942
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "JohnEDeaton1",
+        "text": "Make no mistake, it is because of examples like this that give @SBF_FTX and his complicit parents hope that SBF can also get a pardon. Pay to play in Washington was bad before - but they don’t even try and hide it anymore. https://t.co/MH4nHq49Om",
+        "created_at": "2026-03-31T09:05:20.000Z",
+        "tweet_id": "2038905474783859173",
+        "metrics": {
+          "retweet_count": 31,
+          "reply_count": 8,
+          "like_count": 82,
+          "quote_count": 1,
+          "bookmark_count": 1,
+          "impression_count": 6251
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "LATEST: @Ripple Prime extends its @HyperliquidX integration to include HIP-3 symbols, giving institutional traders on-chain perpetuals access to traditional assets including gold, silver and oil. https://t.co/JyAHrzuqdA",
+        "created_at": "2026-03-31T09:03:31.000Z",
+        "tweet_id": "2038905017961226392",
+        "metrics": {
+          "retweet_count": 70,
+          "reply_count": 31,
+          "like_count": 392,
+          "quote_count": 5,
+          "bookmark_count": 23,
+          "impression_count": 18355
+        },
+        "tier": 2,
+        "weight": 2
+      },
+      {
+        "username": "CoinDesk",
+        "text": "NEW: The U.S. Department of Labor proposes a rule that would make it easier for 401(k) plans to include crypto, private equity and real estate, potentially opening trillions in retirement savings to digital assets. https://t.co/9jPNEWiYAN",
+        "created_at": "2026-03-31T08:11:33.000Z",
+        "tweet_id": "2038891939043422448",
+        "metrics": {
+          "retweet_count": 25,
+          "reply_count": 29,
+          "like_count": 104,
+          "quote_count": 6,
+          "bookmark_count": 4,
+          "impression_count": 11227
+        },
+        "tier": 2,
+        "weight": 2
+      },
       {
         "username": "WatcherGuru",
         "text": "JUST IN: 🇺🇸🇮🇷 Secretary of War Pete Hegseth's broker attempted large defense stock investments weeks before US attacked Iran, FT reports. https://t.co/NkHTW9rrS4",
         "created_at": "2026-03-30T23:30:43.000Z",
         "tweet_id": "2038760866955329786",
         "metrics": {
-          "retweet_count": 647,
-          "reply_count": 390,
-          "like_count": 3996,
-          "quote_count": 86,
-          "bookmark_count": 203,
-          "impression_count": 275164
+          "retweet_count": 1094,
+          "reply_count": 468,
+          "like_count": 7046,
+          "quote_count": 109,
+          "bookmark_count": 314,
+          "impression_count": 472019
         },
         "tier": 2,
         "weight": 2
@@ -421,12 +629,12 @@
         "created_at": "2026-03-30T23:25:44.000Z",
         "tweet_id": "2038759613399446008",
         "metrics": {
-          "retweet_count": 4,
-          "reply_count": 10,
-          "like_count": 151,
-          "quote_count": 1,
-          "bookmark_count": 5,
-          "impression_count": 102249
+          "retweet_count": 9,
+          "reply_count": 11,
+          "like_count": 233,
+          "quote_count": 3,
+          "bookmark_count": 9,
+          "impression_count": 164749
         },
         "tier": 2,
         "weight": 2
@@ -437,12 +645,12 @@
         "created_at": "2026-03-30T23:23:41.000Z",
         "tweet_id": "2038759096568987741",
         "metrics": {
-          "retweet_count": 479,
-          "reply_count": 1530,
-          "like_count": 5728,
-          "quote_count": 967,
-          "bookmark_count": 276,
-          "impression_count": 1082217
+          "retweet_count": 702,
+          "reply_count": 1967,
+          "like_count": 8205,
+          "quote_count": 1251,
+          "bookmark_count": 427,
+          "impression_count": 2081209
         },
         "tier": 2,
         "weight": 2
@@ -453,28 +661,12 @@
         "created_at": "2026-03-30T22:47:31.000Z",
         "tweet_id": "2038749994929344786",
         "metrics": {
-          "retweet_count": 8,
-          "reply_count": 23,
-          "like_count": 67,
-          "quote_count": 0,
-          "bookmark_count": 7,
-          "impression_count": 15433
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "RT @WatcherGuru: JUST IN: 🇺🇸 Fed Chair Jerome Powell warns US national debt is growing \"substantially\" faster than the economy and says it'…",
-        "created_at": "2026-03-30T21:48:14.000Z",
-        "tweet_id": "2038735076708474950",
-        "metrics": {
-          "retweet_count": 5073,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 4
+          "retweet_count": 13,
+          "reply_count": 28,
+          "like_count": 123,
+          "quote_count": 1,
+          "bookmark_count": 13,
+          "impression_count": 27530
         },
         "tier": 2,
         "weight": 2
@@ -485,12 +677,12 @@
         "created_at": "2026-03-30T21:25:12.000Z",
         "tweet_id": "2038729277152145761",
         "metrics": {
-          "retweet_count": 15,
+          "retweet_count": 16,
           "reply_count": 25,
-          "like_count": 87,
+          "like_count": 104,
           "quote_count": 3,
           "bookmark_count": 2,
-          "impression_count": 14327
+          "impression_count": 18084
         },
         "tier": 2,
         "weight": 2
@@ -501,12 +693,12 @@
         "created_at": "2026-03-30T20:48:04.000Z",
         "tweet_id": "2038719934939689387",
         "metrics": {
-          "retweet_count": 933,
-          "reply_count": 421,
-          "like_count": 6865,
-          "quote_count": 141,
-          "bookmark_count": 339,
-          "impression_count": 372451
+          "retweet_count": 1099,
+          "reply_count": 456,
+          "like_count": 8142,
+          "quote_count": 168,
+          "bookmark_count": 390,
+          "impression_count": 512218
         },
         "tier": 2,
         "weight": 2
@@ -517,195 +709,19 @@
         "created_at": "2026-03-30T20:31:37.000Z",
         "tweet_id": "2038715795761504416",
         "metrics": {
-          "retweet_count": 30,
+          "retweet_count": 39,
           "reply_count": 2,
-          "like_count": 78,
-          "quote_count": 1,
-          "bookmark_count": 2,
-          "impression_count": 6220
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "Read more: https://t.co/0l8aaPXn4l",
-        "created_at": "2026-03-30T20:26:55.000Z",
-        "tweet_id": "2038714609532571757",
-        "metrics": {
-          "retweet_count": 2,
-          "reply_count": 12,
-          "like_count": 4,
-          "quote_count": 0,
-          "bookmark_count": 1,
-          "impression_count": 7858
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "INSIGHT: @CoinWOfficial's upgraded futures platform now covers 20 million users with a $200M risk fund and an industry-first zero profit-share copy trading model.\n\nBuilt for volatility, built around the user. https://t.co/D14dfowvTI",
-        "created_at": "2026-03-30T20:26:54.000Z",
-        "tweet_id": "2038714607548686699",
-        "metrics": {
-          "retweet_count": 4,
-          "reply_count": 26,
-          "like_count": 20,
-          "quote_count": 1,
-          "bookmark_count": 0,
-          "impression_count": 9298
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "ChairmanSelig",
-        "text": "The @CFTC takes seriously its responsibility to reject prediction market contracts that are readily susceptible to manipulation and we’re working with the professional sports leagues to ensure we get this right. \n\nWhen a league raises manipulation concerns about a contract https://t.co/CqYykHa88o",
-        "created_at": "2026-03-30T20:02:47.000Z",
-        "tweet_id": "2038708539611599202",
-        "metrics": {
-          "retweet_count": 6,
-          "reply_count": 13,
-          "like_count": 57,
-          "quote_count": 3,
-          "bookmark_count": 12,
-          "impression_count": 7600
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "@MidnightNtwrk is officially live and we're breaking down what the 'fourth generation of blockchain' means for privacy, compliance, and real-world adoption.\n\nJoin @IOHK_Charles, @F_ZK_Now, and Mike Ward on Thursday at 10:00am EDT as they discuss the launch — drop your questions https://t.co/sMKYcwI726",
-        "created_at": "2026-03-30T20:00:24.000Z",
-        "tweet_id": "2038707939372904848",
-        "metrics": {
-          "retweet_count": 87,
-          "reply_count": 20,
-          "like_count": 346,
-          "quote_count": 2,
-          "bookmark_count": 9,
-          "impression_count": 10278
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "OndoFinance",
-        "text": "https://t.co/WCHfMVKESN",
-        "created_at": "2026-03-30T19:46:46.000Z",
-        "tweet_id": "2038704506699919547",
-        "metrics": {
-          "retweet_count": 0,
-          "reply_count": 1,
-          "like_count": 17,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 3662
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "OndoFinance",
-        "text": "“It's clear that onchain rails will underpin the future of finance.”\n\nOndo’s @iandebode shares insights with @rwa_io alongside J.P. Morgan, Citi, Standard Chartered, ABN AMRO, and more.\n\nStablecoin adoption among financial institutions has crossed 90%. Tokenized treasuries are https://t.co/44uQqI3f9C",
-        "created_at": "2026-03-30T19:46:45.000Z",
-        "tweet_id": "2038704504019775729",
-        "metrics": {
-          "retweet_count": 44,
-          "reply_count": 17,
-          "like_count": 297,
-          "quote_count": 4,
-          "bookmark_count": 5,
-          "impression_count": 8149
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "🎥 Bloomberg's @JSeyff shares his view on Morgan Stanley launching a Bitcoin ETF and how times are changing on Public Keys at the @NYSE \n\n“I remember 2017 through today, it’s long Bitcoin, short the banks and now we have a bank launching a Bitcoin ETF.” https://t.co/luibdCw6D4",
-        "created_at": "2026-03-30T19:24:40.000Z",
-        "tweet_id": "2038698944969035853",
-        "metrics": {
-          "retweet_count": 16,
-          "reply_count": 16,
           "like_count": 112,
-          "quote_count": 5,
-          "bookmark_count": 8,
-          "impression_count": 31099
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "WatcherGuru",
-        "text": "JUST IN: 🇺🇸 BlackRock CIO Rick Rieder says he thinks the Federal Reserve will cut interest rates.",
-        "created_at": "2026-03-30T19:15:50.000Z",
-        "tweet_id": "2038696722671481014",
-        "metrics": {
-          "retweet_count": 352,
-          "reply_count": 303,
-          "like_count": 3664,
-          "quote_count": 40,
-          "bookmark_count": 78,
-          "impression_count": 247855
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "ChairmanSelig",
-        "text": "The @CFTC is proud to partner with @MLB to protect the integrity of professional baseball games and prediction markets. We look forward to announcing similar partnerships with other professional sports leagues soon.\n\nWe’ll work together with the leagues to prevent insider https://t.co/VlDIrYkS01",
-        "created_at": "2026-03-30T18:50:22.000Z",
-        "tweet_id": "2038690313473060986",
-        "metrics": {
-          "retweet_count": 8,
-          "reply_count": 4,
-          "like_count": 45,
-          "quote_count": 1,
-          "bookmark_count": 5,
-          "impression_count": 4539
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "CoinDesk",
-        "text": "POLICY: Senators Bill Cassidy and Cynthia Lummis introduce the “Mined in America Act,” directing the Department of Commerce to establish a voluntary crypto mining certification program and codify Donald Trump’s Strategic Bitcoin Reserve. https://t.co/CZlUKpNIUF",
-        "created_at": "2026-03-30T18:48:36.000Z",
-        "tweet_id": "2038689869132620143",
-        "metrics": {
-          "retweet_count": 6,
-          "reply_count": 19,
-          "like_count": 43,
           "quote_count": 1,
           "bookmark_count": 2,
-          "impression_count": 9480
-        },
-        "tier": 2,
-        "weight": 2
-      },
-      {
-        "username": "JohnEDeaton1",
-        "text": "RT @MattWalshBlog: While our country is at war, our airports are a mess, DHS is not funded, and our elections are not secure, Lindsey Graha…",
-        "created_at": "2026-03-30T18:19:46.000Z",
-        "tweet_id": "2038682612177219945",
-        "metrics": {
-          "retweet_count": 10298,
-          "reply_count": 0,
-          "like_count": 0,
-          "quote_count": 0,
-          "bookmark_count": 0,
-          "impression_count": 0
+          "impression_count": 7515
         },
         "tier": 2,
         "weight": 2
       }
     ],
-    "fetched_at": "2026-03-31T02:39:01.834Z",
-    "post_count": 39,
+    "fetched_at": "2026-03-31T13:53:50.361Z",
+    "post_count": 40,
     "errors": []
   },
   "x402_agent": {
@@ -881,17 +897,17 @@
       "timestamp": "2026-03-07T03:24:01.000Z"
     },
     "x402_flow": "13 mainnet payments • 13,000 drops lifetime (0.013 XRP)",
-    "last_updated": "2026-03-31T02:39:02.268Z"
+    "last_updated": "2026-03-31T13:53:50.846Z"
   },
   "etf": {
-    "total_aum": 1120608974,
-    "daily_net_flow": 0,
+    "total_aum": 1118301437,
+    "daily_net_flow": -2307537,
     "daily_inflow": 0,
-    "daily_outflow": 0,
-    "weekly_net_flow": 2663878,
+    "daily_outflow": 2307537,
+    "weekly_net_flow": 356341,
     "weekly_inflow": 2663878,
-    "weekly_outflow": 0,
-    "cum_net_flow": -2780249,
+    "weekly_outflow": 2307537,
+    "cum_net_flow": -5087786,
     "cum_inflow": 9278993,
     "flow_date": "2026-03-30",
     "as_of_date": "2026-03-30",
@@ -899,13 +915,6 @@
     "total_xrp_locked": null,
     "pct_supply": null,
     "funds": [
-      {
-        "ticker": "XRPZ",
-        "issuer": "XRPZ",
-        "aum": null,
-        "xrp_locked": null,
-        "daily_flow": 0
-      },
       {
         "ticker": "TOXR",
         "issuer": "TOXR",
@@ -916,6 +925,13 @@
       {
         "ticker": "GXRP",
         "issuer": "Grayscale",
+        "aum": null,
+        "xrp_locked": null,
+        "daily_flow": -2307537
+      },
+      {
+        "ticker": "XRPZ",
+        "issuer": "XRPZ",
         "aum": null,
         "xrp_locked": null,
         "daily_flow": 0
@@ -932,18 +948,18 @@
     "_cumulative_aum_note": "Approximation from sum of historical flows — does not reflect NAV changes"
   },
   "btc_etf": {
-    "total_aum": 56361200000,
-    "daily_net_flow": 61900000,
-    "daily_inflow": 61900000,
+    "total_aum": 56368700000,
+    "daily_net_flow": 69400000,
+    "daily_inflow": 69400000,
     "daily_outflow": 0,
-    "weekly_net_flow": -393700000,
-    "weekly_inflow": 145200000,
+    "weekly_net_flow": -386200000,
+    "weekly_inflow": 152700000,
     "weekly_outflow": 538900000,
-    "cum_net_flow": 216000000,
-    "cum_inflow": 1156400000,
+    "cum_net_flow": 223500000,
+    "cum_inflow": 1163900000,
     "flow_date": "2026-03-30",
     "as_of_date": "2026-03-30",
-    "num_funds": 9,
+    "num_funds": 10,
     "total_xrp_locked": null,
     "pct_supply": null,
     "funds": [
@@ -952,7 +968,7 @@
         "issuer": "IBIT",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": null
+        "daily_flow": 7500000
       },
       {
         "ticker": "FBTC",
@@ -1022,18 +1038,18 @@
     "_cumulative_aum_note": "Approximation from sum of historical flows — does not reflect NAV changes"
   },
   "eth_etf": {
-    "total_aum": 11532200000,
-    "daily_net_flow": 10600000,
-    "daily_inflow": 10600000,
-    "daily_outflow": 0,
-    "weekly_net_flow": -179600000,
-    "weekly_inflow": 175500000,
-    "weekly_outflow": 355100000,
-    "cum_net_flow": -99700000,
-    "cum_inflow": 595900000,
+    "total_aum": 11526600000,
+    "daily_net_flow": 5000000,
+    "daily_inflow": 14800000,
+    "daily_outflow": 9800000,
+    "weekly_net_flow": -185200000,
+    "weekly_inflow": 179700000,
+    "weekly_outflow": 364900000,
+    "cum_net_flow": -105300000,
+    "cum_inflow": 600100000,
     "flow_date": "2026-03-30",
     "as_of_date": "2026-03-30",
-    "num_funds": 7,
+    "num_funds": 9,
     "total_xrp_locked": null,
     "pct_supply": null,
     "funds": [
@@ -1042,14 +1058,14 @@
         "issuer": "ETHA",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": null
+        "daily_flow": -9800000
       },
       {
         "ticker": "ETHB",
         "issuer": "ETHB",
         "aum": null,
         "xrp_locked": null,
-        "daily_flow": null
+        "daily_flow": 4200000
       },
       {
         "ticker": "FETH",
@@ -1122,14 +1138,14 @@
     },
     "rlusd_circulation": {
       "target": 5000000000,
-      "current": 1416364985.9340272,
+      "current": 1416130266.53661,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 28
     },
     "xrp_etf_aum": {
       "target": 5000000000,
-      "current": 1120608974,
+      "current": 1118301437,
       "deadline": "2026-12-31",
       "status": "TRACKING",
       "pct_complete": 22
@@ -1186,15 +1202,382 @@
     "base": 44,
     "mid": 28,
     "bull": 12,
-    "last_updated": "2026-03-31T03:00:03.266Z",
-    "last_reasoning": "Bear case increased from 14% to 16%: compound stress matrix at CRITICAL with two legs breached, RLUSD in active contraction (not recovery), crypto czar vacancy, Fear & Greed at 11. Base case decreased from 42% to 44% (adjusted for rounding) but narrative weakened by RLUSD trajectory and governance gap. Mid case reduced slightly from 32% to 28% reflecting that macro headwinds make institutional acceleration timeline harder. Bull unchanged at 12% — the structural catalysts (DoL 401k, tokenization exemption, Clarity Act) still exist but require execution during extreme stress conditions."
+    "last_updated": "2026-03-31T14:14:04.430Z",
+    "last_reasoning": "Bear case probability increased from 14% to 16%: compound stress matrix at CRITICAL, RLUSD contracting, XRP ETF flows negative, F&G 11. Base case reduced from 42% to 44% (net probability shifted from base to bear). Mid and bull maintained — institutional infrastructure buildout (Convera, Keyrock, RWA doubling, DOL 401k rule, Hashdex options) provides genuine upside catalysts that justify maintaining mid-case probability, but the severe macro headwinds and RLUSD contraction shift near-term weight toward bear. The thesis paradox is active: the same stress driving bear probabilities (Japan energy crisis, Hormuz disruption) could accelerate demand for efficient settlement infrastructure."
   },
+  "action_recommendation": "REDUCE_EXPOSURE",
+  "action_reasoning": "The evidence trajectory has been consistently negative on the thesis's core measurable metrics across 5+ cycles. The Blind Auditor correctly flags that the system has been spending 100% of acquisition budget without moving the assessment, and 8 critical tensions remain unresolved. The specific evidence warranting REDUCE_EXPOSURE: (1) CI-1 Settlement Activity CONVERGING_NEGATIVE for 5 consecutive cycles with no reversal signal, (2) 8 of 10 kill switches at WARNING, (3) RLUSD cross-chain distribution showing the thesis asset's own stablecoin predominantly on competing infrastructure, (4) compound stress at CRITICAL reducing the probability of near-term trajectory recovery. This is not EXIT_SIGNAL because: the Convera partnership represents a named Tier-1 enterprise client that could convert to deployment within quarters, the Tillis legislative text could enable differentiating RLUSD yield products, and the thesis paradox remains active — the current stress environment could still validate the settlement demand thesis if deployment materializes. REDUCE_EXPOSURE is the action that matches the evidence: weakening on measurables, some genuine positive signals on the pipeline, but insufficient evidence of conversion to justify full position maintenance.",
+  "thesis_status": "WEAKENING",
+  "confidence_in_status": "medium",
+  "thesis_status_reasoning": null,
+  "commander_summary": "The thesis is weakening because its most measurable component — on-chain settlement activity — shows sustained negative convergence across 5 consecutive cycles while infrastructure announcements have not converted to observable usage. The RLUSD cross-chain distribution finding (78% off-XRPL) is a new data point that challenges the thesis's core claim about XRPL as the settlement layer: even Ripple's own stablecoin is primarily deployed on competing infrastructure. Eight of ten kill switches are now at WARNING or worse, with only Clarity Act and Token Velocity not at WARNING. The Convera partnership and regulatory progress are genuine positive signals, but they address the infrastructure and regulatory prerequisites — not the usage gap that has been the persistent negative finding. Confidence is medium rather than high because the off-DEX institutional settlement channel (unobservable) could account for the usage gap, and Convera deployment could materially change the picture within 1-2 quarters.",
+  "signal_matrix": [
+    {
+      "signal": "Ripple-Convera enterprise partnership",
+      "description": "Strategic inference at 50% weight (VALID but partial data support). Convera is a real Tier-1 entity but announcement vs. deployment distinction applies. Null hypothesis partially rejected — specificity of integration language exceeds generic partnership announcement.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 7,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "RLUSD declining from recovery peak — cross-chain distribution finding",
+      "description": "Full weight strategic inference. The 78% off-XRPL finding is the most important data point this cycle — it directly challenges the thesis's core claim about XRPL as settlement layer.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 8,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "XRP ETF AUM declining under macro stress",
+      "description": "Null hypothesis holds — macro-driven, not XRP-specific. Relative resilience (-0.5% cumulative) during Fear & Greed 11 is contextually notable but not thesis-defining.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 5,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Compound Stress Matrix — CRITICAL",
+      "description": "Null hypothesis holds for cause. Orderly but heavily pre-loaded. Staleness of Brent data (8 days) introduces uncertainty on current severity but last measurement exceeds emergency.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 9,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Fear & Greed Index at 11",
+      "description": "Environmental condition only per GL-031. Does not drive thesis scoring.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 3.5,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Stablecoin yield legislation text imminent",
+      "description": "Null holds — routine legislative process. Content matters more than release event.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 6,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Sacks SGE term expired — crypto czar vacancy",
+      "description": "Null holds — independent regulatory tracks advancing. Friction not blockage.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 5,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Ripple Prime HIP-3 Hyperliquid extension",
+      "description": "Notable that Ripple is extending institutional product on non-XRPL chain (Hyperliquid). Reinforces multi-chain / off-XRPL pattern observed in RLUSD distribution.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 5,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Keyrock $1.1B Series C — Ripple among backers",
+      "description": "Null holds — standard venture participation. Observable action but generic ecosystem exposure.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 3.5,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "US DOL 401(k) crypto inclusion proposed rule",
+      "description": "Proposed rule, not enacted. Per LZ-RC-005, predictions/proposals carry lower weight. Significant if enacted but uncertain conversion.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 4.2,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Hashdex NCIQ ETF options live on Nasdaq",
+      "description": "Product is live — not a proposal. XRP is one of seven assets in basket, diluting specificity. Expands institutional access surface.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 3.5,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "RWA tokenization on XRPL doubles (unverified)",
+      "description": "Excluded from strategic inference per CL-023. Community source, unverified. Would be significant if confirmed.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 2.8,
+      "severity": "moderate",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "SEC collateral rule change",
+      "description": "Contextual signal. Tangential thesis connection requiring multiple inferential steps.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 2,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "Google quantum computing threat",
+      "description": "Long-term existential risk. Years from materialization. All blockchains equally affected.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 2.1,
+      "severity": "high",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    },
+    {
+      "signal": "XRPL on-chain activity — low DEX volume, inverted order book",
+      "description": "Full weight. Primary source on-chain data directly contradicts institutional settlement narrative. Per LZ-EH-003, actions > statements. This is the most important finding for the thesis. Upgraded because the RLUSD cross-chain distribution finding (78% off-XRPL) compounds the on-chain weakness signal.",
+      "impact": null,
+      "probability": null,
+      "time_weight": null,
+      "composite": 8,
+      "severity": "critical",
+      "proximity": null,
+      "blind_spot": false,
+      "is_new": null,
+      "category": null
+    }
+  ],
+  "active_tensions": [
+    {
+      "tension_id": "T-10",
+      "description": "CI-1 Settlement Activity CONVERGING_NEGATIVE for 5 consecutive cycles. Both measurable components declining. CI-2 at MIXED/CONTESTED. Approach path toward falsification criteria (3 indices CONVERGING_NEGATIVE for 3+ runs) at 1 of 3 with CI-2 the most likely next to flip.",
+      "watch_for": "Any reversal in RLUSD trajectory above $1.5B. XRPL DEX volume sustained above $20M/24h. CI-2 shift to CONVERGING_NEGATIVE would put system at 2 of 3. Convera deployment evidence could prevent CI-2 flip.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "within",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-1",
+      "description": "Compound stress at CRITICAL — Brent emergency ($103.79, 8 days stale), USD/JPY 0.54 from critical (160), JGB 0.026% from elevated (2.3%). BOJ April 28 rate decision is cascade pivot. All three legs pre-loaded simultaneously.",
+      "watch_for": "(a) BOJ rate decision April 28 — hike spikes JGB, hold weakens yen. (b) Updated Brent price. (c) JGB crossing 2.3%. (d) USD/JPY crossing 160. (e) Any Hormuz de-escalation.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "within",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-8",
+      "description": "Hidden Road at 29 days without XRPL transactions. May 1 reclassification threshold 31 days away. Ripple Prime actively extending on non-XRPL chain (Hyperliquid). Reclassification would cascade to announcement-to-deployment kill switch and CI-2.",
+      "watch_for": "Hidden Road XRPL on-chain transactions before May 1. Any Ripple/Hidden Road XRPL-specific routing announcement. If no evidence by May 1, reclassify deployment count to 0 XRPL-specific.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "approaching",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-4",
+      "description": "RLUSD at $1.416B, declined from $1.583B recovery peak. Kill switch pace requires $13M/day; trajectory declining. NEW: 78% of RLUSD is off-XRPL — even growth may not serve thesis if distribution remains Ethereum-dominant. Chain distribution is now the key qualitative dimension.",
+      "watch_for": "RLUSD recovery above $1.5B. Decline below $1.2B = kill switch CRITICAL. RLUSD chain distribution data (verified breakdown XRPL vs Ethereum). Tillis text content — permissive yield = catalyst.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "extended",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-2",
+      "description": "Kill switch cumulative deterioration — 8 of 10 at WARNING or worse. Only Clarity Act showing positive trajectory. Token Velocity is structural gap. Deterioration accelerating across cycles.",
+      "watch_for": "Any kill switch sustained positive movement over 2+ cycles. RLUSD above $1.5B. First PermDEX transaction. Hidden Road XRPL activity. ETF AUM recovery. Convera deployment confirmation.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "extended",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-7",
+      "description": "PermDEX at 39 days with zero institutional adoption on-chain. May 20 checkpoint (90 days) is 50 days away. SUSPICIOUS_ABSENCE classification maintained. SEC tokenization exemption may be gating factor.",
+      "watch_for": "First PermDEX institutional participant on-chain. SEC tokenization exemption publication. May 20: zero adoption = kill switch CRITICAL.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "approaching",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-3",
+      "description": "SEC tokenization exemption — potential gating factor for PermDEX adoption and the thesis's most discriminating near-term regulatory test. Chain-agnostic enablement without XRPL adoption within 60 days would directly challenge demand hypothesis.",
+      "watch_for": "SEC exemption text publication. Post-publication XRPL-specific institutional deployment. Chain-agnostic framing without XRPL traction within 60 days.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "approaching",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-5",
+      "description": "XRP ETF AUM at $1.118B, 22% of $5B target. Declining with negative cumulative flows (-$5.09M). Fund count discrepancy (4 vs 7 reporting). Macro-driven but absolute trajectory deeply off-pace.",
+      "watch_for": "Fund count resolution (all 7 reporting). Weekly flows sustained positive 3+ weeks. AUM below $1B = CRITICAL. DOL 401(k) rule advancement.",
+      "impact_score": 4,
+      "expected_resolution_window": "weeks",
+      "window_status": "within",
+      "classification": "ACTIVE",
+      "is_new": false
+    }
+  ],
+  "unresolved_tensions": [
+    {
+      "tension_id": "T-10",
+      "description": "CI-1 Settlement Activity CONVERGING_NEGATIVE for 5 consecutive cycles. Both measurable components declining. CI-2 at MIXED/CONTESTED. Approach path toward falsification criteria (3 indices CONVERGING_NEGATIVE for 3+ runs) at 1 of 3 with CI-2 the most likely next to flip.",
+      "watch_for": "Any reversal in RLUSD trajectory above $1.5B. XRPL DEX volume sustained above $20M/24h. CI-2 shift to CONVERGING_NEGATIVE would put system at 2 of 3. Convera deployment evidence could prevent CI-2 flip.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "within",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-1",
+      "description": "Compound stress at CRITICAL — Brent emergency ($103.79, 8 days stale), USD/JPY 0.54 from critical (160), JGB 0.026% from elevated (2.3%). BOJ April 28 rate decision is cascade pivot. All three legs pre-loaded simultaneously.",
+      "watch_for": "(a) BOJ rate decision April 28 — hike spikes JGB, hold weakens yen. (b) Updated Brent price. (c) JGB crossing 2.3%. (d) USD/JPY crossing 160. (e) Any Hormuz de-escalation.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "within",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-8",
+      "description": "Hidden Road at 29 days without XRPL transactions. May 1 reclassification threshold 31 days away. Ripple Prime actively extending on non-XRPL chain (Hyperliquid). Reclassification would cascade to announcement-to-deployment kill switch and CI-2.",
+      "watch_for": "Hidden Road XRPL on-chain transactions before May 1. Any Ripple/Hidden Road XRPL-specific routing announcement. If no evidence by May 1, reclassify deployment count to 0 XRPL-specific.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "approaching",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-4",
+      "description": "RLUSD at $1.416B, declined from $1.583B recovery peak. Kill switch pace requires $13M/day; trajectory declining. NEW: 78% of RLUSD is off-XRPL — even growth may not serve thesis if distribution remains Ethereum-dominant. Chain distribution is now the key qualitative dimension.",
+      "watch_for": "RLUSD recovery above $1.5B. Decline below $1.2B = kill switch CRITICAL. RLUSD chain distribution data (verified breakdown XRPL vs Ethereum). Tillis text content — permissive yield = catalyst.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "extended",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-2",
+      "description": "Kill switch cumulative deterioration — 8 of 10 at WARNING or worse. Only Clarity Act showing positive trajectory. Token Velocity is structural gap. Deterioration accelerating across cycles.",
+      "watch_for": "Any kill switch sustained positive movement over 2+ cycles. RLUSD above $1.5B. First PermDEX transaction. Hidden Road XRPL activity. ETF AUM recovery. Convera deployment confirmation.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "extended",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-7",
+      "description": "PermDEX at 39 days with zero institutional adoption on-chain. May 20 checkpoint (90 days) is 50 days away. SUSPICIOUS_ABSENCE classification maintained. SEC tokenization exemption may be gating factor.",
+      "watch_for": "First PermDEX institutional participant on-chain. SEC tokenization exemption publication. May 20: zero adoption = kill switch CRITICAL.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "approaching",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-3",
+      "description": "SEC tokenization exemption — potential gating factor for PermDEX adoption and the thesis's most discriminating near-term regulatory test. Chain-agnostic enablement without XRPL adoption within 60 days would directly challenge demand hypothesis.",
+      "watch_for": "SEC exemption text publication. Post-publication XRPL-specific institutional deployment. Chain-agnostic framing without XRPL traction within 60 days.",
+      "impact_score": 5,
+      "expected_resolution_window": "weeks",
+      "window_status": "approaching",
+      "classification": "ACTIVE",
+      "is_new": false
+    },
+    {
+      "tension_id": "T-5",
+      "description": "XRP ETF AUM at $1.118B, 22% of $5B target. Declining with negative cumulative flows (-$5.09M). Fund count discrepancy (4 vs 7 reporting). Macro-driven but absolute trajectory deeply off-pace.",
+      "watch_for": "Fund count resolution (all 7 reporting). Weekly flows sustained positive 3+ weeks. AUM below $1B = CRITICAL. DOL 401(k) rule advancement.",
+      "impact_score": 4,
+      "expected_resolution_window": "weeks",
+      "window_status": "within",
+      "classification": "ACTIVE",
+      "is_new": false
+    }
+  ],
   "last_analysis": {
-    "timestamp": "2026-03-31T03:00:03.266Z",
-    "run_type": "evening",
+    "timestamp": "2026-03-31T14:14:04.430Z",
+    "run_type": "morning",
     "stress_level": "CRITICAL",
     "stress_score": 82,
-    "applied_at": "2026-03-31T03:01:39.154Z",
-    "changes_applied": 1
+    "applied_at": "2026-03-31T14:15:56.250Z",
+    "changes_applied": 2
   }
 }
