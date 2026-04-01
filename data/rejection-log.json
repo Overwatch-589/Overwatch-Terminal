@@ -1124,5 +1124,19 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-03-31T02:58:38.820Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "Dormant XRP ETF issuers may be preparing to close or merge funds",
+    "signal_ids": [
+      "20260401-0252-SIG-003"
+    ],
+    "rejection_reason": "SPECULATIVE classification — 3 assumptions. Supplementary intelligence suggests non-reporting funds are operational, directly contradicting the closure inference. Stripped from scoring per burden of proof protocol.",
+    "root_cause": "ASSUMPTION_FAILURE",
+    "confidence_in_rejection": "high",
+    "corrections_ledger_action": "auto_commit",
+    "timestamp": "2026-04-01T03:13:14.979Z",
+    "source": "layer4_reconcile",
+    "promoted": true,
+    "promoted_at": "2026-04-01T03:13:14.983Z"
   }
 ]
