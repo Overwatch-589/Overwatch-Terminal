@@ -39,6 +39,7 @@ const { logPaperTrades, applyDispositions } = require('./x402-paper-trade-logger
 const { constrainRequests, recordOutcomes, probeStructuralGaps } = require('./x402-constrained-acquisition');
 const { calculateActionPressure } = require('./action-pressure');
 const { executeBaseAcquisition } = require('./x402-base-agent');
+const { loadAliases, matchAlias } = require('./utils/signal-matching');
 
 const DASHBOARD_PATH      = path.join(__dirname, '..', 'dashboard-data.json');
 const ANALYSIS_PATH       = path.join(__dirname, '..', 'analysis-output.json');
@@ -47,6 +48,9 @@ const DEBUG_RESPONSE_PATH = path.join(__dirname, 'debug-claude-response.txt');
 const HISTORY_PATH        = path.join(__dirname, 'analysis-history.json');
 
 const HISTORY_MAX_RECORDS = 180; // 90 days × 2 runs/day
+
+const DOSSIER_PATH = path.join(__dirname, '..', 'data', 'signal-dossier-data.json');
+const ALIAS_PATH   = path.join(__dirname, '..', 'config', 'signal-aliases.json');
 
 const LAYER_ZERO_RULES = `
 <layer_zero_immutable_laws>
@@ -816,6 +820,52 @@ These are patterns in YOUR reasoning detected across multiple pipeline runs. The
     warn('L2', 'Failed to load acquired intelligence (non-fatal): ' + aiErr.message);
   }
 
+  // AD #21 Phase 2: Load signal track records for confidence modifier injection
+  let trackRecordSection = '';
+  const trackRecordMap = new Map(); // canonical_name → track_record (for output flagging)
+  try {
+    if (fs.existsSync(DOSSIER_PATH)) {
+      const dossierData = JSON.parse(fs.readFileSync(DOSSIER_PATH, 'utf8'));
+      const { aliases, sortedKeys } = loadAliases(ALIAS_PATH, log);
+      const lineageMap = new Map();
+      for (const lineage of (dossierData.lineages || [])) {
+        if (lineage.track_record) {
+          lineageMap.set(lineage.canonical_name, lineage.track_record);
+        }
+      }
+
+      // Match each Layer 1 signal to a lineage and collect track records
+      const injectionLines = [];
+      for (const signal of sweepResults) {
+        const title = signal.signal || signal.description || signal.title || '';
+        const match = matchAlias(title, aliases, sortedKeys);
+        if (match && lineageMap.has(match.canonical_name)) {
+          const tr = lineageMap.get(match.canonical_name);
+          trackRecordMap.set(match.canonical_name, tr);
+          const topCLs = (tr.top_corrections || []).map(c => c.id).join(', ') || 'none';
+          injectionLines.push(
+            `- ${match.canonical_name} (${tr.appearance_count} appearances): ` +
+            `Survival rate ${(tr.survival_rate * 100).toFixed(0)}%. ` +
+            `Average L2→L4 drift: ${tr.average_drift.toFixed(2)}. ` +
+            `Corrections fired on ${(tr.correction_frequency * 100).toFixed(0)}% of appearances [${topCLs}]. ` +
+            `Given this track record, how confident are you in your current assessment?`
+          );
+        }
+      }
+
+      if (injectionLines.length > 0) {
+        trackRecordSection = `\n=== SIGNAL TRACK RECORDS (AD #21 — your historical accuracy on recurring signals) ===\nThese are aggregate statistics from your past performance on specific signal categories. They do not constrain your scoring. They inform your confidence calibration.\n\n${injectionLines.join('\n\n')}\n\n`;
+        log('L2', `AD #21: Injected track records for ${injectionLines.length} signals`);
+      } else {
+        log('L2', 'AD #21: No track records matched current Layer 1 signals');
+      }
+    } else {
+      log('L2', 'AD #21: No signal-dossier-data.json found — skipping track record injection');
+    }
+  } catch (trErr) {
+    warn('L2', 'AD #21: Failed to load track records (non-fatal): ' + trErr.message);
+  }
+
   const prompt = `${LAYER_ZERO_RULES}
 
 You are a senior analyst performing the CONTEXTUALIZE step of a four-layer investment thesis monitoring system. You receive raw observations from Layer 1 (SWEEP) and your job is to produce contextually scored signals — but ONLY after verifying that your understanding is sufficient to score them accurately.
@@ -838,6 +888,7 @@ ${JSON.stringify(correctionsLedger)}
 
 ${calibrationSectionL2}
 ${acquiredIntelSection}
+${trackRecordSection}
 === PHASE 1: KNOWLEDGE AUDIT ===
 
 For each significant signal from Layer 1, perform the following check BEFORE scoring:
@@ -984,7 +1035,8 @@ Respond with ONLY valid JSON — no markdown, no code fences, no commentary outs
       "thesis_relevance": "DIRECT | INDIRECT | CONTEXTUAL",
       "confidence": "HIGH | MEDIUM | LOW",
       "reasoning": "...",
-      "knowledge_verified": true
+      "knowledge_verified": true,
+      "track_record_injected": false
     }
   ],
   "unscored_signals": [

@@ -30,6 +30,7 @@
 const path = require('path');
 const fs   = require('fs');
 const { diffWords } = require('diff');
+const { loadAliases, matchAlias } = require('./utils/signal-matching');
 
 const DATA_DIR    = path.join(__dirname, '..', 'data');
 const CONFIG_DIR  = path.join(__dirname, '..', 'config');
@@ -51,51 +52,6 @@ function computeStdDev(values) {
   const mean = values.reduce((a, b) => a + b, 0) / values.length;
   const variance = values.reduce((sum, v) => sum + Math.pow(v - mean, 2), 0) / values.length;
   return Math.round(Math.sqrt(variance) * 100) / 100;
-}
-
-// ─── Alias Dictionary ───────────────────────────────────────────────────────
-
-/**
- * Load the signal alias dictionary and return keys sorted longest-first.
- * Longest-match-first prevents substring collisions:
- * "blackrock etf" matches before "blackrock" can steal it.
- */
-function loadAliases() {
-  try {
-    if (!fs.existsSync(ALIAS_PATH)) {
-      warn('aliases', 'No signal-aliases.json found — all signals will be orphans');
-      return { aliases: {}, sortedKeys: [] };
-    }
-    const raw = JSON.parse(fs.readFileSync(ALIAS_PATH, 'utf8'));
-    const aliases = {};
-    const keys = [];
-    for (const [key, value] of Object.entries(raw)) {
-      if (key === '_comment') continue;
-      aliases[key] = value;
-      keys.push(key);
-    }
-    // Sort by length descending — longest match wins
-    keys.sort((a, b) => b.length - a.length);
-    log('aliases', `Loaded ${keys.length} alias keys → ${new Set(keys.map(k => aliases[k].lineage_id)).size} lineage IDs`);
-    return { aliases, sortedKeys: keys };
-  } catch (e) {
-    err('aliases', `Failed to load aliases: ${e.message}`);
-    return { aliases: {}, sortedKeys: [] };
-  }
-}
-
-/**
- * Match a signal title to a lineage using the alias dictionary.
- * Returns { lineage_id, canonical_name } or null if no match.
- */
-function matchAlias(signalTitle, aliases, sortedKeys) {
-  const lower = signalTitle.toLowerCase();
-  for (const key of sortedKeys) {
-    if (lower.includes(key)) {
-      return aliases[key];
-    }
-  }
-  return null;
 }
 
 /**
@@ -218,7 +174,7 @@ function assembleSignalDossiers(options) {
   const outputPath = opts.outputPath || OUTPUT_PATH;
 
   // Load alias dictionary
-  const { aliases, sortedKeys } = loadAliases();
+  const { aliases, sortedKeys } = loadAliases(ALIAS_PATH, log);
 
   // Discover trace files (already in chronological order)
   const traceFiles = discoverTraceFiles(dataDir);
