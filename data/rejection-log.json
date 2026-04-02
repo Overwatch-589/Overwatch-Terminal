@@ -1165,5 +1165,19 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-04-02T02:58:56.526Z"
+  },
+  {
+    "layer3_inference": "Ripple hidden move — likely in active institutional negotiations using Kroll rating as credentialing tool",
+    "signal_ids": [
+      "20260402-1348-SIG-005",
+      "20260402-1348-SIG-006",
+      "20260402-1348-SIG-004"
+    ],
+    "rejection_reason": "Inference stripped from scoring influence. While plausible, this is behavioral interpretation of circumstantial evidence (timing of two events). Per BC-001, confidence on behavioral interpretations from single actions should be capped at low. Per LZ-RC-003, the absence of disclosed clients is not evidence of their existence. The inference appears in the report as context but does not influence bear pressure score or tactical recommendation.",
+    "root_cause": "NARRATIVE_WEIGHT_BIAS",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-04-02T14:06:10.084Z",
+    "source": "layer4_reconcile"
   }
 ]
