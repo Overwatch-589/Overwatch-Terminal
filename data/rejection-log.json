@@ -1179,5 +1179,17 @@
     "corrections_ledger_action": "flag_for_review",
     "timestamp": "2026-04-02T14:06:10.084Z",
     "source": "layer4_reconcile"
+  },
+  {
+    "layer3_inference": "DriftProtocol exploit 'strengthens permissioned infrastructure case' for XRPL PermDEX",
+    "signal_ids": [
+      "20260403-0238-SIG-012"
+    ],
+    "rejection_reason": "No evidence that any institution has cited DeFi security concerns as a reason to prefer permissioned infrastructure. The inference is plausible as narrative but has zero behavioral or data support. Per LZ-CC-001, a coherent narrative without real-world anchoring is not evidence.",
+    "root_cause": "NARRATIVE_WEIGHT_BIAS",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-04-03T02:55:29.021Z",
+    "source": "layer4_reconcile"
   }
 ]
