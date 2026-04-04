@@ -1,0 +1,31 @@
+{
+  "_version": "1.0",
+  "_description": "AD #21 Phase 3 — Blind Interrogator: Confidence Mismatch Detection",
+  "_interrogated_at": "2026-04-04T01:08:25.490Z",
+  "_trace_file": "cognitive-trace-2026-04-03T02-57-27-878Z.json",
+  "_run_timestamp": "2026-04-03T02:57:27.878Z",
+  "_dossier_assembled_at": "2026-04-03T13:47:17.964Z",
+  "_scan_stats": {
+    "signals_checked": 15,
+    "signals_with_track_record": 9,
+    "signals_without_track_record": 0,
+    "signals_no_alias_match": 6,
+    "findings_count": 0,
+    "by_type": {
+      "severe_overconfident": 0,
+      "overconfident": 0,
+      "underconfident": 0,
+      "severe_underconfident": 0,
+      "poor_calibration": 0
+    }
+  },
+  "_thresholds": {
+    "high_survival_floor": 0.5,
+    "severe_survival_floor": 0.3,
+    "low_survival_ceiling": 0.7,
+    "severe_low_survival_ceiling": 0.85,
+    "poor_calibration_floor": 0.3,
+    "min_appearances": 3
+  },
+  "findings": []
+}

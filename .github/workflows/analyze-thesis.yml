@@ -53,6 +53,9 @@ jobs:
       - name: Assemble signal dossiers
         run: node scripts/assemble-signal-dossiers.js
 
+      - name: Run confidence interrogator
+        run: node scripts/blind-interrogator.js
+
       - name: Detect reasoning drift
         run: node scripts/detect-drift.js
 
