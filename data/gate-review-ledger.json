@@ -22779,5 +22779,259 @@
     "violations_count": 11,
     "compliance": "MODERATE_ISSUES",
     "gate_failed": false
+  },
+  {
+    "timestamp": "2026-04-04T02:30:06.000Z",
+    "layer": 1,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "JGB 10Y at 2.274% — 2.6 bps from elevated trigger",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence rated 'medium' based on 9-day-stale data (March 26) when assessing proximity to a threshold breach described as 'immediate'. The evidence quality does not support medium confidence for an 'immediate proximity' assessment. Stale data reduces accuracy of current state assessment, warranting lower confidence or explicit temporal qualification.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "S&P 500 at 6582 with DXY at 99.74",
+          "rule_violated": "LZ-MR-003",
+          "violation": "Finding presents 'co-occurring observations' as a 'combination' representing a 'complex macro environment' using data points from different dates (S&P 500 April 2, DXY March 26, US 10Y unspecified recent date). This creates a composite snapshot from temporally misaligned measurements, introducing distortion. The finding acknowledges they are 'co-occurring' but treats them as a coherent simultaneous state.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Stablecoin yield legislation under active negotiation",
+          "rule_violated": "LZ-EH-002",
+          "violation": "Evidence is cited as 'Eleanor Terrett citing Politico' — two layers of intermediary reporting away from primary source (the actual legislative text or direct statements from negotiating parties). The finding treats this secondhand-of-secondhand reporting with 'medium' confidence for severity 'high' implications without acknowledging the evidentiary degradation from multiple intermediaries.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "ETH ETF experiencing significant outflows",
+          "rule_violated": "LZ-RC-001",
+          "violation": "Finding states 'This broader crypto ETF weakness provides context for XRP ETF flows — negative sentiment is cross-asset, not XRP-specific.' This presents temporal correlation (both ETH and XRP ETFs experiencing outflows) as explanatory causation (ETH outflows explain/contextualize XRP outflows). Co-occurrence does not establish that one provides causal context for the other; both could be independent effects of a common cause, or unrelated.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Ondo Finance expands to 250+ tokenized assets across 20+ sectors",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence rated 'medium' based solely on a single company announcement tweet without independent verification of the claim of '250+ assets' or 'world's largest tokenized stock platform'. For a competitive intelligence finding with 'moderate' severity, single-source unverified claims warrant lower confidence or explicit acknowledgment of lack of independent verification.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 15,
+      "clean_findings": 10,
+      "reviewer_notes": "Four of five violations are confidence-calibration or evidence-quality issues (LZ-EPH-002, LZ-EH-002, LZ-MR-003) rather than logical fallacies. The LZ-RC-001 violation on ETH/XRP correlation-as-context is the most substantive reasoning error. Overall output shows strong anchoring to verifiable data but moderate issues in handling temporal alignment, intermediary sourcing, and correlation inference. The x402 dormancy finding correctly identified as a blind_spot is exemplary self-awareness. No LZ-EPH-003 violations despite multiple complex inferences — assumption discipline appears strong."
+    },
+    "violations_count": 5,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-04-04T02:35:39.357Z",
+    "layer": 2,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "SIG-014 JGB 10Y scored at severity 6 with MEDIUM confidence despite 9-day stale data and 71% correction rate",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence level MEDIUM is not proportional to evidence quality. The data is 9 days stale in a fast-moving yield environment, has not breached the threshold it's being scored against, and has a 71% correction rate (highest in the dataset). The combination of staleness + non-breach + high historical correction rate should produce LOW confidence, not MEDIUM. The reasoning acknowledges all these factors but does not adjust confidence accordingly.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "SIG-008 stablecoin legislation scored at severity 6 with confidence MEDIUM and flagged as AMBIGUOUS direction, but still assigned a severity score",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The signal is correctly identified as having AMBIGUOUS direction (could help or hurt RLUSD depending on final text that is not public). Per LZ-EPH-001, when the direction is genuinely unknowable, 'I don't know' is the correct output. Assigning a severity score of 6 implies a directional assessment has been made. The correct action is to flag the ambiguity and either not score it directionally, or score it as a pure uncertainty/volatility signal without implied direction. The reasoning identifies the ambiguity but then scores it anyway.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "CI-2 Institutional Adoption Index marked as CONTESTED with 0.33 agreement ratio, but the convergence_direction is listed as 'CONTESTED' rather than acknowledging insufficient assessable components",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "With only 3 of 5 components assessable and those 3 showing different directions (GROWING, STABLE, DECLINING), claiming 'convergence_status: MIXED' and 'convergence_direction: CONTESTED' expresses higher confidence in the index state than the evidence supports. The index has 40% observability and non-converging signals. The honest assessment per LZ-EPH-001 is INSUFFICIENT_DATA, not CONTESTED. CONTESTED implies the data is telling us something definitive (that there is a contest); INSUFFICIENT_DATA admits we cannot see enough to know.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound Stress Matrix pre_loaded_detail states 'by the CRITICAL definition (two of Brent >$95, JGB >2.5%, USD/JPY >160), the system is already at CRITICAL for Brent' but overall status remains ELEVATED",
+          "rule_violated": "LZ-EH-005",
+          "violation": "The reasoning contains an internal contradiction: it states the system meets CRITICAL definition via Brent, but then maintains ELEVATED status. The explanation for this is embedded in 'approaching for USD/JPY' but the threshold definition is explicit: two of three. Brent at emergency ($121.88 >> $95) satisfies one leg of CRITICAL. The reasoning does not clearly resolve whether the second CRITICAL leg is met. If JGB is 'approaching' (2.274% vs 2.5% = 22.6bps away, not breached), and USD/JPY is 'approaching' (159.60 vs 160 = 40bps away, not breached), then CRITICAL is NOT met and the statement 'the system is already at CRITICAL for Brent' is misleading. This is an unresolved internal contradiction that should have been flagged per LZ-EH-005.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Layer2_summary states 'the violent unwind scenario is the closest it has been' without providing quantitative comparison to prior cycles",
+          "rule_violated": "LZ-RC-002",
+          "violation": "Claiming 'closest it has been' requires comparison across time, which requires multiple observations. The statement implies a trend (increasing proximity over time) but does not cite prior proximity measurements to establish the trend. This could be a single-point-in-time observation being presented as a comparative trend. Without citing prior cycle proximity measurements, this is speculation.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "SIG-011 Ondo Finance severity reduced from 5 to 3 based on -0.44 track record drift, but the signal is on Tier 2 source (weighted to 2.1), meaning the actual output severity after tier weighting is 2.1, not 3",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The reasoning applies track record calibration to arrive at severity 3, but then applies tier weighting (0.7x for Tier 2) to produce weighted_severity 2.1. The confidence in the final output (2.1) should reflect the compounded uncertainty of both the track record correction AND the tier downgrade, but confidence is listed as MEDIUM. A signal that has been corrected by -0.44 on average AND is from a Tier 2 source AND is in an adjacent-but-not-identical use case should have LOW confidence, not MEDIUM.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 41,
+      "reviewer_notes": "Four MODERATE violations detected, all related to confidence calibration and ambiguity handling. The output correctly applies most graduated lessons and demonstrates strong self-awareness (e.g., CL-046, CL-047, CL-057 applications are clean). The primary pattern: the system correctly identifies uncertainty/ambiguity/staleness but then does not fully propagate that uncertainty into confidence levels or scoring decisions. SIG-008 ambiguity and CI-2 contested/insufficient distinction are the clearest examples. The Compound Stress Matrix CRITICAL/ELEVATED contradiction is the most significant — the reasoning contains the pieces to resolve it but leaves it unresolved without explicit LZ-EH-005 flagging. Overall, this is a high-quality output with specific calibration errors, not systemic reasoning failure."
+    },
+    "violations_count": 6,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-04-04T02:41:34.259Z",
+    "layer": 3,
+    "model_used": "claude-sonnet-4-5-20250929",
+    "tier1_flags_count": 0,
+    "tier1_hard_fails": 0,
+    "tier1_flags": [],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Strategic Inference: Ripple hidden move - 'likely in active institutional client negotiations'",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "Inference chain built on multiple unproven assumptions: (1) that expensive compliance infrastructure implies active client pipeline rather than speculative positioning, (2) that absence of public announcements is due to NDAs rather than absence of clients, (3) that Convera partnership is in implementation phase rather than stalled. The inference assumes a specific causal chain (infrastructure → pipeline → NDAs) without evidence for any link. Classification as 'FLAGGED' with assumption_count:2 undercounts—at least 3 assumptions present.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Strategic Inference: Japanese Institutions hidden move - classified as SPECULATIVE with assumption_count:3 but then states 'cannot construct incentive-based inference from absence of signals'",
+          "rule_violated": "LZ-EPH-001",
+          "violation": "The output correctly identifies insufficient evidence but then assigns assumption_count:3 and a 'likely_action' field structure, creating internal contradiction. If no inference can be constructed, the entry should state 'INSUFFICIENT_EVIDENCE' with no assumption count or likely action. The structure implies analysis occurred when the content says it didn't. Should either be omitted entirely or restructured to clearly indicate 'no inference possible.'",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound Stress Inference: 'the thesis could be simultaneously correct and unprofitable' - presented as resolution to thesis paradox",
+          "rule_violated": "LZ-CC-001",
+          "violation": "This statement is internally coherent but lacks verifiable anchoring to distinguish it from any other logically consistent narrative. The output correctly identifies the paradox but then attempts to resolve its *outcome* ('thesis correct but unprofitable') without evidence that this specific outcome is more likely than alternatives (thesis wrong, thesis correct and profitable, partial scenarios). The statement 'historical precedent suggests acute stress destroys faster than institutional adoption can respond' is presented without citation to specific precedent. Coherent speculation without evidentiary anchoring.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Strategic Inference: XRP ETF flows - 'suggests XRP ETF holders have higher conviction or longer time horizons than ETH ETF holders'",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Confidence listed as 'medium' but the inference requires assumption that flow behavior reveals holder psychology (conviction) rather than structural factors (liquidity, holder composition, market maker activity). The alternative explanation (illiquidity/inattention) is acknowledged but then the primary explanation is given medium confidence despite resting on unverified assumption about investor intent. Evidence supports the factual observation (near-zero flows vs negative flows) but not the psychological attribution. Confidence should be low given the assumption load.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Behavioral Pattern: 'XRP ETF near-zero cumulative flows during extreme fear diverge from ETH ETF significant cumulative outflows' - thesis_implication: supports, significance: medium",
+          "rule_violated": "LZ-RC-001",
+          "violation": "The pattern observation is factual (flows do diverge), but the thesis_implication:'supports' assigns directional meaning to correlation without establishing causation. The divergence could support the thesis (informed conviction), contradict it (illiquidity making XRP harder to exit), or be neutral (different holder bases with different motivations). The output acknowledges this ambiguity in the strategic inference section but then scores it as thesis-supporting in the behavioral pattern. Correlation presented as directionally meaningful.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Scenario Probabilities: thesis_confirmed at 18%, thesis_modified at 55%, thesis_falsified at 27% - sum to 100%",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "Precise probability assignments (18%, 55%, 27%) imply a level of quantitative confidence not supported by the evidence base. The evidence is largely qualitative and contains multiple acknowledged data gaps (ODL volume dark, x402 dormant, Japanese institutions unobservable, JGB data 9 days stale). Assigning probabilities to single-digit precision suggests false precision. The relative ordering (modified > falsified > confirmed) may be reasonable but the specific percentages overstate measurement capability. Should be expressed as ranges or qualitative confidence levels.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "Player Analysis: Ripple say-do gap assessment states 'the most significant absence: Ripple has not disclosed any new institutional client names'",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The absence of new client announcements is treated as evidence of absence of clients ('the filling has not yet produced measurable public evidence'). This violates the principle that absence of evidence is informationally neutral. The output partially corrects this in the strategic inference section by acknowledging enterprise sales cycles could explain the gap, but the player analysis section treats the absence as directionally negative evidence. The absence should be stated as a data gap, not as evidence that clients don't exist.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Feedback Loop: 'RLUSD Contraction → Kill Switch Pressure → Institutional Credibility Gap' - described as feedback loop",
+          "rule_violated": "LZ-RC-001",
+          "violation": "This is described as a feedback loop but no closing mechanism is specified. A true feedback loop requires output feeding back to input (e.g., credibility gap reduces adoption which reduces RLUSD which increases credibility gap). The structure as described is a linear causal chain, not a loop. The name implies a self-reinforcing mechanism that isn't demonstrated. Should be reclassified as causal chain or the feedback mechanism should be explicitly specified.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MODERATE_ISSUES",
+      "model_used": "claude-sonnet-4-5-20250929",
+      "gate_failed": false,
+      "findings_reviewed": 47,
+      "clean_findings": 39,
+      "reviewer_notes": "Output shows strong overall epistemological discipline with extensive use of null hypothesis testing, honest acknowledgment of data gaps, and appropriate application of corrections. The violations are concentrated in three areas: (1) false precision in probability assignments, (2) assumption counting in multi-step inferences (particularly hidden moves), and (3) subtle correlation-causation blending in behavioral interpretations. The compound stress analysis and most strategic inferences follow the rules correctly. The output correctly applies LZ-EPH-001 ('I don't know') in multiple places and avoids the plausibility trap in most sections, but violates LZ-CC-001 when attempting to resolve the thesis paradox outcome. The Japanese institutions 'hidden move' entry is internally contradictory and should be restructured. Notable strength: appropriate use of LZ-RC-004 (null hypothesis testing) throughout strategic inferences."
+    },
+    "violations_count": 8,
+    "compliance": "MODERATE_ISSUES",
+    "gate_failed": false
+  },
+  {
+    "timestamp": "2026-04-04T02:47:29.223Z",
+    "layer": 4,
+    "model_used": "claude-opus-4-6",
+    "tier1_flags_count": 1,
+    "tier1_hard_fails": 1,
+    "tier1_flags": [
+      {
+        "rule_id": "AD15-EXTENSION-FRICTION",
+        "finding": "Tension T-2",
+        "detail": "Second consecutive window extension without score escalation (5 → 5). First extension is free. Second extension requires impact_score increase.",
+        "severity": "HARD_FAIL",
+        "timestamp": "2026-04-04T02:46:39.055Z"
+      }
+    ],
+    "gate_result": {
+      "violations": [
+        {
+          "finding": "Tension T-2 second extension without score escalation (impact_score remains 5 → 5)",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The disposition states 'per tension lifecycle rules, score increases' and explicitly acknowledges this is the second extension, yet the impact_score remains at 5 (unchanged from prior). The reasoning claims escalation but the output does not reflect it. If the score was already at maximum (5) and cannot increase further, this should be explicitly stated as a ceiling constraint rather than claiming the score increased. The confidence in the assessment is not proportional to the acknowledged procedural requirement — the system claims compliance with its own rule while violating it.",
+          "severity": "MODERATE"
+        },
+        {
+          "finding": "ODL Volume kill switch escalation — 'The absence itself is a negative signal per LZ-EH-003'",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The reasoning classifies ODL data cessation as a SUSPICIOUS_ABSENCE and then states 'The absence itself is a negative signal per LZ-EH-003.' While the *action* of ceasing disclosure is legitimately weighted under LZ-EH-003 (the act of stopping publication is an observable behavior), the reasoning subtly conflates this with the absence of the underlying data being a negative signal about ODL volume itself. The action of stopping disclosure can be weighted. But absence of the disclosed data cannot tell us whether ODL volumes are good or bad — that is informationally neutral per LZ-RC-003. The analysis partially handles this correctly (noting the action) but the concluding sentence overreaches by calling the absence itself a negative signal rather than calling the act of concealment a negative signal.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "CFTC federal preemption — 'broader applicability of prediction market precedent' classified as 1 assumption with full weight",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The inference chain involves: (1) assumption that prediction market precedent extends to broader digital asset regulation, (2) assumption that CFTC ambition for unified oversight will succeed against state resistance, and (3) assumption that this indirectly benefits Ripple/XRP. The reasoning counts only 1 assumption but the chain from 'CFTC sues states over prediction markets' to 'establishes broader digital asset precedent benefiting the thesis' involves at least 2-3 unproven links. Confidence (full weight) may be disproportionate to the actual assumption count. However, since the final composite score is only 4 (low), the practical impact is limited.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Brent at $121.88 drives Japan feedback loop — classified as 1 assumption with full weight",
+          "rule_violated": "LZ-EPH-003",
+          "violation": "The reasoning states '1 assumption (Hormuz disruption persists weeks not days).' However, the full inference chain includes additional unproven assumptions: (1) Hormuz disruption persists, (2) the oil-to-yen transmission mechanism activates at this specific price level with the speed implied, (3) BOJ responds in a way that creates the feedback loop rather than intervening to break it. The macroeconomic transmission mechanism is 'established' as the reasoning claims, but the specific activation and non-intervention assumptions are unproven in this instance. The assumption count appears undercounted. That said, the core oil price and yen data points are verified measurements, and the composite score of 9 primarily reflects the measured severity of Brent's level, so the practical impact of this undercount on the scoring may be limited.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Convera engineering deployment classified as SUSPICIOUS_ABSENCE",
+          "rule_violated": "LZ-RC-003",
+          "violation": "The reasoning states 'supplementary intelligence confirms blog page exists but no evidence of engineering deployment' and classifies this as SUSPICIOUS_ABSENCE. However, the analysis does not establish what coverage the 'supplementary intelligence' has — can it reliably detect engineering deployment if it existed? If the monitoring capability is limited (e.g., checking a blog page is not equivalent to checking engineering repositories, API endpoints, or infrastructure), then the absence may reflect observational limitations, not suspicious concealment. The classification jumps from 'we looked and didn't find it' to 'suspicious' without establishing that the search method would have found it if it existed. This edges toward treating absence of evidence as evidence of absence.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Stablecoin yield legislation — null hypothesis holds with 'partial' data support but 'full' final weight",
+          "rule_violated": "LZ-EPH-002",
+          "violation": "The burden_of_proof entry assigns data_support as 'partial' but final_weight as 'full.' The reasoning correctly applies LZ-EH-005 (ambiguity is the finding) and LZ-RC-004 (null holds). However, assigning full weight to a finding with acknowledged partial data support creates a proportionality tension. The null hypothesis holding is appropriate, but the confidence/weight should reflect the partial data support. This is mitigated by the fact that the final composite score was actually reduced from 6 to 5, suggesting the system did apply some caution in practice even if the weight label is inconsistent.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Compound stress self_challenge acknowledges LZ-MR-003 temporal distortion but does not reduce confidence accordingly",
+          "rule_violated": "LZ-MR-003",
+          "violation": "The self_challenge explicitly states 'We do not have a simultaneous snapshot per LZ-MR-003' and acknowledges that oil prices and JGB yields could have moved in either direction during the staleness period. Despite this acknowledged temporal distortion across the three compound stress legs (Brent potentially stale, JGB 9 days stale, USD/JPY more current), the compound stress assessment proceeds with 'high' confidence in the self_challenge section. The level assessment (ELEVATED, not upgraded to CRITICAL) is appropriately conservative, but the high confidence claim in the face of explicitly acknowledged temporal distortion is a proportionality issue.",
+          "severity": "MINOR"
+        },
+        {
+          "finding": "Probability adjustment reasoning — bear increased from 14% to 22%",
+          "rule_violated": "LZ-RC-005",
+          "violation": "The probability adjustments are forward-looking predictions. The reasoning supporting specific percentage allocations (bear 22%, base 40%, mid 28%, bull 10%) presents these with a precision that implies more calculability than the evidence supports. The adjustments cite directional reasoning (stress approaching critical, RLUSD contracting) which is sound, but the specific numerical assignments (why 22% and not 20% or 25%?) lack corresponding precision in the evidence. This is a minor violation because the directional reasoning is sound and the system acknowledges these as probability ranges, but the false precision of specific percentages on forward-looking estimates slightly overstates confidence.",
+          "severity": "MINOR"
+        }
+      ],
+      "compliance": "MINOR_ISSUES",
+      "model_used": "claude-opus-4-6",
+      "gate_failed": false,
+      "findings_reviewed": 62,
+      "clean_findings": 54,
+      "reviewer_notes": "The Tier 1 code flag on T-2 is valid — the output explicitly claims 'per tension lifecycle rules, score increases' in the disposition_reason but the impact_score remains at 5. This is either a ceiling constraint (5 is maximum) that should be explicitly stated, or a genuine implementation error. The analytical layer should clarify whether 5 is the maximum possible impact_score and if so, document the ceiling rather than claiming an increase occurred. Beyond this, the output demonstrates unusually strong epistemological discipline — particularly in paradox holding (refusing to resolve genuine contradictions), null hypothesis application, LZ-EPH-001 compliance ('I don't know' used appropriately for RLUSD decline cause), and the explicit acknowledgment of behavioral inference limitations via BC-001. The ODL/LZ-RC-003 tension is worth tracking — the system correctly identifies the *action* of ceasing disclosure as meaningful under LZ-EH-003 but should more carefully distinguish this from the *absence of the data itself* which is neutral under LZ-RC-003."
+    },
+    "violations_count": 8,
+    "compliance": "MINOR_ISSUES",
+    "gate_failed": false
   }
 ]

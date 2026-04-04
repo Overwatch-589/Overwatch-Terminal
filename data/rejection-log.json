@@ -1206,5 +1206,18 @@
     "source": "layer4_reconcile",
     "promoted": true,
     "promoted_at": "2026-04-03T13:41:20.674Z"
+  },
+  {
+    "layer3_inference": "XRP ETF near-zero cumulative flows indicate holder conviction (at full weight)",
+    "signal_ids": [
+      "20260404-0230-SIG-006",
+      "20260404-0230-SIG-012"
+    ],
+    "rejection_reason": "Layer 3 classified as VALID with full weight. Layer 4 reduces to 50% weight because the conviction interpretation relies on behavioral analysis of a single pattern (flow divergence), and the alternative explanation (illiquidity/small market) cannot be ruled out. Per BC-001, behavioral interpretation of single action fails the confidence check.",
+    "root_cause": "NARRATIVE_WEIGHT_BIAS",
+    "confidence_in_rejection": "medium",
+    "corrections_ledger_action": "flag_for_review",
+    "timestamp": "2026-04-04T02:46:39.052Z",
+    "source": "layer4_reconcile"
   }
 ]
